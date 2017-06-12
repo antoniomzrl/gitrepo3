@@ -1,0 +1,19 @@
+  No Interactions   Material/particle/Proc. Name
+            1e+07    WATER_LIQ e+ Transportation
+      1.72213e+06    WATER_LIQ e+ G4LEPTSAnnihilation
+      5.45707e+08    WATER_LIQ e+ G4LEPTSDissocNeutr
+      9.36911e+08    WATER_LIQ e+ G4LEPTSElastic
+      1.05141e+09    WATER_LIQ e+ G4LEPTSExcitRotat
+      4.96927e+06    WATER_LIQ e+ G4LEPTSExcitVibrat
+      1.28303e+07    WATER_LIQ e+ G4LEPTSExcitation
+      2.44286e+09    WATER_LIQ e+ G4LEPTSIonisation
+      7.92578e+06    WATER_LIQ e+ G4LEPTSPositronium
+
+      2.10153e+08    WATER_LIQ e- GmUserSpecialCut
+       2.0097e+08    WATER_LIQ e- G4LEPTSAttachment
+      1.15776e+09    WATER_LIQ e- G4LEPTSDissocNeutr
+      5.87164e+11    WATER_LIQ e- G4LEPTSElastic
+      1.12876e+12    WATER_LIQ e- G4LEPTSExcitRotat
+      1.95681e+10    WATER_LIQ e- G4LEPTSExcitVibrat
+      4.49034e+08    WATER_LIQ e- G4LEPTSExcitation
+      9.49694e+08    WATER_LIQ e- G4LEPTSIonisation

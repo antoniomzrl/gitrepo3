@@ -1,0 +1,24 @@
+P8  (0.0 -10.0 8.0)
+
+Simu sin e-:
+  NoPrimaries 4.35784e+08
+  cGyHour     0.0122789
+  compt    1.5554e-07
+  phot     1.22504e-07
+  Rayl     3.63998e-08
+
+Simu con e-:
+  NoPrimaries  4.2452e+08
+  cGyHour      0.0127597
+  pCmm3s       0.00101814
+  pCugHour     0.00366531
+  compt     1.47594e-07
+  phot      1.29116e-07
+  Rayl      3.98573e-08
+  Elastic      0.0309854
+  ExcitRotat   0.0542509
+  ExcitVibrat  0.000944193
+  Excitation   2.16185e-05
+  Ionisation   0.000114954
+  DissocNeutr  4.85335e-05
+  Attachment   5.27234e-06

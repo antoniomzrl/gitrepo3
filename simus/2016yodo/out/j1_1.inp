@@ -1,0 +1,29 @@
+#!/bin/sh
+/gamos/setParam GmAnalysisMgr:FileNameSuffix j_
+# GEOMETRY
+/gamos/setParam GmGeometryFromText:FileName j.geom
+/gamos/geometry GmGeometryFromText
+/gamos/setParam JobName j1_1
+#/gamos/random/setSeeds 
+/gamos/random/restoreSeeds 1 1
+
+/gamos/physicsList GmLEPTSPhysics 
+/run/initialize 
+#GEN_PHOT_YODO 
+/gamos/generator GmGenerator 
+/gamos/generator/addSingleParticleSource gn gamma 1*keV 
+/gamos/generator/positionDist gn GmGenerDistPositionInG4Volumes gseio 
+/gamos/generator/directionDist gn GmGenerDistDirectionRandom 
+/gamos/generator/energyDist gn GmGenerDistEnergyFromFile I125photHosp.txt fixed 1*keV 
+/gamos/generator/timeDist gn GmGenerDistTimeConstant 
+/gamos/physics/userLimits/setMinEKin ulicuba cuba e- 1*MeV 
+#VISU 
+/vis/scene/create 
+/vis/open VRML2FILE 
+/vis/viewer/flush 
+/tracking/storeTrajectory 1 
+/vis/scene/add/trajectories 
+/vis/scene/endOfEventAction accumulate 
+/vis/viewer/update 
+/vis/viewer/flush 
+/run/beamOn 10 

@@ -1,0 +1,37 @@
+
+e-_G4DNAAttachment
+
+hydrogen_G4DNAIonisation
+proton_G4DNAIonisation
+e-_G4DNAIonisation
+
+hydrogen_G4DNAChargeIncrease
+proton_G4DNAChargeDecrease
+
+hydrogen_G4DNAExcitation
+proton_G4DNAExcitation
+e-_G4DNAExcitation
+
+e-_G4DNAVibExcitation
+e-_G4DNAElastic
+
+phot
+
+
+#Transportation
+
+# hydrogen_G4DNAChargeIncrease
+# hydrogen_G4DNAIonisation
+# hydrogen_G4DNAExcitation
+
+# proton_G4DNAChargeDecrease
+# proton_G4DNAIonisation
+# proton_G4DNAExcitation
+
+# e-_G4DNAAttachment
+# e-_G4DNAIonisation
+# e-_G4DNAExcitation
+# e-_G4DNAVibExcitation
+# e-_G4DNAElastic
+
+# -------------------------------

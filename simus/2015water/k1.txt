@@ -1,0 +1,434 @@
+Flat profile:
+
+Each sample counts as 0.01 seconds.
+  %   cumulative   self              self     total           
+ time   seconds   seconds    calls  ms/call  ms/call  name    
+ 72.19      1.22     1.22  2105652     0.00     0.00  PlotSphere()
+ 16.57      1.50     0.28  4219320     0.00     0.00  SetColor(float, float, float)
+  3.55      1.56     0.06        8     7.50     7.50  PlotLegend(DataObject*)
+  2.37      1.60     0.04        4    10.00    79.87  PlotPoints(DataObject*)
+  2.37      1.64     0.04        2    20.00    20.00  ComputeFrame(DataObject*)
+  1.78      1.67     0.03        1    30.00    30.00  std::vector<Point, std::allocator<Point> >::_M_fill_insert(__gnu_cxx::__normal_iterator<Point*, std::vector<Point, std::allocator<Point> > >, unsigned long, Point const&)
+  0.59      1.68     0.01        1    10.00    30.00  BestSpatialUnit(DataObject*)
+  0.59      1.69     0.01        1    10.00    10.00  ComputeHistogram(DataObject*)
+  0.00      1.69     0.00      320     0.00     0.00  Interpolate(float, float, float, float, float)
+  0.00      1.69     0.00      140     0.00     0.00  gl_pango_ft2_render_layout(_PangoLayout*)
+  0.00      1.69     0.00       72     0.00     0.00  PlotText(float, float, float, char const*, char const*, int)
+  0.00      1.69     0.00       72     0.00     0.00  PlotText(float, float, float, char*)
+  0.00      1.69     0.00       36     0.00     0.00  MyLabelScale(char const*, void (*)(), void*, _GtkWidget*, float, float, float, float)
+  0.00      1.69     0.00       16     0.00     0.00  ComputeSize(float, float, float, float, float)
+  0.00      1.69     0.00       16     0.00     0.00  ComputeSphereVertex(double, int, int)
+  0.00      1.69     0.00       12     0.00     0.00  myclock()
+  0.00      1.69     0.00        8     0.00     0.07  PlotColorBar(float, float, float, float, float, float, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >)
+  0.00      1.69     0.00        8     0.00     0.07  PlotSmallColorBar(DataObject*)
+  0.00      1.69     0.00        6     0.00   261.60  PlaceVolume()
+  0.00      1.69     0.00        6     0.00     0.00  PlotFrameLabels(DataObject*)
+  0.00      1.69     0.00        6     0.00     7.57  DrawInfo()
+  0.00      1.69     0.00        6     0.00     0.00  PlotFrame(DataObject*)
+  0.00      1.69     0.00        4     0.00    11.35  exposeInfo(_GtkWidget*, _GdkEventExpose*, void*)
+  0.00      1.69     0.00        4     0.00     0.00  Draw()
+  0.00      1.69     0.00        2     0.00     7.57  ReshapeInfo(int, int)
+  0.00      1.69     0.00        2     0.00     0.00  Lights()
+  0.00      1.69     0.00        2     0.00     0.00  Reshape(int, int)
+  0.00      1.69     0.00        2     0.00     0.00  LightsOff()
+  0.00      1.69     0.00        2     0.00   610.04  PlotBalls(DataObject*)
+  0.00      1.69     0.00        1     0.00     0.00  _GLOBAL__sub_I_Debug
+  0.00      1.69     0.00        1     0.00     0.00  _GLOBAL__sub_I_RefPoint
+  0.00      1.69     0.00        1     0.00     0.00  _GLOBAL__sub_I__Z11ComputeSizeffff
+  0.00      1.69     0.00        1     0.00     0.00  _GLOBAL__sub_I__Z11ReadPetFilePc
+  0.00      1.69     0.00        1     0.00     0.00  _GLOBAL__sub_I__Z11TimerRotatev
+  0.00      1.69     0.00        1     0.00     0.00  _GLOBAL__sub_I__Z11defaultFontB5cxx11
+  0.00      1.69     0.00        1     0.00     0.00  _GLOBAL__sub_I__Z14CB_InterpolateP14_GtkAdjustment
+  0.00      1.69     0.00        1     0.00     0.00  _GLOBAL__sub_I__Z3tpiB5cxx11
+  0.00      1.69     0.00        1     0.00     0.00  _GLOBAL__sub_I__Z3tpnB5cxx11
+  0.00      1.69     0.00        1     0.00     0.00  _GLOBAL__sub_I__Z6InClip5Point
+  0.00      1.69     0.00        1     0.00     0.00  _GLOBAL__sub_I__Z6thecmpRK5PointS1_
+  0.00      1.69     0.00        1     0.00     0.00  _GLOBAL__sub_I__Z7myclockv
+  0.00      1.69     0.00        1     0.00     0.00  _GLOBAL__sub_I__Z8BestNearff
+  0.00      1.69     0.00        1     0.00     0.00  _GLOBAL__sub_I__Z8DrawInfov
+  0.00      1.69     0.00        1     0.00     0.00  _GLOBAL__sub_I__Z8GlWidgetPc
+  0.00      1.69     0.00        1     0.00     0.00  _GLOBAL__sub_I__Z8keyPressP10_GtkWidgetP12_GdkEventKey
+  0.00      1.69     0.00        1     0.00     0.00  _GLOBAL__sub_I__Z9LightsOffv
+  0.00      1.69     0.00        1     0.00     0.00  _GLOBAL__sub_I__Z9PlotFrameP10DataObject
+  0.00      1.69     0.00        1     0.00     0.00  _GLOBAL__sub_I__Z9SaveImageiiii
+  0.00      1.69     0.00        1     0.00     0.00  _GLOBAL__sub_I__Z9configureP10_GtkWidgetP18_GdkEventConfigurePv
+  0.00      1.69     0.00        1     0.00     0.00  _GLOBAL__sub_I_butwin
+  0.00      1.69     0.00        1     0.00     0.00  _GLOBAL__sub_I_cb
+  0.00      1.69     0.00        1     0.00     0.00  _GLOBAL__sub_I_d
+  0.00      1.69     0.00        1     0.00     0.00  _GLOBAL__sub_I_xMouse
+  0.00      1.69     0.00        1     0.00     0.00  MyCombo(char const*, void (*)(), _GtkWidget*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >)
+  0.00      1.69     0.00        1     0.00     0.00  DataObject::DataObject()
+
+ %         the percentage of the total running time of the
+time       program used by this function.
+
+cumulative a running sum of the number of seconds accounted
+ seconds   for by this function and those listed above it.
+
+ self      the number of seconds accounted for by this
+seconds    function alone.  This is the major sort for this
+           listing.
+
+calls      the number of times this function was invoked, if
+           this function is profiled, else blank.
+ 
+ self      the average number of milliseconds spent in this
+ms/call    function per call, if this function is profiled,
+	   else blank.
+
+ total     the average number of milliseconds spent in this
+ms/call    function and its descendents per call, if this 
+	   function is profiled, else blank.
+
+name       the name of the function.  This is the minor sort
+           for this listing. The index shows the location of
+	   the function in the gprof listing. If the index is
+	   in parenthesis it shows where it would appear in
+	   the gprof listing if it were to be printed.
+
+Copyright (C) 2012-2014 Free Software Foundation, Inc.
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.
+
+		     Call graph (explanation follows)
+
+
+granularity: each sample hit covers 2 byte(s) for 0.59% of 1.69 seconds
+
+index % time    self  children    called     name
+                                   6             PlaceVolume() [1]
+                0.00    0.52       2/6           configure(_GtkWidget*, _GdkEventConfigure*, void*) [5]
+                0.00    1.05       4/6           expose(_GtkWidget*, _GdkEventExpose*, void*) [4]
+[1]     92.9    0.00    1.57       6+6       PlaceVolume() [1]
+                0.00    1.22       2/2           PlotBalls(DataObject*) [2]
+                0.04    0.28       4/4           PlotPoints(DataObject*) [6]
+                0.01    0.02       1/1           BestSpatialUnit(DataObject*) [13]
+                0.00    0.00      12/12          myclock() [34]
+                0.00    0.00       6/6           PlotFrameLabels(DataObject*) [35]
+                0.00    0.00       6/6           PlotFrame(DataObject*) [36]
+                0.00    0.00       2/2           LightsOff() [40]
+                                   6             PlaceVolume() [1]
+-----------------------------------------------
+                0.00    1.22       2/2           PlaceVolume() [1]
+[2]     72.2    0.00    1.22       2         PlotBalls(DataObject*) [2]
+                1.22    0.00 2105652/2105652     PlotSphere() [3]
+                0.00    0.00      16/4219320     SetColor(float, float, float) [7]
+                0.00    0.00      16/16          ComputeSize(float, float, float, float, float) [32]
+                0.00    0.00      16/16          ComputeSphereVertex(double, int, int) [33]
+                0.00    0.00       2/2           Lights() [38]
+-----------------------------------------------
+                1.22    0.00 2105652/2105652     PlotBalls(DataObject*) [2]
+[3]     72.2    1.22    0.00 2105652         PlotSphere() [3]
+-----------------------------------------------
+                                                 <spontaneous>
+[4]     64.6    0.00    1.09                 expose(_GtkWidget*, _GdkEventExpose*, void*) [4]
+                0.00    1.05       4/6           PlaceVolume() [1]
+                0.00    0.05       4/4           exposeInfo(_GtkWidget*, _GdkEventExpose*, void*) [11]
+                0.00    0.00       4/4           Draw() [37]
+-----------------------------------------------
+                                                 <spontaneous>
+[5]     31.0    0.00    0.52                 configure(_GtkWidget*, _GdkEventConfigure*, void*) [5]
+                0.00    0.52       2/6           PlaceVolume() [1]
+                0.00    0.00       2/2           Reshape(int, int) [39]
+-----------------------------------------------
+                0.04    0.28       4/4           PlaceVolume() [1]
+[6]     18.9    0.04    0.28       4         PlotPoints(DataObject*) [6]
+                0.28    0.00 4211304/4219320     SetColor(float, float, float) [7]
+-----------------------------------------------
+                0.00    0.00      16/4219320     PlotBalls(DataObject*) [2]
+                0.00    0.00    8000/4219320     PlotColorBar(float, float, float, float, float, float, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [18]
+                0.28    0.00 4211304/4219320     PlotPoints(DataObject*) [6]
+[7]     16.6    0.28    0.00 4219320         SetColor(float, float, float) [7]
+-----------------------------------------------
+                0.02    0.00       2/8           ReshapeInfo(int, int) [15]
+                0.05    0.00       6/8           DrawInfo() [10]
+[8]      3.6    0.06    0.00       8         PlotLegend(DataObject*) [8]
+                0.00    0.00      48/72          PlotText(float, float, float, char const*, char const*, int) [29]
+-----------------------------------------------
+                                                 <spontaneous>
+[9]      3.6    0.00    0.06                 ReadBinaryFile(char*, char*) [9]
+                0.03    0.00       1/1           std::vector<Point, std::allocator<Point> >::_M_fill_insert(__gnu_cxx::__normal_iterator<Point*, std::vector<Point, std::allocator<Point> > >, unsigned long, Point const&) [14]
+                0.02    0.00       1/2           ComputeFrame(DataObject*) [12]
+                0.01    0.00       1/1           ComputeHistogram(DataObject*) [17]
+                0.00    0.00       1/1           DataObject::DataObject() [66]
+-----------------------------------------------
+                0.00    0.05       6/6           exposeInfo(_GtkWidget*, _GdkEventExpose*, void*) [11]
+[10]     2.7    0.00    0.05       6         DrawInfo() [10]
+                0.05    0.00       6/8           PlotLegend(DataObject*) [8]
+                0.00    0.00       6/8           PlotSmallColorBar(DataObject*) [19]
+-----------------------------------------------
+                0.00    0.05       4/4           expose(_GtkWidget*, _GdkEventExpose*, void*) [4]
+[11]     2.7    0.00    0.05       4         exposeInfo(_GtkWidget*, _GdkEventExpose*, void*) [11]
+                0.00    0.05       6/6           DrawInfo() [10]
+-----------------------------------------------
+                0.02    0.00       1/2           ReadBinaryFile(char*, char*) [9]
+                0.02    0.00       1/2           BestSpatialUnit(DataObject*) [13]
+[12]     2.4    0.04    0.00       2         ComputeFrame(DataObject*) [12]
+-----------------------------------------------
+                0.01    0.02       1/1           PlaceVolume() [1]
+[13]     1.8    0.01    0.02       1         BestSpatialUnit(DataObject*) [13]
+                0.02    0.00       1/2           ComputeFrame(DataObject*) [12]
+-----------------------------------------------
+                0.03    0.00       1/1           ReadBinaryFile(char*, char*) [9]
+[14]     1.8    0.03    0.00       1         std::vector<Point, std::allocator<Point> >::_M_fill_insert(__gnu_cxx::__normal_iterator<Point*, std::vector<Point, std::allocator<Point> > >, unsigned long, Point const&) [14]
+-----------------------------------------------
+                0.00    0.02       2/2           configureInfo(_GtkWidget*, _GdkEventConfigure*, void*) [16]
+[15]     0.9    0.00    0.02       2         ReshapeInfo(int, int) [15]
+                0.02    0.00       2/8           PlotLegend(DataObject*) [8]
+                0.00    0.00       2/8           PlotSmallColorBar(DataObject*) [19]
+-----------------------------------------------
+                                                 <spontaneous>
+[16]     0.9    0.00    0.02                 configureInfo(_GtkWidget*, _GdkEventConfigure*, void*) [16]
+                0.00    0.02       2/2           ReshapeInfo(int, int) [15]
+-----------------------------------------------
+                0.01    0.00       1/1           ReadBinaryFile(char*, char*) [9]
+[17]     0.6    0.01    0.00       1         ComputeHistogram(DataObject*) [17]
+-----------------------------------------------
+                0.00    0.00       8/8           PlotSmallColorBar(DataObject*) [19]
+[18]     0.0    0.00    0.00       8         PlotColorBar(float, float, float, float, float, float, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [18]
+                0.00    0.00    8000/4219320     SetColor(float, float, float) [7]
+                0.00    0.00     320/320         Interpolate(float, float, float, float, float) [27]
+                0.00    0.00      72/140         gl_pango_ft2_render_layout(_PangoLayout*) [28]
+                0.00    0.00      72/72          PlotText(float, float, float, char*) [30]
+-----------------------------------------------
+                0.00    0.00       2/8           ReshapeInfo(int, int) [15]
+                0.00    0.00       6/8           DrawInfo() [10]
+[19]     0.0    0.00    0.00       8         PlotSmallColorBar(DataObject*) [19]
+                0.00    0.00       8/8           PlotColorBar(float, float, float, float, float, float, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [18]
+-----------------------------------------------
+                0.00    0.00     320/320         PlotColorBar(float, float, float, float, float, float, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [18]
+[27]     0.0    0.00    0.00     320         Interpolate(float, float, float, float, float) [27]
+-----------------------------------------------
+                0.00    0.00      68/140         PlotText(float, float, float, char const*, char const*, int) [29]
+                0.00    0.00      72/140         PlotColorBar(float, float, float, float, float, float, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [18]
+[28]     0.0    0.00    0.00     140         gl_pango_ft2_render_layout(_PangoLayout*) [28]
+-----------------------------------------------
+                0.00    0.00      24/72          PlotFrameLabels(DataObject*) [35]
+                0.00    0.00      48/72          PlotLegend(DataObject*) [8]
+[29]     0.0    0.00    0.00      72         PlotText(float, float, float, char const*, char const*, int) [29]
+                0.00    0.00      68/140         gl_pango_ft2_render_layout(_PangoLayout*) [28]
+-----------------------------------------------
+                0.00    0.00      72/72          PlotColorBar(float, float, float, float, float, float, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [18]
+[30]     0.0    0.00    0.00      72         PlotText(float, float, float, char*) [30]
+-----------------------------------------------
+                0.00    0.00      36/36          ButtonWidgets() [101]
+[31]     0.0    0.00    0.00      36         MyLabelScale(char const*, void (*)(), void*, _GtkWidget*, float, float, float, float) [31]
+-----------------------------------------------
+                0.00    0.00      16/16          PlotBalls(DataObject*) [2]
+[32]     0.0    0.00    0.00      16         ComputeSize(float, float, float, float, float) [32]
+-----------------------------------------------
+                0.00    0.00      16/16          PlotBalls(DataObject*) [2]
+[33]     0.0    0.00    0.00      16         ComputeSphereVertex(double, int, int) [33]
+-----------------------------------------------
+                0.00    0.00      12/12          PlaceVolume() [1]
+[34]     0.0    0.00    0.00      12         myclock() [34]
+-----------------------------------------------
+                0.00    0.00       6/6           PlaceVolume() [1]
+[35]     0.0    0.00    0.00       6         PlotFrameLabels(DataObject*) [35]
+                0.00    0.00      24/72          PlotText(float, float, float, char const*, char const*, int) [29]
+-----------------------------------------------
+                0.00    0.00       6/6           PlaceVolume() [1]
+[36]     0.0    0.00    0.00       6         PlotFrame(DataObject*) [36]
+-----------------------------------------------
+                0.00    0.00       4/4           expose(_GtkWidget*, _GdkEventExpose*, void*) [4]
+[37]     0.0    0.00    0.00       4         Draw() [37]
+-----------------------------------------------
+                0.00    0.00       2/2           PlotBalls(DataObject*) [2]
+[38]     0.0    0.00    0.00       2         Lights() [38]
+-----------------------------------------------
+                0.00    0.00       2/2           configure(_GtkWidget*, _GdkEventConfigure*, void*) [5]
+[39]     0.0    0.00    0.00       2         Reshape(int, int) [39]
+-----------------------------------------------
+                0.00    0.00       2/2           PlaceVolume() [1]
+[40]     0.0    0.00    0.00       2         LightsOff() [40]
+-----------------------------------------------
+                0.00    0.00       1/1           __libc_csu_init [181]
+[41]     0.0    0.00    0.00       1         _GLOBAL__sub_I_Debug [41]
+-----------------------------------------------
+                0.00    0.00       1/1           __libc_csu_init [181]
+[42]     0.0    0.00    0.00       1         _GLOBAL__sub_I_RefPoint [42]
+-----------------------------------------------
+                0.00    0.00       1/1           __libc_csu_init [181]
+[43]     0.0    0.00    0.00       1         _GLOBAL__sub_I__Z11ComputeSizeffff [43]
+-----------------------------------------------
+                0.00    0.00       1/1           __libc_csu_init [181]
+[44]     0.0    0.00    0.00       1         _GLOBAL__sub_I__Z11ReadPetFilePc [44]
+-----------------------------------------------
+                0.00    0.00       1/1           __libc_csu_init [181]
+[45]     0.0    0.00    0.00       1         _GLOBAL__sub_I__Z11TimerRotatev [45]
+-----------------------------------------------
+                0.00    0.00       1/1           __libc_csu_init [181]
+[46]     0.0    0.00    0.00       1         _GLOBAL__sub_I__Z11defaultFontB5cxx11 [46]
+-----------------------------------------------
+                0.00    0.00       1/1           __libc_csu_init [181]
+[47]     0.0    0.00    0.00       1         _GLOBAL__sub_I__Z14CB_InterpolateP14_GtkAdjustment [47]
+-----------------------------------------------
+                0.00    0.00       1/1           __libc_csu_init [181]
+[48]     0.0    0.00    0.00       1         _GLOBAL__sub_I__Z3tpiB5cxx11 [48]
+-----------------------------------------------
+                0.00    0.00       1/1           __libc_csu_init [181]
+[49]     0.0    0.00    0.00       1         _GLOBAL__sub_I__Z3tpnB5cxx11 [49]
+-----------------------------------------------
+                0.00    0.00       1/1           __libc_csu_init [181]
+[50]     0.0    0.00    0.00       1         _GLOBAL__sub_I__Z6InClip5Point [50]
+-----------------------------------------------
+                0.00    0.00       1/1           __libc_csu_init [181]
+[51]     0.0    0.00    0.00       1         _GLOBAL__sub_I__Z6thecmpRK5PointS1_ [51]
+-----------------------------------------------
+                0.00    0.00       1/1           __libc_csu_init [181]
+[52]     0.0    0.00    0.00       1         _GLOBAL__sub_I__Z7myclockv [52]
+-----------------------------------------------
+                0.00    0.00       1/1           __libc_csu_init [181]
+[53]     0.0    0.00    0.00       1         _GLOBAL__sub_I__Z8BestNearff [53]
+-----------------------------------------------
+                0.00    0.00       1/1           __libc_csu_init [181]
+[54]     0.0    0.00    0.00       1         _GLOBAL__sub_I__Z8DrawInfov [54]
+-----------------------------------------------
+                0.00    0.00       1/1           __libc_csu_init [181]
+[55]     0.0    0.00    0.00       1         _GLOBAL__sub_I__Z8GlWidgetPc [55]
+-----------------------------------------------
+                0.00    0.00       1/1           __libc_csu_init [181]
+[56]     0.0    0.00    0.00       1         _GLOBAL__sub_I__Z8keyPressP10_GtkWidgetP12_GdkEventKey [56]
+-----------------------------------------------
+                0.00    0.00       1/1           __libc_csu_init [181]
+[57]     0.0    0.00    0.00       1         _GLOBAL__sub_I__Z9LightsOffv [57]
+-----------------------------------------------
+                0.00    0.00       1/1           __libc_csu_init [181]
+[58]     0.0    0.00    0.00       1         _GLOBAL__sub_I__Z9PlotFrameP10DataObject [58]
+-----------------------------------------------
+                0.00    0.00       1/1           __libc_csu_init [181]
+[59]     0.0    0.00    0.00       1         _GLOBAL__sub_I__Z9SaveImageiiii [59]
+-----------------------------------------------
+                0.00    0.00       1/1           __libc_csu_init [181]
+[60]     0.0    0.00    0.00       1         _GLOBAL__sub_I__Z9configureP10_GtkWidgetP18_GdkEventConfigurePv [60]
+-----------------------------------------------
+                0.00    0.00       1/1           __libc_csu_init [181]
+[61]     0.0    0.00    0.00       1         _GLOBAL__sub_I_butwin [61]
+-----------------------------------------------
+                0.00    0.00       1/1           __libc_csu_init [181]
+[62]     0.0    0.00    0.00       1         _GLOBAL__sub_I_cb [62]
+-----------------------------------------------
+                0.00    0.00       1/1           __libc_csu_init [181]
+[63]     0.0    0.00    0.00       1         _GLOBAL__sub_I_d [63]
+-----------------------------------------------
+                0.00    0.00       1/1           __libc_csu_init [181]
+[64]     0.0    0.00    0.00       1         _GLOBAL__sub_I_xMouse [64]
+-----------------------------------------------
+                0.00    0.00       1/1           ButtonWidgets() [101]
+[65]     0.0    0.00    0.00       1         MyCombo(char const*, void (*)(), _GtkWidget*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [65]
+-----------------------------------------------
+                0.00    0.00       1/1           ReadBinaryFile(char*, char*) [9]
+[66]     0.0    0.00    0.00       1         DataObject::DataObject() [66]
+-----------------------------------------------
+
+ This table describes the call tree of the program, and was sorted by
+ the total amount of time spent in each function and its children.
+
+ Each entry in this table consists of several lines.  The line with the
+ index number at the left hand margin lists the current function.
+ The lines above it list the functions that called this function,
+ and the lines below it list the functions this one called.
+ This line lists:
+     index	A unique number given to each element of the table.
+		Index numbers are sorted numerically.
+		The index number is printed next to every function name so
+		it is easier to look up where the function is in the table.
+
+     % time	This is the percentage of the `total' time that was spent
+		in this function and its children.  Note that due to
+		different viewpoints, functions excluded by options, etc,
+		these numbers will NOT add up to 100%.
+
+     self	This is the total amount of time spent in this function.
+
+     children	This is the total amount of time propagated into this
+		function by its children.
+
+     called	This is the number of times the function was called.
+		If the function called itself recursively, the number
+		only includes non-recursive calls, and is followed by
+		a `+' and the number of recursive calls.
+
+     name	The name of the current function.  The index number is
+		printed after it.  If the function is a member of a
+		cycle, the cycle number is printed between the
+		function's name and the index number.
+
+
+ For the function's parents, the fields have the following meanings:
+
+     self	This is the amount of time that was propagated directly
+		from the function into this parent.
+
+     children	This is the amount of time that was propagated from
+		the function's children into this parent.
+
+     called	This is the number of times this parent called the
+		function `/' the total number of times the function
+		was called.  Recursive calls to the function are not
+		included in the number after the `/'.
+
+     name	This is the name of the parent.  The parent's index
+		number is printed after it.  If the parent is a
+		member of a cycle, the cycle number is printed between
+		the name and the index number.
+
+ If the parents of the function cannot be determined, the word
+ `<spontaneous>' is printed in the `name' field, and all the other
+ fields are blank.
+
+ For the function's children, the fields have the following meanings:
+
+     self	This is the amount of time that was propagated directly
+		from the child into the function.
+
+     children	This is the amount of time that was propagated from the
+		child's children to the function.
+
+     called	This is the number of times the function called
+		this child `/' the total number of times the child
+		was called.  Recursive calls by the child are not
+		listed in the number after the `/'.
+
+     name	This is the name of the child.  The child's index
+		number is printed after it.  If the child is a
+		member of a cycle, the cycle number is printed
+		between the name and the index number.
+
+ If there are any cycles (circles) in the call graph, there is an
+ entry for the cycle-as-a-whole.  This entry shows who called the
+ cycle (as parents) and the members of the cycle (as children.)
+ The `+' recursive calls entry shows the number of function calls that
+ were internal to the cycle, and the calls entry for each member shows,
+ for that member, how many times it was called from other members of
+ the cycle.
+
+Copyright (C) 2012-2014 Free Software Foundation, Inc.
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.
+
+Index by function name
+
+  [41] _GLOBAL__sub_I_Debug   [60] _GLOBAL__sub_I__Z9configureP10_GtkWidgetP18_GdkEventConfigurePv [19] PlotSmallColorBar(DataObject*)
+  [42] _GLOBAL__sub_I_RefPoint [61] _GLOBAL__sub_I_butwin [33] ComputeSphereVertex(double, int, int)
+  [43] _GLOBAL__sub_I__Z11ComputeSizeffff [62] _GLOBAL__sub_I_cb [28] gl_pango_ft2_render_layout(_PangoLayout*)
+  [44] _GLOBAL__sub_I__Z11ReadPetFilePc [63] _GLOBAL__sub_I_d [37] Draw()
+  [45] _GLOBAL__sub_I__Z11TimerRotatev [64] _GLOBAL__sub_I_xMouse [38] Lights()
+  [46] _GLOBAL__sub_I__Z11defaultFontB5cxx11 [8] PlotLegend(DataObject*) [65] MyCombo(char const*, void (*)(), _GtkWidget*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >)
+  [47] _GLOBAL__sub_I__Z14CB_InterpolateP14_GtkAdjustment [6] PlotPoints(DataObject*) [39] Reshape(int, int)
+  [48] _GLOBAL__sub_I__Z3tpiB5cxx11 [3] PlotSphere()      [34] myclock()
+  [49] _GLOBAL__sub_I__Z3tpnB5cxx11 [11] exposeInfo(_GtkWidget*, _GdkEventExpose*, void*) [10] DrawInfo()
+  [50] _GLOBAL__sub_I__Z6InClip5Point [32] ComputeSize(float, float, float, float, float) [29] PlotText(float, float, float, char const*, char const*, int)
+  [51] _GLOBAL__sub_I__Z6thecmpRK5PointS1_ [27] Interpolate(float, float, float, float, float) [30] PlotText(float, float, float, char*)
+  [52] _GLOBAL__sub_I__Z7myclockv [1] PlaceVolume()        [7] SetColor(float, float, float)
+  [53] _GLOBAL__sub_I__Z8BestNearff [15] ReshapeInfo(int, int) [40] LightsOff()
+  [54] _GLOBAL__sub_I__Z8DrawInfov [12] ComputeFrame(DataObject*) [2] PlotBalls(DataObject*)
+  [55] _GLOBAL__sub_I__Z8GlWidgetPc [31] MyLabelScale(char const*, void (*)(), void*, _GtkWidget*, float, float, float, float) [36] PlotFrame(DataObject*)
+  [56] _GLOBAL__sub_I__Z8keyPressP10_GtkWidgetP12_GdkEventKey [18] PlotColorBar(float, float, float, float, float, float, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [66] DataObject::DataObject()
+  [57] _GLOBAL__sub_I__Z9LightsOffv [13] BestSpatialUnit(DataObject*) [14] std::vector<Point, std::allocator<Point> >::_M_fill_insert(__gnu_cxx::__normal_iterator<Point*, std::vector<Point, std::allocator<Point> > >, unsigned long, Point const&)
+  [58] _GLOBAL__sub_I__Z9PlotFrameP10DataObject [35] PlotFrameLabels(DataObject*)
+  [59] _GLOBAL__sub_I__Z9SaveImageiiii [17] ComputeHistogram(DataObject*)

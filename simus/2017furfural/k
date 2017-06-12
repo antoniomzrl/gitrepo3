@@ -1,0 +1,17 @@
+Original:
+              Interac    ElossTotal      ElossAvg
+                 6495       6212.99       0.95658   Elastic
+                    5       35.2697       7.05394   ElectronicExcitation
+                42855       47.1595    0.00110044   ExcitRotatSMF
+DXS-10:
+                 4625       3308.29      0.715306   Elastic
+                    3       23.1979       7.73265   ElectronicExcitation
+                26046       6069.49       0.23303   ExcitRotat
+
+Sin rotat:
+                 9143       6182.28      0.676177   Elastic
+                    9       60.2946        6.6994   ElectronicExcitation
+
+DXS-10 y sin rot
+                10528       5633.52      0.535099   Elastic
+                    7       50.8198       7.25998   ElectronicExcitation

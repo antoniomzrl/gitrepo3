@@ -1,0 +1,17 @@
+proton_LeptsChargeDecrease
+hydrogen_LeptsChargeIncrease
+
+proton_LeptsIonisation
+hydrogen_LeptsIonisation
+
+proton_LeptsElectronicExcitation
+hydrogen_LeptsElectronicExcitation
+
+proton_LeptsElastic
+hydrogen_LeptsElastic
+
+phot
+compt
+Rayl
+
+Transportation

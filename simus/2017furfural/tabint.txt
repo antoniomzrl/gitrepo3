@@ -1,0 +1,14 @@
+       No Ints          Edep      Avg Edep
+    6.5854e+07   6.21433e+07      0.943653    LeptsElasticSMF
+         60773        435561       7.16702    LeptsElectronicExcitationSMF
+   4.22328e+08        463586    0.00109769    LeptsExcitRotatSMF
+           295             0             0    LeptsIonisationSMF
+
+
+       No Ints          Edep      Avg Edep
+   6.58199e+07    6.2182e+07      0.944729    LeptsElasticSMF
+         55795        399571       7.16141    LeptsElectronicExcitationSMF
+   4.21325e+08        462514    0.00109776    LeptsExcitRotatSMF
+
+
+Total Edepo(eV):     6.30425e+07

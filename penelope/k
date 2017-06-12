@@ -1,0 +1,763 @@
+gfortran -c -std=legacy  -o penslab.o penslab.f
+penslab.f:87:72: Error: Unexpected PARAMETER statement at (1)
+penslab.f:91:72: Error: Unexpected PARAMETER statement at (1)
+penslab.f:92:72: Error: Unexpected attribute declaration statement at (1)
+penslab.f:95:72: Error: Unexpected COMMON statement at (1)
+penslab.f:96:72: Error: Unexpected COMMON statement at (1)
+penslab.f:97:72: Error: Unexpected COMMON statement at (1)
+penslab.f:103:72: Error: Unexpected attribute declaration statement at (1)
+penslab.f:110:72: Error: Unexpected attribute declaration statement at (1)
+penslab.f:115:72: Error: Unexpected PARAMETER statement at (1)
+penslab.f:117:72: Error: Unexpected attribute declaration statement at (1)
+penslab.f:118:38:
+
+       DATA DOSZ,DOSZ2,DOSZP,LDOSZ/NCH3*0.0D0,NCH*0/
+                                      1
+Error: Symbol ‘nch3’ must be a PARAMETER in DATA statement at (1)
+penslab.f:120:72: Error: Unexpected attribute declaration statement at (1)
+penslab.f:121:38:
+
+       DATA CHRZ,CHRZ2,CHRZP,LCHRZ/NCH3*0.0D0,NCH*0/
+                                      1
+Error: Symbol ‘nch3’ must be a PARAMETER in DATA statement at (1)
+penslab.f:123:72: Error: Unexpected attribute declaration statement at (1)
+penslab.f:124:25:
+
+       DATA EDEP,EDEP2/NCH*0.0D0,NCH*0.0D0/
+                         1
+Error: Symbol ‘nch’ must be a PARAMETER in DATA statement at (1)
+penslab.f:126:72: Error: Unexpected attribute declaration statement at (1)
+penslab.f:127:26:
+
+       DATA PDTL,PDTL2/NCH3*0.0D0,NCH3*0.0D0/
+                          1
+Error: Symbol ‘nch3’ must be a PARAMETER in DATA statement at (1)
+penslab.f:129:72: Error: Unexpected attribute declaration statement at (1)
+penslab.f:130:34:
+
+       DATA PDA,PDA2,PDAP,LPDA/NCH9*0.0D0,NCH3*0/
+                                  1
+Error: Symbol ‘nch9’ must be a PARAMETER in DATA statement at (1)
+penslab.f:132:72: Error: Unexpected attribute declaration statement at (1)
+penslab.f:133:35:
+
+       DATA PDE,PDE2,PDEP,LPDE/NCH18*0.0D0,NCH6*0/
+                                   1
+Error: Symbol ‘nch18’ must be a PARAMETER in DATA statement at (1)
+penslab.f:135:72: Error: Unexpected PARAMETER statement at (1)
+penslab.f:136:72: Error: Unexpected data declaration statement at (1)
+penslab.f:137:72: Error: Unexpected attribute declaration statement at (1)
+penslab.f:193:37:
+
+             read(1, *, IOSTAT=ios) ei(Ns+1), fi(Ns+1)
+                                     1
+Error: Syntax error in READ statement at (1)
+penslab.f:202:72: Error: Expected expression in PRINT statement at (1)
+penslab.f:205:20:
+
+             fi(i) = fi(i-1) + fi(i)
+                    1
+Error: Statement function at (1) is recursive
+penslab.f:208:19:
+
+             fi(i)= fi(i)/fi(Ns)
+                   1
+Error: Statement function at (1) is recursive
+penslab.f:250:27:
+
+         READ(BUFFER,*) EABS(1,M),EABS(2,M),EABS(3,M),C1(M),C2(M),
+                           1
+Error: Syntax error in READ statement at (1)
+penslab.f:254:31:
+
+         IF(EABS(1,M).LT.1.0D2) EABS(1,M)=1.0D2
+                               1
+Error: Cannot assign to a named constant at (1)
+penslab.f:255:31:
+
+         IF(EABS(2,M).LT.1.0D2) EABS(2,M)=1.0D2
+                               1
+Error: Cannot assign to a named constant at (1)
+penslab.f:256:31:
+
+         IF(EABS(3,M).LT.1.0D2) EABS(3,M)=1.0D2
+                               1
+Error: Cannot assign to a named constant at (1)
+penslab.f:288:8:
+
+         pmfile(1) = trim(pfile)
+        1
+Error: Unclassifiable statement at (1)
+penslab.f:354:8:
+
+         BSE(1)=E0/DFLOAT(NCH)
+        1
+Error: Unclassifiable statement at (1)
+penslab.f:355:8:
+
+         BSE(2)=E0/DFLOAT(NCH)
+        1
+Error: Unclassifiable statement at (1)
+penslab.f:356:8:
+
+         BSE(3)=E0/DFLOAT(NCH)
+        1
+Error: Unclassifiable statement at (1)
+penslab.f:360:8:
+
+         BSE(1)=E0/DFLOAT(NCH)
+        1
+Error: Unclassifiable statement at (1)
+penslab.f:361:8:
+
+         BSE(2)=E0/DFLOAT(NCH)
+        1
+Error: Unclassifiable statement at (1)
+penslab.f:362:8:
+
+         BSE(3)=E0/DFLOAT(NCH)
+        1
+Error: Unclassifiable statement at (1)
+penslab.f:366:8:
+
+         BSE(1)=EPMAX/DFLOAT(NCH)
+        1
+Error: Unclassifiable statement at (1)
+penslab.f:367:8:
+
+         BSE(2)=EPMAX/DFLOAT(NCH)
+        1
+Error: Unclassifiable statement at (1)
+penslab.f:368:8:
+
+         BSE(3)=E0/DFLOAT(NCH)
+        1
+Error: Unclassifiable statement at (1)
+penslab.f:379:6:
+
+       BSE(1)=1.0000001D0*BSE(1)
+      1
+Error: Unclassifiable statement at (1)
+penslab.f:380:6:
+
+       BSE(2)=1.0000001D0*BSE(2)
+      1
+Error: Unclassifiable statement at (1)
+penslab.f:381:6:
+
+       BSE(3)=1.0000001D0*BSE(3)
+      1
+Error: Unclassifiable statement at (1)
+penslab.f:400:6:
+
+       ILB(1)=1  ! Identifies primary particles.
+      1
+Error: Unclassifiable statement at (1)
+penslab.f:401:6:
+
+       ILB(2)=0
+      1
+Error: Unclassifiable statement at (1)
+penslab.f:402:6:
+
+       ILB(3)=0
+      1
+Error: Unclassifiable statement at (1)
+penslab.f:403:6:
+
+       ILB(4)=0
+      1
+Error: Unclassifiable statement at (1)
+penslab.f:404:6:
+
+       ILB(5)=0
+      1
+Error: Unclassifiable statement at (1)
+penslab.f:458:72: Error: Expected a right parenthesis in expression at (1)
+penslab.f:469:72: Error: Unexpected STATEMENT FUNCTION statement at (1)
+penslab.f:515:16:
+
+       COL(ICOL)=COL(ICOL)+1.0D0  ! The interaction is counted.
+                1
+Error: Statement function at (1) is recursive
+penslab.f:553:17:
+
+         DOSZ(KZ)=DOSZ(KZ)+DOSZP(KZ)  ! Cleaning partial counters.
+                 1
+Error: Statement function at (1) is recursive
+penslab.f:554:18:
+
+         DOSZ2(KZ)=DOSZ2(KZ)+DOSZP(KZ)**2
+                  1
+Error: Statement function at (1) is recursive
+penslab.f:555:72: Error: Unexpected STATEMENT FUNCTION statement at (1)
+penslab.f:556:72: Error: Unexpected STATEMENT FUNCTION statement at (1)
+penslab.f:558:18:
+
+         DOSZP(KZ)=DOSZP(KZ)+DE*WGHT
+                  1
+Error: Statement function at (1) is recursive
+penslab.f:566:21:
+
+             CHRZ(KZ)=CHRZ(KZ)+CHRZP(KZ)
+                     1
+Error: Statement function at (1) is recursive
+penslab.f:567:22:
+
+             CHRZ2(KZ)=CHRZ2(KZ)+CHRZP(KZ)**2
+                      1
+Error: Statement function at (1) is recursive
+penslab.f:568:72: Error: Unexpected STATEMENT FUNCTION statement at (1)
+penslab.f:569:72: Error: Unexpected STATEMENT FUNCTION statement at (1)
+penslab.f:571:22:
+
+             CHRZP(KZ)=CHRZP(KZ)+ICHR*WGHT
+                      1
+Error: Statement function at (1) is recursive
+penslab.f:586:8:
+
+         PRIM(IEXIT)=PRIM(IEXIT)+WGHT0
+        1
+Error: Unclassifiable statement at (1)
+penslab.f:587:8:
+
+         AVTL(IEXIT)=AVTL(IEXIT)+TL*WGHT0
+        1
+Error: Unclassifiable statement at (1)
+penslab.f:588:8:
+
+         AVTL2(IEXIT)=AVTL2(IEXIT)+(TL*WGHT0)**2
+        1
+Error: Unclassifiable statement at (1)
+penslab.f:590:10:
+
+           AVE(IEXIT)=AVE(IEXIT)+E*WGHT0
+          1
+Error: Unclassifiable statement at (1)
+penslab.f:591:10:
+
+           AVE2(IEXIT)=AVE2(IEXIT)+(E*WGHT0)**2
+          1
+Error: Unclassifiable statement at (1)
+penslab.f:592:10:
+
+           AVW(IEXIT)=AVW(IEXIT)+W*WGHT0
+          1
+Error: Unclassifiable statement at (1)
+penslab.f:593:10:
+
+           AVW2(IEXIT)=AVW2(IEXIT)+(W*WGHT0)**2
+          1
+Error: Unclassifiable statement at (1)
+penslab.f:594:10:
+
+           AVA(IEXIT)=AVA(IEXIT)+ANGLE*WGHT0
+          1
+Error: Unclassifiable statement at (1)
+penslab.f:595:10:
+
+           AVA2(IEXIT)=AVA2(IEXIT)+(ANGLE*WGHT0)**2
+          1
+Error: Unclassifiable statement at (1)
+penslab.f:597:10:
+
+           AVLD(IEXIT)=AVLD(IEXIT)+DLAT*WGHT0
+          1
+Error: Unclassifiable statement at (1)
+penslab.f:598:10:
+
+           AVLD2(IEXIT)=AVLD2(IEXIT)+(DLAT*WGHT0)**2
+          1
+Error: Unclassifiable statement at (1)
+penslab.f:627:10:
+
+           AVNI(KC,IEXIT)=AVNI(KC,IEXIT)+(COL(KC)*WGHT0)
+          1
+Error: Unclassifiable statement at (1)
+penslab.f:628:10:
+
+           AVNI2(KC,IEXIT)=AVNI2(KC,IEXIT)+(COL(KC)*WGHT0)**2
+          1
+Error: Unclassifiable statement at (1)
+penslab.f:633:24:
+
+           PDTL(IEXIT,K)=PDTL(IEXIT,K)+WGHT0
+                        1
+Error: Statement function at (1) is recursive
+penslab.f:634:72: Error: Unexpected STATEMENT FUNCTION statement at (1)
+penslab.f:637:8:
+
+         SEC(KPAR,IEXIT)=SEC(KPAR,IEXIT)+WGHT
+        1
+Error: Unclassifiable statement at (1)
+penslab.f:646:22:
+
+           PDA(KPAR,K)=PDA(KPAR,K)+PDAP(KPAR,K)
+                      1
+Error: Statement function at (1) is recursive
+penslab.f:647:23:
+
+           PDA2(KPAR,K)=PDA2(KPAR,K)+PDAP(KPAR,K)**2
+                       1
+Error: Statement function at (1) is recursive
+penslab.f:648:72: Error: Unexpected STATEMENT FUNCTION statement at (1)
+penslab.f:649:72: Error: Unexpected STATEMENT FUNCTION statement at (1)
+penslab.f:651:23:
+
+           PDAP(KPAR,K)=PDAP(KPAR,K)+WGHT
+                       1
+Error: Statement function at (1) is recursive
+penslab.f:657:30:
+
+             PDE(KPAR,IEXIT,K)=PDE(KPAR,IEXIT,K)+PDEP(KPAR,IEXIT,K)
+                              1
+Error: Statement function at (1) is recursive
+penslab.f:658:31:
+
+             PDE2(KPAR,IEXIT,K)=PDE2(KPAR,IEXIT,K)+PDEP(KPAR,IEXIT,K)**2
+                               1
+Error: Statement function at (1) is recursive
+penslab.f:659:72: Error: Unexpected STATEMENT FUNCTION statement at (1)
+penslab.f:660:72: Error: Unexpected STATEMENT FUNCTION statement at (1)
+penslab.f:662:31:
+
+             PDEP(KPAR,IEXIT,K)=PDEP(KPAR,IEXIT,K)+WGHT
+                               1
+Error: Statement function at (1) is recursive
+penslab.f:674:19:
+
+           DOSZ(KZ)=DOSZ(KZ)+DOSZP(KZ)
+                   1
+Error: Statement function at (1) is recursive
+penslab.f:675:20:
+
+           DOSZ2(KZ)=DOSZ2(KZ)+DOSZP(KZ)**2
+                    1
+Error: Statement function at (1) is recursive
+penslab.f:676:72: Error: Unexpected STATEMENT FUNCTION statement at (1)
+penslab.f:677:72: Error: Unexpected STATEMENT FUNCTION statement at (1)
+penslab.f:679:20:
+
+           DOSZP(KZ)=DOSZP(KZ)-E*WGHT
+                    1
+Error: Statement function at (1) is recursive
+penslab.f:682:19:
+
+           CHRZ(KZ)=CHRZ(KZ)+CHRZP(KZ)
+                   1
+Error: Statement function at (1) is recursive
+penslab.f:683:20:
+
+           CHRZ2(KZ)=CHRZ2(KZ)+CHRZP(KZ)**2
+                    1
+Error: Statement function at (1) is recursive
+penslab.f:684:72: Error: Unexpected STATEMENT FUNCTION statement at (1)
+penslab.f:685:72: Error: Unexpected STATEMENT FUNCTION statement at (1)
+penslab.f:687:20:
+
+           CHRZP(KZ)=CHRZP(KZ)+(2-KPAR)*WGHT
+                    1
+Error: Statement function at (1) is recursive
+penslab.f:701:19:
+
+           EDEP(KE)=EDEP(KE)+WGHT0
+                   1
+Error: Statement function at (1) is recursive
+penslab.f:702:20:
+
+           EDEP2(KE)=EDEP2(KE)+WGHT0**2
+                    1
+Error: Statement function at (1) is recursive
+penslab.f:716:16:
+
+         DOSZ(K)=DOSZ(K)+DOSZP(K)
+                1
+Error: Statement function at (1) is recursive
+penslab.f:717:17:
+
+         DOSZ2(K)=DOSZ2(K)+DOSZP(K)**2
+                 1
+Error: Statement function at (1) is recursive
+penslab.f:718:16:
+
+         CHRZ(K)=CHRZ(K)+CHRZP(K)
+                1
+Error: Statement function at (1) is recursive
+penslab.f:719:17:
+
+         CHRZ2(K)=CHRZ2(K)+CHRZP(K)**2
+                 1
+Error: Statement function at (1) is recursive
+penslab.f:721:22:
+
+           PDA(KPAR,K)=PDA(KPAR,K)+PDAP(KPAR,K)
+                      1
+Error: Statement function at (1) is recursive
+penslab.f:722:23:
+
+           PDA2(KPAR,K)=PDA2(KPAR,K)+PDAP(KPAR,K)**2
+                       1
+Error: Statement function at (1) is recursive
+penslab.f:723:10:
+
+           PDE(KPAR,1,K)=PDE(KPAR,1,K)+PDEP(KPAR,1,K)
+          1
+Error: Unclassifiable statement at (1)
+penslab.f:724:10:
+
+           PDE2(KPAR,1,K)=PDE2(KPAR,1,K)+PDEP(KPAR,1,K)**2
+          1
+Error: Unclassifiable statement at (1)
+penslab.f:725:10:
+
+           PDE(KPAR,2,K)=PDE(KPAR,2,K)+PDEP(KPAR,2,K)
+          1
+Error: Unclassifiable statement at (1)
+penslab.f:726:10:
+
+           PDE2(KPAR,2,K)=PDE2(KPAR,2,K)+PDEP(KPAR,2,K)**2
+          1
+Error: Unclassifiable statement at (1)
+penslab.f:747:24:
+
+       WRITE(6,3004) PRIM(1)
+                        1
+Error: Syntax error in WRITE statement at (1)
+penslab.f:749:24:
+
+       WRITE(6,3005) PRIM(2)
+                        1
+Error: Syntax error in WRITE statement at (1)
+penslab.f:751:24:
+
+       WRITE(6,3006) PRIM(3)
+                        1
+Error: Syntax error in WRITE statement at (1)
+penslab.f:753:23:
+
+       WRITE(6,3007) SEC(1,1),SEC(2,1),SEC(3,1),
+                       1
+Error: Syntax error in WRITE statement at (1)
+penslab.f:763:14:
+
+       FT=(PRIM(1)+SEC(KPARP,1))/TOTN
+              1
+Error: Expected a right parenthesis in expression at (1)
+penslab.f:768:14:
+
+       FB=(PRIM(2)+SEC(KPARP,2))/TOTN
+              1
+Error: Expected a right parenthesis in expression at (1)
+penslab.f:773:6:
+
+       FA=PRIM(3)/TOTN
+      1
+Error: Unclassifiable statement at (1)
+penslab.f:782:25:
+
+         DF=1.0D0/MAX(PRIM(I),1.0D0)
+                         1
+Error: Syntax error in argument list at (1)
+penslab.f:783:8:
+
+         AVTL2(I)=3.0D0*DF*SQRT(ABS(AVTL2(I)-AVTL(I)**2*DF))
+        1
+Error: Unclassifiable statement at (1)
+penslab.f:784:8:
+
+         AVTL(I)=AVTL(I)*DF
+        1
+Error: Unclassifiable statement at (1)
+penslab.f:786:17:
+
+           IF(AVNI(KC,I).GT.0.5D0) THEN
+                 1
+Error: Syntax error in IF-expression at (1)
+penslab.f:787:12:
+
+             AVNI2(KC,I)=3.0D0*DF*SQRT(ABS(AVNI2(KC,I)-AVNI(KC,I)**2*DF))
+            1
+Error: Unclassifiable statement at (1)
+penslab.f:788:12:
+
+             AVNI(KC,I)=AVNI(KC,I)*DF
+            1
+Error: Unclassifiable statement at (1)
+penslab.f:789:72: Error: Unexpected ELSE statement at (1)
+penslab.f:790:12:
+
+             AVNI2(KC,I)=0.0D0
+            1
+Error: Unclassifiable statement at (1)
+penslab.f:791:12:
+
+             AVNI(KC,I)=0.0D0
+            1
+Error: Unclassifiable statement at (1)
+penslab.f:792:13:
+
+           ENDIF
+             1
+Error: Expecting END DO statement at (1)
+penslab.f:795:10:
+
+           AVE2(I)=3.0D0*DF*SQRT(ABS(AVE2(I)-AVE(I)**2*DF))
+          1
+Error: Unclassifiable statement at (1)
+penslab.f:796:10:
+
+           AVE(I)=AVE(I)*DF
+          1
+Error: Unclassifiable statement at (1)
+penslab.f:797:10:
+
+           AVW2(I)=3.0D0*DF*SQRT(ABS(AVW2(I)-AVW(I)**2*DF))
+          1
+Error: Unclassifiable statement at (1)
+penslab.f:798:10:
+
+           AVW(I)=AVW(I)*DF
+          1
+Error: Unclassifiable statement at (1)
+penslab.f:799:10:
+
+           AVA2(I)=3.0D0*DF*RA2DE*SQRT(ABS(AVA2(I)-AVA(I)**2*DF))
+          1
+Error: Unclassifiable statement at (1)
+penslab.f:800:10:
+
+           AVA(I)=AVA(I)*RA2DE*DF
+          1
+Error: Unclassifiable statement at (1)
+penslab.f:801:10:
+
+           AVLD2(I)=3.0D0*DF*SQRT(ABS(AVLD2(I)-AVLD(I)**2*DF))
+          1
+Error: Unclassifiable statement at (1)
+penslab.f:802:10:
+
+           AVLD(I)=AVLD(I)*DF
+          1
+Error: Unclassifiable statement at (1)
+penslab.f:811:24:
+
+       WRITE(6,3013) AVNI(1,1),AVNI2(1,1)
+                        1
+Error: Syntax error in WRITE statement at (1)
+penslab.f:814:24:
+
+       WRITE(6,3014) AVNI(2,1),AVNI2(2,1)
+                        1
+Error: Syntax error in WRITE statement at (1)
+penslab.f:817:24:
+
+       WRITE(6,3015) AVNI(3,1),AVNI2(3,1)
+                        1
+Error: Syntax error in WRITE statement at (1)
+penslab.f:820:24:
+
+       WRITE(6,3016) AVNI(4,1),AVNI2(4,1)
+                        1
+Error: Syntax error in WRITE statement at (1)
+penslab.f:824:24:
+
+       WRITE(6,3017) AVNI(1,1),AVNI2(1,1)
+                        1
+Error: Syntax error in WRITE statement at (1)
+penslab.f:827:24:
+
+       WRITE(6,3018) AVNI(2,1),AVNI2(2,1)
+                        1
+Error: Syntax error in WRITE statement at (1)
+penslab.f:830:24:
+
+       WRITE(6,3019) AVNI(3,1),AVNI2(3,1)
+                        1
+Error: Syntax error in WRITE statement at (1)
+penslab.f:833:24:
+
+       WRITE(6,3020) AVNI(4,1),AVNI2(4,1)
+                        1
+Error: Syntax error in WRITE statement at (1)
+penslab.f:836:24:
+
+       WRITE(6,3021) AVNI(5,1),AVNI2(5,1)
+                        1
+Error: Syntax error in WRITE statement at (1)
+penslab.f:839:24:
+
+       WRITE(6,3022) AVNI(7,1),AVNI2(7,1)
+                        1
+Error: Syntax error in WRITE statement at (1)
+penslab.f:846:26:
+
+         WRITE(6,3013) AVNI(1,2),AVNI2(1,2)
+                          1
+Error: Syntax error in WRITE statement at (1)
+penslab.f:847:26:
+
+         WRITE(6,3014) AVNI(2,2),AVNI2(2,2)
+                          1
+Error: Syntax error in WRITE statement at (1)
+penslab.f:848:26:
+
+         WRITE(6,3015) AVNI(3,2),AVNI2(3,2)
+                          1
+Error: Syntax error in WRITE statement at (1)
+penslab.f:849:26:
+
+         WRITE(6,3016) AVNI(4,2),AVNI2(4,2)
+                          1
+Error: Syntax error in WRITE statement at (1)
+penslab.f:851:26:
+
+         WRITE(6,3017) AVNI(1,2),AVNI2(1,2)
+                          1
+Error: Syntax error in WRITE statement at (1)
+penslab.f:852:26:
+
+         WRITE(6,3018) AVNI(2,2),AVNI2(2,2)
+                          1
+Error: Syntax error in WRITE statement at (1)
+penslab.f:853:26:
+
+         WRITE(6,3019) AVNI(3,2),AVNI2(3,2)
+                          1
+Error: Syntax error in WRITE statement at (1)
+penslab.f:854:26:
+
+         WRITE(6,3020) AVNI(4,2),AVNI2(4,2)
+                          1
+Error: Syntax error in WRITE statement at (1)
+penslab.f:855:26:
+
+         WRITE(6,3021) AVNI(5,2),AVNI2(5,2)
+                          1
+Error: Syntax error in WRITE statement at (1)
+penslab.f:856:26:
+
+         WRITE(6,3022) AVNI(7,2),AVNI2(7,2)
+                          1
+Error: Syntax error in WRITE statement at (1)
+penslab.f:861:26:
+
+         WRITE(6,3013) AVNI(1,3),AVNI2(1,3)
+                          1
+Error: Syntax error in WRITE statement at (1)
+penslab.f:862:26:
+
+         WRITE(6,3014) AVNI(2,3),AVNI2(2,3)
+                          1
+Error: Syntax error in WRITE statement at (1)
+penslab.f:863:26:
+
+         WRITE(6,3015) AVNI(3,3),AVNI2(3,3)
+                          1
+Error: Syntax error in WRITE statement at (1)
+penslab.f:864:26:
+
+         WRITE(6,3016) AVNI(4,3),AVNI2(4,3)
+                          1
+Error: Syntax error in WRITE statement at (1)
+penslab.f:866:26:
+
+         WRITE(6,3017) AVNI(1,3),AVNI2(1,3)
+                          1
+Error: Syntax error in WRITE statement at (1)
+penslab.f:867:26:
+
+         WRITE(6,3018) AVNI(2,3),AVNI2(2,3)
+                          1
+Error: Syntax error in WRITE statement at (1)
+penslab.f:868:26:
+
+         WRITE(6,3019) AVNI(3,3),AVNI2(3,3)
+                          1
+Error: Syntax error in WRITE statement at (1)
+penslab.f:869:26:
+
+         WRITE(6,3020) AVNI(4,3),AVNI2(4,3)
+                          1
+Error: Syntax error in WRITE statement at (1)
+penslab.f:870:26:
+
+         WRITE(6,3021) AVNI(5,3),AVNI2(5,3)
+                          1
+Error: Syntax error in WRITE statement at (1)
+penslab.f:871:26:
+
+         WRITE(6,3022) AVNI(7,3),AVNI2(7,3)
+                          1
+Error: Syntax error in WRITE statement at (1)
+penslab.f:876:23:
+
+       WRITE(6,3026) AVE(1),AVE2(1)
+                       1
+Error: Syntax error in WRITE statement at (1)
+penslab.f:879:23:
+
+       WRITE(6,3027) AVE(2),AVE2(2)
+                       1
+Error: Syntax error in WRITE statement at (1)
+penslab.f:894:24:
+
+       WRITE(6,3030) AVTL(1),AVTL2(1)
+                        1
+Error: Syntax error in WRITE statement at (1)
+penslab.f:897:24:
+
+       WRITE(6,3031) AVTL(2),AVTL2(2)
+                        1
+Error: Syntax error in WRITE statement at (1)
+penslab.f:900:24:
+
+       WRITE(6,3032) AVTL(3),AVTL2(3)
+                        1
+Error: Syntax error in WRITE statement at (1)
+penslab.f:906:24:
+
+       WRITE(6,3030) AVLD(1),AVLD2(1)
+                        1
+Error: Syntax error in WRITE statement at (1)
+penslab.f:907:24:
+
+       WRITE(6,3031) AVLD(2),AVLD2(2)
+                        1
+Error: Syntax error in WRITE statement at (1)
+penslab.f:912:23:
+
+       WRITE(6,3035) AVW(1),AVW2(1)
+                       1
+Error: Syntax error in WRITE statement at (1)
+penslab.f:915:23:
+
+       WRITE(6,3036) AVW(2),AVW2(2)
+                       1
+Error: Syntax error in WRITE statement at (1)
+penslab.f:922:23:
+
+       WRITE(6,3038) AVA(1),AVA2(1)
+                       1
+Error: Syntax error in WRITE statement at (1)
+penslab.f:925:23:
+
+       WRITE(6,3039) AVA(2),AVA2(2)
+                       1
+Error: Syntax error in WRITE statement at (1)
+penslab.f:111:10:
+
+       DATA PRIM,SEC,AVTL,AVTL2,AVW,AVW2,AVA,AVA2,AVE,AVE2,
+          1
+Error: DATA statement at (1) has more values than variables
+penslab.f:411:22:
+
+       W=W0L+W0UL*RAND(1.0D0)
+                      1
+Error: ‘i’ argument of ‘rand’ intrinsic at (1) must be INTEGER
+penslab.f:412:21:
+
+       PHI=TWOPI*RAND(2.0D0)
+                     1
+Error: ‘i’ argument of ‘rand’ intrinsic at (1) must be INTEGER
+Makefile:25: recipe for target 'penslab.o' failed
+make: *** [penslab.o] Error 1

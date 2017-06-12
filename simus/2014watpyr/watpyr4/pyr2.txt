@@ -1,0 +1,13 @@
+   Type                     N#     %                Edep     Edep/col 
+ 1 Elastic                6694  0.307813    0.199171  eV0.0297537 meV
+ 2 Excit-rotat           14583  0.670575      163.33  eV     11.2 meV
+ 3 Excit-vibrat            343  0.0157723      85.75  eV     0.25  eV
+ 4 Excit-electr             34  0.00156343     253.6  eV  7.45882  eV
+ 5 Dissoc-neutr             16  0.000735734  403.213  eV  25.2008  eV
+ 6 Ionization               76  0.00349473   585.574  eV  7.70493  eV
+ 7 Attachment                1  4.59834e-05  4.41234  eV  4.41234  eV
+
+Dens: 1.01579 g/cm3
+mass: 2.2418e-07 Kg 0.00022418 g 0.22418 ug
+E. Dep: 1496.08 eV = 2.39698e-16 Joule
+Dose: 1.06922e-09 Gy

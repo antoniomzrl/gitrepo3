@@ -1,0 +1,41 @@
+
+Febrero:
+
+Figuras h2o / e+ para pedir proyecto al Australian Research Council sobre positrones con biomoléculas. Necesitaría figuras impactantes de simulación de positrones en agua, tanto las generales con trayectorias de muchos positrones
+
+
+drawpw sustituir glutsphere por glusphere con iluminacion correcta por los dos lados.
+
+Eliminación lib GLUT de la app por ligera mejora performance.
+
+Busco fuente "gluSphere" para separar inicializacion a ver si mejora performance.
+
+Modificacion separando parte repetitiva entre llamadas a gluSphere a ver.
+
+Cambios para evitar redisplay con los eventos de ratón, exposición, etc.
+
+Eliminación total dependencia librería GLUT a cambio de pango-cairo.
+
+Análisis fonts pango-cairo listado completo.
+
+Anotación procesos Kill&Stop en fichero de trayectorias.
+
+Modificación de pérdida y depósito de energía en H2O.
+
+Procesos StopKill incluidos en el visor.
+
+Corrección de suma de energía depositada en el visor.
+
+Añado modo económico de rendering con 5-6 slices mientras gira o selecciona zona.
+
+
+
+Abril - Mayo 2013:
+
+Acelerador médico, geometría.
+
+Modificación de anotación de eventos pre-post. Sobraban algunos "transportation".
+
+Anotación posición/momento del los e- parados en fichero y ejecución posterior en otro run.
+
+

@@ -1,0 +1,104 @@
+
+1e6 e- incidentes de 2 keV
+
+
+(1) gold:
+
+  Material ProcName    N# interact            Edep        Avg Edep
+GOLD_SOLID UserCut     9.42752e+07     2.50566e+08         2.65781
+GOLD_SOLID Elastic     2.7449e+10           476055     1.73433e-05
+GOLD_SOLID ExcitElectr 1.51684e+08     7.63044e+08         5.03049
+GOLD_SOLID Ionisation  9.49624e+07     8.76503e+08            9.23
+
+
+(2) gold + 1 nm pyrimidine:
+
+  Material ProcName    N# interact            Edep        Avg Edep
+GOLD_SOLID UserCut     9.48803e+07     2.52941e+08          2.6659
+GOLD_SOLID Elastic     2.75153e+10          477158     1.73416e-05
+GOLD_SOLID ExcitElectr 1.51901e+08     7.63976e+08         5.02943
+GOLD_SOLID Ionisation  9.49879e+07     8.76738e+08            9.23
+PYR_LIQUID UserCut            7978         4401.46        0.551238
+PYR_LIQUID IonisAuger          103            3605           15.75
+PYR_LIQUID Attachment         6074         32385.8          5.3291
+PYR_LIQUID DissocNeutr       56448     1.35904e+06         24.0793
+PYR_LIQUID Elastic     3.26312e+06         133.099     4.07895e-05
+PYR_LIQUID ExcitElectr       19547          143056          7.3197
+PYR_LIQUID ExcitRotat  2.18571e+07          244799          0.0112
+PYR_LIQUID ExcitVibrat 1.10272e+06          275680            0.25
+PYR_LIQUID Ionisation       167388     1.54494e+06         9.22971
+
+
+(2) gold + 3 nm pyrimidine:
+
+  Material ProcName    N# interact            Edep        Avg Edep
+GOLD_SOLID UserCut     9.53117e+07       2.546e+08         2.67124
+GOLD_SOLID Elastic     2.75298e+10          477394      1.7341e-05
+GOLD_SOLID ExcitElectr 1.51653e+08     7.62703e+08         5.02926
+GOLD_SOLID Ionisation   9.4752e+07     8.74561e+08            9.23
+PYR_LIQUID UserCut           35827           21779        0.607704
+PYR_LIQUID IonisAuger          161            5635            32.2
+PYR_LIQUID Attachment        15027         78490.2         5.22343
+PYR_LIQUID DissocNeutr      174860     4.20466e+06         24.0434
+PYR_LIQUID Elastic     1.21503e+07         465.524     3.83155e-05
+PYR_LIQUID ExcitElectr       82243          603522         7.33883
+PYR_LIQUID ExcitRotat  1.05832e+08     1.18532e+06          0.0112
+PYR_LIQUID ExcitVibrat  4.1299e+06     1.03247e+06            0.25
+PYR_LIQUID Ionisation       546403     5.04317e+06         9.22976
+
+
+
+(2) gold + 5 nm pyrimidine:
+
+  Material ProcName    N# interact            Edep        Avg Edep
+GOLD_SOLID UserCut     9.54945e+07     2.54812e+08         2.66834
+GOLD_SOLID Elastic     2.74049e+10          475219     1.73407e-05
+GOLD_SOLID ExcitElectr 1.51495e+08      7.6173e+08         5.02807
+GOLD_SOLID Ionisation  9.45702e+07     8.72883e+08            9.23
+PYR_LIQUID UserCut           82279         52594.7         0.63912
+PYR_LIQUID IonisAuger          390           13650           34.65
+PYR_LIQUID Attachment        20071          106459         5.30256
+PYR_LIQUID DissocNeutr      296070     7.13114e+06         24.0863
+PYR_LIQUID Elastic     2.12821e+07         799.419     3.75637e-05
+PYR_LIQUID ExcitElectr      176811     1.29491e+06         7.32368
+PYR_LIQUID ExcitRotat  2.11293e+08     2.36648e+06          0.0112
+PYR_LIQUID ExcitVibrat   6.637e+06     1.65925e+06            0.25
+PYR_LIQUID Ionisation       971193     8.96387e+06         9.22975
+
+
+
+(2) gold + 10 nm pyrimidine:
+
+  Material ProcName    N# interact            Edep        Avg Edep
+GOLD_SOLID UserCut     9.53836e+07     2.53965e+08         2.66257
+GOLD_SOLID Elastic     2.71001e+10          469898     1.73394e-05
+GOLD_SOLID ExcitElectr 1.50504e+08      7.5674e+08         5.02805
+GOLD_SOLID Ionisation  9.38604e+07     8.66331e+08            9.23
+PYR_LIQUID UserCut          227450          145461        0.639554
+PYR_LIQUID IonisAuger          705           24675              35
+PYR_LIQUID Attachment        31386          170918         5.44524
+PYR_LIQUID DissocNeutr      611558      1.4651e+07         23.9565
+PYR_LIQUID Elastic     4.45954e+07         1722.32     3.86206e-05
+PYR_LIQUID ExcitElectr      508634     3.72791e+06         7.32925
+PYR_LIQUID ExcitRotat  4.39723e+08      4.9249e+06          0.0112
+PYR_LIQUID ExcitVibrat 1.20898e+07     3.02245e+06            0.25
+PYR_LIQUID Ionisation  2.13579e+06     1.97127e+07         9.22972
+
+
+
+(2) gold + 30 nm pyrimidine:
+
+  Material ProcName    N# interact            Edep        Avg Edep
+GOLD_SOLID UserCut       9.289e+07     2.44092e+08         2.62775
+GOLD_SOLID Elastic     2.49696e+10          433214     1.73497e-05
+GOLD_SOLID ExcitElectr 1.42664e+08     7.17741e+08         5.03098
+GOLD_SOLID Ionisation  8.91162e+07     8.22542e+08            9.23
+PYR_LIQUID UserCut          975335          618617        0.634258
+PYR_LIQUID IonisAuger         1848           64680              35
+PYR_LIQUID Attachment        90455          513158         5.67321
+PYR_LIQUID DissocNeutr 2.01905e+06     4.78793e+07         23.7138
+PYR_LIQUID Elastic     1.65713e+08         6537.78     3.94524e-05
+PYR_LIQUID ExcitElectr  2.2756e+06     1.66692e+07         7.32519
+PYR_LIQUID ExcitRotat  1.57963e+09     1.76919e+07          0.0112
+PYR_LIQUID ExcitVibrat 4.01095e+07     1.00274e+07            0.25
+PYR_LIQUID Ionisation  7.47164e+06     6.89601e+07         9.22957

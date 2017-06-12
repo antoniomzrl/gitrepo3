@@ -1,0 +1,836 @@
+user	1m17.788s
+sys	0m0.340s
+iiii  1
+exec cd oo2; for j in 2_2.sh  ; do bash $j ; done
+
+real	1m18.504s
+user	1m17.908s
+sys	0m0.512s
+
+real	1m18.774s
+user	1m18.412s
+sys	0m0.316s
+
+real	1m18.786s
+user	2m36.324s
+sys	0m0.828s
+iiii  2
+exec cd oo3; for j in 3_3.sh  ; do bash $j ; done
+
+real	1m17.929s
+user	1m17.444s
+sys	0m0.404s
+
+real	1m18.719s
+user	1m18.284s
+sys	0m0.372s
+
+real	1m23.265s
+user	1m22.868s
+sys	0m0.332s
+
+real	1m23.277s
+user	3m58.600s
+sys	0m1.112s
+iiii  3
+exec cd oo4; for j in 4_4.sh  ; do bash $j ; done
+
+real	1m17.304s
+user	1m16.900s
+sys	0m0.340s
+
+real	1m19.536s
+user	1m19.044s
+sys	0m0.428s
+
+real	1m21.526s
+user	1m21.120s
+sys	0m0.348s
+
+real	1m21.815s
+user	1m21.356s
+sys	0m0.408s
+
+real	1m21.828s
+user	5m18.424s
+sys	0m1.524s
+iiii  4
+exec cd oo5; for j in 5_5.sh  ; do bash $j ; done
+
+real	1m17.245s
+user	1m16.744s
+sys	0m0.400s
+
+real	1m18.412s
+user	1m18.008s
+sys	0m0.352s
+
+real	1m18.417s
+user	1m17.988s
+sys	0m0.380s
+
+real	1m18.938s
+user	1m18.552s
+sys	0m0.328s
+
+real	1m23.732s
+user	1m23.312s
+sys	0m0.356s
+
+real	1m23.744s
+user	6m34.608s
+sys	0m1.816s
+iiii  5
+exec cd oo6; for j in 6_6.sh  ; do bash $j ; done
+
+real	1m18.863s
+user	1m18.344s
+sys	0m0.452s
+
+real	1m19.275s
+user	1m18.840s
+sys	0m0.376s
+
+real	1m20.008s
+user	1m19.540s
+sys	0m0.404s
+
+real	1m21.163s
+user	1m20.616s
+sys	0m0.408s
+
+real	1m21.667s
+user	1m21.080s
+sys	0m0.524s
+
+real	1m23.620s
+user	1m23.168s
+sys	0m0.396s
+
+real	1m23.633s
+user	8m1.592s
+sys	0m2.560s
+iiii  6
+exec cd oo7; for j in 7_7.sh  ; do bash $j ; done
+
+real	1m18.737s
+user	1m17.848s
+sys	0m0.368s
+
+real	1m19.577s
+user	1m19.136s
+sys	0m0.352s
+
+real	1m19.740s
+user	1m19.220s
+sys	0m0.452s
+
+real	1m20.034s
+user	1m19.500s
+sys	0m0.468s
+
+real	1m20.672s
+user	1m20.248s
+sys	0m0.328s
+
+real	1m24.582s
+user	1m23.972s
+sys	0m0.496s
+
+real	1m25.347s
+user	1m24.904s
+sys	0m0.376s
+
+real	1m25.360s
+user	9m24.836s
+sys	0m2.840s
+iiii  7
+exec cd oo8; for j in 8_8.sh  ; do bash $j ; done
+
+real	1m18.974s
+user	1m18.380s
+sys	0m0.508s
+
+real	1m19.437s
+user	1m19.036s
+sys	0m0.344s
+
+real	1m21.667s
+user	1m20.992s
+sys	0m0.448s
+
+real	1m21.997s
+user	1m21.348s
+sys	0m0.448s
+
+real	1m22.139s
+user	1m21.700s
+sys	0m0.328s
+
+real	1m22.691s
+user	1m22.144s
+sys	0m0.476s
+
+real	1m24.478s
+user	1m24.004s
+sys	0m0.392s
+
+real	1m24.694s
+user	1m24.248s
+sys	0m0.384s
+
+real	1m24.708s
+user	10m51.856s
+sys	0m3.328s
+iiii  8
+exec cd oo9; for j in 9_9.sh  ; do bash $j ; done
+
+real	1m25.618s
+user	1m24.964s
+sys	0m0.536s
+
+real	1m28.298s
+user	1m27.724s
+sys	0m0.464s
+
+real	1m29.145s
+user	1m28.256s
+sys	0m0.580s
+
+real	1m30.789s
+user	1m30.032s
+sys	0m0.508s
+
+real	1m32.277s
+user	1m31.188s
+sys	0m0.468s
+
+real	1m32.337s
+user	1m31.260s
+sys	0m0.484s
+
+real	1m33.280s
+user	1m32.244s
+sys	0m0.480s
+
+real	1m33.461s
+user	1m32.468s
+sys	0m0.560s
+
+real	1m33.609s
+user	1m33.044s
+sys	0m0.408s
+
+real	1m33.621s
+user	13m31.184s
+sys	0m4.488s
+iiii  9
+exec cd oo10; for j in 10_10.sh  ; do bash $j ; done
+
+real	1m32.834s
+user	1m32.100s
+sys	0m0.492s
+
+real	1m35.135s
+user	1m34.168s
+sys	0m0.496s
+
+real	1m35.988s
+user	1m35.136s
+sys	0m0.576s
+
+real	1m36.521s
+user	1m35.768s
+sys	0m0.496s
+
+real	1m37.403s
+user	1m36.324s
+sys	0m0.580s
+
+real	1m37.805s
+user	1m36.792s
+sys	0m0.544s
+
+real	1m39.703s
+user	1m38.656s
+sys	0m0.564s
+
+real	1m40.250s
+user	1m39.040s
+sys	0m0.580s
+
+real	1m41.602s
+user	1m40.060s
+sys	0m0.720s
+
+real	1m42.712s
+user	1m41.164s
+sys	0m0.648s
+
+real	1m42.723s
+user	16m9.208s
+sys	0m5.696s
+iiii  10
+exec cd oo11; for j in 11_11.sh  ; do bash $j ; done
+
+real	1m43.141s
+user	1m42.060s
+sys	0m0.572s
+
+real	1m43.675s
+user	1m42.464s
+sys	0m0.540s
+
+real	1m44.917s
+user	1m43.652s
+sys	0m0.532s
+
+real	1m46.495s
+user	1m44.864s
+sys	0m0.736s
+
+real	1m46.640s
+user	1m45.428s
+sys	0m0.612s
+
+real	1m47.060s
+user	1m45.364s
+sys	0m0.676s
+
+real	1m47.500s
+user	1m45.960s
+sys	0m0.588s
+
+real	1m48.035s
+user	1m46.708s
+sys	0m0.524s
+
+real	1m49.205s
+user	1m47.752s
+sys	0m0.592s
+
+real	1m49.461s
+user	1m47.812s
+sys	0m0.604s
+
+real	1m51.213s
+user	1m49.296s
+sys	0m0.788s
+
+real	1m51.228s
+user	19m21.368s
+sys	0m6.764s
+iiii  11
+exec cd oo12; for j in 12_12.sh  ; do bash $j ; done
+
+real	1m50.474s
+user	1m49.212s
+sys	0m0.604s
+
+real	1m51.095s
+user	1m49.680s
+sys	0m0.548s
+
+real	1m52.011s
+user	1m50.528s
+sys	0m0.572s
+
+real	1m52.476s
+user	1m51.276s
+sys	0m0.604s
+
+real	1m52.534s
+user	1m50.980s
+sys	0m0.628s
+
+real	1m53.820s
+user	1m52.396s
+sys	0m0.596s
+
+real	1m53.958s
+user	1m52.600s
+sys	0m0.588s
+
+real	1m54.005s
+user	1m52.572s
+sys	0m0.692s
+
+real	1m54.258s
+user	1m53.096s
+sys	0m0.576s
+
+real	1m54.365s
+user	1m52.760s
+sys	0m0.600s
+
+real	1m54.370s
+user	1m52.768s
+sys	0m0.672s
+
+real	2m0.924s
+user	1m58.856s
+sys	0m0.632s
+
+real	2m0.935s
+user	22m26.724s
+sys	0m7.312s
+iiii  12
+exec cd oo13; for j in 13_13.sh  ; do bash $j ; done
+
+real	1m58.558s
+user	1m56.856s
+sys	0m0.676s
+
+real	1m59.803s
+user	1m58.000s
+sys	0m0.712s
+
+real	2m0.013s
+user	1m58.564s
+sys	0m0.616s
+
+real	2m0.389s
+user	1m58.220s
+sys	0m0.740s
+
+real	2m0.590s
+user	1m58.344s
+sys	0m0.704s
+
+real	2m0.681s
+user	1m58.608s
+sys	0m0.684s
+
+real	2m0.843s
+user	1m59.112s
+sys	0m0.636s
+
+real	2m1.956s
+user	1m59.880s
+sys	0m0.684s
+
+real	2m2.072s
+user	1m59.916s
+sys	0m0.736s
+
+real	2m2.541s
+user	2m1.048s
+sys	0m0.616s
+
+real	2m2.716s
+user	2m0.868s
+sys	0m0.652s
+
+real	2m3.934s
+user	2m1.640s
+sys	0m0.680s
+
+real	2m4.495s
+user	2m2.124s
+sys	0m0.668s
+
+real	2m4.523s
+user	25m53.184s
+sys	0m8.804s
+iiii  13
+exec cd oo14; for j in 14_14.sh  ; do bash $j ; done
+
+real	2m1.313s
+user	1m59.588s
+sys	0m0.628s
+
+real	2m5.843s
+user	2m3.604s
+sys	0m0.728s
+
+real	2m5.961s
+user	2m4.108s
+sys	0m0.652s
+
+real	2m6.020s
+user	2m4.136s
+sys	0m0.612s
+
+real	2m7.042s
+user	2m5.020s
+sys	0m0.700s
+
+real	2m7.302s
+user	2m5.056s
+sys	0m0.848s
+
+real	2m7.454s
+user	2m5.664s
+sys	0m0.596s
+
+real	2m7.580s
+user	2m5.088s
+sys	0m0.824s
+
+real	2m8.649s
+user	2m6.240s
+sys	0m0.668s
+
+real	2m9.438s
+user	2m6.520s
+sys	0m0.804s
+
+real	2m9.582s
+user	2m7.384s
+sys	0m0.744s
+
+real	2m9.897s
+user	2m7.076s
+sys	0m0.844s
+
+real	2m10.351s
+user	2m7.892s
+sys	0m0.756s
+
+real	2m11.205s
+user	2m8.632s
+sys	0m0.740s
+
+real	2m11.219s
+user	29m16.008s
+sys	0m10.152s
+iiii  14
+exec cd oo15; for j in 15_15.sh  ; do bash $j ; done
+
+real	2m10.722s
+user	2m8.116s
+sys	0m0.800s
+
+real	2m13.035s
+user	2m10.300s
+sys	0m0.788s
+
+real	2m13.158s
+user	2m10.180s
+sys	0m0.724s
+
+real	2m13.580s
+user	2m11.124s
+sys	0m0.708s
+
+real	2m13.638s
+user	2m10.888s
+sys	0m0.940s
+
+real	2m14.135s
+user	2m11.664s
+sys	0m0.696s
+
+real	2m14.748s
+user	2m12.260s
+sys	0m0.764s
+
+real	2m15.094s
+user	2m13.240s
+sys	0m0.720s
+
+real	2m15.282s
+user	2m13.036s
+sys	0m0.756s
+
+real	2m15.731s
+user	2m12.768s
+sys	0m0.856s
+
+real	2m16.157s
+user	2m14.064s
+sys	0m0.764s
+
+real	2m17.177s
+user	2m14.332s
+sys	0m0.800s
+
+real	2m17.216s
+user	2m14.860s
+sys	0m0.764s
+
+real	2m17.230s
+user	2m14.780s
+sys	0m0.764s
+
+real	2m22.081s
+user	2m18.952s
+sys	0m0.820s
+
+real	2m22.097s
+user	33m10.568s
+sys	0m11.664s
+iiii  15
+exec cd oo16; for j in 16_16.sh  ; do bash $j ; done
+
+real	2m20.513s
+user	2m15.748s
+sys	0m0.828s
+
+real	2m20.951s
+user	2m16.012s
+sys	0m0.708s
+
+real	2m21.100s
+user	2m17.716s
+sys	0m0.824s
+
+real	2m21.782s
+user	2m17.460s
+sys	0m0.808s
+
+real	2m22.559s
+user	2m19.252s
+sys	0m0.792s
+
+real	2m22.757s
+user	2m17.136s
+sys	0m0.900s
+
+real	2m22.898s
+user	2m17.888s
+sys	0m0.816s
+
+real	2m23.022s
+user	2m19.308s
+sys	0m0.836s
+
+real	2m23.210s
+user	2m17.392s
+sys	0m0.656s
+
+real	2m23.467s
+user	2m20.784s
+sys	0m0.712s
+
+real	2m23.535s
+user	2m20.044s
+sys	0m0.860s
+
+real	2m23.692s
+user	2m18.964s
+sys	0m0.748s
+
+real	2m23.883s
+user	2m18.008s
+sys	0m0.788s
+
+real	2m24.280s
+user	2m21.312s
+sys	0m0.804s
+
+real	2m26.195s
+user	2m21.120s
+sys	0m0.784s
+
+real	2m26.779s
+user	2m18.844s
+sys	0m0.900s
+
+real	2m26.793s
+user	36m56.992s
+sys	0m12.764s
+iiii  16
+exec cd oo17; for j in 17_17.sh  ; do bash $j ; done
+
+real	2m24.868s
+user	2m14.768s
+sys	0m0.936s
+
+real	2m27.364s
+user	2m16.260s
+sys	0m0.772s
+
+real	2m27.641s
+user	2m14.520s
+sys	0m0.864s
+
+real	2m27.807s
+user	2m15.732s
+sys	0m0.824s
+
+real	2m27.867s
+user	2m17.576s
+sys	0m0.776s
+
+real	2m28.997s
+user	2m18.128s
+sys	0m0.780s
+
+real	2m29.178s
+user	2m16.440s
+sys	0m0.904s
+
+real	2m29.879s
+user	2m16.588s
+sys	0m0.848s
+
+real	2m30.033s
+user	2m18.404s
+sys	0m0.848s
+
+real	2m30.455s
+user	2m20.632s
+sys	0m0.912s
+
+real	2m30.716s
+user	2m18.544s
+sys	0m0.912s
+
+real	2m30.845s
+user	2m16.008s
+sys	0m0.884s
+
+real	2m30.904s
+user	2m18.740s
+sys	0m0.796s
+
+real	2m31.580s
+user	2m18.264s
+sys	0m0.792s
+
+real	2m32.897s
+user	2m16.128s
+sys	0m0.836s
+
+real	2m33.023s
+user	2m19.340s
+sys	0m0.852s
+
+real	2m33.780s
+user	2m18.768s
+sys	0m0.884s
+
+real	2m33.808s
+user	38m54.844s
+sys	0m14.424s
+iiii  17
+exec cd oo18; for j in 18_18.sh  ; do bash $j ; done
+^C
+real	0m38.854s
+user	0m0.004s
+sys	0m0.000s
+iiii  18
+exec cd oo19; for j in 19_19.sh  ; do bash $j ; done
+
+real	0m39.075s
+user	0m33.596s
+sys	0m0.220s
+
+real	0m39.094s
+user	0m33.148s
+sys	0m0.176s
+
+real	0m39.100s
+user	0m34.456s
+sys	0m0.244s
+
+real	0m39.114s
+
+real	0m39.114s
+user	0m34.092s
+sys	0m0.164s
+user	0m33.596s
+sys	0m0.180s
+
+real	0m39.121s
+user	0m33.888s
+sys	0m0.176s
+
+real	0m39.086s
+user	0m34.016s
+sys	0m0.248s
+
+real	0m39.127s
+user	0m34.124s
+sys	0m0.228s
+
+real	0m39.129s
+user	0m33.288s
+sys	0m0.248s
+
+real	0m39.136s
+user	0m34.984s
+sys	0m0.176s
+
+real	0m39.147s
+user	0m32.388s
+sys	0m0.188s
+
+real	0m39.150s
+user	0m32.864s
+sys	0m0.204s
+
+real	0m39.161s
+user	0m34.076s
+sys	0m0.200s
+
+real	0m39.162s
+user	0m33.760s
+sys	0m0.244s
+
+real	0m39.165s
+user	0m34.080s
+sys	0m0.140s
+
+real	0m39.174s
+user	0m33.200s
+sys	0m0.156s
+
+real	0m39.257s
+user	0m34.176s
+sys	0m0.216s
+^C
+real	0m1.926s
+user	0m0.000s
+sys	0m0.004s
+iiii  19
+(tecno17)~/lepts/2016taliogold> 19_19.sh: line 21:  2443 Aborted                 (core dumped) gamos 17_17.inp 1>&17_17.log
+
+real	0m1.971s
+user	0m1.496s
+sys	0m0.032s
+19_19.sh: line 9:  2430 Aborted                 (core dumped) gamos 05_05.inp 1>&05_05.log
+19_19.sh: line 16:  2435 Aborted                 (core dumped) gamos 12_12.inp 1>&12_12.log
+
+real	0m1.976s
+user	0m1.528s
+
+real	0m1.977s
+user	0m1.360s
+sys	0m0.028s
+sys	0m0.024s
+19_19.sh: line 23:  2434 Aborted                 (core dumped) gamos 19_19.inp 1>&19_19.log
+
+real	0m1.983s
+user	0m1.364s
+sys	0m0.032s
+19_19.sh: line 6:  2427 Aborted                 (core dumped) gamos 02_02.inp 1>&02_02.log
+
+real	0m1.985s
+user	0m1.712s
+sys	0m0.016s
+19_19.sh: line 19:  2440 Aborted                 (core dumped) gamos 15_15.inp 1>&15_15.log
+19_19.sh: line 14:  2431 Aborted                 (core dumped) gamos 10_10.inp 1>&10_10.log
+
+real	0m1.985s
+user	0m1.252s
+sys	0m0.024s
+
+real	0m1.984s
+user	0m1.452s
+sys	0m0.036s
+19_19.sh: line 7:  2429 Aborted                 (core dumped) gamos 03_03.inp 1>&03_03.log
+
+real	0m1.987s
+user	0m1.364s
+sys	0m0.024s
+19_19.sh: line 17:  2436 Aborted                 (core dumped) gamos 13_13.inp 1>&13_13.log
+
+real	0m1.986s
+user	0m1.220s
+sys	0m0.040s
+19_19.sh: line 8:  2423 Aborted                 (core dumped) gamos 04_04.inp 1>&04_04.log
+
+real	0m1.996s
+user	0m1.524s

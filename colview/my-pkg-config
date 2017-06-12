@@ -1,0 +1,6 @@
+set -x
+PREFIX="../win32dev"
+
+export PKG_CONFIG_PATH=${PREFIX}/gtkglext/lib/pkgconfig:${PREFIX}/gtk/lib/pkgconfig
+
+i686-w64-mingw32-pkg-config $*

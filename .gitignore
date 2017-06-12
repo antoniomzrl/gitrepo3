@@ -1,0 +1,19 @@
+# no backup:
+*.o
+*.obj
+*.exe
+*.bcd
+*.bin
+*.root
+*.wrl
+*.log
+*~
+#*
+.#*
+oo*
+kk*
+a.out
+*.root
+*.root.csv
+penelope/material
+penelope/penslab

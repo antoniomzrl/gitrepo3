@@ -1,0 +1,64 @@
+#
+# Makefile for CES Sparc Ultra 5 machines with graphics cards and OpenGL
+# (machines named after trees, e.g., oak, located in Riggs 10).
+#
+# Rename to "Makefile" and type "make" to compile the simple example gtk
+# programs.
+#
+
+CC = cc
+
+CFLAGS = -g
+
+INCLUDE = -I. \
+  -I/usr/include/ -I/usr/include/X11/ -I/usr/include/gtk \
+  -I/usr/local/include -I/usr/local/include/GL \
+  -I/usr/local/lib/glib/include
+
+LDFLAGS =  -L. \
+  -L/usr/lib -L/usr/lib/X11 \
+  -L/usr/local/lib
+
+# Normally you'd want to use these LDLIBS, right now -lgtkgl is broken...
+#LDLIBS = \
+#  -lGL -lGLU \
+#  -lX11 -lXext -lXmu \
+#  -lgtkgl -lgtk -lgdk -lglib \
+#  -lm
+
+LDLIBS = \
+  -lGL -lGLU \
+  -lX11 -lXext -lXmu \
+  -lgtk -lgdk -lglib \
+  -lm
+
+SRCS = \
+gtksimple.c \
+gtksimple2.c \
+gktglsimple.c
+
+EX1_OBJS = \
+gtksimple.o
+
+EX2_OBJS = \
+gtksimple2.o
+
+EX3_OBJS = \
+gtkglsimple.o
+
+.c.o:
+	$(CC) $(DEFS) $(INCLUDE) $(CFLAGS) -c $<
+
+all: gtksimple gtksimple2 gtkglsimple
+
+gtksimple: $(EX1_OBJS) gtksimple.c
+	$(CC) $(CFLAGS) $(INCLUDE) $(EX1_OBJS) $(LDFLAGS) $(LDLIBS) -o $@
+
+gtksimple2: $(EX2_OBJS) gtksimple2.c
+	$(CC) $(CFLAGS) $(INCLUDE) $(EX2_OBJS) $(LDFLAGS) $(LDLIBS) -o $@
+
+gtkglsimple: $(EX3_OBJS) gtkglsimple.c
+	$(CC) $(CFLAGS) $(INCLUDE) $(EX3_OBJS) $(LDFLAGS) $(LDLIBS) -o $@
+
+clean:
+	rm -f *.o core gtksimple gtksimple2 gtkglsimple

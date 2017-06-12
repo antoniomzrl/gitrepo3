@@ -1,0 +1,58 @@
+#
+# Makefile for Linux machines---the location of libraries and header files
+# may be different depending on your flavor of linux and where the libraries
+# have been installed.
+#
+# Rename to "Makefile" and type "make" to compile the simple example gtk
+# programs.
+#
+
+CC = gcc
+
+CFLAGS = -g
+
+INCLUDE = -I. \
+  -I/usr/include/ -I/usr/include/X11/ \
+  -I/usr/include/gtk-1.2 \
+  -I/usr/include/glib-1.2 -I/usr/lib/glib/include
+
+LDFLAGS =  -L. \
+  -L/usr/lib \
+  -L/usr/X11R6/lib
+
+LDLIBS = \
+  -lGL -lGLU \
+  -lX11 -lXext -lXmu \
+  -lgtkgl -lgtk -lgdk -lglib \
+  -lm
+
+SRCS = \
+gtksimple.c \
+gtksimple2.c \
+gtkglsimple.c
+
+EX1_OBJS = \
+gtksimple.o
+
+EX2_OBJS = \
+gtksimple2.o
+
+EX3_OBJS = \
+gtkglsimple.o
+
+.c.o:
+	$(CC) $(DEFS) $(INCLUDE) $(CFLAGS) -c $<
+
+all: gtksimple gtksimple2 gtkglsimple
+
+gtksimple: $(EX1_OBJS) gtksimple.c
+	$(CC) $(CFLAGS) $(INCLUDE) $(EX1_OBJS) $(LDFLAGS) $(LDLIBS) -o $@
+
+gtksimple2: $(EX2_OBJS) gtksimple2.c
+	$(CC) $(CFLAGS) $(INCLUDE) $(EX2_OBJS) $(LDFLAGS) $(LDLIBS) -o $@
+
+gtkglsimple: $(EX3_OBJS) gtkglsimple.c
+	$(CC) $(CFLAGS) $(INCLUDE) $(EX3_OBJS) $(LDFLAGS) $(LDLIBS) -o $@
+
+clean:
+	rm -f *.o core gtksimple gtksimple2 gtkglsimple

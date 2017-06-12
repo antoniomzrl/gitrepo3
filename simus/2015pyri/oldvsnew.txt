@@ -1,0 +1,21 @@
+
+     No Ints          Edep      Edep/Tot      Avg Edep   Process
+ 2.06583e+06   2.39841e+06     0.0481976       1.16099   PYRIM_OLD SpecialCut
+       16354       90593.7    0.00182053       5.53954   PYRIM_OLD Attachment
+      571010   1.35206e+07      0.271704       23.6784   PYRIM_OLD DissocNeutr
+ 1.84357e+08       21023.1   0.000422473   0.000114035   PYRIM_OLD Elastic
+ 3.91479e+08   4.38457e+06     0.0881105        0.0112   PYRIM_OLD ExcitRotat
+ 8.93232e+06   2.23308e+06     0.0448751          0.25   PYRIM_OLD ExcitVibrat
+      917533   6.72725e+06      0.135188       7.33189   PYRIM_OLD Excitation
+ 2.20554e+06   2.03866e+07      0.409681       9.24337   PYRIM_OLD Ionisation
+
+
+     No Ints          Edep      Edep/Tot      Avg Edep   Process
+ 2.06787e+06   2.40544e+06      0.048301       1.16324   PYRIM e- SpecialCut
+        9764       54784.4    0.00110007       5.61086   PYRIM e- Attachment
+      570233   1.35109e+07      0.271298       23.6937   PYRIM e- DissocNeutr
+ 1.32244e+08       17497.3   0.000351345   0.000132311   PYRIM e- Elastic
+ 2.99057e+08   3.34944e+06     0.0672565        0.0112   PYRIM e- ExcitRotat
+ 1.96138e+07   3.82932e+06     0.0768923      0.195235   PYRIM e- ExcitVibrat
+      863965   6.33997e+06      0.127306       7.33823   PYRIM e- Excitation
+  2.1954e+06   2.02937e+07      0.407495       9.24372   PYRIM e- Ionisation

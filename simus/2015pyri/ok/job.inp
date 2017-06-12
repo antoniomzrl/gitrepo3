@@ -1,0 +1,24 @@
+#!/bin/sh (help emacs)
+# GEOMETRY
+/gamos/setParam GmGeometryFromText:FileName job.geom
+/gamos/geometry GmGeometryFromText
+/gamos/setParam JobName job
+
+/gamos/geometry/createRegion ch_region ch_PYRIMIDINE 
+/gamos/physicsList GmLEPTSPhysics 
+/run/initialize 
+/gamos/userAction UAInteraction 
+/gamos/setParam TimeMark 10 
+/gamos/userAction UAClock 
+/gamos/setParam UAInteractionSp:x 600 0 3000*nm 
+/gamos/setParam UAInteractionSp:Title EdIntDepth 
+/gamos/userAction UAInteractionSp 
+#USERLIMITS 
+/gamos/physics/userLimits/setMinEKin ulimit_PYRIMIDINE_e- ch_PYRIMIDINE e- 1.2*eV 
+/gamos/physics/userLimits/print 
+#GENERATOR_e-_5*keV 
+/gamos/generator GmGenerator 
+/gamos/generator/addSingleParticleSource gn e- 5*keV 
+/gamos/generator/positionDist gn GmGenerDistPositionInG4Volumes gbox 
+/gamos/generator/directionDist gn GmGenerDistDirectionConst 1 0 0 
+/run/beamOn 10000 

@@ -1,0 +1,46 @@
+
+
+Te adjunto los ficheros que hemos hablado:
+
+e-H2O-Eloss-Add: 
+La primera columna es la energía incidente (30-6000000 eV), la segunda es la pérdida media de energía de acuerdo con NIST, la tercera es la pérdida media de energía de nuestro espectro de pérdidas experimental, la cuarta es la energía media que hay que añadir a la nuestra para obtener la del NIST. 
+
+La forma de añadirla es incluyendo en el espectro de pérdidas un nuevo proceso: la doble ionización. La quinta columna es la forma de la función de distrobución que hay que añadir para obtener la energía media que falta. Fíjate que va desde 40eV hasta 6 MeV por lo que para energías más bajas de 6 MeV la vamos truncando. En resumen, de momento basta con añadir la nueva distribución y comprobar que para cada energía incidente, con la distribución total se obtienen (aproximadamente) las energías medias de la primera columna.
+
+
+H2O Eloss-full_: 
+Es el espectro de pérdiada de energía que sustituye al anterior. Como últimamente, hay que añadir las vibracionales y rotacionales, separar la excitación de la ionización y cuando añadas la doble ionización, también la trataremos aparte. 
+Fíjate que al igual que cuando hay ionización generas un secundario, con la doble ionización generas 2 secundarios, más tarde hablaremos del criterio de ángulo para los secundarios.
+
+
+Ang-MomTrans_10-6000 keV_2: 
+Este es la función de distribución para el momento transferido (K) y electrones incidentes de más de 10 keV (relativistas). Como antes, con la distribución de probabilidades de las DCS, en lugar del ángulo, sorteas el momento transferido (ojo va en unidades atómicas). Después con el valor de K sacas el ángulo pues K=2*P*sin (ang/2) , y P=(1/c)((E(eV)/27.2+c^2)^2-c^4))^0.5, siendo c=137 en u.a. 
+
+Mañana te enviaré las secciones eficaces. Llámame si hay algo que no esté claro
+
+
+
+
+Borra los anteriores,  a alguno le faltaba el último ajuste. Utiliza estos
+
+
+
+
+En el último fichero de energía media no he incluido la del NIST, sólo la que hay que añadir (las prisas...). Si la necesitas puedes usar la del anterior.
+
+
+
+
+te envío las secciones eficaces integrales tal como están ahora. Una vez sorteado el proceso se utiliza el espectro de pérdida normalizado para cada proceso y se determina la pérdida de energía. 
+
+K-shell ionisation es la ionización de al capa interna y el espectro es el que te envié ayer para pérdidas de energía por encima de 500 eV. 
+
+Falta por encontrar un espectro de pérdidas para la ionización doble pero las lineas para ello son las que te dije ayer (intenta hacer esa deconvolución con las energías medias). 
+
+Como antes, para la excitación utilizas el espetro normalizado por debajo del límite de ionización, para la ionización simple por encima de dicho límite, para las vibracionales el que ya tenías y para las rotacionales el valor anteriormente fijado.
+
+Observa que no hay disociación neutra, está incluida en la excitación. Más adelante te daré unos coeficientes de disociación neutra para aplicar a la excitación y de disociación iónica para la ionización pero de momento tiramos con esto.
+
+El fichero del momento transferido sólo lo usamos para el determinar el ángulo de dispersión por encima de 10 keV  (a esas energías el elástico y el inelástico se consideran iguales). Dime si tienes dudas con esta parte.
+
+

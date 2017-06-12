@@ -1,0 +1,12 @@
+TITLE  Aluminium foil
+KPAR   1        [Primary particles: 1=electron, 2=photon, 3=positron]
+E0     500.0E3                                [Initial energy, in eV]
+Z0     -10.0                      [Z-coordinate of the source, in cm]
+POLAR  0.0 0.0                  [Polar angle interval limits, in deg]
+SIMPAR 1.0E4 1.0E4 1.0E4 0.10 0.10 1.0E3 -1.0E3 [EABSs,C1,C2,Wcc,Wcr]
+PFNAME al.mat                     [Material file name, 18 characters]
+THICKN 0.02                                   [Slab thickness, in cm]
+DSMAX  0.004                     [Maximum allowed step length, in cm]
+NSIMSH 2147483647         [Desired number of showers, max=2147483647]
+TIME   300                         [Allotted simulation time, in sec]
+RSEED  12345 54321                                     [Random seeds]

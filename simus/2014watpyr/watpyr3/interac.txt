@@ -1,0 +1,31 @@
+
+Pyrimidine:
+
+         Process          No Ints            Edep        Avg Edep
+
+      Attachment           187588     1.03338e+06         5.50869
+     DissocNeutr      5.95116e+06     1.40492e+08         23.6076
+         Elastic      1.99269e+09         62983.4   3.1607205e-05
+     ExcitElectr      1.05807e+07     7.73274e+07         7.30836
+      ExcitRotat      4.22679e+09     4.73401e+07          0.0112
+     ExcitVibrat      9.64608e+07     2.41152e+07            0.25
+GmUserSpecialCut      2.00761e+06          488077        0.243121
+      IonizAuger             5262          184170              35
+      Ionization      2.40526e+07     1.83669e+08         7.63614
+  Transportation           100000               0               0
+
+
+Water:
+
+         Process          No Ints            Edep        Avg Edep
+      Attachment      1.62517e+06     1.17831e+07          7.2504
+     DissocNeutr      9.16063e+06     1.84047e+08         20.0911
+         Elastic      7.02806e+09     1.25798e+06     0.000178994
+     ExcitElectr      2.23713e+06     2.19324e+07         9.80383
+      ExcitRotat      1.52136e+09     1.70392e+07          0.0112
+     ExcitVibrat      2.21857e+08     5.54644e+07            0.25
+GmUserSpecialCut      1.65416e+07     5.48441e+06        0.331553
+      IonizAuger            63931     2.23758e+06              35
+      Ionization      1.79648e+07     1.98934e+08         11.0735
+  Transportation           100000               0               0
+

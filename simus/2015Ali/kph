@@ -1,0 +1,3379 @@
+found    /home/roldan/gamos51c/GAMOS.5.1.0/config/confgamos.sh
+select   /home/roldan/gamos51c/GAMOS.5.1.0/config/confgamos.sh
+gamos is /home/roldan/gamos51c/GAMOS.5.1.0/bin/Linux-g++/gamos
+
+*************************************************************
+ Geant4 version Name: geant4-10-01    (5-December-2014)
+                      Copyright : Geant4 Collaboration
+                      Reference : NIM A 506 (2003), 250-303
+                            WWW : http://cern.ch/geant4
+*************************************************************
+
+Visualization Manager instantiating with verbosity "warnings (3)"...
+Visualization Manager initialising...
+Registering graphics systems...
+
+You have successfully registered the following graphics systems.
+Current available graphics systems are:
+  ASCIITree (ATree)
+  DAWNFILE (DAWNFILE)
+  FukuiRenderer (DAWN)
+  G4HepRep (HepRepXML)
+  G4HepRepFile (HepRepFile)
+  OpenGLImmediateX (OGLI, OGLIX)
+  OpenGLStoredX (OGL, OGLS, OGLSX)
+  RayTracer (RayTracer)
+  VRML1 (VRML1)
+  VRML1FILE (VRML1FILE)
+  VRML2 (VRML2)
+  VRML2FILE (VRML2FILE)
+  gMocrenFile (gMocrenFile)
+
+Registering model factories...
+
+You have successfully registered the following model factories.
+Registered model factories:
+  generic
+  drawByCharge
+  drawByParticleID
+  drawByOriginVolume
+  drawByAttribute
+
+Registered filter factories:
+  chargeFilter
+  particleFilter
+  originVolumeFilter
+  attributeFilter
+
+You have successfully registered the following user vis actions.
+Run Duration User Vis Actions: none
+End of Event User Vis Actions: none
+End of Run User Vis Actions: none
+
+Some /vis commands (optionally) take a string to specify colour.
+Available colours:
+  black, blue, brown, cyan, gray, green, grey, magenta, red, white, yellow
+
+/control/execute job.inp
+/gamos/setParam GmGeometryFromText:FileName job.geom
+/gamos/geometry GmGeometryFromText
+/gamos/setParam JobName job
+/gamos/geometry/createRegion ch_region ch_G4_WATER
+/gamos/physicsList GmLEPTSPhysics
+/run/initialize
+ particle GenericIon manager 0x13f08f0
+ particle He3 manager 0x14002a0
+ particle Ps-1s manager 0x1400410
+ particle Ps-2s manager 0x1400660
+ particle alpha manager 0x14008b0
+ particle alpha+ manager 0x1400b00
+ particle anti_He3 manager 0x1400d50
+ particle anti_alpha manager 0x1400fa0
+ particle anti_deuteron manager 0x14011f0
+ particle anti_triton manager 0x1401440
+ particle carbon manager 0x1401690
+ particle deuteron manager 0x14018e0
+ particle e+ manager 0x1401b30
+ particle e- manager 0x1401d80
+ particle gamma manager 0x1401fd0
+ particle geantino manager 0x1402220
+ particle helium manager 0x1402470
+ particle hydrogen manager 0x14026c0
+ particle iron manager 0x1402910
+ particle nitrogen manager 0x1402b60
+ particle oxygen manager 0x1402db0
+ particle proton manager 0x1403000
+ particle silicon manager 0x1403250
+ particle triton manager 0x14034a0
+Warning : Region <ch_region> does not have specific production cuts,
+even though it appears in the current tracking world.
+Default cuts are used for this region.
+/gamos/userAction UAVerbose
+PluginService: Declared factory for class UserActionPrueba with signature GmUserAction* (void)
+PluginService: Declared factory for class UAVerbose with signature GmUserAction* (void)
+PluginService: Declared factory for class UADepo with signature GmUserAction* (void)
+PluginService: Declared factory for class UAInteraction with signature GmUserAction* (void)
+PluginService: Declared factory for class UAInteractionSp with signature GmUserAction* (void)
+PluginService: Declared factory for class UAWIF with signature GmUserAction* (void)
+PluginService: Declared factory for class UAContinuationFile with signature GmUserAction* (void)
+PluginService: Declared factory for class UAExit with signature GmUserAction* (void)
+PluginService: Declared factory for class UAClock with signature GmUserAction* (void)
+PluginService: Declared factory for class UAVoxel with signature GmUserAction* (void)
+PluginService: Declared factory for class UAVolume with signature GmUserAction* (void)
+PluginService: Declared factory for class UASelectVolume with signature GmUserAction* (void)
+PluginService: Declared factory for class UAScoreVolume with signature GmUserAction* (void)
+PluginService: Loaded library  /home/roldan/gamos51c/GAMOS.5.1.0/lib/Linux-g++/libleptsuas.so
+UAVerbose Constructor
+Thermalization: 
+300 (kelvin) 
+0.025852 (eV)
+e-    95361.5 (m/s)
+neutr 2223.92 (m/s)
+/gamos/userAction UAWIF
+UAWIF Constructor
+/gamos/userAction GmCountProcessesUA
+/gamos/analysis/histo1Max *Ener* 7*MeV
+/gamos/userAction GmGenerHistosUA
+ CreateHisto1D gener: KinEnergy = 286000001
+ CreateHisto1D gener: Position X = 286000011
+ CreateHisto1D gener: Position Y = 286000012
+ CreateHisto1D gener: Position Z = 286000013
+ CreateHisto2D gener: Position XY = 286000021
+ CreateHisto2D gener: Position XZ = 286000022
+ CreateHisto2D gener: Position YZ = 286000023
+ CreateHisto1D gener: Angle theta = 286000111
+ CreateHisto1D gener: Angle phi = 286000112
+ CreateHisto1D gener: Time between source decays (ns) = 286000211
+/gamos/userAction UAClock
+UAClock Constructor
+/gamos/setParam TimeMark 3600
+/gamos/userAction UAInteraction
+UAInteraction Constructor
+/gamos/userAction UAInteractionSp
+UAInteractionSp Constructor
+/gamos/setParam SPhg:Title NoInts
+/gamos/userAction UADepo
+UADepo Constructor
+/gamos/userAction UAVerbose
+UAVerbose Constructor
+Thermalization: 
+300 (kelvin) 
+0.025852 (eV)
+e-    95361.5 (m/s)
+neutr 2223.92 (m/s)
+/gamos/userAction UAWIF
+UAWIF Constructor
+/gamos/generator GmGenerator
+/gamos/generator/addSingleParticleSource gn gamma 20*keV
+/gamos/generator/positionDist gn GmGenerDistPositionInG4Volumes gbox
+/gamos/generator/directionDist gn GmGenerDistDirectionConst 1 0 0
+/gamos/physics/userLimits/setMinEKin ulimit_G4_WATER_e- ch_G4_WATER e- 1*MeV
+/gamos/physics/userLimits/print
+%%%%% USER LIMITS : (for each volume) particle MaxStep MaxTrkLength MaxTOF MinEKin MinRange
+%%%UL:  VOLUME= ch_G4_WATER
+%UL: PARTICLE= e- 1.79769e+308 1.79769e+308 1.79769e+308 1 0
+/vis/scene/create
+/vis/open VRML2FILE
+Issue /vis/viewer/refresh or flush to see effect.
+/vis/viewer/flush
+Your "world" has no vis attributes or is marked as visible.
+  For a better view of the contents, mark the world as invisible, e.g.,
+  myWorldLogicalVol -> SetVisAttributes (G4VisAttributes::Invisible);
+G4Scene::AddWorldIfEmpty: The scene was empty of run-duration models.
+  "world" has been added.
+/vis/scene/add/trajectories
+/tracking/storeTrajectory 1
+Attributes available for modeling and filtering with
+  "/vis/modeling/trajectories/create/drawByAttribute" and
+  "/vis/filtering/trajectories/create/attributeFilter" commands:
+G4TrajectoriesModel:
+  Event ID (EventID): G4int
+  Run ID (RunID): G4int
+G4Trajectory:
+  Charge (Ch): unit: e+ (G4double)
+  Track ID (ID): G4int
+  Initial kinetic energy (IKE): G4BestUnit (G4double)
+  Initial momentum magnitude (IMag): G4BestUnit (G4double)
+  Initial momentum (IMom): G4BestUnit (G4ThreeVector)
+  No. of points (NTP): G4int
+  PDG Encoding (PDG): G4int
+  Parent ID (PID): G4int
+  Particle Name (PN): G4String
+G4TrajectoryPoint:
+  Position (Pos): G4BestUnit (G4ThreeVector)
+WARNING: Trajectory storing has been requested.  This action may be
+  reversed with "/tracking/storeTrajectory 0".
+/vis/scene/notifyHandlers
+/vis/scene/endOfEventAction accumulate
+WARNING: The vis manager will keep up to 100 events.
+  This may use a lot of memory.
+  It may be changed with, e.g., "/vis/scene/endOfEventAction accumulate 10".
+/vis/viewer/update
+/vis/viewer/flush
+===========================================
+Output VRML 2.0 file: g4_01.wrl
+Maximum number of files in the destination directory: 100
+  (Customizable with the environment variable: G4VRMLFILE_MAX_FILE_NUM) 
+===========================================
+*** VRML 2.0 File  g4_01.wrl  is generated.
+MESSAGE from VRML2FILE driver:
+    Set an environmental variable  G4VRMLFILE_VIEWER
+    if you want to visualize the generated VRML file
+    automatically.  For example, 
+    setenv  G4VRMLFILE_VIEWER  vrwave 
+/run/beamOn 10
+
+theXSType: 1 XSTotal
+Reading (e+ / vacuum)
+Couple not found: vacuum - e+
+vacuum 1 g/mole 931.494 MeV e+ 0.510999 MeV
+G4_WATER 0 g/mole 0 MeV e+ 0.510999 MeV
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : 
+      issued by : G4VLEPTSModel::ReadIXS
+File not found: 
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+
+theXSType: 1 XSTotal
+Reading (e+ / G4_WATER)
+Found masterfile section: begin WATER_LIQ WATER G4_WATER 
+Material G4_WATER derived from  WATER_GAS
+
+theXSType: 1 XSTotal
+Reading (e+ / WATER_GAS)
+Found masterfile section: begin WATER_GAS 
+vacuum 1 g/mole 931.494 MeV e+ 0.510999 MeV
+G4_WATER 18 g/mole 16766.9 MeV e+ 0.510999 MeV
+Reading		/home/roldan/lepts/xsd/wle+IXS-2015nov.txt	(Elastic, column 2/10)
+Reading		/home/roldan/lepts/xsd/we+iDXS-2015nov.txt
+Reading		/home/roldan/lepts/xsd/we+iDXSROT-2015nov.txt
+Reading		/home/roldan/lepts/xsd/water_ELD.txt
+Reading		/home/roldan/lepts/xsd/water_ELDVIB-2015nov.txt
+
+theXSType: 3 XSInelastic
+Reading (e+ / vacuum)
+Couple not found: vacuum - e+
+vacuum 1 g/mole 931.494 MeV e+ 0.510999 MeV
+G4_WATER 0 g/mole 0 MeV e+ 0.510999 MeV
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : 
+      issued by : G4VLEPTSModel::ReadIXS
+File not found: 
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+
+theXSType: 3 XSInelastic
+Reading (e+ / G4_WATER)
+Found masterfile section: begin WATER_LIQ WATER G4_WATER 
+Material G4_WATER derived from  WATER_GAS
+
+theXSType: 3 XSInelastic
+Reading (e+ / WATER_GAS)
+Found masterfile section: begin WATER_GAS 
+vacuum 1 g/mole 931.494 MeV e+ 0.510999 MeV
+G4_WATER 18 g/mole 16766.9 MeV e+ 0.510999 MeV
+Reading		/home/roldan/lepts/xsd/wle+IXS-2015nov.txt	(Ionisation, column 3/10)
+Reading		/home/roldan/lepts/xsd/we+iDXS-2015nov.txt
+Reading		/home/roldan/lepts/xsd/we+iDXSROT-2015nov.txt
+Reading		/home/roldan/lepts/xsd/water_ELD.txt
+Reading		/home/roldan/lepts/xsd/water_ELDVIB-2015nov.txt
+
+theXSType: 4 XSIonisation
+Reading (e+ / vacuum)
+Couple not found: vacuum - e+
+vacuum 1 g/mole 931.494 MeV e+ 0.510999 MeV
+G4_WATER 0 g/mole 0 MeV e+ 0.510999 MeV
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : 
+      issued by : G4VLEPTSModel::ReadIXS
+File not found: 
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+
+theXSType: 4 XSIonisation
+Reading (e+ / G4_WATER)
+Found masterfile section: begin WATER_LIQ WATER G4_WATER 
+Material G4_WATER derived from  WATER_GAS
+
+theXSType: 4 XSIonisation
+Reading (e+ / WATER_GAS)
+Found masterfile section: begin WATER_GAS 
+vacuum 1 g/mole 931.494 MeV e+ 0.510999 MeV
+G4_WATER 18 g/mole 16766.9 MeV e+ 0.510999 MeV
+Reading		/home/roldan/lepts/xsd/wle+IXS-2015nov.txt	(ElectronicExc, column 4/10)
+Reading		/home/roldan/lepts/xsd/we+iDXS-2015nov.txt
+Reading		/home/roldan/lepts/xsd/we+iDXSROT-2015nov.txt
+Reading		/home/roldan/lepts/xsd/water_ELD.txt
+Reading		/home/roldan/lepts/xsd/water_ELDVIB-2015nov.txt
+
+theXSType: 5 XSExcitation
+Reading (e+ / vacuum)
+Couple not found: vacuum - e+
+vacuum 1 g/mole 931.494 MeV e+ 0.510999 MeV
+G4_WATER 0 g/mole 0 MeV e+ 0.510999 MeV
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : 
+      issued by : G4VLEPTSModel::ReadIXS
+File not found: 
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+
+theXSType: 5 XSExcitation
+Reading (e+ / G4_WATER)
+Found masterfile section: begin WATER_LIQ WATER G4_WATER 
+Material G4_WATER derived from  WATER_GAS
+
+theXSType: 5 XSExcitation
+Reading (e+ / WATER_GAS)
+Found masterfile section: begin WATER_GAS 
+vacuum 1 g/mole 931.494 MeV e+ 0.510999 MeV
+G4_WATER 18 g/mole 16766.9 MeV e+ 0.510999 MeV
+Reading		/home/roldan/lepts/xsd/wle+IXS-2015nov.txt	(Dissociation, column 5/10)
+Reading		/home/roldan/lepts/xsd/we+iDXS-2015nov.txt
+Reading		/home/roldan/lepts/xsd/we+iDXSROT-2015nov.txt
+Reading		/home/roldan/lepts/xsd/water_ELD.txt
+Reading		/home/roldan/lepts/xsd/water_ELDVIB-2015nov.txt
+
+theXSType: 6 XSDissociation
+Reading (e+ / vacuum)
+Couple not found: vacuum - e+
+vacuum 1 g/mole 931.494 MeV e+ 0.510999 MeV
+G4_WATER 0 g/mole 0 MeV e+ 0.510999 MeV
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : 
+      issued by : G4VLEPTSModel::ReadIXS
+File not found: 
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+
+theXSType: 6 XSDissociation
+Reading (e+ / G4_WATER)
+Found masterfile section: begin WATER_LIQ WATER G4_WATER 
+Material G4_WATER derived from  WATER_GAS
+
+theXSType: 6 XSDissociation
+Reading (e+ / WATER_GAS)
+Found masterfile section: begin WATER_GAS 
+vacuum 1 g/mole 931.494 MeV e+ 0.510999 MeV
+G4_WATER 18 g/mole 16766.9 MeV e+ 0.510999 MeV
+Reading		/home/roldan/lepts/xsd/wle+IXS-2015nov.txt	(VibrationalExc, column 6/10)
+Reading		/home/roldan/lepts/xsd/we+iDXS-2015nov.txt
+Reading		/home/roldan/lepts/xsd/we+iDXSROT-2015nov.txt
+Reading		/home/roldan/lepts/xsd/water_ELD.txt
+Reading		/home/roldan/lepts/xsd/water_ELDVIB-2015nov.txt
+
+theXSType: 2 XSElastic
+Reading (e+ / vacuum)
+Couple not found: vacuum - e+
+vacuum 1 g/mole 931.494 MeV e+ 0.510999 MeV
+G4_WATER 0 g/mole 0 MeV e+ 0.510999 MeV
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : 
+      issued by : G4VLEPTSModel::ReadIXS
+File not found: 
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+
+theXSType: 2 XSElastic
+Reading (e+ / G4_WATER)
+Found masterfile section: begin WATER_LIQ WATER G4_WATER 
+Material G4_WATER derived from  WATER_GAS
+
+theXSType: 2 XSElastic
+Reading (e+ / WATER_GAS)
+Found masterfile section: begin WATER_GAS 
+vacuum 1 g/mole 931.494 MeV e+ 0.510999 MeV
+G4_WATER 18 g/mole 16766.9 MeV e+ 0.510999 MeV
+Reading		/home/roldan/lepts/xsd/wle+IXS-2015nov.txt	(RotationalExc, column 7/10)
+Reading		/home/roldan/lepts/xsd/we+iDXS-2015nov.txt
+Reading		/home/roldan/lepts/xsd/we+iDXSROT-2015nov.txt
+Reading		/home/roldan/lepts/xsd/water_ELD.txt
+Reading		/home/roldan/lepts/xsd/water_ELDVIB-2015nov.txt
+
+theXSType: 9 XSRotation
+Reading (e+ / vacuum)
+Couple not found: vacuum - e+
+vacuum 1 g/mole 931.494 MeV e+ 0.510999 MeV
+G4_WATER 0 g/mole 0 MeV e+ 0.510999 MeV
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : 
+      issued by : G4VLEPTSModel::ReadIXS
+File not found: 
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+
+theXSType: 9 XSRotation
+Reading (e+ / G4_WATER)
+Found masterfile section: begin WATER_LIQ WATER G4_WATER 
+Material G4_WATER derived from  WATER_GAS
+
+theXSType: 9 XSRotation
+Reading (e+ / WATER_GAS)
+Found masterfile section: begin WATER_GAS 
+vacuum 1 g/mole 931.494 MeV e+ 0.510999 MeV
+G4_WATER 18 g/mole 16766.9 MeV e+ 0.510999 MeV
+Reading		/home/roldan/lepts/xsd/wle+IXS-2015nov.txt	(Positronium, column 8/10)
+Reading		/home/roldan/lepts/xsd/we+iDXS-2015nov.txt
+Reading		/home/roldan/lepts/xsd/we+iDXSROT-2015nov.txt
+Reading		/home/roldan/lepts/xsd/water_ELD.txt
+Reading		/home/roldan/lepts/xsd/water_ELDVIB-2015nov.txt
+
+theXSType: 10 
+Reading (e+ / vacuum)
+Couple not found: vacuum - e+
+vacuum 1 g/mole 931.494 MeV e+ 0.510999 MeV
+G4_WATER 0 g/mole 0 MeV e+ 0.510999 MeV
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : 
+      issued by : G4VLEPTSModel::ReadIXS
+File not found: 
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+
+theXSType: 10 
+Reading (e+ / G4_WATER)
+Found masterfile section: begin WATER_LIQ WATER G4_WATER 
+Material G4_WATER derived from  WATER_GAS
+
+theXSType: 10 
+Reading (e+ / WATER_GAS)
+Found masterfile section: begin WATER_GAS 
+vacuum 1 g/mole 931.494 MeV e+ 0.510999 MeV
+G4_WATER 18 g/mole 16766.9 MeV e+ 0.510999 MeV
+Reading		/home/roldan/lepts/xsd/wle+IXS-2015nov.txt	(Annihilation, column 9/10)
+Reading		/home/roldan/lepts/xsd/we+iDXS-2015nov.txt
+Reading		/home/roldan/lepts/xsd/we+iDXSROT-2015nov.txt
+Reading		/home/roldan/lepts/xsd/water_ELD.txt
+Reading		/home/roldan/lepts/xsd/water_ELDVIB-2015nov.txt
+
+theXSType: 1 XSTotal
+Reading (e- / vacuum)
+Couple not found: vacuum - e-
+vacuum 1 g/mole 931.494 MeV e- 0.510999 MeV
+G4_WATER 0 g/mole 0 MeV e- 0.510999 MeV
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : 
+      issued by : G4VLEPTSModel::ReadIXS
+File not found: 
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+
+theXSType: 1 XSTotal
+Reading (e- / G4_WATER)
+Found masterfile section: begin WATER_LIQ WATER G4_WATER 
+Material G4_WATER derived from  WATER_GAS
+
+theXSType: 1 XSTotal
+Reading (e- / WATER_GAS)
+Found masterfile section: begin WATER_GAS 
+vacuum 1 g/mole 931.494 MeV e- 0.510999 MeV
+G4_WATER 18 g/mole 16766.9 MeV e- 0.510999 MeV
+Reading		/home/roldan/lepts/xsd/wle-IXS-2015nov.txt	(Elastic, column 2/10)
+Reading		/home/roldan/lepts/xsd/we-iDXS.txt
+Reading		/home/roldan/lepts/xsd/we-iDXSROT.txt
+Reading		/home/roldan/lepts/xsd/water_ELD.txt
+Reading		/home/roldan/lepts/xsd/water_ELDVIB-2015nov.txt
+
+theXSType: 3 XSInelastic
+Reading (e- / vacuum)
+Couple not found: vacuum - e-
+vacuum 1 g/mole 931.494 MeV e- 0.510999 MeV
+G4_WATER 0 g/mole 0 MeV e- 0.510999 MeV
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : 
+      issued by : G4VLEPTSModel::ReadIXS
+File not found: 
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+
+theXSType: 3 XSInelastic
+Reading (e- / G4_WATER)
+Found masterfile section: begin WATER_LIQ WATER G4_WATER 
+Material G4_WATER derived from  WATER_GAS
+
+theXSType: 3 XSInelastic
+Reading (e- / WATER_GAS)
+Found masterfile section: begin WATER_GAS 
+vacuum 1 g/mole 931.494 MeV e- 0.510999 MeV
+G4_WATER 18 g/mole 16766.9 MeV e- 0.510999 MeV
+Reading		/home/roldan/lepts/xsd/wle-IXS-2015nov.txt	(Ionisation, column 3/10)
+Reading		/home/roldan/lepts/xsd/we-iDXS.txt
+Reading		/home/roldan/lepts/xsd/we-iDXSROT.txt
+Reading		/home/roldan/lepts/xsd/water_ELD.txt
+Reading		/home/roldan/lepts/xsd/water_ELDVIB-2015nov.txt
+
+theXSType: 4 XSIonisation
+Reading (e- / vacuum)
+Couple not found: vacuum - e-
+vacuum 1 g/mole 931.494 MeV e- 0.510999 MeV
+G4_WATER 0 g/mole 0 MeV e- 0.510999 MeV
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : 
+      issued by : G4VLEPTSModel::ReadIXS
+File not found: 
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+
+theXSType: 4 XSIonisation
+Reading (e- / G4_WATER)
+Found masterfile section: begin WATER_LIQ WATER G4_WATER 
+Material G4_WATER derived from  WATER_GAS
+
+theXSType: 4 XSIonisation
+Reading (e- / WATER_GAS)
+Found masterfile section: begin WATER_GAS 
+vacuum 1 g/mole 931.494 MeV e- 0.510999 MeV
+G4_WATER 18 g/mole 16766.9 MeV e- 0.510999 MeV
+Reading		/home/roldan/lepts/xsd/wle-IXS-2015nov.txt	(ElectronicExc, column 4/10)
+Reading		/home/roldan/lepts/xsd/we-iDXS.txt
+Reading		/home/roldan/lepts/xsd/we-iDXSROT.txt
+Reading		/home/roldan/lepts/xsd/water_ELD.txt
+Reading		/home/roldan/lepts/xsd/water_ELDVIB-2015nov.txt
+
+theXSType: 5 XSExcitation
+Reading (e- / vacuum)
+Couple not found: vacuum - e-
+vacuum 1 g/mole 931.494 MeV e- 0.510999 MeV
+G4_WATER 0 g/mole 0 MeV e- 0.510999 MeV
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : 
+      issued by : G4VLEPTSModel::ReadIXS
+File not found: 
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+
+theXSType: 5 XSExcitation
+Reading (e- / G4_WATER)
+Found masterfile section: begin WATER_LIQ WATER G4_WATER 
+Material G4_WATER derived from  WATER_GAS
+
+theXSType: 5 XSExcitation
+Reading (e- / WATER_GAS)
+Found masterfile section: begin WATER_GAS 
+vacuum 1 g/mole 931.494 MeV e- 0.510999 MeV
+G4_WATER 18 g/mole 16766.9 MeV e- 0.510999 MeV
+Reading		/home/roldan/lepts/xsd/wle-IXS-2015nov.txt	(Dissociation, column 5/10)
+Reading		/home/roldan/lepts/xsd/we-iDXS.txt
+Reading		/home/roldan/lepts/xsd/we-iDXSROT.txt
+Reading		/home/roldan/lepts/xsd/water_ELD.txt
+Reading		/home/roldan/lepts/xsd/water_ELDVIB-2015nov.txt
+
+theXSType: 6 XSDissociation
+Reading (e- / vacuum)
+Couple not found: vacuum - e-
+vacuum 1 g/mole 931.494 MeV e- 0.510999 MeV
+G4_WATER 0 g/mole 0 MeV e- 0.510999 MeV
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : 
+      issued by : G4VLEPTSModel::ReadIXS
+File not found: 
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+
+theXSType: 6 XSDissociation
+Reading (e- / G4_WATER)
+Found masterfile section: begin WATER_LIQ WATER G4_WATER 
+Material G4_WATER derived from  WATER_GAS
+
+theXSType: 6 XSDissociation
+Reading (e- / WATER_GAS)
+Found masterfile section: begin WATER_GAS 
+vacuum 1 g/mole 931.494 MeV e- 0.510999 MeV
+G4_WATER 18 g/mole 16766.9 MeV e- 0.510999 MeV
+Reading		/home/roldan/lepts/xsd/wle-IXS-2015nov.txt	(VibrationalExc, column 6/10)
+Reading		/home/roldan/lepts/xsd/we-iDXS.txt
+Reading		/home/roldan/lepts/xsd/we-iDXSROT.txt
+Reading		/home/roldan/lepts/xsd/water_ELD.txt
+Reading		/home/roldan/lepts/xsd/water_ELDVIB-2015nov.txt
+
+theXSType: 2 XSElastic
+Reading (e- / vacuum)
+Couple not found: vacuum - e-
+vacuum 1 g/mole 931.494 MeV e- 0.510999 MeV
+G4_WATER 0 g/mole 0 MeV e- 0.510999 MeV
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : 
+      issued by : G4VLEPTSModel::ReadIXS
+File not found: 
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+
+theXSType: 2 XSElastic
+Reading (e- / G4_WATER)
+Found masterfile section: begin WATER_LIQ WATER G4_WATER 
+Material G4_WATER derived from  WATER_GAS
+
+theXSType: 2 XSElastic
+Reading (e- / WATER_GAS)
+Found masterfile section: begin WATER_GAS 
+vacuum 1 g/mole 931.494 MeV e- 0.510999 MeV
+G4_WATER 18 g/mole 16766.9 MeV e- 0.510999 MeV
+Reading		/home/roldan/lepts/xsd/wle-IXS-2015nov.txt	(RotationalExc, column 7/10)
+Reading		/home/roldan/lepts/xsd/we-iDXS.txt
+Reading		/home/roldan/lepts/xsd/we-iDXSROT.txt
+Reading		/home/roldan/lepts/xsd/water_ELD.txt
+Reading		/home/roldan/lepts/xsd/water_ELDVIB-2015nov.txt
+
+theXSType: 7 XSVibration
+Reading (e- / vacuum)
+Couple not found: vacuum - e-
+vacuum 1 g/mole 931.494 MeV e- 0.510999 MeV
+G4_WATER 0 g/mole 0 MeV e- 0.510999 MeV
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : 
+      issued by : G4VLEPTSModel::ReadIXS
+File not found: 
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+
+theXSType: 7 XSVibration
+Reading (e- / G4_WATER)
+Found masterfile section: begin WATER_LIQ WATER G4_WATER 
+Material G4_WATER derived from  WATER_GAS
+
+theXSType: 7 XSVibration
+Reading (e- / WATER_GAS)
+Found masterfile section: begin WATER_GAS 
+vacuum 1 g/mole 931.494 MeV e- 0.510999 MeV
+G4_WATER 18 g/mole 16766.9 MeV e- 0.510999 MeV
+Reading		/home/roldan/lepts/xsd/wle-IXS-2015nov.txt	(Attachment, column 8/10)
+Reading		/home/roldan/lepts/xsd/we-iDXS.txt
+Reading		/home/roldan/lepts/xsd/we-iDXSROT.txt
+Reading		/home/roldan/lepts/xsd/water_ELD.txt
+Reading		/home/roldan/lepts/xsd/water_ELDVIB-2015nov.txt
+
+theXSType: 8 XSAttach-Pstr-CT
+Reading (e- / vacuum)
+Couple not found: vacuum - e-
+vacuum 1 g/mole 931.494 MeV e- 0.510999 MeV
+G4_WATER 0 g/mole 0 MeV e- 0.510999 MeV
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : 
+      issued by : G4VLEPTSModel::ReadIXS
+File not found: 
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+
+theXSType: 8 XSAttach-Pstr-CT
+Reading (e- / G4_WATER)
+Found masterfile section: begin WATER_LIQ WATER G4_WATER 
+Material G4_WATER derived from  WATER_GAS
+
+theXSType: 8 XSAttach-Pstr-CT
+Reading (e- / WATER_GAS)
+Found masterfile section: begin WATER_GAS 
+vacuum 1 g/mole 931.494 MeV e- 0.510999 MeV
+G4_WATER 18 g/mole 16766.9 MeV e- 0.510999 MeV
+Reading		/home/roldan/lepts/xsd/wle-IXS-2015nov.txt	(Thermalisation, column 9/10)
+Reading		/home/roldan/lepts/xsd/we-iDXS.txt
+Reading		/home/roldan/lepts/xsd/we-iDXSROT.txt
+Reading		/home/roldan/lepts/xsd/water_ELD.txt
+Reading		/home/roldan/lepts/xsd/water_ELDVIB-2015nov.txt
+
+theXSType: 1 XSTotal
+Reading (hydrogen / vacuum)
+Couple not found: vacuum - hydrogen
+vacuum 1 g/mole 931.494 MeV hydrogen 938.783 MeV
+G4_WATER 0 g/mole 0 MeV hydrogen 938.783 MeV
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : 
+      issued by : G4VLEPTSModel::ReadIXS
+File not found: 
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+
+theXSType: 1 XSTotal
+Reading (hydrogen / G4_WATER)
+Found masterfile section: begin WATER_LIQ WATER G4_WATER 
+Material G4_WATER derived from  WATER_GAS
+
+theXSType: 1 XSTotal
+Reading (hydrogen / WATER_GAS)
+Found masterfile section: begin WATER_GAS 
+vacuum 1 g/mole 931.494 MeV hydrogen 938.783 MeV
+G4_WATER 18 g/mole 16766.9 MeV hydrogen 938.783 MeV
+Reading		/home/roldan/lepts/xsd/wlh_IXS.txt	(Elastic, column 2/5)
+Reading		/home/roldan/lepts/xsd/water_liquid_DXS_proton.txt
+
+theXSType: 4 XSIonisation
+Reading (hydrogen / vacuum)
+Couple not found: vacuum - hydrogen
+vacuum 1 g/mole 931.494 MeV hydrogen 938.783 MeV
+G4_WATER 0 g/mole 0 MeV hydrogen 938.783 MeV
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : 
+      issued by : G4VLEPTSModel::ReadIXS
+File not found: 
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+
+theXSType: 4 XSIonisation
+Reading (hydrogen / G4_WATER)
+Found masterfile section: begin WATER_LIQ WATER G4_WATER 
+Material G4_WATER derived from  WATER_GAS
+
+theXSType: 4 XSIonisation
+Reading (hydrogen / WATER_GAS)
+Found masterfile section: begin WATER_GAS 
+vacuum 1 g/mole 931.494 MeV hydrogen 938.783 MeV
+G4_WATER 18 g/mole 16766.9 MeV hydrogen 938.783 MeV
+Reading		/home/roldan/lepts/xsd/wlh_IXS.txt	(ElectronicExc, column 4/5)
+Reading		/home/roldan/lepts/xsd/water_liquid_DXS_proton.txt
+Reading		/home/roldan/lepts/xsd/water_ELD_proton_excit.txt
+
+theXSType: 3 XSInelastic
+Reading (hydrogen / vacuum)
+Couple not found: vacuum - hydrogen
+vacuum 1 g/mole 931.494 MeV hydrogen 938.783 MeV
+G4_WATER 0 g/mole 0 MeV hydrogen 938.783 MeV
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : 
+      issued by : G4VLEPTSModel::ReadIXS
+File not found: 
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+
+theXSType: 3 XSInelastic
+Reading (hydrogen / G4_WATER)
+Found masterfile section: begin WATER_LIQ WATER G4_WATER 
+Material G4_WATER derived from  WATER_GAS
+
+theXSType: 3 XSInelastic
+Reading (hydrogen / WATER_GAS)
+Found masterfile section: begin WATER_GAS 
+vacuum 1 g/mole 931.494 MeV hydrogen 938.783 MeV
+G4_WATER 18 g/mole 16766.9 MeV hydrogen 938.783 MeV
+Reading		/home/roldan/lepts/xsd/wlh_IXS.txt	(Ionisation, column 3/5)
+Reading		/home/roldan/lepts/xsd/water_liquid_DXS_proton.txt
+Reading		/home/roldan/lepts/xsd/water_ELD_proton_ionis.txt
+
+theXSType: 11 
+Reading (hydrogen / vacuum)
+Couple not found: vacuum - hydrogen
+vacuum 1 g/mole 931.494 MeV hydrogen 938.783 MeV
+G4_WATER 0 g/mole 0 MeV hydrogen 938.783 MeV
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : 
+      issued by : G4VLEPTSModel::ReadIXS
+File not found: 
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+
+theXSType: 11 
+Reading (hydrogen / G4_WATER)
+Found masterfile section: begin WATER_LIQ WATER G4_WATER 
+Material G4_WATER derived from  WATER_GAS
+
+theXSType: 11 
+Reading (hydrogen / WATER_GAS)
+Found masterfile section: begin WATER_GAS 
+vacuum 1 g/mole 931.494 MeV hydrogen 938.783 MeV
+G4_WATER 18 g/mole 16766.9 MeV hydrogen 938.783 MeV
+Reading		/home/roldan/lepts/xsd/wlh_IXS.txt	(ChargeTransfer, column 5/5)
+Reading		/home/roldan/lepts/xsd/water_liquid_DXS_proton.txt
+
+theXSType: 1 XSTotal
+Reading (proton / vacuum)
+Couple not found: vacuum - proton
+vacuum 1 g/mole 931.494 MeV proton 938.272 MeV
+G4_WATER 0 g/mole 0 MeV proton 938.272 MeV
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : 
+      issued by : G4VLEPTSModel::ReadIXS
+File not found: 
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+
+theXSType: 1 XSTotal
+Reading (proton / G4_WATER)
+Found masterfile section: begin WATER_LIQ WATER G4_WATER 
+Material G4_WATER derived from  WATER_GAS
+
+theXSType: 1 XSTotal
+Reading (proton / WATER_GAS)
+Found masterfile section: begin WATER_GAS 
+vacuum 1 g/mole 931.494 MeV proton 938.272 MeV
+G4_WATER 18 g/mole 16766.9 MeV proton 938.272 MeV
+Reading		/home/roldan/lepts/xsd/wlp_IXS.txt	(Elastic, column 2/5)
+Reading		/home/roldan/lepts/xsd/water_liquid_DXS_proton.txt
+Reading		/home/roldan/lepts/xsd/water_liquid_DXSSEC_proton.txt
+
+theXSType: 4 XSIonisation
+Reading (proton / vacuum)
+Couple not found: vacuum - proton
+vacuum 1 g/mole 931.494 MeV proton 938.272 MeV
+G4_WATER 0 g/mole 0 MeV proton 938.272 MeV
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : 
+      issued by : G4VLEPTSModel::ReadIXS
+File not found: 
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+
+theXSType: 4 XSIonisation
+Reading (proton / G4_WATER)
+Found masterfile section: begin WATER_LIQ WATER G4_WATER 
+Material G4_WATER derived from  WATER_GAS
+
+theXSType: 4 XSIonisation
+Reading (proton / WATER_GAS)
+Found masterfile section: begin WATER_GAS 
+vacuum 1 g/mole 931.494 MeV proton 938.272 MeV
+G4_WATER 18 g/mole 16766.9 MeV proton 938.272 MeV
+Reading		/home/roldan/lepts/xsd/wlp_IXS.txt	(ElectronicExc, column 4/5)
+Reading		/home/roldan/lepts/xsd/water_liquid_DXS_proton.txt
+Reading		/home/roldan/lepts/xsd/water_liquid_DXSSEC_proton.txt
+Reading		/home/roldan/lepts/xsd/water_ELD_proton_excit.txt
+
+theXSType: 3 XSInelastic
+Reading (proton / vacuum)
+Couple not found: vacuum - proton
+vacuum 1 g/mole 931.494 MeV proton 938.272 MeV
+G4_WATER 0 g/mole 0 MeV proton 938.272 MeV
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : 
+      issued by : G4VLEPTSModel::ReadIXS
+File not found: 
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+
+theXSType: 3 XSInelastic
+Reading (proton / G4_WATER)
+Found masterfile section: begin WATER_LIQ WATER G4_WATER 
+Material G4_WATER derived from  WATER_GAS
+
+theXSType: 3 XSInelastic
+Reading (proton / WATER_GAS)
+Found masterfile section: begin WATER_GAS 
+vacuum 1 g/mole 931.494 MeV proton 938.272 MeV
+G4_WATER 18 g/mole 16766.9 MeV proton 938.272 MeV
+Reading		/home/roldan/lepts/xsd/wlp_IXS.txt	(Ionisation, column 3/5)
+Reading		/home/roldan/lepts/xsd/water_liquid_DXS_proton.txt
+Reading		/home/roldan/lepts/xsd/water_liquid_DXSSEC_proton.txt
+Reading		/home/roldan/lepts/xsd/water_ELD_proton_ionis.txt
+
+theXSType: 11 
+Reading (proton / vacuum)
+Couple not found: vacuum - proton
+vacuum 1 g/mole 931.494 MeV proton 938.272 MeV
+G4_WATER 0 g/mole 0 MeV proton 938.272 MeV
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : 
+      issued by : G4VLEPTSModel::ReadIXS
+File not found: 
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+
+theXSType: 11 
+Reading (proton / G4_WATER)
+Found masterfile section: begin WATER_LIQ WATER G4_WATER 
+Material G4_WATER derived from  WATER_GAS
+
+theXSType: 11 
+Reading (proton / WATER_GAS)
+Found masterfile section: begin WATER_GAS 
+vacuum 1 g/mole 931.494 MeV proton 938.272 MeV
+G4_WATER 18 g/mole 16766.9 MeV proton 938.272 MeV
+Reading		/home/roldan/lepts/xsd/wlp_IXS.txt	(ChargeTransfer, column 5/5)
+Reading		/home/roldan/lepts/xsd/water_liquid_DXS_proton.txt
+Reading		/home/roldan/lepts/xsd/water_liquid_DXSSEC_proton.txt
+
+phot:   for  gamma    SubType= 12  BuildTable= 0
+      LambdaPrime table from 200 keV to 10 TeV in 54 bins 
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+ LivermorePhElectric :  Emin=        0 eV    Emax=        1 GeV   AngularGenSauterGavrila
+       PhotoElectric :  Emin=        1 GeV   Emax=       10 TeV   AngularGenSauterGavrila
+
+compt:   for  gamma    SubType= 13  BuildTable= 1
+      Lambda table from 100 eV  to 1 MeV, 7 bins per decade, spline: 1
+      LambdaPrime table from 1 MeV to 10 TeV in 49 bins 
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+    LivermoreCompton :  Emin=        0 eV    Emax=        1 GeV
+       Klein-Nishina :  Emin=        1 GeV   Emax=       10 TeV
+
+conv:   for  gamma    SubType= 14  BuildTable= 1
+      Lambda table from 1.022 MeV to 10 TeV, 20 bins per decade, spline: 1
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+ LivermoreConversion :  Emin=        0 eV    Emax=        1 GeV
+        BetheHeitler :  Emin=        1 GeV   Emax=       80 GeV
+     BetheHeitlerLPM :  Emin=       80 GeV   Emax=       10 TeV
+
+Rayl:   for  gamma    SubType= 11  BuildTable= 1
+      Lambda table from 100 eV  to 100 keV, 7 bins per decade, spline: 0
+      LambdaPrime table from 100 keV to 10 TeV in 56 bins 
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+   LivermoreRayleigh :  Emin=        0 eV    Emax=        1 GeV   CullenGenerator
+   LivermoreRayleigh :  Emin=        1 GeV   Emax=       10 TeV   CullenGenerator
+
+e-_G4LEPTSElastic:   for  e-    SubType= 51  BuildTable= 0
+ Total cross sections computed from G4LEPTSElasticModel model
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+ G4LEPTSElasticModel :  Emin=        0 eV    Emax=        1 GeV
+
+e-_G4LEPTSIonisation:   for  e-    SubType= 53  BuildTable= 0
+ Total cross sections computed from G4LEPTSIonisationModel
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+G4LEPTSIonisationModel :  Emin=        0 eV    Emax=        1 MeV
+
+e-_G4LEPTSExcitation:   for  e-    SubType= 52  BuildTable= 0
+ Total cross sections computed from G4LEPTSExcitationModel
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+G4LEPTSExcitationModel :  Emin=        0 eV    Emax=        1 MeV
+
+e-_G4LEPTSDissocNeutr:   for  e-    SubType= -1  BuildTable= 0
+ Total cross sections computed from G4LEPTSDissociationModel model
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+G4LEPTSDissociationModel :  Emin=        0 eV    Emax=       15 MeV
+
+e-_G4LEPTSExcitVibrat:   for  e-    SubType= 54  BuildTable= 0
+ Total cross sections computed from G4LEPTSVibExcitationModel
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+G4LEPTSVibExcitationModel :  Emin=        0 eV    Emax=      100 eV 
+
+e-_G4LEPTSExcitRotat:   for  e-    SubType= -1  BuildTable= 0
+ Total cross sections computed from G4LEPTSRotExcitationModel model
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+G4LEPTSRotExcitationModel :  Emin=        0 eV    Emax=       15 MeV
+
+e-_G4LEPTSAttachment:   for  e-    SubType= 55  BuildTable= 0
+ Total cross sections computed from G4LEPTSAttachmentModel
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+G4LEPTSAttachmentModel :  Emin=        0 eV    Emax=       13 eV 
+
+e-_G4LEPTSThermalisation:   for  e-    SubType= -1  BuildTable= 0
+ Total cross sections computed from G4LEPTSThermalisationModel model
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+G4LEPTSThermalisationModel :  Emin=        0 eV    Emax=       15 MeV
+
+e+_G4LEPTSElastic:   for  e+    SubType= 51  BuildTable= 0
+ Total cross sections computed from G4LEPTSElasticModel model
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+ G4LEPTSElasticModel :  Emin=        0 eV    Emax=        1 GeV
+
+e+_G4LEPTSIonisation:   for  e+    SubType= 53  BuildTable= 0
+ Total cross sections computed from G4LEPTSIonisationModel
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+G4LEPTSIonisationModel :  Emin=        0 eV    Emax=        1 MeV
+
+e+_G4LEPTSExcitation:   for  e+    SubType= 52  BuildTable= 0
+ Total cross sections computed from G4LEPTSExcitationModel
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+G4LEPTSExcitationModel :  Emin=        0 eV    Emax=        1 MeV
+
+e+_G4LEPTSDissocNeutr:   for  e+    SubType= -1  BuildTable= 0
+ Total cross sections computed from G4LEPTSDissociationModel model
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+G4LEPTSDissociationModel :  Emin=        0 eV    Emax=       15 MeV
+
+e+_G4LEPTSExcitVibrat:   for  e+    SubType= 54  BuildTable= 0
+ Total cross sections computed from G4LEPTSVibExcitationModel
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+G4LEPTSVibExcitationModel :  Emin=        0 eV    Emax=      100 eV 
+
+e+_G4LEPTSExcitRotat:   for  e+    SubType= -1  BuildTable= 0
+ Total cross sections computed from G4LEPTSRotExcitationModel model
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+G4LEPTSRotExcitationModel :  Emin=        0 eV    Emax=       15 MeV
+
+e+_G4LEPTSPositronium:   for  e+    SubType= -1  BuildTable= 0
+ Total cross sections computed from G4LEPTSPositroniumModel model
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+G4LEPTSPositroniumModel :  Emin=        0 eV    Emax=       15 MeV
+
+e+_G4LEPTSAnnihilation:   for  e+    SubType= -1  BuildTable= 0
+ Total cross sections computed from G4LEPTSAnnihilationModel model
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+G4LEPTSAnnihilationModel :  Emin=        0 eV    Emax=       15 MeV
+
+proton_G4LEPTSElastic:   for  proton    SubType= 51  BuildTable= 0
+ Total cross sections computed from G4LEPTSElasticModel model
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+ G4LEPTSElasticModel :  Emin=        0 eV    Emax=        1 GeV
+
+proton_G4LEPTSExcitation:   for  proton    SubType= 51  BuildTable= 0
+ Total cross sections computed from G4LEPTSExcitationIonModel model
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+G4LEPTSExcitationIonModel :  Emin=        0 eV    Emax=        1 GeV
+
+proton_G4LEPTSIonisation:   for  proton    SubType= 51  BuildTable= 0
+ Total cross sections computed from G4LEPTSIonisationIonModel model
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+G4LEPTSIonisationIonModel :  Emin=        0 eV    Emax=        1 GeV
+
+proton_G4LEPTSChargeDecrease:   for  proton    SubType= 51  BuildTable= 0
+ Total cross sections computed from G4LEPTSChargeTransferModel model
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+G4LEPTSChargeTransferModel :  Emin=        0 eV    Emax=        1 GeV
+
+========= Table of registered couples ==============================
+
+Index : 0     used in the geometry : Yes
+ Material : vacuum
+ Range cuts        :  gamma  1 um     e-  1 um     e+  1 um  proton 1 mm 
+ Energy thresholds :  gamma  100 eV     e-  100 eV     e+  100 eV  proton 100 keV
+ Region(s) which use this couple : 
+    DefaultRegionForTheWorld
+
+Index : 1     used in the geometry : Yes
+ Material : G4_WATER
+ Range cuts        :  gamma  1 um     e-  1 um     e+  1 um  proton 1 mm 
+ Energy thresholds :  gamma  100 eV     e-  100 eV     e+  100 eV  proton 100 keV
+ Region(s) which use this couple : 
+    ch_region
+
+====================================================================
+
+/vis/scene/notifyHandlers scene-0
+### Run 0 starts.
+UAVerbose BeginOfRun
+UAWIF BeginOfRun
+@@@@@ GmCountProcessesUA GmCountProcessesUA
+UAClock BeginOfRunAction
+UAInteraction BeginOfRunAction
+UAInteractionSp BeginOfRunAction
+hgsp 0 Edep EdepX UnkNown - Depth - mm
+hgsp 1 Edep EdepX gamma - Depth - mm
+hgsp 2 Edep EdepX e- - Depth - mm
+hgsp 3 Edep EdepX e+ - Depth - mm
+hgsp 4 Edep EdepX proton - Depth - mm
+hgsp 5 Edep EdepX hydrogen - Depth - mm
+UADepo BeginOfRunAction
+x 1 1 1
+y 1 1 1
+z 1 1 1
+UAVerbose BeginOfRun
+UAWIF BeginOfRun
+UAVerbose BeginOfEvent 0
+UAWIF BeginOfEvent 0
+UAVerbose BeginOfEvent 0
+UAWIF BeginOfEvent 0
+err preproc
+vacuum 6.02214e-08 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   gbox	world	
+  material  vacuum	vacuum
+  Dens      1e-25 (g/cm3 )
+  Proc      null	Transportation
+  Pos       (-797.621,-11.7338,-15.6638) -> (-784.445,-11.7338,-15.6638)
+  Delta     (13.1758,0,0)	1.31758 cm 
+  Mom       (0.02,0,0)
+  KinE(eV)  20000	20000
+  Elost(eV) 0
+  Edep(eV)  0
+
+err preproc
+vacuum 6.02214e-08 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   gbox	world	
+  material  vacuum	vacuum
+  Dens      1e-25 (g/cm3 )
+  Proc      null	Transportation
+  Pos       (-797.621,-11.7338,-15.6638) -> (-784.445,-11.7338,-15.6638)
+  Delta     (13.1758,0,0)	1.31758 cm 
+  Mom       (0.02,0,0)
+  KinE(eV)  20000	20000
+  Elost(eV) 0
+  Edep(eV)  0
+
+vacuum 6.02214e-08 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   world	ch_G4_WATER	
+  material  vacuum	G4_WATER
+  Dens      1e-25 (g/cm3 )
+  Proc      Transportation	Transportation
+  Pos       (-784.445,-11.7338,-15.6638) -> (1.13687e-13,-11.7338,-15.6638)
+  Delta     (784.445,0,0)	78.4445 cm 
+  Mom       (0.02,0,0)
+  KinE(eV)  20000	20000
+  Elost(eV) 0
+  Edep(eV)  0
+
+vacuum 6.02214e-08 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   world	ch_G4_WATER	
+  material  vacuum	G4_WATER
+  Dens      1e-25 (g/cm3 )
+  Proc      Transportation	Transportation
+  Pos       (-784.445,-11.7338,-15.6638) -> (1.13687e-13,-11.7338,-15.6638)
+  Delta     (784.445,0,0)	78.4445 cm 
+  Mom       (0.02,0,0)
+  KinE(eV)  20000	20000
+  Elost(eV) 0
+  Edep(eV)  0
+
+G4_WATER 3.34563e+16 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   ch_G4_WATER	ch_G4_WATER	
+  material  G4_WATER	G4_WATER
+  Dens      1 (g/cm3 )
+  Proc      Transportation	compt
+  Pos       (1.13687e-13,-11.7338,-15.6638) -> (740.075,-11.7338,-15.6638)
+  Delta     (740.075,0,0)	74.0075 cm 
+  Mom       (0.02,0,0)
+  KinE(eV)  20000	18771.7
+  Elost(eV) 1228.33
+  Edep(eV)  13.61
+
+G4_WATER 3.34563e+16 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   ch_G4_WATER	ch_G4_WATER	
+  material  G4_WATER	G4_WATER
+  Dens      1 (g/cm3 )
+  Proc      Transportation	compt
+  Pos       (1.13687e-13,-11.7338,-15.6638) -> (740.075,-11.7338,-15.6638)
+  Delta     (740.075,0,0)	74.0075 cm 
+  Mom       (0.02,0,0)
+  KinE(eV)  20000	18771.7
+  Elost(eV) 1228.33
+  Edep(eV)  13.61
+
+G4_WATER 3.34563e+16 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   ch_G4_WATER	ch_G4_WATER	
+  material  G4_WATER	G4_WATER
+  Dens      1 (g/cm3 )
+  Proc      compt	compt
+  Pos       (740.075,-11.7338,-15.6638) -> (474.455,-234.838,-52.4552)
+  Delta     (-265.62,-223.104,-36.7914)	34.8831 cm 
+  Mom       (-0.0142938,-0.0120059,-0.00197986)
+  KinE(eV)  18771.7	17981
+  Elost(eV) 790.668
+  Edep(eV)  13.61
+
+G4_WATER 3.34563e+16 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   ch_G4_WATER	ch_G4_WATER	
+  material  G4_WATER	G4_WATER
+  Dens      1 (g/cm3 )
+  Proc      compt	compt
+  Pos       (740.075,-11.7338,-15.6638) -> (474.455,-234.838,-52.4552)
+  Delta     (-265.62,-223.104,-36.7914)	34.8831 cm 
+  Mom       (-0.0142938,-0.0120059,-0.00197986)
+  KinE(eV)  18771.7	17981
+  Elost(eV) 790.668
+  Edep(eV)  13.61
+
+G4_WATER 3.34563e+16 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   ch_G4_WATER	ch_G4_WATER	
+  material  G4_WATER	G4_WATER
+  Dens      1 (g/cm3 )
+  Proc      compt	compt
+  Pos       (474.455,-234.838,-52.4552) -> (445.503,-243.685,246.106)
+  Delta     (-28.9529,-8.84732,298.561)	30.0092 cm 
+  Mom       (-0.00173481,-0.000530116,0.0178893)
+  KinE(eV)  17981	17958.6
+  Elost(eV) 22.4498
+  Edep(eV)  13.61
+
+G4_WATER 3.34563e+16 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   ch_G4_WATER	ch_G4_WATER	
+  material  G4_WATER	G4_WATER
+  Dens      1 (g/cm3 )
+  Proc      compt	compt
+  Pos       (474.455,-234.838,-52.4552) -> (445.503,-243.685,246.106)
+  Delta     (-28.9529,-8.84732,298.561)	30.0092 cm 
+  Mom       (-0.00173481,-0.000530116,0.0178893)
+  KinE(eV)  17981	17958.6
+  Elost(eV) 22.4498
+  Edep(eV)  13.61
+
+G4_WATER 3.34563e+16 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   ch_G4_WATER	world	
+  material  G4_WATER	vacuum
+  Dens      1 (g/cm3 )
+  Proc      compt	Transportation
+  Pos       (445.503,-243.685,246.106) -> (487.524,-249.5,500)
+  Delta     (42.0211,-5.81505,253.894)	25.7414 cm 
+  Mom       (0.00293162,-0.000405689,0.017713)
+  KinE(eV)  17958.6	17958.6
+  Elost(eV) 0
+  Edep(eV)  0
+
+G4_WATER 3.34563e+16 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   ch_G4_WATER	world	
+  material  G4_WATER	vacuum
+  Dens      1 (g/cm3 )
+  Proc      compt	Transportation
+  Pos       (445.503,-243.685,246.106) -> (487.524,-249.5,500)
+  Delta     (42.0211,-5.81505,253.894)	25.7414 cm 
+  Mom       (0.00293162,-0.000405689,0.017713)
+  KinE(eV)  17958.6	17958.6
+  Elost(eV) 0
+  Edep(eV)  0
+
+err post phvl
+err post mat
+vacuum 6.02214e-08 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   world	null	
+  material  vacuum	null
+  Dens      1e-25 (g/cm3 )
+  Proc      Transportation	Transportation
+  Pos       (487.524,-249.5,500) -> (901.29,-306.759,3000)
+  Delta     (413.766,-57.2586,2500)	2.53466 m  
+  Mom       (0.00293162,-0.000405689,0.017713)
+  KinE(eV)  17958.6	17958.6
+  Elost(eV) 0
+  Edep(eV)  0
+
+err post phvl
+err post mat
+vacuum 6.02214e-08 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   world	null	
+  material  vacuum	null
+  Dens      1e-25 (g/cm3 )
+  Proc      Transportation	Transportation
+  Pos       (487.524,-249.5,500) -> (901.29,-306.759,3000)
+  Delta     (413.766,-57.2586,2500)	2.53466 m  
+  Mom       (0.00293162,-0.000405689,0.017713)
+  KinE(eV)  17958.6	17958.6
+  Elost(eV) 0
+  Edep(eV)  0
+
+err preproc
+G4_WATER 3.34563e+16 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      e-
+  PhysVol   ch_G4_WATER	ch_G4_WATER	
+  material  G4_WATER	G4_WATER
+  Dens      1 (g/cm3 )
+  Proc      null	GmUserSpecialCut
+  Pos       (445.503,-243.685,246.106) -> (445.503,-243.685,246.106)
+  Delta     (0,0,0)	0 fm 
+  Mom       (-0.00300253,-8.00414e-05,0.0001127)
+  KinE(eV)  8.83979	0
+  Elost(eV) 8.83979
+  Edep(eV)  8.83979
+
+err preproc
+G4_WATER 3.34563e+16 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      e-
+  PhysVol   ch_G4_WATER	ch_G4_WATER	
+  material  G4_WATER	G4_WATER
+  Dens      1 (g/cm3 )
+  Proc      null	GmUserSpecialCut
+  Pos       (445.503,-243.685,246.106) -> (445.503,-243.685,246.106)
+  Delta     (0,0,0)	0 fm 
+  Mom       (-0.00300253,-8.00414e-05,0.0001127)
+  KinE(eV)  8.83979	0
+  Elost(eV) 8.83979
+  Edep(eV)  8.83979
+
+err preproc
+G4_WATER 3.34563e+16 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      e-
+  PhysVol   ch_G4_WATER	ch_G4_WATER	
+  material  G4_WATER	G4_WATER
+  Dens      1 (g/cm3 )
+  Proc      null	GmUserSpecialCut
+  Pos       (474.455,-234.838,-52.4552) -> (474.455,-234.838,-52.4552)
+  Delta     (0,0,0)	0 fm 
+  Mom       (-0.0134808,-0.0123255,-0.0214734)
+  KinE(eV)  777.058	0
+  Elost(eV) 777.058
+  Edep(eV)  777.058
+
+err preproc
+G4_WATER 3.34563e+16 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      e-
+  PhysVol   ch_G4_WATER	ch_G4_WATER	
+  material  G4_WATER	G4_WATER
+  Dens      1 (g/cm3 )
+  Proc      null	GmUserSpecialCut
+  Pos       (474.455,-234.838,-52.4552) -> (474.455,-234.838,-52.4552)
+  Delta     (0,0,0)	0 fm 
+  Mom       (-0.0134808,-0.0123255,-0.0214734)
+  KinE(eV)  777.058	0
+  Elost(eV) 777.058
+  Edep(eV)  777.058
+
+err preproc
+G4_WATER 3.34563e+16 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      e-
+  PhysVol   ch_G4_WATER	ch_G4_WATER	
+  material  G4_WATER	G4_WATER
+  Dens      1 (g/cm3 )
+  Proc      null	GmUserSpecialCut
+  Pos       (740.075,-11.7338,-15.6638) -> (740.075,-11.7338,-15.6638)
+  Delta     (0,0,0)	0 fm 
+  Mom       (0.0332318,0.0116145,0.00191531)
+  KinE(eV)  1214.72	0
+  Elost(eV) 1214.72
+  Edep(eV)  1214.72
+
+err preproc
+G4_WATER 3.34563e+16 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      e-
+  PhysVol   ch_G4_WATER	ch_G4_WATER	
+  material  G4_WATER	G4_WATER
+  Dens      1 (g/cm3 )
+  Proc      null	GmUserSpecialCut
+  Pos       (740.075,-11.7338,-15.6638) -> (740.075,-11.7338,-15.6638)
+  Delta     (0,0,0)	0 fm 
+  Mom       (0.0332318,0.0116145,0.00191531)
+  KinE(eV)  1214.72	0
+  Elost(eV) 1214.72
+  Edep(eV)  1214.72
+
+UAVerbose EndOfEvent 0
+UAWIF EndOfEvent 0
+Clk Ev 1	0.002294sec	435.92 part/sec	(ETA: 0.020646sec / 0.02294sec)
+UAVerbose EndOfEvent 0
+UAWIF EndOfEvent 0
+===========================================
+Output VRML 2.0 file: g4_02.wrl
+Maximum number of files in the destination directory: 100
+  (Customizable with the environment variable: G4VRMLFILE_MAX_FILE_NUM) 
+===========================================
+G4VisManager: Using G4TrajectoryDrawByCharge as default trajectory model.
+See commands in /vis/modeling/trajectories/ for other options.
+UAVerbose BeginOfEvent 1
+UAWIF BeginOfEvent 1
+UAVerbose BeginOfEvent 1
+UAWIF BeginOfEvent 1
+err preproc
+vacuum 6.02214e-08 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   gbox	world	
+  material  vacuum	vacuum
+  Dens      1e-25 (g/cm3 )
+  Proc      null	Transportation
+  Pos       (-806.232,3.16001,-6.41764) -> (-776.045,3.16001,-6.41764)
+  Delta     (30.1863,0,0)	3.01863 cm 
+  Mom       (0.02,0,0)
+  KinE(eV)  20000	20000
+  Elost(eV) 0
+  Edep(eV)  0
+
+err preproc
+vacuum 6.02214e-08 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   gbox	world	
+  material  vacuum	vacuum
+  Dens      1e-25 (g/cm3 )
+  Proc      null	Transportation
+  Pos       (-806.232,3.16001,-6.41764) -> (-776.045,3.16001,-6.41764)
+  Delta     (30.1863,0,0)	3.01863 cm 
+  Mom       (0.02,0,0)
+  KinE(eV)  20000	20000
+  Elost(eV) 0
+  Edep(eV)  0
+
+vacuum 6.02214e-08 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   world	ch_G4_WATER	
+  material  vacuum	G4_WATER
+  Dens      1e-25 (g/cm3 )
+  Proc      Transportation	Transportation
+  Pos       (-776.045,3.16001,-6.41764) -> (1.13687e-13,3.16001,-6.41764)
+  Delta     (776.045,0,0)	77.6045 cm 
+  Mom       (0.02,0,0)
+  KinE(eV)  20000	20000
+  Elost(eV) 0
+  Edep(eV)  0
+
+vacuum 6.02214e-08 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   world	ch_G4_WATER	
+  material  vacuum	G4_WATER
+  Dens      1e-25 (g/cm3 )
+  Proc      Transportation	Transportation
+  Pos       (-776.045,3.16001,-6.41764) -> (1.13687e-13,3.16001,-6.41764)
+  Delta     (776.045,0,0)	77.6045 cm 
+  Mom       (0.02,0,0)
+  KinE(eV)  20000	20000
+  Elost(eV) 0
+  Edep(eV)  0
+
+G4_WATER 3.34563e+16 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   ch_G4_WATER	ch_G4_WATER	
+  material  G4_WATER	G4_WATER
+  Dens      1 (g/cm3 )
+  Proc      Transportation	compt
+  Pos       (1.13687e-13,3.16001,-6.41764) -> (0.367514,3.16001,-6.41764)
+  Delta     (0.367514,0,0)	367.514 um 
+  Mom       (0.02,0,0)
+  KinE(eV)  20000	19332.8
+  Elost(eV) 667.235
+  Edep(eV)  13.61
+
+G4_WATER 3.34563e+16 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   ch_G4_WATER	ch_G4_WATER	
+  material  G4_WATER	G4_WATER
+  Dens      1 (g/cm3 )
+  Proc      Transportation	compt
+  Pos       (1.13687e-13,3.16001,-6.41764) -> (0.367514,3.16001,-6.41764)
+  Delta     (0.367514,0,0)	367.514 um 
+  Mom       (0.02,0,0)
+  KinE(eV)  20000	19332.8
+  Elost(eV) 667.235
+  Edep(eV)  13.61
+
+G4_WATER 3.34563e+16 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   ch_G4_WATER	world	
+  material  G4_WATER	vacuum
+  Dens      1 (g/cm3 )
+  Proc      compt	Transportation
+  Pos       (0.367514,3.16001,-6.41764) -> (1.95954e-14,3.3247,-6.06949)
+  Delta     (-0.367514,0.164686,0.348148)	532.348 um 
+  Mom       (-0.0133466,0.00598075,0.0126433)
+  KinE(eV)  19332.8	19332.8
+  Elost(eV) 0
+  Edep(eV)  0
+
+G4_WATER 3.34563e+16 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   ch_G4_WATER	world	
+  material  G4_WATER	vacuum
+  Dens      1 (g/cm3 )
+  Proc      compt	Transportation
+  Pos       (0.367514,3.16001,-6.41764) -> (1.95954e-14,3.3247,-6.06949)
+  Delta     (-0.367514,0.164686,0.348148)	532.348 um 
+  Mom       (-0.0133466,0.00598075,0.0126433)
+  KinE(eV)  19332.8	19332.8
+  Elost(eV) 0
+  Edep(eV)  0
+
+err post phvl
+err post mat
+vacuum 6.02214e-08 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   world	null	
+  material  vacuum	null
+  Dens      1e-25 (g/cm3 )
+  Proc      Transportation	Transportation
+  Pos       (1.95954e-14,3.3247,-6.06949) -> (-3000,1347.65,2835.85)
+  Delta     (-3000,1344.33,2841.92)	4.34554 m  
+  Mom       (-0.0133466,0.00598075,0.0126433)
+  KinE(eV)  19332.8	19332.8
+  Elost(eV) 0
+  Edep(eV)  0
+
+err post phvl
+err post mat
+vacuum 6.02214e-08 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   world	null	
+  material  vacuum	null
+  Dens      1e-25 (g/cm3 )
+  Proc      Transportation	Transportation
+  Pos       (1.95954e-14,3.3247,-6.06949) -> (-3000,1347.65,2835.85)
+  Delta     (-3000,1344.33,2841.92)	4.34554 m  
+  Mom       (-0.0133466,0.00598075,0.0126433)
+  KinE(eV)  19332.8	19332.8
+  Elost(eV) 0
+  Edep(eV)  0
+
+err preproc
+G4_WATER 3.34563e+16 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      e-
+  PhysVol   ch_G4_WATER	ch_G4_WATER	
+  material  G4_WATER	G4_WATER
+  Dens      1 (g/cm3 )
+  Proc      null	GmUserSpecialCut
+  Pos       (0.367514,3.16001,-6.41764) -> (0.367514,3.16001,-6.41764)
+  Delta     (0,0,0)	0 fm 
+  Mom       (0.0239051,-0.00421091,-0.00890189)
+  KinE(eV)  653.625	0
+  Elost(eV) 653.625
+  Edep(eV)  653.625
+
+err preproc
+G4_WATER 3.34563e+16 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      e-
+  PhysVol   ch_G4_WATER	ch_G4_WATER	
+  material  G4_WATER	G4_WATER
+  Dens      1 (g/cm3 )
+  Proc      null	GmUserSpecialCut
+  Pos       (0.367514,3.16001,-6.41764) -> (0.367514,3.16001,-6.41764)
+  Delta     (0,0,0)	0 fm 
+  Mom       (0.0239051,-0.00421091,-0.00890189)
+  KinE(eV)  653.625	0
+  Elost(eV) 653.625
+  Edep(eV)  653.625
+
+UAVerbose EndOfEvent 1
+UAWIF EndOfEvent 1
+UAVerbose EndOfEvent 1
+UAWIF EndOfEvent 1
+UAVerbose BeginOfEvent 2
+UAWIF BeginOfEvent 2
+UAVerbose BeginOfEvent 2
+UAWIF BeginOfEvent 2
+err preproc
+vacuum 6.02214e-08 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   gbox	world	
+  material  vacuum	vacuum
+  Dens      1e-25 (g/cm3 )
+  Proc      null	Transportation
+  Pos       (-812.944,-2.29535,6.8335) -> (-776.062,-2.29535,6.8335)
+  Delta     (36.8821,0,0)	3.68821 cm 
+  Mom       (0.02,0,0)
+  KinE(eV)  20000	20000
+  Elost(eV) 0
+  Edep(eV)  0
+
+err preproc
+vacuum 6.02214e-08 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   gbox	world	
+  material  vacuum	vacuum
+  Dens      1e-25 (g/cm3 )
+  Proc      null	Transportation
+  Pos       (-812.944,-2.29535,6.8335) -> (-776.062,-2.29535,6.8335)
+  Delta     (36.8821,0,0)	3.68821 cm 
+  Mom       (0.02,0,0)
+  KinE(eV)  20000	20000
+  Elost(eV) 0
+  Edep(eV)  0
+
+vacuum 6.02214e-08 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   world	ch_G4_WATER	
+  material  vacuum	G4_WATER
+  Dens      1e-25 (g/cm3 )
+  Proc      Transportation	Transportation
+  Pos       (-776.062,-2.29535,6.8335) -> (-1.13687e-13,-2.29535,6.8335)
+  Delta     (776.062,0,0)	77.6062 cm 
+  Mom       (0.02,0,0)
+  KinE(eV)  20000	20000
+  Elost(eV) 0
+  Edep(eV)  0
+
+vacuum 6.02214e-08 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   world	ch_G4_WATER	
+  material  vacuum	G4_WATER
+  Dens      1e-25 (g/cm3 )
+  Proc      Transportation	Transportation
+  Pos       (-776.062,-2.29535,6.8335) -> (-1.13687e-13,-2.29535,6.8335)
+  Delta     (776.062,0,0)	77.6062 cm 
+  Mom       (0.02,0,0)
+  KinE(eV)  20000	20000
+  Elost(eV) 0
+  Edep(eV)  0
+
+G4_WATER 3.34563e+16 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   ch_G4_WATER	ch_G4_WATER	
+  material  G4_WATER	G4_WATER
+  Dens      1 (g/cm3 )
+  Proc      Transportation	compt
+  Pos       (-1.13687e-13,-2.29535,6.8335) -> (120.903,-2.29535,6.8335)
+  Delta     (120.903,0,0)	12.0903 cm 
+  Mom       (0.02,0,0)
+  KinE(eV)  20000	19436.2
+  Elost(eV) 563.768
+  Edep(eV)  13.61
+
+G4_WATER 3.34563e+16 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   ch_G4_WATER	ch_G4_WATER	
+  material  G4_WATER	G4_WATER
+  Dens      1 (g/cm3 )
+  Proc      Transportation	compt
+  Pos       (-1.13687e-13,-2.29535,6.8335) -> (120.903,-2.29535,6.8335)
+  Delta     (120.903,0,0)	12.0903 cm 
+  Mom       (0.02,0,0)
+  KinE(eV)  20000	19436.2
+  Elost(eV) 563.768
+  Edep(eV)  13.61
+
+G4_WATER 3.34563e+16 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   ch_G4_WATER	world	
+  material  G4_WATER	vacuum
+  Dens      1 (g/cm3 )
+  Proc      compt	Transportation
+  Pos       (120.903,-2.29535,6.8335) -> (227.867,4.66273,500)
+  Delta     (106.964,6.95808,493.167)	50.4681 cm 
+  Mom       (0.0041194,0.000267969,0.0189928)
+  KinE(eV)  19436.2	19436.2
+  Elost(eV) 0
+  Edep(eV)  0
+
+G4_WATER 3.34563e+16 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   ch_G4_WATER	world	
+  material  G4_WATER	vacuum
+  Dens      1 (g/cm3 )
+  Proc      compt	Transportation
+  Pos       (120.903,-2.29535,6.8335) -> (227.867,4.66273,500)
+  Delta     (106.964,6.95808,493.167)	50.4681 cm 
+  Mom       (0.0041194,0.000267969,0.0189928)
+  KinE(eV)  19436.2	19436.2
+  Elost(eV) 0
+  Edep(eV)  0
+
+err post phvl
+err post mat
+vacuum 6.02214e-08 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   world	null	
+  material  vacuum	null
+  Dens      1e-25 (g/cm3 )
+  Proc      Transportation	Transportation
+  Pos       (227.867,4.66273,500) -> (770.1,39.9352,3000)
+  Delta     (542.233,35.2725,2500)	2.55837 m  
+  Mom       (0.0041194,0.000267969,0.0189928)
+  KinE(eV)  19436.2	19436.2
+  Elost(eV) 0
+  Edep(eV)  0
+
+err post phvl
+err post mat
+vacuum 6.02214e-08 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   world	null	
+  material  vacuum	null
+  Dens      1e-25 (g/cm3 )
+  Proc      Transportation	Transportation
+  Pos       (227.867,4.66273,500) -> (770.1,39.9352,3000)
+  Delta     (542.233,35.2725,2500)	2.55837 m  
+  Mom       (0.0041194,0.000267969,0.0189928)
+  KinE(eV)  19436.2	19436.2
+  Elost(eV) 0
+  Edep(eV)  0
+
+err preproc
+G4_WATER 3.34563e+16 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      e-
+  PhysVol   ch_G4_WATER	ch_G4_WATER	
+  material  G4_WATER	G4_WATER
+  Dens      1 (g/cm3 )
+  Proc      null	GmUserSpecialCut
+  Pos       (120.903,-2.29535,6.8335) -> (120.903,-2.29535,6.8335)
+  Delta     (0,0,0)	0 fm 
+  Mom       (0.0152331,-0.000256477,-0.0181783)
+  KinE(eV)  550.158	0
+  Elost(eV) 550.158
+  Edep(eV)  550.158
+
+err preproc
+G4_WATER 3.34563e+16 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      e-
+  PhysVol   ch_G4_WATER	ch_G4_WATER	
+  material  G4_WATER	G4_WATER
+  Dens      1 (g/cm3 )
+  Proc      null	GmUserSpecialCut
+  Pos       (120.903,-2.29535,6.8335) -> (120.903,-2.29535,6.8335)
+  Delta     (0,0,0)	0 fm 
+  Mom       (0.0152331,-0.000256477,-0.0181783)
+  KinE(eV)  550.158	0
+  Elost(eV) 550.158
+  Edep(eV)  550.158
+
+UAVerbose EndOfEvent 2
+UAWIF EndOfEvent 2
+UAVerbose EndOfEvent 2
+UAWIF EndOfEvent 2
+UAVerbose BeginOfEvent 3
+UAWIF BeginOfEvent 3
+UAVerbose BeginOfEvent 3
+UAWIF BeginOfEvent 3
+err preproc
+vacuum 6.02214e-08 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   gbox	world	
+  material  vacuum	vacuum
+  Dens      1e-25 (g/cm3 )
+  Proc      null	Transportation
+  Pos       (-791.13,-17.0986,14.8331) -> (-789.388,-17.0986,14.8331)
+  Delta     (1.74223,0,0)	1.74223 mm 
+  Mom       (0.02,0,0)
+  KinE(eV)  20000	20000
+  Elost(eV) 0
+  Edep(eV)  0
+
+err preproc
+vacuum 6.02214e-08 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   gbox	world	
+  material  vacuum	vacuum
+  Dens      1e-25 (g/cm3 )
+  Proc      null	Transportation
+  Pos       (-791.13,-17.0986,14.8331) -> (-789.388,-17.0986,14.8331)
+  Delta     (1.74223,0,0)	1.74223 mm 
+  Mom       (0.02,0,0)
+  KinE(eV)  20000	20000
+  Elost(eV) 0
+  Edep(eV)  0
+
+vacuum 6.02214e-08 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   world	ch_G4_WATER	
+  material  vacuum	G4_WATER
+  Dens      1e-25 (g/cm3 )
+  Proc      Transportation	Transportation
+  Pos       (-789.388,-17.0986,14.8331) -> (0,-17.0986,14.8331)
+  Delta     (789.388,0,0)	78.9388 cm 
+  Mom       (0.02,0,0)
+  KinE(eV)  20000	20000
+  Elost(eV) 0
+  Edep(eV)  0
+
+vacuum 6.02214e-08 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   world	ch_G4_WATER	
+  material  vacuum	G4_WATER
+  Dens      1e-25 (g/cm3 )
+  Proc      Transportation	Transportation
+  Pos       (-789.388,-17.0986,14.8331) -> (0,-17.0986,14.8331)
+  Delta     (789.388,0,0)	78.9388 cm 
+  Mom       (0.02,0,0)
+  KinE(eV)  20000	20000
+  Elost(eV) 0
+  Edep(eV)  0
+
+G4_WATER 3.34563e+16 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   ch_G4_WATER	ch_G4_WATER	
+  material  G4_WATER	G4_WATER
+  Dens      1 (g/cm3 )
+  Proc      Transportation	compt
+  Pos       (0,-17.0986,14.8331) -> (173.205,-17.0986,14.8331)
+  Delta     (173.205,0,0)	17.3205 cm 
+  Mom       (0.02,0,0)
+  KinE(eV)  20000	18475.2
+  Elost(eV) 1524.84
+  Edep(eV)  13.61
+
+G4_WATER 3.34563e+16 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   ch_G4_WATER	ch_G4_WATER	
+  material  G4_WATER	G4_WATER
+  Dens      1 (g/cm3 )
+  Proc      Transportation	compt
+  Pos       (0,-17.0986,14.8331) -> (173.205,-17.0986,14.8331)
+  Delta     (173.205,0,0)	17.3205 cm 
+  Mom       (0.02,0,0)
+  KinE(eV)  20000	18475.2
+  Elost(eV) 1524.84
+  Edep(eV)  13.61
+
+G4_WATER 3.34563e+16 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   ch_G4_WATER	ch_G4_WATER	
+  material  G4_WATER	G4_WATER
+  Dens      1 (g/cm3 )
+  Proc      compt	compt
+  Pos       (173.205,-17.0986,14.8331) -> (75.0323,37.5274,-7.35763)
+  Delta     (-98.1731,54.626,-22.1907)	11.4518 cm 
+  Mom       (-0.0158382,0.0088128,-0.00358001)
+  KinE(eV)  18475.2	17420.3
+  Elost(eV) 1054.84
+  Edep(eV)  13.61
+
+G4_WATER 3.34563e+16 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   ch_G4_WATER	ch_G4_WATER	
+  material  G4_WATER	G4_WATER
+  Dens      1 (g/cm3 )
+  Proc      compt	compt
+  Pos       (173.205,-17.0986,14.8331) -> (75.0323,37.5274,-7.35763)
+  Delta     (-98.1731,54.626,-22.1907)	11.4518 cm 
+  Mom       (-0.0158382,0.0088128,-0.00358001)
+  KinE(eV)  18475.2	17420.3
+  Elost(eV) 1054.84
+  Edep(eV)  13.61
+
+G4_WATER 3.34563e+16 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   ch_G4_WATER	ch_G4_WATER	
+  material  G4_WATER	G4_WATER
+  Dens      1 (g/cm3 )
+  Proc      compt	compt
+  Pos       (75.0323,37.5274,-7.35763) -> (111.284,-32.1986,-33.6296)
+  Delta     (36.252,-69.726,-26.2719)	8.28622 cm 
+  Mom       (0.00762136,-0.0146587,-0.00552321)
+  KinE(eV)  17420.3	17001.6
+  Elost(eV) 418.741
+  Edep(eV)  13.61
+
+G4_WATER 3.34563e+16 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   ch_G4_WATER	ch_G4_WATER	
+  material  G4_WATER	G4_WATER
+  Dens      1 (g/cm3 )
+  Proc      compt	compt
+  Pos       (75.0323,37.5274,-7.35763) -> (111.284,-32.1986,-33.6296)
+  Delta     (36.252,-69.726,-26.2719)	8.28622 cm 
+  Mom       (0.00762136,-0.0146587,-0.00552321)
+  KinE(eV)  17420.3	17001.6
+  Elost(eV) 418.741
+  Edep(eV)  13.61
+
+G4_WATER 3.34563e+16 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   ch_G4_WATER	world	
+  material  G4_WATER	vacuum
+  Dens      1 (g/cm3 )
+  Proc      compt	Transportation
+  Pos       (111.284,-32.1986,-33.6296) -> (-1.42109e-14,-99.2782,-135.109)
+  Delta     (-111.284,-67.0797,-101.479)	16.4869 cm 
+  Mom       (-0.0114758,-0.00691736,-0.0104647)
+  KinE(eV)  17001.6	17001.6
+  Elost(eV) 0
+  Edep(eV)  0
+
+G4_WATER 3.34563e+16 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   ch_G4_WATER	world	
+  material  G4_WATER	vacuum
+  Dens      1 (g/cm3 )
+  Proc      compt	Transportation
+  Pos       (111.284,-32.1986,-33.6296) -> (-1.42109e-14,-99.2782,-135.109)
+  Delta     (-111.284,-67.0797,-101.479)	16.4869 cm 
+  Mom       (-0.0114758,-0.00691736,-0.0104647)
+  KinE(eV)  17001.6	17001.6
+  Elost(eV) 0
+  Edep(eV)  0
+
+err post phvl
+err post mat
+vacuum 6.02214e-08 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   world	null	
+  material  vacuum	null
+  Dens      1e-25 (g/cm3 )
+  Proc      Transportation	Transportation
+  Pos       (-1.42109e-14,-99.2782,-135.109) -> (-3000,-1907.61,-2870.78)
+  Delta     (-3000,-1808.33,-2735.67)	4.44454 m  
+  Mom       (-0.0114758,-0.00691736,-0.0104647)
+  KinE(eV)  17001.6	17001.6
+  Elost(eV) 0
+  Edep(eV)  0
+
+err post phvl
+err post mat
+vacuum 6.02214e-08 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   world	null	
+  material  vacuum	null
+  Dens      1e-25 (g/cm3 )
+  Proc      Transportation	Transportation
+  Pos       (-1.42109e-14,-99.2782,-135.109) -> (-3000,-1907.61,-2870.78)
+  Delta     (-3000,-1808.33,-2735.67)	4.44454 m  
+  Mom       (-0.0114758,-0.00691736,-0.0104647)
+  KinE(eV)  17001.6	17001.6
+  Elost(eV) 0
+  Edep(eV)  0
+
+err preproc
+G4_WATER 3.34563e+16 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      e-
+  PhysVol   ch_G4_WATER	ch_G4_WATER	
+  material  G4_WATER	G4_WATER
+  Dens      1 (g/cm3 )
+  Proc      null	GmUserSpecialCut
+  Pos       (111.284,-32.1986,-33.6296) -> (111.284,-32.1986,-33.6296)
+  Delta     (0,0,0)	0 fm 
+  Mom       (0.0183389,-0.00744662,0.00473703)
+  KinE(eV)  405.131	0
+  Elost(eV) 405.131
+  Edep(eV)  405.131
+
+err preproc
+G4_WATER 3.34563e+16 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      e-
+  PhysVol   ch_G4_WATER	ch_G4_WATER	
+  material  G4_WATER	G4_WATER
+  Dens      1 (g/cm3 )
+  Proc      null	GmUserSpecialCut
+  Pos       (111.284,-32.1986,-33.6296) -> (111.284,-32.1986,-33.6296)
+  Delta     (0,0,0)	0 fm 
+  Mom       (0.0183389,-0.00744662,0.00473703)
+  KinE(eV)  405.131	0
+  Elost(eV) 405.131
+  Edep(eV)  405.131
+
+err preproc
+G4_WATER 3.34563e+16 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      e-
+  PhysVol   ch_G4_WATER	ch_G4_WATER	
+  material  G4_WATER	G4_WATER
+  Dens      1 (g/cm3 )
+  Proc      null	GmUserSpecialCut
+  Pos       (75.0323,37.5274,-7.35763) -> (75.0323,37.5274,-7.35763)
+  Delta     (0,0,0)	0 fm 
+  Mom       (-0.0230368,0.0230412,0.00190314)
+  KinE(eV)  1041.23	0
+  Elost(eV) 1041.23
+  Edep(eV)  1041.23
+
+err preproc
+G4_WATER 3.34563e+16 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      e-
+  PhysVol   ch_G4_WATER	ch_G4_WATER	
+  material  G4_WATER	G4_WATER
+  Dens      1 (g/cm3 )
+  Proc      null	GmUserSpecialCut
+  Pos       (75.0323,37.5274,-7.35763) -> (75.0323,37.5274,-7.35763)
+  Delta     (0,0,0)	0 fm 
+  Mom       (-0.0230368,0.0230412,0.00190314)
+  KinE(eV)  1041.23	0
+  Elost(eV) 1041.23
+  Edep(eV)  1041.23
+
+err preproc
+G4_WATER 3.34563e+16 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      e-
+  PhysVol   ch_G4_WATER	ch_G4_WATER	
+  material  G4_WATER	G4_WATER
+  Dens      1 (g/cm3 )
+  Proc      null	GmUserSpecialCut
+  Pos       (173.205,-17.0986,14.8331) -> (173.205,-17.0986,14.8331)
+  Delta     (0,0,0)	0 fm 
+  Mom       (0.0379989,-0.0093954,0.00381668)
+  KinE(eV)  1511.23	0
+  Elost(eV) 1511.23
+  Edep(eV)  1511.23
+
+err preproc
+G4_WATER 3.34563e+16 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      e-
+  PhysVol   ch_G4_WATER	ch_G4_WATER	
+  material  G4_WATER	G4_WATER
+  Dens      1 (g/cm3 )
+  Proc      null	GmUserSpecialCut
+  Pos       (173.205,-17.0986,14.8331) -> (173.205,-17.0986,14.8331)
+  Delta     (0,0,0)	0 fm 
+  Mom       (0.0379989,-0.0093954,0.00381668)
+  KinE(eV)  1511.23	0
+  Elost(eV) 1511.23
+  Edep(eV)  1511.23
+
+UAVerbose EndOfEvent 3
+UAWIF EndOfEvent 3
+UAVerbose EndOfEvent 3
+UAWIF EndOfEvent 3
+UAVerbose BeginOfEvent 4
+UAWIF BeginOfEvent 4
+UAVerbose BeginOfEvent 4
+UAWIF BeginOfEvent 4
+err preproc
+vacuum 6.02214e-08 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   gbox	world	
+  material  vacuum	vacuum
+  Dens      1e-25 (g/cm3 )
+  Proc      null	Transportation
+  Pos       (-800.746,-2.69482,8.56306) -> (-776.667,-2.69482,8.56306)
+  Delta     (24.0786,0,0)	2.40786 cm 
+  Mom       (0.02,0,0)
+  KinE(eV)  20000	20000
+  Elost(eV) 0
+  Edep(eV)  0
+
+err preproc
+vacuum 6.02214e-08 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   gbox	world	
+  material  vacuum	vacuum
+  Dens      1e-25 (g/cm3 )
+  Proc      null	Transportation
+  Pos       (-800.746,-2.69482,8.56306) -> (-776.667,-2.69482,8.56306)
+  Delta     (24.0786,0,0)	2.40786 cm 
+  Mom       (0.02,0,0)
+  KinE(eV)  20000	20000
+  Elost(eV) 0
+  Edep(eV)  0
+
+vacuum 6.02214e-08 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   world	ch_G4_WATER	
+  material  vacuum	G4_WATER
+  Dens      1e-25 (g/cm3 )
+  Proc      Transportation	Transportation
+  Pos       (-776.667,-2.69482,8.56306) -> (-1.13687e-13,-2.69482,8.56306)
+  Delta     (776.667,0,0)	77.6667 cm 
+  Mom       (0.02,0,0)
+  KinE(eV)  20000	20000
+  Elost(eV) 0
+  Edep(eV)  0
+
+vacuum 6.02214e-08 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   world	ch_G4_WATER	
+  material  vacuum	G4_WATER
+  Dens      1e-25 (g/cm3 )
+  Proc      Transportation	Transportation
+  Pos       (-776.667,-2.69482,8.56306) -> (-1.13687e-13,-2.69482,8.56306)
+  Delta     (776.667,0,0)	77.6667 cm 
+  Mom       (0.02,0,0)
+  KinE(eV)  20000	20000
+  Elost(eV) 0
+  Edep(eV)  0
+
+G4_WATER 3.34563e+16 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   ch_G4_WATER	ch_G4_WATER	
+  material  G4_WATER	G4_WATER
+  Dens      1 (g/cm3 )
+  Proc      Transportation	compt
+  Pos       (-1.13687e-13,-2.69482,8.56306) -> (59.4212,-2.69482,8.56306)
+  Delta     (59.4212,0,0)	5.94212 cm 
+  Mom       (0.02,0,0)
+  KinE(eV)  20000	18577.2
+  Elost(eV) 1422.82
+  Edep(eV)  13.61
+
+G4_WATER 3.34563e+16 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   ch_G4_WATER	ch_G4_WATER	
+  material  G4_WATER	G4_WATER
+  Dens      1 (g/cm3 )
+  Proc      Transportation	compt
+  Pos       (-1.13687e-13,-2.69482,8.56306) -> (59.4212,-2.69482,8.56306)
+  Delta     (59.4212,0,0)	5.94212 cm 
+  Mom       (0.02,0,0)
+  KinE(eV)  20000	18577.2
+  Elost(eV) 1422.82
+  Edep(eV)  13.61
+
+G4_WATER 3.34563e+16 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   ch_G4_WATER	world	
+  material  G4_WATER	vacuum
+  Dens      1 (g/cm3 )
+  Proc      compt	Transportation
+  Pos       (59.4212,-2.69482,8.56306) -> (0,42.2404,48.3719)
+  Delta     (-59.4212,44.9353,39.8089)	8.44678 cm 
+  Mom       (-0.0130686,0.00988271,0.00875525)
+  KinE(eV)  18577.2	18577.2
+  Elost(eV) 0
+  Edep(eV)  0
+
+G4_WATER 3.34563e+16 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   ch_G4_WATER	world	
+  material  G4_WATER	vacuum
+  Dens      1 (g/cm3 )
+  Proc      compt	Transportation
+  Pos       (59.4212,-2.69482,8.56306) -> (0,42.2404,48.3719)
+  Delta     (-59.4212,44.9353,39.8089)	8.44678 cm 
+  Mom       (-0.0130686,0.00988271,0.00875525)
+  KinE(eV)  18577.2	18577.2
+  Elost(eV) 0
+  Edep(eV)  0
+
+err post phvl
+err post mat
+vacuum 6.02214e-08 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   world	null	
+  material  vacuum	null
+  Dens      1e-25 (g/cm3 )
+  Proc      Transportation	Transportation
+  Pos       (0,42.2404,48.3719) -> (-3000,2310.89,2058.2)
+  Delta     (-3000,2268.65,2009.83)	4.26453 m  
+  Mom       (-0.0130686,0.00988271,0.00875525)
+  KinE(eV)  18577.2	18577.2
+  Elost(eV) 0
+  Edep(eV)  0
+
+err post phvl
+err post mat
+vacuum 6.02214e-08 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   world	null	
+  material  vacuum	null
+  Dens      1e-25 (g/cm3 )
+  Proc      Transportation	Transportation
+  Pos       (0,42.2404,48.3719) -> (-3000,2310.89,2058.2)
+  Delta     (-3000,2268.65,2009.83)	4.26453 m  
+  Mom       (-0.0130686,0.00988271,0.00875525)
+  KinE(eV)  18577.2	18577.2
+  Elost(eV) 0
+  Edep(eV)  0
+
+err preproc
+G4_WATER 3.34563e+16 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      e-
+  PhysVol   ch_G4_WATER	ch_G4_WATER	
+  material  G4_WATER	G4_WATER
+  Dens      1 (g/cm3 )
+  Proc      null	GmUserSpecialCut
+  Pos       (59.4212,-2.69482,8.56306) -> (59.4212,-2.69482,8.56306)
+  Delta     (0,0,0)	0 fm 
+  Mom       (0.0352409,-0.0105928,-0.00938437)
+  KinE(eV)  1409.21	0
+  Elost(eV) 1409.21
+  Edep(eV)  1409.21
+
+err preproc
+G4_WATER 3.34563e+16 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      e-
+  PhysVol   ch_G4_WATER	ch_G4_WATER	
+  material  G4_WATER	G4_WATER
+  Dens      1 (g/cm3 )
+  Proc      null	GmUserSpecialCut
+  Pos       (59.4212,-2.69482,8.56306) -> (59.4212,-2.69482,8.56306)
+  Delta     (0,0,0)	0 fm 
+  Mom       (0.0352409,-0.0105928,-0.00938437)
+  KinE(eV)  1409.21	0
+  Elost(eV) 1409.21
+  Edep(eV)  1409.21
+
+UAVerbose EndOfEvent 4
+UAWIF EndOfEvent 4
+UAVerbose EndOfEvent 4
+UAWIF EndOfEvent 4
+UAVerbose BeginOfEvent 5
+UAWIF BeginOfEvent 5
+UAVerbose BeginOfEvent 5
+UAWIF BeginOfEvent 5
+err preproc
+vacuum 6.02214e-08 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   gbox	world	
+  material  vacuum	vacuum
+  Dens      1e-25 (g/cm3 )
+  Proc      null	Transportation
+  Pos       (-792.038,8.67772,0.777096) -> (-776.567,8.67772,0.777096)
+  Delta     (15.4706,0,0)	1.54706 cm 
+  Mom       (0.02,0,0)
+  KinE(eV)  20000	20000
+  Elost(eV) 0
+  Edep(eV)  0
+
+err preproc
+vacuum 6.02214e-08 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   gbox	world	
+  material  vacuum	vacuum
+  Dens      1e-25 (g/cm3 )
+  Proc      null	Transportation
+  Pos       (-792.038,8.67772,0.777096) -> (-776.567,8.67772,0.777096)
+  Delta     (15.4706,0,0)	1.54706 cm 
+  Mom       (0.02,0,0)
+  KinE(eV)  20000	20000
+  Elost(eV) 0
+  Edep(eV)  0
+
+vacuum 6.02214e-08 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   world	ch_G4_WATER	
+  material  vacuum	G4_WATER
+  Dens      1e-25 (g/cm3 )
+  Proc      Transportation	Transportation
+  Pos       (-776.567,8.67772,0.777096) -> (0,8.67772,0.777096)
+  Delta     (776.567,0,0)	77.6567 cm 
+  Mom       (0.02,0,0)
+  KinE(eV)  20000	20000
+  Elost(eV) 0
+  Edep(eV)  0
+
+vacuum 6.02214e-08 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   world	ch_G4_WATER	
+  material  vacuum	G4_WATER
+  Dens      1e-25 (g/cm3 )
+  Proc      Transportation	Transportation
+  Pos       (-776.567,8.67772,0.777096) -> (0,8.67772,0.777096)
+  Delta     (776.567,0,0)	77.6567 cm 
+  Mom       (0.02,0,0)
+  KinE(eV)  20000	20000
+  Elost(eV) 0
+  Edep(eV)  0
+
+G4_WATER 3.34563e+16 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   ch_G4_WATER	world	
+  material  G4_WATER	vacuum
+  Dens      1 (g/cm3 )
+  Proc      Transportation	Transportation
+  Pos       (0,8.67772,0.777096) -> (1000,8.67772,0.777096)
+  Delta     (1000,0,0)	1 m  
+  Mom       (0.02,0,0)
+  KinE(eV)  20000	20000
+  Elost(eV) 0
+  Edep(eV)  0
+
+G4_WATER 3.34563e+16 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   ch_G4_WATER	world	
+  material  G4_WATER	vacuum
+  Dens      1 (g/cm3 )
+  Proc      Transportation	Transportation
+  Pos       (0,8.67772,0.777096) -> (1000,8.67772,0.777096)
+  Delta     (1000,0,0)	1 m  
+  Mom       (0.02,0,0)
+  KinE(eV)  20000	20000
+  Elost(eV) 0
+  Edep(eV)  0
+
+err post phvl
+err post mat
+vacuum 6.02214e-08 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   world	null	
+  material  vacuum	null
+  Dens      1e-25 (g/cm3 )
+  Proc      Transportation	Transportation
+  Pos       (1000,8.67772,0.777096) -> (3000,8.67772,0.777096)
+  Delta     (2000,0,0)	2 m  
+  Mom       (0.02,0,0)
+  KinE(eV)  20000	20000
+  Elost(eV) 0
+  Edep(eV)  0
+
+err post phvl
+err post mat
+vacuum 6.02214e-08 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   world	null	
+  material  vacuum	null
+  Dens      1e-25 (g/cm3 )
+  Proc      Transportation	Transportation
+  Pos       (1000,8.67772,0.777096) -> (3000,8.67772,0.777096)
+  Delta     (2000,0,0)	2 m  
+  Mom       (0.02,0,0)
+  KinE(eV)  20000	20000
+  Elost(eV) 0
+  Edep(eV)  0
+
+UAVerbose EndOfEvent 5
+UAWIF EndOfEvent 5
+UAVerbose EndOfEvent 5
+UAWIF EndOfEvent 5
+UAVerbose BeginOfEvent 6
+UAWIF BeginOfEvent 6
+UAVerbose BeginOfEvent 6
+UAWIF BeginOfEvent 6
+err preproc
+vacuum 6.02214e-08 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   gbox	world	
+  material  vacuum	vacuum
+  Dens      1e-25 (g/cm3 )
+  Proc      null	Transportation
+  Pos       (-789.536,11.433,-10.9372) -> (-780.644,11.433,-10.9372)
+  Delta     (8.89195,0,0)	8.89195 mm 
+  Mom       (0.02,0,0)
+  KinE(eV)  20000	20000
+  Elost(eV) 0
+  Edep(eV)  0
+
+err preproc
+vacuum 6.02214e-08 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   gbox	world	
+  material  vacuum	vacuum
+  Dens      1e-25 (g/cm3 )
+  Proc      null	Transportation
+  Pos       (-789.536,11.433,-10.9372) -> (-780.644,11.433,-10.9372)
+  Delta     (8.89195,0,0)	8.89195 mm 
+  Mom       (0.02,0,0)
+  KinE(eV)  20000	20000
+  Elost(eV) 0
+  Edep(eV)  0
+
+vacuum 6.02214e-08 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   world	ch_G4_WATER	
+  material  vacuum	G4_WATER
+  Dens      1e-25 (g/cm3 )
+  Proc      Transportation	Transportation
+  Pos       (-780.644,11.433,-10.9372) -> (0,11.433,-10.9372)
+  Delta     (780.644,0,0)	78.0644 cm 
+  Mom       (0.02,0,0)
+  KinE(eV)  20000	20000
+  Elost(eV) 0
+  Edep(eV)  0
+
+vacuum 6.02214e-08 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   world	ch_G4_WATER	
+  material  vacuum	G4_WATER
+  Dens      1e-25 (g/cm3 )
+  Proc      Transportation	Transportation
+  Pos       (-780.644,11.433,-10.9372) -> (0,11.433,-10.9372)
+  Delta     (780.644,0,0)	78.0644 cm 
+  Mom       (0.02,0,0)
+  KinE(eV)  20000	20000
+  Elost(eV) 0
+  Edep(eV)  0
+
+G4_WATER 3.34563e+16 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   ch_G4_WATER	ch_G4_WATER	
+  material  G4_WATER	G4_WATER
+  Dens      1 (g/cm3 )
+  Proc      Transportation	compt
+  Pos       (0,11.433,-10.9372) -> (168.638,11.433,-10.9372)
+  Delta     (168.638,0,0)	16.8638 cm 
+  Mom       (0.02,0,0)
+  KinE(eV)  20000	19789.9
+  Elost(eV) 210.059
+  Edep(eV)  13.61
+
+G4_WATER 3.34563e+16 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   ch_G4_WATER	ch_G4_WATER	
+  material  G4_WATER	G4_WATER
+  Dens      1 (g/cm3 )
+  Proc      Transportation	compt
+  Pos       (0,11.433,-10.9372) -> (168.638,11.433,-10.9372)
+  Delta     (168.638,0,0)	16.8638 cm 
+  Mom       (0.02,0,0)
+  KinE(eV)  20000	19789.9
+  Elost(eV) 210.059
+  Edep(eV)  13.61
+
+G4_WATER 3.34563e+16 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   ch_G4_WATER	ch_G4_WATER	
+  material  G4_WATER	G4_WATER
+  Dens      1 (g/cm3 )
+  Proc      compt	compt
+  Pos       (168.638,11.433,-10.9372) -> (239.664,-56.1304,5.1222)
+  Delta     (71.0257,-67.5634,16.0594)	9.93346 cm 
+  Mom       (0.0141501,-0.0134603,0.00319943)
+  KinE(eV)  19789.9	19627.5
+  Elost(eV) 162.452
+  Edep(eV)  13.61
+
+G4_WATER 3.34563e+16 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   ch_G4_WATER	ch_G4_WATER	
+  material  G4_WATER	G4_WATER
+  Dens      1 (g/cm3 )
+  Proc      compt	compt
+  Pos       (168.638,11.433,-10.9372) -> (239.664,-56.1304,5.1222)
+  Delta     (71.0257,-67.5634,16.0594)	9.93346 cm 
+  Mom       (0.0141501,-0.0134603,0.00319943)
+  KinE(eV)  19789.9	19627.5
+  Elost(eV) 162.452
+  Edep(eV)  13.61
+
+G4_WATER 3.34563e+16 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   ch_G4_WATER	world	
+  material  G4_WATER	vacuum
+  Dens      1 (g/cm3 )
+  Proc      compt	Transportation
+  Pos       (239.664,-56.1304,5.1222) -> (215.582,-500,-106.17)
+  Delta     (-24.0819,-443.87,-111.293)	45.8242 cm 
+  Mom       (-0.00103148,-0.0190119,-0.0047669)
+  KinE(eV)  19627.5	19627.5
+  Elost(eV) 0
+  Edep(eV)  0
+
+G4_WATER 3.34563e+16 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   ch_G4_WATER	world	
+  material  G4_WATER	vacuum
+  Dens      1 (g/cm3 )
+  Proc      compt	Transportation
+  Pos       (239.664,-56.1304,5.1222) -> (215.582,-500,-106.17)
+  Delta     (-24.0819,-443.87,-111.293)	45.8242 cm 
+  Mom       (-0.00103148,-0.0190119,-0.0047669)
+  KinE(eV)  19627.5	19627.5
+  Elost(eV) 0
+  Edep(eV)  0
+
+err post phvl
+err post mat
+vacuum 6.02214e-08 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   world	null	
+  material  vacuum	null
+  Dens      1e-25 (g/cm3 )
+  Proc      Transportation	Transportation
+  Pos       (215.582,-500,-106.17) -> (79.9458,-3000,-733.002)
+  Delta     (-135.636,-2500,-626.832)	2.58095 m  
+  Mom       (-0.00103148,-0.0190119,-0.0047669)
+  KinE(eV)  19627.5	19627.5
+  Elost(eV) 0
+  Edep(eV)  0
+
+err post phvl
+err post mat
+vacuum 6.02214e-08 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   world	null	
+  material  vacuum	null
+  Dens      1e-25 (g/cm3 )
+  Proc      Transportation	Transportation
+  Pos       (215.582,-500,-106.17) -> (79.9458,-3000,-733.002)
+  Delta     (-135.636,-2500,-626.832)	2.58095 m  
+  Mom       (-0.00103148,-0.0190119,-0.0047669)
+  KinE(eV)  19627.5	19627.5
+  Elost(eV) 0
+  Edep(eV)  0
+
+err preproc
+G4_WATER 3.34563e+16 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      e-
+  PhysVol   ch_G4_WATER	ch_G4_WATER	
+  material  G4_WATER	G4_WATER
+  Dens      1 (g/cm3 )
+  Proc      null	GmUserSpecialCut
+  Pos       (239.664,-56.1304,5.1222) -> (239.664,-56.1304,5.1222)
+  Delta     (0,0,0)	0 fm 
+  Mom       (0.0104248,0.00371261,0.00544772)
+  KinE(eV)  148.842	0
+  Elost(eV) 148.842
+  Edep(eV)  148.842
+
+err preproc
+G4_WATER 3.34563e+16 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      e-
+  PhysVol   ch_G4_WATER	ch_G4_WATER	
+  material  G4_WATER	G4_WATER
+  Dens      1 (g/cm3 )
+  Proc      null	GmUserSpecialCut
+  Pos       (239.664,-56.1304,5.1222) -> (239.664,-56.1304,5.1222)
+  Delta     (0,0,0)	0 fm 
+  Mom       (0.0104248,0.00371261,0.00544772)
+  KinE(eV)  148.842	0
+  Elost(eV) 148.842
+  Edep(eV)  148.842
+
+err preproc
+G4_WATER 3.34563e+16 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      e-
+  PhysVol   ch_G4_WATER	ch_G4_WATER	
+  material  G4_WATER	G4_WATER
+  Dens      1 (g/cm3 )
+  Proc      null	GmUserSpecialCut
+  Pos       (168.638,11.433,-10.9372) -> (168.638,11.433,-10.9372)
+  Delta     (0,0,0)	0 fm 
+  Mom       (0.00552707,0.0126947,-0.00301745)
+  KinE(eV)  196.449	0
+  Elost(eV) 196.449
+  Edep(eV)  196.449
+
+err preproc
+G4_WATER 3.34563e+16 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      e-
+  PhysVol   ch_G4_WATER	ch_G4_WATER	
+  material  G4_WATER	G4_WATER
+  Dens      1 (g/cm3 )
+  Proc      null	GmUserSpecialCut
+  Pos       (168.638,11.433,-10.9372) -> (168.638,11.433,-10.9372)
+  Delta     (0,0,0)	0 fm 
+  Mom       (0.00552707,0.0126947,-0.00301745)
+  KinE(eV)  196.449	0
+  Elost(eV) 196.449
+  Edep(eV)  196.449
+
+UAVerbose EndOfEvent 6
+UAWIF EndOfEvent 6
+UAVerbose EndOfEvent 6
+UAWIF EndOfEvent 6
+UAVerbose BeginOfEvent 7
+UAWIF BeginOfEvent 7
+UAVerbose BeginOfEvent 7
+UAWIF BeginOfEvent 7
+err preproc
+vacuum 6.02214e-08 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   gbox	world	
+  material  vacuum	vacuum
+  Dens      1e-25 (g/cm3 )
+  Proc      null	Transportation
+  Pos       (-813.386,-0.952461,8.71556) -> (-776.588,-0.952461,8.71556)
+  Delta     (36.7982,0,0)	3.67982 cm 
+  Mom       (0.02,0,0)
+  KinE(eV)  20000	20000
+  Elost(eV) 0
+  Edep(eV)  0
+
+err preproc
+vacuum 6.02214e-08 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   gbox	world	
+  material  vacuum	vacuum
+  Dens      1e-25 (g/cm3 )
+  Proc      null	Transportation
+  Pos       (-813.386,-0.952461,8.71556) -> (-776.588,-0.952461,8.71556)
+  Delta     (36.7982,0,0)	3.67982 cm 
+  Mom       (0.02,0,0)
+  KinE(eV)  20000	20000
+  Elost(eV) 0
+  Edep(eV)  0
+
+vacuum 6.02214e-08 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   world	ch_G4_WATER	
+  material  vacuum	G4_WATER
+  Dens      1e-25 (g/cm3 )
+  Proc      Transportation	Transportation
+  Pos       (-776.588,-0.952461,8.71556) -> (0,-0.952461,8.71556)
+  Delta     (776.588,0,0)	77.6588 cm 
+  Mom       (0.02,0,0)
+  KinE(eV)  20000	20000
+  Elost(eV) 0
+  Edep(eV)  0
+
+vacuum 6.02214e-08 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   world	ch_G4_WATER	
+  material  vacuum	G4_WATER
+  Dens      1e-25 (g/cm3 )
+  Proc      Transportation	Transportation
+  Pos       (-776.588,-0.952461,8.71556) -> (0,-0.952461,8.71556)
+  Delta     (776.588,0,0)	77.6588 cm 
+  Mom       (0.02,0,0)
+  KinE(eV)  20000	20000
+  Elost(eV) 0
+  Edep(eV)  0
+
+G4_WATER 3.34563e+16 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   ch_G4_WATER	ch_G4_WATER	
+  material  G4_WATER	G4_WATER
+  Dens      1 (g/cm3 )
+  Proc      Transportation	compt
+  Pos       (0,-0.952461,8.71556) -> (873.754,-0.952461,8.71556)
+  Delta     (873.754,0,0)	87.3754 cm 
+  Mom       (0.02,0,0)
+  KinE(eV)  20000	19072.8
+  Elost(eV) 927.21
+  Edep(eV)  13.61
+
+G4_WATER 3.34563e+16 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   ch_G4_WATER	ch_G4_WATER	
+  material  G4_WATER	G4_WATER
+  Dens      1 (g/cm3 )
+  Proc      Transportation	compt
+  Pos       (0,-0.952461,8.71556) -> (873.754,-0.952461,8.71556)
+  Delta     (873.754,0,0)	87.3754 cm 
+  Mom       (0.02,0,0)
+  KinE(eV)  20000	19072.8
+  Elost(eV) 927.21
+  Edep(eV)  13.61
+
+G4_WATER 3.34563e+16 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   ch_G4_WATER	world	
+  material  G4_WATER	vacuum
+  Dens      1 (g/cm3 )
+  Proc      compt	Transportation
+  Pos       (873.754,-0.952461,8.71556) -> (831.579,-57.368,-500)
+  Delta     (-42.1743,-56.4155,-508.716)	51.3569 cm 
+  Mom       (-0.00156626,-0.00209514,-0.0188926)
+  KinE(eV)  19072.8	19072.8
+  Elost(eV) 0
+  Edep(eV)  0
+
+G4_WATER 3.34563e+16 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   ch_G4_WATER	world	
+  material  G4_WATER	vacuum
+  Dens      1 (g/cm3 )
+  Proc      compt	Transportation
+  Pos       (873.754,-0.952461,8.71556) -> (831.579,-57.368,-500)
+  Delta     (-42.1743,-56.4155,-508.716)	51.3569 cm 
+  Mom       (-0.00156626,-0.00209514,-0.0188926)
+  KinE(eV)  19072.8	19072.8
+  Elost(eV) 0
+  Edep(eV)  0
+
+err post phvl
+err post mat
+vacuum 6.02214e-08 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   world	null	
+  material  vacuum	null
+  Dens      1e-25 (g/cm3 )
+  Proc      Transportation	Transportation
+  Pos       (831.579,-57.368,-500) -> (624.321,-334.613,-3000)
+  Delta     (-207.259,-277.245,-2500)	2.52385 m  
+  Mom       (-0.00156626,-0.00209514,-0.0188926)
+  KinE(eV)  19072.8	19072.8
+  Elost(eV) 0
+  Edep(eV)  0
+
+err post phvl
+err post mat
+vacuum 6.02214e-08 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   world	null	
+  material  vacuum	null
+  Dens      1e-25 (g/cm3 )
+  Proc      Transportation	Transportation
+  Pos       (831.579,-57.368,-500) -> (624.321,-334.613,-3000)
+  Delta     (-207.259,-277.245,-2500)	2.52385 m  
+  Mom       (-0.00156626,-0.00209514,-0.0188926)
+  KinE(eV)  19072.8	19072.8
+  Elost(eV) 0
+  Edep(eV)  0
+
+err preproc
+G4_WATER 3.34563e+16 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      e-
+  PhysVol   ch_G4_WATER	ch_G4_WATER	
+  material  G4_WATER	G4_WATER
+  Dens      1 (g/cm3 )
+  Proc      null	GmUserSpecialCut
+  Pos       (873.754,-0.952461,8.71556) -> (873.754,-0.952461,8.71556)
+  Delta     (0,0,0)	0 fm 
+  Mom       (0.0228772,0.002235,0.0201537)
+  KinE(eV)  913.6	0
+  Elost(eV) 913.6
+  Edep(eV)  913.6
+
+err preproc
+G4_WATER 3.34563e+16 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      e-
+  PhysVol   ch_G4_WATER	ch_G4_WATER	
+  material  G4_WATER	G4_WATER
+  Dens      1 (g/cm3 )
+  Proc      null	GmUserSpecialCut
+  Pos       (873.754,-0.952461,8.71556) -> (873.754,-0.952461,8.71556)
+  Delta     (0,0,0)	0 fm 
+  Mom       (0.0228772,0.002235,0.0201537)
+  KinE(eV)  913.6	0
+  Elost(eV) 913.6
+  Edep(eV)  913.6
+
+UAVerbose EndOfEvent 7
+UAWIF EndOfEvent 7
+UAVerbose EndOfEvent 7
+UAWIF EndOfEvent 7
+UAVerbose BeginOfEvent 8
+UAWIF BeginOfEvent 8
+UAVerbose BeginOfEvent 8
+UAWIF BeginOfEvent 8
+err preproc
+vacuum 6.02214e-08 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   gbox	world	
+  material  vacuum	vacuum
+  Dens      1e-25 (g/cm3 )
+  Proc      null	Transportation
+  Pos       (-789.553,-9.56318,2.88467) -> (-777.082,-9.56318,2.88467)
+  Delta     (12.4712,0,0)	1.24712 cm 
+  Mom       (0.02,0,0)
+  KinE(eV)  20000	20000
+  Elost(eV) 0
+  Edep(eV)  0
+
+err preproc
+vacuum 6.02214e-08 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   gbox	world	
+  material  vacuum	vacuum
+  Dens      1e-25 (g/cm3 )
+  Proc      null	Transportation
+  Pos       (-789.553,-9.56318,2.88467) -> (-777.082,-9.56318,2.88467)
+  Delta     (12.4712,0,0)	1.24712 cm 
+  Mom       (0.02,0,0)
+  KinE(eV)  20000	20000
+  Elost(eV) 0
+  Edep(eV)  0
+
+vacuum 6.02214e-08 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   world	ch_G4_WATER	
+  material  vacuum	G4_WATER
+  Dens      1e-25 (g/cm3 )
+  Proc      Transportation	Transportation
+  Pos       (-777.082,-9.56318,2.88467) -> (1.13687e-13,-9.56318,2.88467)
+  Delta     (777.082,0,0)	77.7082 cm 
+  Mom       (0.02,0,0)
+  KinE(eV)  20000	20000
+  Elost(eV) 0
+  Edep(eV)  0
+
+vacuum 6.02214e-08 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   world	ch_G4_WATER	
+  material  vacuum	G4_WATER
+  Dens      1e-25 (g/cm3 )
+  Proc      Transportation	Transportation
+  Pos       (-777.082,-9.56318,2.88467) -> (1.13687e-13,-9.56318,2.88467)
+  Delta     (777.082,0,0)	77.7082 cm 
+  Mom       (0.02,0,0)
+  KinE(eV)  20000	20000
+  Elost(eV) 0
+  Edep(eV)  0
+
+G4_WATER 3.34563e+16 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   ch_G4_WATER	ch_G4_WATER	
+  material  G4_WATER	G4_WATER
+  Dens      1 (g/cm3 )
+  Proc      Transportation	compt
+  Pos       (1.13687e-13,-9.56318,2.88467) -> (85.5151,-9.56318,2.88467)
+  Delta     (85.5151,0,0)	8.55151 cm 
+  Mom       (0.02,0,0)
+  KinE(eV)  20000	19759.6
+  Elost(eV) 240.447
+  Edep(eV)  13.61
+
+G4_WATER 3.34563e+16 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   ch_G4_WATER	ch_G4_WATER	
+  material  G4_WATER	G4_WATER
+  Dens      1 (g/cm3 )
+  Proc      Transportation	compt
+  Pos       (1.13687e-13,-9.56318,2.88467) -> (85.5151,-9.56318,2.88467)
+  Delta     (85.5151,0,0)	8.55151 cm 
+  Mom       (0.02,0,0)
+  KinE(eV)  20000	19759.6
+  Elost(eV) 240.447
+  Edep(eV)  13.61
+
+G4_WATER 3.34563e+16 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   ch_G4_WATER	ch_G4_WATER	
+  material  G4_WATER	G4_WATER
+  Dens      1 (g/cm3 )
+  Proc      compt	compt
+  Pos       (85.5151,-9.56318,2.88467) -> (140.039,43.9975,42.8225)
+  Delta     (54.524,53.5607,39.9378)	8.6236 cm 
+  Mom       (0.0124933,0.0122725,0.00915109)
+  KinE(eV)  19759.6	18252.2
+  Elost(eV) 1507.38
+  Edep(eV)  13.61
+
+G4_WATER 3.34563e+16 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   ch_G4_WATER	ch_G4_WATER	
+  material  G4_WATER	G4_WATER
+  Dens      1 (g/cm3 )
+  Proc      compt	compt
+  Pos       (85.5151,-9.56318,2.88467) -> (140.039,43.9975,42.8225)
+  Delta     (54.524,53.5607,39.9378)	8.6236 cm 
+  Mom       (0.0124933,0.0122725,0.00915109)
+  KinE(eV)  19759.6	18252.2
+  Elost(eV) 1507.38
+  Edep(eV)  13.61
+
+G4_WATER 3.34563e+16 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   ch_G4_WATER	world	
+  material  G4_WATER	vacuum
+  Dens      1 (g/cm3 )
+  Proc      compt	Transportation
+  Pos       (140.039,43.9975,42.8225) -> (0,-124.183,-205.489)
+  Delta     (-140.039,-168.18,-248.312)	33.099 cm 
+  Mom       (-0.00772235,-0.00927418,-0.013693)
+  KinE(eV)  18252.2	18252.2
+  Elost(eV) 0
+  Edep(eV)  0
+
+G4_WATER 3.34563e+16 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   ch_G4_WATER	world	
+  material  G4_WATER	vacuum
+  Dens      1 (g/cm3 )
+  Proc      compt	Transportation
+  Pos       (140.039,43.9975,42.8225) -> (0,-124.183,-205.489)
+  Delta     (-140.039,-168.18,-248.312)	33.099 cm 
+  Mom       (-0.00772235,-0.00927418,-0.013693)
+  KinE(eV)  18252.2	18252.2
+  Elost(eV) 0
+  Edep(eV)  0
+
+err post phvl
+err post mat
+vacuum 6.02214e-08 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   world	null	
+  material  vacuum	null
+  Dens      1e-25 (g/cm3 )
+  Proc      Transportation	Transportation
+  Pos       (0,-124.183,-205.489) -> (-1576.01,-2016.89,-3000)
+  Delta     (-1576.01,-1892.71,-2794.51)	3.72498 m  
+  Mom       (-0.00772235,-0.00927418,-0.013693)
+  KinE(eV)  18252.2	18252.2
+  Elost(eV) 0
+  Edep(eV)  0
+
+err post phvl
+err post mat
+vacuum 6.02214e-08 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   world	null	
+  material  vacuum	null
+  Dens      1e-25 (g/cm3 )
+  Proc      Transportation	Transportation
+  Pos       (0,-124.183,-205.489) -> (-1576.01,-2016.89,-3000)
+  Delta     (-1576.01,-1892.71,-2794.51)	3.72498 m  
+  Mom       (-0.00772235,-0.00927418,-0.013693)
+  KinE(eV)  18252.2	18252.2
+  Elost(eV) 0
+  Edep(eV)  0
+
+err preproc
+G4_WATER 3.34563e+16 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      e-
+  PhysVol   ch_G4_WATER	ch_G4_WATER	
+  material  G4_WATER	G4_WATER
+  Dens      1 (g/cm3 )
+  Proc      null	GmUserSpecialCut
+  Pos       (140.039,43.9975,42.8225) -> (140.039,43.9975,42.8225)
+  Delta     (0,0,0)	0 fm 
+  Mom       (0.0211467,0.0225488,0.0239421)
+  KinE(eV)  1493.77	0
+  Elost(eV) 1493.77
+  Edep(eV)  1493.77
+
+err preproc
+G4_WATER 3.34563e+16 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      e-
+  PhysVol   ch_G4_WATER	ch_G4_WATER	
+  material  G4_WATER	G4_WATER
+  Dens      1 (g/cm3 )
+  Proc      null	GmUserSpecialCut
+  Pos       (140.039,43.9975,42.8225) -> (140.039,43.9975,42.8225)
+  Delta     (0,0,0)	0 fm 
+  Mom       (0.0211467,0.0225488,0.0239421)
+  KinE(eV)  1493.77	0
+  Elost(eV) 1493.77
+  Edep(eV)  1493.77
+
+err preproc
+G4_WATER 3.34563e+16 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      e-
+  PhysVol   ch_G4_WATER	ch_G4_WATER	
+  material  G4_WATER	G4_WATER
+  Dens      1 (g/cm3 )
+  Proc      null	GmUserSpecialCut
+  Pos       (85.5151,-9.56318,2.88467) -> (85.5151,-9.56318,2.88467)
+  Delta     (0,0,0)	0 fm 
+  Mom       (0.00673568,-0.0109482,-0.00816362)
+  KinE(eV)  226.837	0
+  Elost(eV) 226.837
+  Edep(eV)  226.837
+
+err preproc
+G4_WATER 3.34563e+16 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      e-
+  PhysVol   ch_G4_WATER	ch_G4_WATER	
+  material  G4_WATER	G4_WATER
+  Dens      1 (g/cm3 )
+  Proc      null	GmUserSpecialCut
+  Pos       (85.5151,-9.56318,2.88467) -> (85.5151,-9.56318,2.88467)
+  Delta     (0,0,0)	0 fm 
+  Mom       (0.00673568,-0.0109482,-0.00816362)
+  KinE(eV)  226.837	0
+  Elost(eV) 226.837
+  Edep(eV)  226.837
+
+UAVerbose EndOfEvent 8
+UAWIF EndOfEvent 8
+UAVerbose EndOfEvent 8
+UAWIF EndOfEvent 8
+UAVerbose BeginOfEvent 9
+UAWIF BeginOfEvent 9
+UAVerbose BeginOfEvent 9
+UAWIF BeginOfEvent 9
+err preproc
+vacuum 6.02214e-08 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   gbox	world	
+  material  vacuum	vacuum
+  Dens      1e-25 (g/cm3 )
+  Proc      null	Transportation
+  Pos       (-783.066,-9.32634,8.75669) -> (-778.521,-9.32634,8.75669)
+  Delta     (4.54439,0,0)	4.54439 mm 
+  Mom       (0.02,0,0)
+  KinE(eV)  20000	20000
+  Elost(eV) 0
+  Edep(eV)  0
+
+err preproc
+vacuum 6.02214e-08 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   gbox	world	
+  material  vacuum	vacuum
+  Dens      1e-25 (g/cm3 )
+  Proc      null	Transportation
+  Pos       (-783.066,-9.32634,8.75669) -> (-778.521,-9.32634,8.75669)
+  Delta     (4.54439,0,0)	4.54439 mm 
+  Mom       (0.02,0,0)
+  KinE(eV)  20000	20000
+  Elost(eV) 0
+  Edep(eV)  0
+
+vacuum 6.02214e-08 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   world	ch_G4_WATER	
+  material  vacuum	G4_WATER
+  Dens      1e-25 (g/cm3 )
+  Proc      Transportation	Transportation
+  Pos       (-778.521,-9.32634,8.75669) -> (0,-9.32634,8.75669)
+  Delta     (778.521,0,0)	77.8521 cm 
+  Mom       (0.02,0,0)
+  KinE(eV)  20000	20000
+  Elost(eV) 0
+  Edep(eV)  0
+
+vacuum 6.02214e-08 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   world	ch_G4_WATER	
+  material  vacuum	G4_WATER
+  Dens      1e-25 (g/cm3 )
+  Proc      Transportation	Transportation
+  Pos       (-778.521,-9.32634,8.75669) -> (0,-9.32634,8.75669)
+  Delta     (778.521,0,0)	77.8521 cm 
+  Mom       (0.02,0,0)
+  KinE(eV)  20000	20000
+  Elost(eV) 0
+  Edep(eV)  0
+
+G4_WATER 3.34563e+16 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   ch_G4_WATER	ch_G4_WATER	
+  material  G4_WATER	G4_WATER
+  Dens      1 (g/cm3 )
+  Proc      Transportation	compt
+  Pos       (0,-9.32634,8.75669) -> (7.30412,-9.32634,8.75669)
+  Delta     (7.30412,0,0)	7.30412 mm 
+  Mom       (0.02,0,0)
+  KinE(eV)  20000	19620
+  Elost(eV) 380.015
+  Edep(eV)  13.61
+
+G4_WATER 3.34563e+16 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   ch_G4_WATER	ch_G4_WATER	
+  material  G4_WATER	G4_WATER
+  Dens      1 (g/cm3 )
+  Proc      Transportation	compt
+  Pos       (0,-9.32634,8.75669) -> (7.30412,-9.32634,8.75669)
+  Delta     (7.30412,0,0)	7.30412 mm 
+  Mom       (0.02,0,0)
+  KinE(eV)  20000	19620
+  Elost(eV) 380.015
+  Edep(eV)  13.61
+
+G4_WATER 3.34563e+16 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   ch_G4_WATER	ch_G4_WATER	
+  material  G4_WATER	G4_WATER
+  Dens      1 (g/cm3 )
+  Proc      compt	compt
+  Pos       (7.30412,-9.32634,8.75669) -> (213.406,226.019,-361.888)
+  Delta     (206.102,235.345,-370.645)	48.5019 cm 
+  Mom       (0.00833724,0.00952018,-0.0149933)
+  KinE(eV)  19620	18191.1
+  Elost(eV) 1428.87
+  Edep(eV)  13.61
+
+G4_WATER 3.34563e+16 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   ch_G4_WATER	ch_G4_WATER	
+  material  G4_WATER	G4_WATER
+  Dens      1 (g/cm3 )
+  Proc      compt	compt
+  Pos       (7.30412,-9.32634,8.75669) -> (213.406,226.019,-361.888)
+  Delta     (206.102,235.345,-370.645)	48.5019 cm 
+  Mom       (0.00833724,0.00952018,-0.0149933)
+  KinE(eV)  19620	18191.1
+  Elost(eV) 1428.87
+  Edep(eV)  13.61
+
+G4_WATER 3.34563e+16 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   ch_G4_WATER	ch_G4_WATER	
+  material  G4_WATER	G4_WATER
+  Dens      1 (g/cm3 )
+  Proc      compt	compt
+  Pos       (213.406,226.019,-361.888) -> (407.836,15.4444,56.2135)
+  Delta     (194.43,-210.574,418.102)	50.6906 cm 
+  Mom       (0.00697743,-0.00755678,0.0150042)
+  KinE(eV)  18191.1	17133.2
+  Elost(eV) 1057.91
+  Edep(eV)  13.61
+
+G4_WATER 3.34563e+16 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   ch_G4_WATER	ch_G4_WATER	
+  material  G4_WATER	G4_WATER
+  Dens      1 (g/cm3 )
+  Proc      compt	compt
+  Pos       (213.406,226.019,-361.888) -> (407.836,15.4444,56.2135)
+  Delta     (194.43,-210.574,418.102)	50.6906 cm 
+  Mom       (0.00697743,-0.00755678,0.0150042)
+  KinE(eV)  18191.1	17133.2
+  Elost(eV) 1057.91
+  Edep(eV)  13.61
+
+G4_WATER 3.34563e+16 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   ch_G4_WATER	world	
+  material  G4_WATER	vacuum
+  Dens      1 (g/cm3 )
+  Proc      compt	Transportation
+  Pos       (407.836,15.4444,56.2135) -> (108.606,256.442,-500)
+  Delta     (-299.231,240.997,-556.213)	67.6012 cm 
+  Mom       (-0.00758386,0.00610796,-0.014097)
+  KinE(eV)  17133.2	17133.2
+  Elost(eV) 0
+  Edep(eV)  0
+
+G4_WATER 3.34563e+16 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   ch_G4_WATER	world	
+  material  G4_WATER	vacuum
+  Dens      1 (g/cm3 )
+  Proc      compt	Transportation
+  Pos       (407.836,15.4444,56.2135) -> (108.606,256.442,-500)
+  Delta     (-299.231,240.997,-556.213)	67.6012 cm 
+  Mom       (-0.00758386,0.00610796,-0.014097)
+  KinE(eV)  17133.2	17133.2
+  Elost(eV) 0
+  Edep(eV)  0
+
+err post phvl
+err post mat
+vacuum 6.02214e-08 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   world	null	
+  material  vacuum	null
+  Dens      1e-25 (g/cm3 )
+  Proc      Transportation	Transportation
+  Pos       (108.606,256.442,-500) -> (-1236.34,1339.65,-3000)
+  Delta     (-1344.95,1083.2,-2500)	3.03846 m  
+  Mom       (-0.00758386,0.00610796,-0.014097)
+  KinE(eV)  17133.2	17133.2
+  Elost(eV) 0
+  Edep(eV)  0
+
+err post phvl
+err post mat
+vacuum 6.02214e-08 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      gamma
+  PhysVol   world	null	
+  material  vacuum	null
+  Dens      1e-25 (g/cm3 )
+  Proc      Transportation	Transportation
+  Pos       (108.606,256.442,-500) -> (-1236.34,1339.65,-3000)
+  Delta     (-1344.95,1083.2,-2500)	3.03846 m  
+  Mom       (-0.00758386,0.00610796,-0.014097)
+  KinE(eV)  17133.2	17133.2
+  Elost(eV) 0
+  Edep(eV)  0
+
+err preproc
+G4_WATER 3.34563e+16 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      e-
+  PhysVol   ch_G4_WATER	ch_G4_WATER	
+  material  G4_WATER	G4_WATER
+  Dens      1 (g/cm3 )
+  Proc      null	GmUserSpecialCut
+  Pos       (407.836,15.4444,56.2135) -> (407.836,15.4444,56.2135)
+  Delta     (0,0,0)	0 fm 
+  Mom       (0.0134958,-0.0126447,0.0269506)
+  KinE(eV)  1044.3	0
+  Elost(eV) 1044.3
+  Edep(eV)  1044.3
+
+err preproc
+G4_WATER 3.34563e+16 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      e-
+  PhysVol   ch_G4_WATER	ch_G4_WATER	
+  material  G4_WATER	G4_WATER
+  Dens      1 (g/cm3 )
+  Proc      null	GmUserSpecialCut
+  Pos       (407.836,15.4444,56.2135) -> (407.836,15.4444,56.2135)
+  Delta     (0,0,0)	0 fm 
+  Mom       (0.0134958,-0.0126447,0.0269506)
+  KinE(eV)  1044.3	0
+  Elost(eV) 1044.3
+  Edep(eV)  1044.3
+
+err preproc
+G4_WATER 3.34563e+16 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      e-
+  PhysVol   ch_G4_WATER	ch_G4_WATER	
+  material  G4_WATER	G4_WATER
+  Dens      1 (g/cm3 )
+  Proc      null	GmUserSpecialCut
+  Pos       (213.406,226.019,-361.888) -> (213.406,226.019,-361.888)
+  Delta     (0,0,0)	0 fm 
+  Mom       (0.00138231,0.0188046,-0.0330586)
+  KinE(eV)  1415.26	0
+  Elost(eV) 1415.26
+  Edep(eV)  1415.26
+
+err preproc
+G4_WATER 3.34563e+16 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      e-
+  PhysVol   ch_G4_WATER	ch_G4_WATER	
+  material  G4_WATER	G4_WATER
+  Dens      1 (g/cm3 )
+  Proc      null	GmUserSpecialCut
+  Pos       (213.406,226.019,-361.888) -> (213.406,226.019,-361.888)
+  Delta     (0,0,0)	0 fm 
+  Mom       (0.00138231,0.0188046,-0.0330586)
+  KinE(eV)  1415.26	0
+  Elost(eV) 1415.26
+  Edep(eV)  1415.26
+
+err preproc
+G4_WATER 3.34563e+16 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      e-
+  PhysVol   ch_G4_WATER	ch_G4_WATER	
+  material  G4_WATER	G4_WATER
+  Dens      1 (g/cm3 )
+  Proc      null	GmUserSpecialCut
+  Pos       (7.30412,-9.32634,8.75669) -> (7.30412,-9.32634,8.75669)
+  Delta     (0,0,0)	0 fm 
+  Mom       (0.0106626,-0.00865834,0.013636)
+  KinE(eV)  366.405	0
+  Elost(eV) 366.405
+  Edep(eV)  366.405
+
+err preproc
+G4_WATER 3.34563e+16 atoms/cm3
+UAVerbose::UserSteppingAction
+  Part      e-
+  PhysVol   ch_G4_WATER	ch_G4_WATER	
+  material  G4_WATER	G4_WATER
+  Dens      1 (g/cm3 )
+  Proc      null	GmUserSpecialCut
+  Pos       (7.30412,-9.32634,8.75669) -> (7.30412,-9.32634,8.75669)
+  Delta     (0,0,0)	0 fm 
+  Mom       (0.0106626,-0.00865834,0.013636)
+  KinE(eV)  366.405	0
+  Elost(eV) 366.405
+  Edep(eV)  366.405
+
+UAVerbose EndOfEvent 9
+UAWIF EndOfEvent 9
+Clk Ev 10	0.007414sec	1348.8 part/sec	(ETA: 0sec / 0.007414sec)
+UAVerbose EndOfEvent 9
+UAWIF EndOfEvent 9
+ Run terminated.
+Run Summary
+  Number of events processed : 10
+  User=0.01s Real=0.01s Sys=0s
+UAVerbose EndOfRun
+UAWIF EndOfRun
+@@@@@ GmCountProcessesUA 
+PART_COUNT: e- = 17
+PART_COUNT: gamma = 10
+PROC_COUNT e- : GmUserSpecialCut = 17
+PROC_COUNT e- : ALL = 17
+PROC_COUNT gamma : Transportation = 40
+PROC_COUNT gamma : compt = 17
+PROC_COUNT gamma : ALL = 57
+PROC_CREATOR_COUNT e- : compt = 17
+PROC_CREATOR_COUNT gamma : Primary = 10
+UAClock EndOfRunActnion
+UAInteraction EndOfRunActnion
+     No Ints            Edep        Edep/Tot        Avg Edep   Process
+          17         13376.7        0.982998         786.862   ch_G4_WATER e- GmUserSpecialCut
+          10               0               0               0   ch_G4_WATER gamma Transportation
+          17          231.37       0.0170025           13.61   ch_G4_WATER gamma compt
+          10               0               0               0   null gamma Transportation
+          20               0               0               0   world gamma Transportation
+Total:
+          74           13608
+	NoEvents:      10
+	NoCols:        74
+	log:           -2.00148
+	Edepo(eV):     13608
+	AvgEdepo:      1360.8
+	D(g/cm3):      1
+	L(cm/um):      1e-07	0.001
+	MM(g/mole):    18
+	SP(MeV*cm2/g): 13608
+	XS(10^-16cm2): -5.98236
+UAInteractionSp EndOfRunAction
+UADepo EndOfRunAction
+	NoEv:     10
+	NoEvI:    34
+	Edep(eV): 13608
+	AvgEdep:  1360.8
+	AvgEdepI: 400.236
+	SP(Ed):   136080 MeV*cm2/g SP(El): 269847
+UAVerbose EndOfRun
+UAWIF EndOfRun
+WARNING - Attempt to delete the physical volume store while geometry closed !
+WARNING - Attempt to delete the logical volume store while geometry closed !
+WARNING - Attempt to delete the solid store while geometry closed !
+WARNING - Attempt to delete the region store while geometry closed !

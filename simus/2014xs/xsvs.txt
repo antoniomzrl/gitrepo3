@@ -1,0 +1,77 @@
+10*keV
+
+Process                                       No Ints            Edep        Edep/Tot        Avg Edep
+G4_WATER e- GmUserSpecialCut                    24534          132754        0.139762         5.41102
+G4_WATER e- Transportation                      1e+06               0               0               0
+G4_WATER e- e-_G4DNAAttachment                      6         65.2622     6.87075e-05          10.877
+G4_WATER e- e-_G4DNAElastic                    141211               0               0               0
+G4_WATER e- e-_G4DNAExcitation                   1615         17361.1       0.0182777         10.7499
+G4_WATER e- e-_G4DNAIonisation                  48479          798048        0.840178         16.4617
+G4_WATER e- e-_G4DNAVibExcitation               14518         1627.34      0.00171325        0.112091
+
+	NoEvents:      1000000
+	NoCols:        205829
+	log:           1.58071
+	Edepo(eV):     949855
+	AvgEdepo:      0.949855
+
+
+
+
+Process                                       No Ints            Edep        Edep/Tot        Avg Edep
+LEPTS_WATER_LIQUID e- GmUserSpecialCut          20357           97007        0.110349         4.76529
+LEPTS_WATER_LIQUID e- IonisAuger                  218            7630      0.00867944              35
+LEPTS_WATER_LIQUID e- Transportation            1e+06               0               0               0
+LEPTS_WATER_LIQUID e- e-_G4LEPTSAttachment          5         65.8154     7.48677e-05         13.1631
+LEPTS_WATER_LIQUID e- e-_G4LEPTSDissocNeutr     10777          276697        0.314754         25.6748
+LEPTS_WATER_LIQUID e- e-_G4LEPTSElastic         71291          38.665      4.3983e-05     0.000542355
+LEPTS_WATER_LIQUID e- e-_G4LEPTSExcitElectr      1046         10735.2       0.0122117         10.2631
+LEPTS_WATER_LIQUID e- e-_G4LEPTSExcitRotat      64552         722.982     0.000822422          0.0112
+LEPTS_WATER_LIQUID e- e-_G4LEPTSExcitVibrat      2467          616.75     0.000701578            0.25
+LEPTS_WATER_LIQUID e- e-_G4LEPTSIonisation      38475          485576        0.552362         12.6206
+
+	NoEvents:      1000000
+	NoCols:        188831
+	log:           1.6669
+	Edepo(eV):     879089
+	AvgEdepo:      0.879089
+
+
+5*keV
+	NoEvents:      1000000
+	NoCols:        352996
+	log:           1.0413
+	Edepo(eV):     1.60739e+06
+	AvgEdepo:      1.60739
+
+	NoEvents:      1000000
+	NoCols:        365600
+	log:           1.00622
+	Edepo(eV):     1.64181e+06
+	AvgEdepo:      1.64181
+
+1*keV - 0.1*nm
+	NoEvents:      1000000
+	NoCols:        49926
+	log:           2.99721
+	Edepo(eV):     436657
+	AvgEdepo:      0.436657
+
+	NoEvents:      1000000
+	NoCols:        60903
+	log:           2.79847
+	Edepo(eV):     514942
+	AvgEdepo:      0.514942
+
+100*eV
+	NoEvents:      1000000
+	NoCols:        228705
+	log:           1.47532
+	Edepo(eV):     1.34185e+06
+	AvgEdepo:      1.34185
+
+	NoEvents:      1000000
+	NoCols:        288503
+	log:           1.24305
+	Edepo(eV):     1.94102e+06
+	AvgEdepo:      1.94102

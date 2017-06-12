@@ -1,0 +1,38 @@
+#!/bin/sh
+/gamos/setParam GmAnalysisMgr:FileNameSuffix j_
+# GEOMETRY
+/gamos/setParam GmGeometryFromText:FileName j.geom
+/gamos/geometry GmGeometryFromText
+/gamos/setParam JobName j1_1
+#/gamos/random/setSeeds 
+/gamos/random/restoreSeeds 1 1
+
+/gamos/geometry/createRegion ch_region ch_G4_WATER 
+/gamos/physicsList GmDNAPhysics 
+#ProdCuts 
+#/cuts/setLowEdge 1 eV 
+#/run/setCut 1 cm 
+#/gamos/physics/setCuts ch_region 1 1 1 
+/run/initialize 
+/gamos/userAction GmCountProcessesUA 
+/gamos/userAction UAInteraction 
+/gamos/userAction UAExit 
+#GENERATOR_e-_10*keV 
+/gamos/generator GmGenerator 
+/gamos/generator/addSingleParticleSource gn e- 10*keV 
+/gamos/generator/positionDist gn GmGenerDistPositionInG4Volumes gbox 
+/gamos/generator/directionDist gn GmGenerDistDirectionConst 1 1 0 
+#USERLIMITS 
+/gamos/physics/userLimits/setMinEKin ulimit_G4_WATER_e- ch_G4_WATER e- 0.5*eV 
+/gamos/physics/userLimits/print 
+#VISU 
+/vis/scene/create 
+/vis/open VRML2FILE 
+/vis/viewer/flush 
+/tracking/storeTrajectory 1 
+/vis/scene/add/trajectories 
+/vis/scene/endOfEventAction accumulate 
+/vis/viewer/update 
+/vis/viewer/flush 
+/gamos/field/setMagField 0.01*tesla 0 0 
+/run/beamOn 10 

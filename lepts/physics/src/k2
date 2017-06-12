@@ -1,0 +1,51 @@
+    if(particleName=="e-") {
+      LeptsElastic * elastic = new LeptsElastic("e-_LeptsElastic");
+      elastic->SetEmModel( new LeptsElasticModel);
+      manager->AddDiscreteProcess( elastic);
+
+      LeptsIonisation * ioni = new LeptsIonisation("e-_LeptsIonisation");
+      ioni->SetEmModel( new LeptsIonisationModel);
+      manager->AddDiscreteProcess( ioni);
+
+      LeptsIonisation * ionis = new LeptsIonisation("e-_LeptsIonisationS");
+      ionis->SetEmModel( new LeptsSingleIonisationModel);
+      manager->AddDiscreteProcess( ionis);
+
+      LeptsIonisation * ionid = new LeptsIonisation("e-_LeptsIonisationD");
+      ionid->SetEmModel( new LeptsDoubleIonisationModel);
+      manager->AddDiscreteProcess( ionid);
+
+      LeptsIonisation * ionik = new LeptsIonisation("e-_LeptsIonisationK");
+      ionik->SetEmModel( new LeptsInternalIonisationModel);
+      manager->AddDiscreteProcess( ionik);
+
+      
+      LeptsElectronicExcitation * excit = new LeptsElectronicExcitation("e-_LeptsElectronicExcitation");
+      excit->SetEmModel( new LeptsElectronicExcitationModel);
+      manager->AddDiscreteProcess( excit);
+
+      LeptsDissociation * dissoc = new LeptsDissociation("e-_LeptsDissocNeutr");
+      dissoc->SetEmModel( new LeptsDissociationModel);
+      manager->AddDiscreteProcess(dissoc);
+
+      LeptsVibrationalExcitation * vib = new LeptsVibrationalExcitation("e-_LeptsExcitVibrat");
+      vib->SetEmModel( new LeptsVibrationalExcitationModel);
+      manager->AddDiscreteProcess( vib);
+
+      LeptsRotationalExcitation * rot = new LeptsRotationalExcitation("e-_LeptsExcitRotat");
+      rot->SetEmModel( new LeptsRotationalExcitationModel);
+      manager->AddDiscreteProcess( rot);
+
+      LeptsAttachment * attach = new LeptsAttachment("e-_LeptsAttachment");
+      attach->SetEmModel( new LeptsAttachmentModel);
+      manager->AddDiscreteProcess( attach);
+
+      LeptsThermalisation * therm = new LeptsThermalisation("e-_LeptsThermalisation");
+      therm->SetEmModel( new LeptsThermalisationModel);
+      manager->AddDiscreteProcess( therm);
+      
+      LeptsElastic * userproc = new LeptsElastic("e-_LeptsUserProc");
+      userproc->SetEmModel( new LeptsUserModel);
+      manager->AddDiscreteProcess( userproc);
+    }
+

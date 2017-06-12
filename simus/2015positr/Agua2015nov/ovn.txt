@@ -1,0 +1,36 @@
+
+     No Ints       Avg Edep   Process
+       53192        30.4995   WATER_GAS_OLD2 e+_G4LEPTSDissocNeutr
+       86211     0.00244281   WATER_GAS_OLD2 e+_G4LEPTSElastic
+       46850         0.0112   WATER_GAS_OLD2 e+_G4LEPTSExcitRotat
+         451           0.25   WATER_GAS_OLD2 e+_G4LEPTSExcitVibrat
+        1281         10.285   WATER_GAS_OLD2 e+_G4LEPTSExcitation
+      238379        12.7436   WATER_GAS_OLD2 e+_G4LEPTSIonisation
+         846        83.8149   WATER_GAS_OLD2 e+_G4LEPTSPositronium
+
+       18780        7.41181   WATER_GAS_OLD2 e-_G4LEPTSAttachment
+      114839        16.8421   WATER_GAS_OLD2 e-_G4LEPTSDissocNeutr
+ 4.90424e+07     0.00303067   WATER_GAS_OLD2 e-_G4LEPTSElastic
+ 9.04985e+07         0.0112   WATER_GAS_OLD2 e-_G4LEPTSExcitRotat
+ 1.64918e+06           0.25   WATER_GAS_OLD2 e-_G4LEPTSExcitVibrat
+       35665        9.84687   WATER_GAS_OLD2 e-_G4LEPTSExcitation
+       92610         12.629   WATER_GAS_OLD2 e-_G4LEPTSIonisation
+
+
+     No Ints       Avg Edep   Process
+          13        1.74856   WATER_GAS e+_G4LEPTSAnnihilation
+       53142        30.4326   WATER_GAS e+_G4LEPTSDissocNeutr
+       91086     0.00237086   WATER_GAS e+_G4LEPTSElastic
+       96718         0.0112   WATER_GAS e+_G4LEPTSExcitRotat
+         408       0.287569   WATER_GAS e+_G4LEPTSExcitVibrat
+        1342        10.3282   WATER_GAS e+_G4LEPTSExcitation
+      239170        12.7408   WATER_GAS e+_G4LEPTSIonisation
+         813        63.8566   WATER_GAS e+_G4LEPTSPositronium
+
+       18861        7.39206   WATER_GAS e-_G4LEPTSAttachment
+      115127        16.8246   WATER_GAS e-_G4LEPTSDissocNeutr
+  4.9095e+07       0.003034   WATER_GAS e-_G4LEPTSElastic
+ 9.05635e+07         0.0112   WATER_GAS e-_G4LEPTSExcitRotat
+ 1.65328e+06           0.25   WATER_GAS e-_G4LEPTSExcitVibrat
+       35605        9.84291   WATER_GAS e-_G4LEPTSExcitation
+       92642        12.6295   WATER_GAS e-_G4LEPTSIonisation

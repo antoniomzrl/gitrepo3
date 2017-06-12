@@ -1,0 +1,20 @@
+#GEOMETRY
+/gamos/setParam GmGeometryFromText:FileName examp1.geom
+/gamos/geometry GmGeometryFromText
+/gamos/geometry/createRegion ch_region ch_G4_WATER 
+
+#PHYSICS MODEL
+/gamos/physicsList GmEMPhysics 
+/run/initialize 
+
+#GENERATOR (monocromatic 1*MeV)
+/gamos/generator GmGenerator 
+/gamos/generator/addSingleParticleSource gn gamma 1*MeV 
+/gamos/generator/positionDist gn GmGenerDistPositionInG4Volumes gbox 
+/gamos/generator/directionDist gn GmGenerDistDirectionConst 1 0 0 
+
+#USERLIMITS 
+/gamos/physics/userLimits/setMinEKin myLimits ch_G4_WATER e- 1*eV
+
+#RUN
+/run/beamOn 20 

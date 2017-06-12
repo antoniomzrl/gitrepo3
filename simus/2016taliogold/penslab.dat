@@ -1,0 +1,27 @@
+
+
+   *******************************************
+   **   Program PENSLAB. Input data file.   **
+   *******************************************
+
+    penslab.sh                                                      
+
+   Primary particles: electrons
+   Initial energy =          0.16578-314 eV
+ EPMAX   1.6578092116916190E-315
+   Particle source at Z0 =          -10.000     cm
+   Particle source at Z0 =          -10.000     cm
+   Particle source at Z0 =           0.0000     cm
+   Initial polar angle in the interval = (   0.000,   0.000) deg
+
+   **** Simulation mode:
+   Electron absorption energy =           100.00     eV
+     Photon absorption energy =           100.00     eV
+   Positron absorption energy =           100.00     eV
+   Electron-positron transport parameters:
+    C1 = 0.100000E-02,      C2 = 0.100000E-02
+   Wcc = -1.00000     eV,  Wcr = -1.00000     eV
+
+   PENELOPE's material definition file: gold.mat          
+ Densidad (g/cm3):   19.320000000000000     
+ PEINIT EPMAX    1.6578092116916190E-315

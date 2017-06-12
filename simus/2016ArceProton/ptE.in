@@ -1,0 +1,24 @@
+#/tracking/verbose 1
+#/gamos/verbosity GmGenerVerbosity debug
+
+
+/gamos/setParam GmGeometryFromText:FileName world.geom
+
+/gamos/geometry GmGeometryFromText
+
+/gamos/physicsList GmDNAPhysics
+/run/setCut 0.001
+
+/gamos/generator GmGenerator
+
+/run/initialize
+
+/gamos/generator/addSingleParticleSource source proton 10*MeV
+/gamos/generator/directionDist source GmGenerDistDirectionConst  0. 0. 1.
+/gamos/generator/positionDist source GmGenerDistPositionPoint 0. 0. 0.
+
+/gamos/userAction GmCountProcessesUA
+/gamos/userAction UAWIF
+
+/run/beamOn 1
+

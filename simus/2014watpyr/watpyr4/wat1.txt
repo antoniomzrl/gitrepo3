@@ -1,0 +1,18 @@
+N# interactions: 3112027
+Energy Dep:      237.766 keV
+
+Histogram:
+   Type                     N#     %                Edep     Edep/col 
+ 1 Elastic              972457  0.312483     30.7284  eV0.0315988 meV
+ 2 Excit-rotat         2072184  0.665863     23.2085 keV     11.2 meV
+ 3 Excit-vibrat          47449  0.015247     11.8622 keV     0.25  eV
+ 4 Excit-electr           5123  0.00164619   37.5242 keV  7.32465  eV
+ 5 Dissoc-neutr           2959  0.000950827  71.0145 keV  23.9995  eV
+ 6 Ionization            11749  0.00377535   93.3637 keV  7.94652  eV
+ 7 Attachment              100  3.21334e-05  551.901  eV  5.51901  eV
+ 8 Ioniz-Auger               6  1.928e-06        210  eV       35  eV
+
+Dens: 1.00385 g/cm3
+mass: 2.90527e-12 Kg 2.90527e-09 g 2.90527e-06 ug
+E. Dep: 237766 eV = 3.80943e-14 Joule
+Dose: 0.0131121 Gy

@@ -1,0 +1,21 @@
+#!/bin/sh
+/gamos/setParam GmAnalysisMgr:FileNameSuffix pru_
+# GEOMETRY
+/gamos/setParam GmGeometryFromText:FileName pru_file.geom
+/gamos/geometry GmGeometryFromText
+/gamos/setParam JobName pru304_404
+#/gamos/random/setSeeds 
+/gamos/random/restoreSeeds 304 404
+
+/gamos/geometry/createRegion ch_region ch_G4_Au 
+/gamos/physicsList GmEMPhysics 
+/run/setCut 1 um 
+/run/initialize 
+/gamos/userAction UAInteraction 
+#GENERATOR_e-_1*keV 
+/gamos/generator GmGenerator 
+/gamos/generator/addSingleParticleSource gn e- 1*keV 
+/gamos/generator/positionDist gn GmGenerDistPositionInG4Volumes gbox 
+/gamos/generator/directionDist gn GmGenerDistDirectionConst 1 0 0 
+/gamos/generator/energyDist gn GmGenerDistEnergyFromFile Tl204elec.txt interpolate 1*keV 
+/run/beamOn 1000 
