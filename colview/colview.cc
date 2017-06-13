@@ -141,6 +141,13 @@ int main(int argc, char **argv) {
   // int aw = gtk_widget_get_allocated_height(btw);
   // cout << "mwnwaw: " << mw << " " << nw << " " << aw   << endl;
 
+
+  // glewExperimental = GL_TRUE;
+  // if( glewInit() != GLEW_OK) {
+  //   cout << "Failed to init GLEW: " << glewGetErrorString(glewInit()) << endl;
+  //   exit(-1);
+  // }
+  
   
   InitShadersText();
   InitShadersIcosahedrons();

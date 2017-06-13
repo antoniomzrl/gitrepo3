@@ -48,6 +48,7 @@ void InitTextures() {
   //if (FT_New_Face(ft, "UbuntuMono-R.ttf", 0, &face))s
 
   string theFontFileName = GetAbsoluteFile( string("DejaVuSansMono.ttf") );
+  //string theFontFileName = GetAbsoluteFile( string("Cantarell-Regular.otf") );
   if (FT_New_Face(ft, theFontFileName.c_str(), 0, &face))
     cout << "ERROR::FREETYPE: Failed to load font" << endl;
   else

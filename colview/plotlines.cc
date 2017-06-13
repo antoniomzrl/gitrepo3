@@ -40,7 +40,7 @@ void InitShadersLines() {
 void AddOrthoLines(vec3 l, vec3 u, vector <vec4> &pvl, vector <vec3> &dir) {
  
   vec3 len = u - l;
-  vec3 m = (u + l) *0.5f;
+  vec3 m = (u + l) * 0.5f;
   float val = -1;
   if( d->Background > 0.5 ) val = -2;
 
@@ -156,8 +156,6 @@ void PlotOrthoLines() {
     AddOrthoLines(-u, u, pvl, dir);
   }
 
-  UpdateTransformMatrices();
-
   glUseProgram(proglin);
 
   glUniform4fv( pltIDl,    plt.size(), &plt[0][0] );
@@ -168,13 +166,15 @@ void PlotOrthoLines() {
   RenderLines(lin, pvl, dir);
 }
 
-extern float FoV, AR;
+
+
 void PlotColorBarLines() {
   cout << "PlotColorBarLines\n";
   
-  vector <vec3> lin, dir, dircb;
-  vector <vec4> pvl, pvlcb;
-
+  vector <vec3> lin, dir;
+  vector <vec4> pvl;
+  
+  
   glUseProgram(proglin);
 
   lin.push_back( vec3(-0.5,  0,  0) );
@@ -182,7 +182,7 @@ void PlotColorBarLines() {
 
   vec3 l = vec3(windowSz->width*0.02,  windowSz->height/2,    0.0);
   vec3 u = vec3(windowSz->width*0.045, windowSz->height*0.98, 0.0);
-  AddColorBarLines(l, u, pvlcb, dircb);
+  AddColorBarLines(l, u, pvl, dir);
   
   mat4 Proj = ortho(0.0f, (float)windowSz->width, 0.0f, (float)windowSz->height);
   theMVP = Proj;
@@ -192,5 +192,5 @@ void PlotColorBarLines() {
   glUniform1f(  pltDtzIDl, d->DiscretizePalette );
   glUniformMatrix4fv( mvpIDl, 1, GL_FALSE, &theMVP[0][0] );
   
-  RenderLines(lin, pvlcb, dircb);
+  RenderLines(lin, pvl, dir);
 }

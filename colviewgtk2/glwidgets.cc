@@ -5,14 +5,14 @@ extern DataObject * d;
 int wWidth, wHeight;
 
 
-void InitGLEW() {
-  glewExperimental = GL_TRUE;
+// void InitGLEW() {
+//   glewExperimental = GL_TRUE;
   
-  if( glewInit() != GLEW_OK) {
-    cout << "Failed to init GLEW: " << glewGetErrorString(glewInit()) << endl;
-    exit(-1);
-  }
-}
+//   if( glewInit() != GLEW_OK) {
+//     cout << "Failed to init GLEW: " << glewGetErrorString(glewInit()) << endl;
+//     exit(-1);
+//   }
+// }
 
 
 GtkWidget * CreateTopWidget(const char * title) {

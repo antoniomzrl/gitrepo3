@@ -50,7 +50,7 @@ void InitShadersIcosahedrons() {
   glGenBuffers(1, &pvlVBO);
   
   glEnable(GL_DEPTH_TEST); // Enable depth test (z-buffer)
-  glDepthFunc(GL_LESS);    // Accept fragment if it closer to camera than former
+  glDepthFunc(GL_LESS); // Accept fragment if it closer to camera than former
   glEnable(GL_CULL_FACE);  // Cull triangles which normal is not towards the camera
 }
 
@@ -103,10 +103,10 @@ void UpdateTransformMatrices() {
   theMVP = Proj * View * Model; // ModelViewProjection : mult 3 matrices
   theIMV = transpose(inverse(View * Model));
   Rm     = Rh * Rv;
-  //cout << "IMV\n"; printglm(IMV); //printglm(ModelMat);
-  //cout << "AxisToMe: " << AxisToMe() << endl;
-}
+  //cout << "IMV\n"; printgsl(IMV); //printgsl(ModelMat);
+  cout << "AxisToMe: " << AxisToMe() << endl;
 
+}
 
 
 

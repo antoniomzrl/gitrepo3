@@ -91,7 +91,7 @@ void Activate() {
   glw = CreateGlWidget( tw);
   gtk_widget_show_all(tw);
   //gtk_window_present(GTK_WINDOW(glw) );
-  InitGLEW();  // GLEW after glwidget is showed
+  //InitGLEW();  // GLEW after glwidget is showed
 
   
   ButtonWidgets();

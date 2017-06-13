@@ -3,6 +3,7 @@
 #include <fstream>
 #include <iomanip>
 #include <sstream>
+#include <stdlib.h>
 
 #include "points.hh"
 

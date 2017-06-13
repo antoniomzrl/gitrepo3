@@ -20,8 +20,10 @@ void InitialPosition() {
 
 void RotateScene(int dx, int dy, int dz) {
   static float inc = glm::pi<float>()/180.0 *0.1;
-  theHorizAngle -= dy * inc;
-  theVertAngle  -= dx * inc;
+  theHorizAngle += dy * inc;
+  theVertAngle  += dx * inc;
+  cout << "angs " << theHorizAngle*180.0/glm::pi<float>()
+       << " " << theVertAngle*180.0/glm::pi<float>() << endl;
 }
 
 

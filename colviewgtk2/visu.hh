@@ -19,7 +19,7 @@
 #include <math.h>
 #include <cstdlib>
 #include <sstream>
-
+#include <stdlib.h> 
 
 #define NPOS std::string::npos
 
@@ -32,7 +32,8 @@
 #define GLEW_STATIC
 #endif
 
-#include <GL/glew.h>
+//#include <GL/glew.h>
+#include <epoxy/gl.h>
 
 
 #include <gtk/gtk.h>

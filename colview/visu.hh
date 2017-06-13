@@ -29,11 +29,13 @@
 #ifdef WIN32
 #include <windows.h>
 #include <sys/types.h>
+//#define GLEW_STATIC
 #endif
 
-#include <gtk/gtk.h>
+//#include <GL/glew.h>
 #include <epoxy/gl.h>
 
+#include <gtk/gtk.h>
 #include <gdk/gdkkeysyms.h>
 
 #include <fcntl.h>

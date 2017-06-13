@@ -15,8 +15,10 @@ INSTALLDIR = /usr/local
    LDOPT = 
  CCGTKGL = $(shell pkg-config --cflags gtkglext-1.0)
  LDGTKGL = $(shell pkg-config --libs   gtkglext-1.0)
- GLEWINC = $(shell pkg-config --cflags glew) -I/usr/include/freetype2
- GLEWLIB = $(shell pkg-config --libs   glew) -lfreetype
+# GLEWINC = $(shell pkg-config --cflags glew) -I/usr/include/freetype2
+# GLEWLIB = $(shell pkg-config --libs   glew) -lfreetype
+ GLEWINC = $(shell pkg-config --cflags epoxy) -I/usr/include/freetype2
+ GLEWLIB = $(shell pkg-config --libs   epoxy) -lfreetype
  GTK3INC = $(shell pkg-config --cflags gtk+-3.0)
  GTK3LIB = $(shell pkg-config --libs   gtk+-3.0)	
 
