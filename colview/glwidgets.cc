@@ -57,7 +57,7 @@ void InitTopWidget(GtkWidget * twg, const char * title) {
 void InitGlWidget(GtkWidget * gla) {
 
   gtk_gl_area_set_has_depth_buffer(GTK_GL_AREA(gla), true); //z-buffer
-  gtk_gl_area_set_has_stencil_buffer(GTK_GL_AREA(gla), true);
+  //gtk_gl_area_set_has_stencil_buffer(GTK_GL_AREA(gla), true);
   
   gtk_widget_set_events(gla,
    			GDK_EXPOSURE_MASK |

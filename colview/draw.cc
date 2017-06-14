@@ -34,13 +34,14 @@ void Draw(void) {
   static int NoCalls = 0;
   NoCalls++;
   
+  glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
+    
   glClearColor(d->Background, d->Background, d->Background, 0.0);
-  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-  
+
   if( d->rMax < 1.0) BestSpatialUnit(d);
 
-  PlotBalls(d);
   PlotColorBarText();
+  PlotBalls(d);
   PlotOrthoLines();
   PlotColorBarLines();
 

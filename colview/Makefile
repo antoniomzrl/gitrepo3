@@ -17,7 +17,8 @@ INSTALLDIR = /usr/local
 #GTK3INC = $(shell pkg-config --cflags gio-2.0 gtk+-3.0 glew) -I/usr/include/freetype2
 #GTK3LIB = $(shell pkg-config --libs   gio-2.0 gtk+-3.0 glew) -lfreetype
  GTK3INC = $(shell pkg-config --cflags gio-2.0 gtk+-3.0 epoxy) -I/usr/include/freetype2
- GTK3LIB = $(shell pkg-config --libs   gio-2.0 gtk+-3.0 epoxy) -lfreetype
+ GTK3LIB = $(shell pkg-config --libs   gio-2.0 gtk+-3.0 epoxy) -lfreetype -lfontconfig
+
 
    UAINC = -I../uas/include
   CXXFLG = $(DEFFLG) $(MYFLG)   $(GTK3INC) $(UAINC)

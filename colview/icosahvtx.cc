@@ -3,7 +3,7 @@
 vector <vec3> vertices, normals;
 
 void AddTriangle(vec3& a, vec3& b, vec3& c) {
-  vec3 n = (a +b +c) /(-3.0f);
+  vec3 n = (a +b +c) /(3.0f);
   
   vertices.push_back(a);
   vertices.push_back(b);

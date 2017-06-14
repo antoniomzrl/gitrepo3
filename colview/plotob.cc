@@ -49,9 +49,9 @@ void InitShadersIcosahedrons() {
   glGenBuffers(1, &nmlVBO);
   glGenBuffers(1, &pvlVBO);
   
-  glEnable(GL_DEPTH_TEST); // Enable depth test (z-buffer)
-  glDepthFunc(GL_LESS); // Accept fragment if it closer to camera than former
-  glEnable(GL_CULL_FACE);  // Cull triangles which normal is not towards the camera
+  //glEnable(GL_CULL_FACE);  // Cull triangles which normal is not towards the camera
+  //glEnable(GL_DEPTH_TEST); // Enable depth test (z-buffer)
+  //glDepthFunc(GL_LESS);    // Accept fragment if it closer to camera than former
 }
 
 
@@ -88,7 +88,7 @@ void UpdateTransformMatrices() {
   
   //mat4 Projection = perspective(45.0 * pi<float>()/180.0, 4.0/3.0, 0.1, 100.0);
   //mat4 Proj = ortho(-FoV,FoV, -FoV,FoV, FoV*2,-FoV);
-  mat4 Proj = ortho(-FoV*AR-AR+1, FoV*AR-AR+1, -FoV,FoV, FoV*2,-FoV);
+  mat4 Proj = ortho(-FoV*AR-AR+1, FoV*AR-AR+1, -FoV,FoV, -FoV*2,FoV*2);
   
   // Camera matrix       Eye          LookAt       Head up
   mat4 View = lookAt( vec3(0,0,1), vec3(0,0,0), vec3(0,1,0) );
@@ -151,7 +151,7 @@ void PlotIcosahedrons() {
   if(vertices.size() == 1) {        // points
     primitive = GL_POINTS;
     Light     = vec4(0.4, 1.0, 0.0, 10.0);
-    LightPos  = vec3(0,0,3);
+    LightPos  = vec3(0,0,-3);
     glPointSize(d->BallSize *10.0);
   }
   else {                      // icosahedrons

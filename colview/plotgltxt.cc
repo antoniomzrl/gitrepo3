@@ -12,27 +12,46 @@ struct Character {
   GLuint Advance;     // Horizontal offset to advance to next glyph
 };
 
+#include <ft2build.h>
+#include FT_FREETYPE_H
+#include <fontconfig/fontconfig.h>
+
 #include <glm/gtc/type_ptr.hpp>
 #include <map>
 std::map<GLchar, Character> Characters;
 GLuint VAOt, VBO;
 
-void InitTextures();
 
-void InitShadersText() {
-  InitTextures();
+int SizeInPixels;
+
+
+string GetFontFileName(string name) {
+  cout << "name: " << name << endl;
   
-  program = LoadShaders("shaderstxt.glsl");
-  //glUseProgram(program);
+  FcConfig  * cfg = FcInitLoadConfigAndFonts();
+  FcPattern * pat = FcNameParse((const FcChar8*)(name.c_str()));
+  FcConfigSubstitute(cfg, pat, FcMatchPattern);
+  FcDefaultSubstitute(pat);
+
+  string fontFile = "";
+  FcResult result;
+  FcPattern * font = FcFontMatch(cfg, pat, &result);
+  
+  if(font) {
+    FcChar8 * file = NULL;
+    if(FcPatternGetString(font, FC_FILE, 0, &file) == FcResultMatch)
+      fontFile = string( (char*)file);
+    
+    FcPatternDestroy(font);
+  }
+  FcPatternDestroy(pat);
+
+  cout << "fontFile: " << fontFile << endl;
+  
+  return fontFile;
 }
 
 
-
-
-#include <ft2build.h>
-#include FT_FREETYPE_H
-
-int SizeInPixels;
 
 void InitTextures() {
   SizeInPixels = 96;
@@ -44,11 +63,10 @@ void InitTextures() {
 
   FT_Face face;  // Load font as face
   
-  //if (FT_New_Face(ft, "arial.ttf", 0, &face))
-  //if (FT_New_Face(ft, "UbuntuMono-R.ttf", 0, &face))s
+  string theFontFileName = GetFontFileName(string("DejaVuSansMono"));
+  if(theFontFileName == string("") )
+    theFontFileName = GetAbsoluteFile( string("Cantarell-Regular.otf") );
 
-  string theFontFileName = GetAbsoluteFile( string("DejaVuSansMono.ttf") );
-  //string theFontFileName = GetAbsoluteFile( string("Cantarell-Regular.otf") );
   if (FT_New_Face(ft, theFontFileName.c_str(), 0, &face))
     cout << "ERROR::FREETYPE: Failed to load font" << endl;
   else
@@ -123,6 +141,15 @@ void InitTextures() {
   glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), 0);
   glBindBuffer(GL_ARRAY_BUFFER, 0);
   glBindVertexArray(0);
+}
+
+
+
+void InitShadersText() {
+  InitTextures();
+  
+  program = LoadShaders("shaderstxt.glsl");
+  //glUseProgram(program);
 }
 
 

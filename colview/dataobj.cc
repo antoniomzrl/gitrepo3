@@ -22,7 +22,7 @@ DataObject::DataObject() {
   Background = 0;
 
   Light    = vec4(0.4, 1.0, 1.0, 0.8);
-  LightPos = vec3(3, -3, 3);
+  LightPos = vec3(-3, 3, 3);
   greenAttenuation = 0.2;
   
   vAxis = 0;

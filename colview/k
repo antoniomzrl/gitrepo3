@@ -1,0 +1,16 @@
+TPI File: ./tpi_all.txt 54
+ReadBinaryFile (/home/roldan/j1_1.bin) BIN
+ double 8 float 4 int 4 sh int 2 Point 56
+constructor DataObject
+rbf bin 0 104
+ReadBinFile ND: 97225 (0.085714 sec)
+ComputeHistogram
+visuogl CenterData
+Screen size: 2560 x 1440 16:9
+Widget size: 1632 x 1224
+word: Particle
+word: Interaction
+word: Energy
+word: ELost
+word: EDep
+Total fonts: 556
