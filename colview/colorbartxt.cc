@@ -95,9 +95,6 @@ void PlotColorBarText(vec3 l, vec3 u) {
   char lab[9][128];
 
   sprintf(lab[0], "Plot: %s", d->Label[d->vType].c_str() );
- 
-  if(d->Background < 0.5) glColor3f(1.0, 1.0, 1.0);
-  else                    glColor3f(0.0, 0.0, 0.0);
 
   float rho = 0.0;  // (g/cm3)
   for(unsigned long i=0; i< d->NumDat; i++) {
@@ -117,9 +114,12 @@ void PlotColorBarText(vec3 l, vec3 u) {
   sprintf(lab[7], "height:  %g %s", d->yn*2, d->SpatialUnits.c_str() );
   sprintf(lab[8], "depth:   %g %s", d->zn*2, d->SpatialUnits.c_str() );
 
+  if(d->Background > 0.5) color = vec3(0,0,0);
+  else                    color = vec3(1,1,1);
+
   for(int i=0; i<9; i++) {
     float y = windowSz->height/2 -windowSz->height/15 - (i+1)*windowSz->height/35;
-    RenderText(lab[i], l.x, y, d->FontSize, vec3(1,1,1) );
+    RenderText(lab[i], l.x, y, d->FontSize, color);
   }
   
   glDisable(GL_BLEND);
