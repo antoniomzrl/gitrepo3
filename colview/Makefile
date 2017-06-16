@@ -1,11 +1,6 @@
-# apt-get install libgtkglext1-dev libtiff5-dev g++-mingw-w64-i686 mingw-w64-tools
-# apt-get install libglu1-mesa-dev libice-dev libsm-dev libxmu-dev libxi-dev libgtk2.0-dev
-# apt-get install libglm-dev libglew-dev 
-
-# cd win32dev/gtk
-# find -name '*.pc' | while read pc; do sed -e "s@^prefix=.*@prefix=$PWD@" -i "$pc"; done
-# cd win32dev/gtkglext
-# idem
+# apt-get install libglu1-mesa-dev libice-dev libsm-dev libxmu-dev libxi-dev
+# apt-get install libgtk-3-dev libglm-dev libtiff5-dev
+# apt-get install g++-mingw-w64-i686 mingw-w64-tools
 
 INSTALLDIR = /usr/local
 
@@ -14,8 +9,6 @@ INSTALLDIR = /usr/local
    MYFLG = -O3 -Wall #-pg -g  #-fbounds-check
    LDOPT =
 
-#GTK3INC = $(shell pkg-config --cflags gio-2.0 gtk+-3.0 glew) -I/usr/include/freetype2
-#GTK3LIB = $(shell pkg-config --libs   gio-2.0 gtk+-3.0 glew) -lfreetype
  GTK3INC = $(shell pkg-config --cflags gio-2.0 gtk+-3.0 epoxy) -I/usr/include/freetype2
  GTK3LIB = $(shell pkg-config --libs   gio-2.0 gtk+-3.0 epoxy) -lfreetype -lfontconfig
 
@@ -28,12 +21,11 @@ INSTALLDIR = /usr/local
 
 SRCS = readfiles.cc readpetfiles.cc datah.cc dataobj.cc printp.cc \
        colorbartxt.cc  plotgltxt.cc \
-       gpures.cc  \
        expose.cc keys.cc callbacks.cc saveimg.cc \
        glwidgets.cc txtwidgets.cc  timer.cc points.cc \
        icosahvtx.cc plotob.cc plotlines.cc transform.cc \
        draw.cc mouse.cc colorsize.cc butwidgets.cc \
-       loadshaders.cc glinfo.cc
+       loadshaders.cc glinfo.cc gpures.cc 
 
 OBJS = $(SRCS:.cc=.o)
 WOBJS = $(SRCS:.cc=.obj)
@@ -45,7 +37,7 @@ install: colview
 	cp colview       $(INSTALLDIR)/bin
 	cp shaders*.glsl $(INSTALLDIR)/colview
 	cp tpi_*.txt     $(INSTALLDIR)/colview
-	cp DejaVuSansMono.ttf $(INSTALLDIR)/colview
+	cp *tf           $(INSTALLDIR)/colview
 
 dist: colview
 	mkdir -p        ../bincolview
