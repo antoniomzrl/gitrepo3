@@ -67,7 +67,7 @@ void MyCheckButton(const gchar * label, gpointer Data, GtkWidget * box, gboolean
 }
 
 
-void MyLabelScale(const gchar * label, GCallback CallBack, gpointer Data, GtkWidget * box,
+void MyLabelScale(const gchar * label, GCallback CallBack, const gchar * Data, GtkWidget * box,
 		  float Min, float Max, float Step, float Def) {
 
   GtkWidget * theLabel = gtk_label_new(label);
@@ -75,7 +75,7 @@ void MyLabelScale(const gchar * label, GCallback CallBack, gpointer Data, GtkWid
   gtk_widget_set_size_request(theLabel, 130,-1);
   
   GtkAdjustment * adj = gtk_adjustment_new(Def, Min, Max, Step, Step, Step);
-  g_signal_connect(adj, "value_changed", G_CALLBACK(CallBack), Data);
+  g_signal_connect(adj, "value_changed", G_CALLBACK(CallBack), (gpointer)Data);
   GtkWidget * theScale = gtk_scale_new(GTK_ORIENTATION_HORIZONTAL, GTK_ADJUSTMENT(adj));
   gtk_scale_set_value_pos( (GtkScale*)theScale, GTK_POS_RIGHT);
   //gtk_scale_set_digits( (GtkScale*)theScale, 2);
@@ -98,7 +98,7 @@ void MyLabelScale(const gchar * label, GCallback CallBack, GtkWidget * box,
 }
 
 // omit CallBack:
-void MyLabelScale(const gchar * label, gpointer Data, GtkWidget * box,
+void MyLabelScale(const gchar * label, const gchar * Data, GtkWidget * box,
 		  float Min, float Max, float Step, float Def) {
   MyLabelScale(label, G_CALLBACK(CB_ScaleValue), Data, box, Min, Max, Step, Def);
 }
@@ -172,55 +172,55 @@ void InitControlWidget(GtkWidget * butwin) {
 
   MyClickButton("TPI File",    G_CALLBACK(CB_TpiFile), boxa2);
 
-  MyLabelScale("Icosah Lvl   ", (gpointer)"isl",  boxa3,  0,   6, 1,    0);
-  MyLabelScale("Ball Size    ", (gpointer)"bsz",  boxa3,  0,   9, 0.1, d->BallSize/0.3);
-  MyLabelScale("Size Factor  ", (gpointer)"bfc",  boxa3,  0,   2, 0.1,  0.2);
-  MyLabelScale("Background   ", (gpointer)"bg",   boxa3,  0,   1, 0.1,  0);
-  MyLabelScale("Stride       ", (gpointer)"std",  boxa3,  0,   9, 0.1,  0);
-  MyLabelScale("Smart Stride ", (gpointer)"sstd", boxa3,  0,   9, 0.1,  0);
-  MyLabelScale("Line Width   ", (gpointer)"lwd",  boxa3,  0,   5, 0.1,  1);
-  MyLabelScale("Canvas Max   ", (gpointer)"q2",   boxa3,-0.5, 1.5, 0.1,  1);
-  MyLabelScale("Canvas Med   ", (gpointer)"q1",   boxa3,   0,   1, 0.1,  0.5);
-  MyLabelScale("Canvas Min   ", (gpointer)"q0",   boxa3,-0.5, 1.5, 0.1,  0);
-  MyLabelScale("Palette Discr", (gpointer)"dpt",  boxa3,  1,  18, 1,   16);
-  MyLabelScale("Font Size    ", (gpointer)"fsz",  boxa3,   5,  40,   1,  d->FontSize);
+  MyLabelScale("Icosah Lvl   ", "isl",  boxa3,  0,   6, 1,    0);
+  MyLabelScale("Ball Size    ", "bsz",  boxa3,  0,   9, 0.1, d->BallSize/0.3);
+  MyLabelScale("Size Factor  ", "bfc",  boxa3,  0,   2, 0.1,  0.2);
+  MyLabelScale("Background   ", "bg",   boxa3,  0,   1, 0.1,  0);
+  MyLabelScale("Stride       ", "std",  boxa3,  0,   9, 0.1,  0);
+  MyLabelScale("Smart Stride ", "sstd", boxa3,  0,   9, 0.1,  0);
+  MyLabelScale("Line Width   ", "lwd",  boxa3,  0,   5, 0.1,  1);
+  MyLabelScale("Canvas Max   ", "q2",   boxa3,-0.5, 1.5, 0.1,  1);
+  MyLabelScale("Canvas Med   ", "q1",   boxa3,   0,   1, 0.1,  0.5);
+  MyLabelScale("Canvas Min   ", "q0",   boxa3,-0.5, 1.5, 0.1,  0);
+  MyLabelScale("Palette Discr", "dpt",  boxa3,  1,  18, 1,   16);
+  MyLabelScale("Font Size    ", "fsz",  boxa3,   5,  40,   1,  d->FontSize);
 
   //MyCheckButton("Swap Z -Z",    G_CALLBACK(CB_SwapDataZZ), boxa1, false);
   //MyHSeparator(boxa1);
 
   // labeled Scales
-  MyLabelScale("Background:    ", (gpointer)"bg",  boxb1,   0,  1,  0.1, 0);
-  MyLabelScale("Light PosX:    ", (gpointer)"lpx", boxb1, -20, 20,  1,   1);
-  MyLabelScale("Light PosY:    ", (gpointer)"lpy", boxb1, -20, 20,  1,   1);
-  MyLabelScale("Light PosZ:    ", (gpointer)"lpz", boxb1, -20, 20,  1,   1);
-  MyLabelScale("Light Int:     ", (gpointer)"lpw", boxb1,   0,  5,  0.1, 0);
-  MyLabelScale("green Attenu:  ", (gpointer)"gat", boxb1,   0, 0.5, 0.1, d->greenAttenuation);
-  MyLabelScale("LightDiffuse : ", (gpointer)"ldf", boxb1,   0,  1,  0.1, 0.9);
-  MyLabelScale("LightAmbient : ", (gpointer)"lam", boxb1,   0,  1,  0.1, 0.4);
-  MyLabelScale("LightSpecular: ", (gpointer)"lsp", boxb1,   0,  1,  0.1, 0.9);
-  MyLabelScale("LightShininess:", (gpointer)"lsh", boxb1,   0,  1,  0.1, 0.2);
+  MyLabelScale("Background:    ", "bg",  boxb1,  0, 1,  0.1, 0);
+  MyLabelScale("Light PosX:    ", "lpx", boxb1, -5, 5,  1,   1);
+  MyLabelScale("Light PosY:    ", "lpy", boxb1, -5, 5,  1,   1);
+  MyLabelScale("Light PosZ:    ", "lpz", boxb1, -5, 5,  1,   1);
+  MyLabelScale("Light Int:     ", "lpw", boxb1,  0, 5,  0.1, 0);
+  MyLabelScale("green Attenu:  ", "gat", boxb1,  0, 5,  0.1, d->greenAttenuation*10);
+  MyLabelScale("LightDiffuse : ", "ldf", boxb1,  0, 1,  0.1, 0.9);
+  MyLabelScale("LightAmbient : ", "lam", boxb1,  0, 1,  0.1, 0.4);
+  MyLabelScale("LightSpecular: ", "lsp", boxb1,  0, 1,  0.1, 0.9);
+  MyLabelScale("LightShininess:", "lsh", boxb1,  0, 1,  0.1, 0.2);
   //  MyCheckButton("Lights On/Off", (gpointer)"tli", boxb2, true);
 
   //  MyHSeparator(boxa2);
-  MyLabelScale("Scale  ",      (gpointer)"sr",  boxc, 0.1, 10, 0.1, 1);
-  MyLabelScale("Scale X",      (gpointer)"sx",  boxc, 0.1, 10, 0.1, 1);
-  MyLabelScale("Scale Y",      (gpointer)"sy",  boxc, 0.1, 10, 0.1, 1);
-  MyLabelScale("Scale Z",      (gpointer)"sz",  boxc, 0.1, 10, 0.1, 1);
-  MyLabelScale("ColorSc",      (gpointer)"csc", boxc, 0,    7, 1 ,  0);
+  MyLabelScale("Scale  ",     "sr",  boxc, 0.1, 20, 0.1, 10);
+  MyLabelScale("Scale X",     "sx",  boxc, 0.1, 20, 0.1, 10);
+  MyLabelScale("Scale Y",     "sy",  boxc, 0.1, 20, 0.1, 10);
+  //MyLabelScale("Scale Z",     "sz",  boxc, 0.1, 20, 0.1, 10);
+  //MyLabelScale("ColorSc",     "csc", boxc, 0,    7, 1 ,  0);
 
-  MyLabelScale("Clip x min:", (gpointer)"cx", boxd, 0, 10, 0.1,  0);
-  MyLabelScale("Clip X MAX:", (gpointer)"cX", boxd, 0, 10, 0.1, 10);
-  MyLabelScale("Clip y min:", (gpointer)"cy", boxd, 0, 10, 0.1,  0);
-  MyLabelScale("Clip Y MAX:", (gpointer)"cY", boxd, 0, 10, 0.1, 10);
-  MyLabelScale("Clip z min:", (gpointer)"cz", boxd, 0, 10, 0.1,  0);
-  MyLabelScale("Clip Z MAX:", (gpointer)"cZ", boxd, 0, 10, 0.1, 10);
-  MyLabelScale("Clip v min:", (gpointer)"cv", boxd, 0, 10, 0.1,  0);
-  MyLabelScale("Clip V MAX:", (gpointer)"cV", boxd, 0, 10, 0.1, 10);
+  MyLabelScale("Clip x min:", "cx", boxd, 0, 10, 0.1,  0);
+  MyLabelScale("Clip x MAX:", "cX", boxd, 0, 10, 0.1, 10);
+  MyLabelScale("Clip y min:", "cy", boxd, 0, 10, 0.1,  0);
+  MyLabelScale("Clip y MAX:", "cY", boxd, 0, 10, 0.1, 10);
+  MyLabelScale("Clip z min:", "cz", boxd, 0, 10, 0.1,  0);
+  MyLabelScale("Clip z MAX:", "cZ", boxd, 0, 10, 0.1, 10);
+  MyLabelScale("Clip v min:", "cv", boxd, 0, 10, 0.1,  0);
+  MyLabelScale("Clip v MAX:", "cV", boxd, 0, 10, 0.1, 10);
 
   MyClickButton("GL Info", G_CALLBACK(CB_GLInfoWindow),   boxe);
   MyClickButton("Fonts TXT",   G_CALLBACK(CB_FontInfoWindow), boxe);
   MyClickButton("Fonts GL",    G_CALLBACK(CB_FontPlot), boxe);
-  MyLabelScale("Resize Win:",  (gpointer)"rsz", boxe, 400, 2500, 100, d->Wsize);
+  //  MyLabelScale("Resize Win:",  "rsz", boxe, 400, 2500, 100, d->Wsize);
   MyClickButton("Sort Data",   G_CALLBACK(CB_SortData), boxe);
   MyCheckButton("AutoRotate",  (gpointer)"art", boxe, false);
   //MyCheckButton("Plot Traj.",  (gpointer)"trk", boxe, false);

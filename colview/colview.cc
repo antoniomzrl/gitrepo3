@@ -5,7 +5,6 @@ extern vector <string> tpi, ntpi;
 extern DataObject * d;
 
 bool JoinWindows = false;
-GdkRectangle * windowSz;
 GtkWidget *glw, *btw;
 float verboseFlag=0, glslVersionFlag=-1.0;
 
@@ -108,9 +107,9 @@ int main(int argc, char **argv) {
   InitGlWidget(glw);
 
   GdkRectangle * screenSz = ScreenDimensions(tw);
-  windowSz = WindowDimensions(screenSz);
 
-  d->FontSize = windowSz->height * 13.0/1000.0;
+  d->PlotSize = WindowDimensions(screenSz);  
+  d->FontSize = d->PlotSize->height * 13.0/1000.0;
 
   btw = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
   InitControlWidget(btw);
@@ -120,20 +119,21 @@ int main(int argc, char **argv) {
 
 
   if(JoinWindows) {
-    gtk_widget_set_size_request(box1, windowSz->width, windowSz->height);
-    gtk_widget_set_size_request(box2, 300, windowSz->height);
+    gtk_widget_set_size_request(box1, d->PlotSize->width, d->PlotSize->height);
+    gtk_widget_set_size_request(box2, 300, d->PlotSize->height);
     gtk_box_pack_start(GTK_BOX(box), box2, true, true, 0);
     gtk_box_pack_start(GTK_BOX(box), box1, true, true, 0);
     gtk_container_add(GTK_CONTAINER(tw), box);
   }
   else {  
-    gtk_window_set_default_size(GTK_WINDOW(tw), windowSz->width, windowSz->height);
+    gtk_window_set_default_size(GTK_WINDOW(tw), d->PlotSize->width, d->PlotSize->height);
     gtk_container_add(GTK_CONTAINER(tw), box1);
     gtk_container_add(GTK_CONTAINER(tw2), box2);
+    gtk_window_move(GTK_WINDOW(tw2), 10, 10);
     gtk_widget_show_all(tw2);
   }
 
-  gtk_window_move(GTK_WINDOW(tw), screenSz->width-windowSz->width-3, 3);
+  gtk_window_move(GTK_WINDOW(tw), screenSz->width-d->PlotSize->width-3, 3);
   gtk_widget_show_all(tw);
 
 

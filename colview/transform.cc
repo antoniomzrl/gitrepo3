@@ -3,42 +3,36 @@
 extern DataObject * d;
 extern GtkWidget * glw;
 
-extern float FoV, AR,
-  theHorizAngle, theVertAngle, theZoom,
-  theHorizDisp, theVertDisp, theDepthDisp;
 extern mat4 Rm;
 
 void InitialPosition() {
-  theHorizAngle = 0; //glm::pi<float>(); // Initial
-  theVertAngle  = 0;
-  theHorizDisp  = 0;
-  theVertDisp   = 0;
-  theDepthDisp  = 0;
-  theZoom       = 1;
+  d->theHorizAngle = 0; //glm::pi<float>(); // Initial
+  d->theVertAngle  = 0;
+  d->theHorizDisp  = 0;
+  d->theVertDisp   = 0;
+  d->theDepthDisp  = 0;
+  d->theZoom       = 1;
 }
 
 
 void RotateScene(int dx, int dy, int dz) {
   static float inc = glm::pi<float>()/180.0 *0.1;
-  theHorizAngle += dy * inc;
-  theVertAngle  += dx * inc;
-  cout << "angs " << theHorizAngle*180.0/glm::pi<float>()
-       << " " << theVertAngle*180.0/glm::pi<float>() << endl;
+  d->theHorizAngle += dy * inc;
+  d->theVertAngle  += dx * inc;
+  cout << "angs " << d->theHorizAngle*180.0/glm::pi<float>()
+       << " " << d->theVertAngle*180.0/glm::pi<float>() << endl;
 }
 
 
 void ScaleScene(int dy) {
-  //cout << "zoom " << theZoom << endl;
-  //theZoom += exp((double)dy*0.01);
-  theZoom += dy / (float)d->Wsize;
-  
-  if(theZoom < 0) theZoom = 0;
+  d->theZoom += (float)dy / (d->PlotSize->height/2.0);
+  if(d->theZoom < 0) d->theZoom = 0;
 }
 
 
 void TranslateScene(int dx, int dy) {
-  theHorizDisp += dx / (float)d->Wsize * FoV;
-  theVertDisp  -= dy / (float)d->Wsize * FoV;
+  d->theHorizDisp += (float)dx / (d->PlotSize->height/2.0) * d->FoV;
+  d->theVertDisp  -= (float)dy / (d->PlotSize->height/2.0) * d->FoV;
 }
 
 
@@ -51,36 +45,32 @@ void ClipData(DataObject * d) {
   float ym = std::min(d->yBegin, d->yEnd);
   float yM = std::max(d->yBegin, d->yEnd);
 
-  cout << "xcyc " << d->xc << " " << d->yc << endl;
+  cout << "xcyc " << d->c.x << " " << d->c.y << endl;
   
-  xm = xm * d->wn + d->xc;
-  xM = xM * d->wn + d->xc;
-  ym = ym * d->wn + d->yc;
-  yM = yM * d->wn + d->yc;
+  xm = xm * d->sw.w + d->c.x;
+  xM = xM * d->sw.w + d->c.x;
+  ym = ym * d->sw.w + d->c.y;
+  yM = yM * d->sw.w + d->c.y;
   
-  cout << "1 Clip ND " << d->NumDat        << endl;
+  cout << "1 Clip ND " << (d->r).size()        << endl;
 
-  int j = 0;
-  for(unsigned long i=0; i< d->NumDat; i++) {
+  int nd = 0;
+  for(unsigned long i=0; i< (d->r).size(); i++) {
     if( d->r[i].x < xM && d->r[i].x > xm &&
 	d->r[i].y < yM && d->r[i].y > ym ) {
-      d->r[j] = d->r[i];
-      j++;
+      d->r[nd] = d->r[i];
+      nd++;
     }
   }
 
-  if( j > 1) {
-    d->NumDat = j;
-    d->MaxDat = j;
+  if( nd > 1) {
+    (d->r).resize(nd);
     ComputeFrame(d);
   }
-  cout << "2 Clip ND " << d->NumDat << " " << d->xBegin << " " <<  d->xEnd
-       << " " << d->yBegin << " " << d->yEnd
-       << endl;
+  cout << "2 Clip ND " << (d->r).size() << " " << d->xBegin << " "
+       <<  d->xEnd << " " << d->yBegin << " " << d->yEnd << endl;
 
-  //glLoadIdentity();
   ComputeHistogram(d);
-  //InitialPosition();
   d->NeedUpdatePV = true;
 }
 
@@ -89,7 +79,7 @@ void ClipData(DataObject * d) {
 void CommitRotation() {
   cout << "CommitRotation" << endl;
   
-  for(unsigned long i=0; i< d->NumDat; i++) {
+  for(unsigned long i=0; i< (d->r).size(); i++) {
     vec4 q = Rm * vec4(d->r[i].x, d->r[i].y, d->r[i].z, 0);
     d->r[i].x = q.x;
     d->r[i].y = q.y;
@@ -107,12 +97,12 @@ void CommitRotationHalfPi() {
   cout << "CommiRotation" << endl;
   float pim = glm::pi<float>()/2.0;
 
-  theHorizAngle = glm::round( theHorizAngle / pim) * pim;
-  theVertAngle  = glm::round( theVertAngle  / pim) * pim;
+  d->theHorizAngle = glm::round( d->theHorizAngle / pim) * pim;
+  d->theVertAngle  = glm::round( d->theVertAngle  / pim) * pim;
 
   mat4 Id = mat4(1.0);
-  mat4 Rh = rotate( Id, theHorizAngle, vec3(0,1,0) );
-  mat4 Rv = rotate( Id, theVertAngle,  vec3(1,0,0) );
+  mat4 Rh = rotate( Id, d->theHorizAngle, vec3(0,1,0) );
+  mat4 Rv = rotate( Id, d->theVertAngle,  vec3(1,0,0) );
   Rm      = Rh * Rv;
   
   CommitRotation();

@@ -59,44 +59,39 @@ using namespace std;
 
 
 typedef struct DataObject {
-  string FileName, FileType;
-  unsigned long NumDat, MinDat, MaxDat;
-  double EdepTotal;
-  //GLfloat xm, ym, zm, tm, em, lm, pm;
-  //GLfloat xM, yM, zM, tM, eM, lM, pM;        // Max
-  //GLfloat cxm, cym, czm, ctm, cem, clm, cpm; // Clip
-  //GLfloat cxM, cyM, czM, ctM, ceM, clM, cpM;
-  Point m, M, c, C; // min, max, clip min, clip max
-  GLfloat xc, yc, zc, xn, yn, zn, wn, Radius, Diameter;
-  GLfloat xLeft, xRight, yBottom, yTop, zNear, zFar, Fv, rMax, Rv, Volume;
-  GLfloat BallSize, BallFactor, BallScale, Background, DiscretizePalette;
-  GLfloat CanvasPoint[3];
+  GLfloat BallSize, BallFactor, BallScale, Background, DiscretizePalette, greenAttenuation;
   vec4 Light; //Ambient, Diffuse, Specular, Intensity
   vec3 LightPos;
-  float greenAttenuation;
-  int vAxis, vFrame, vFrameLabels, vColorBar, 
-    vFontList, vSelection, vEconomic, vColorScale,
-    vLorLines, vBalls, vTracks,
-    vElastic, vType, vAutoRotate, vID;
+  vec3 CanvasPoint;
+  int vFrame, vSelection, vEconomic, vType, vAutoRotate;
   string Label[10];
-  
   int IcosahedronLevel, Stride, SmartStride;
   int FontSize;
   float LineWidth;
-  GLfloat ScaleX, ScaleY, ScaleZ;
+  vec3 Scale;
   GLfloat xBegin, yBegin, xEnd, yEnd; // Mouse
-  float rcx, rcy, rcz; //rot. cent
-  float Wsize;
+
+  float FoV, AR,
+    theHorizAngle, theVertAngle, theZoom,
+    theHorizDisp, theVertDisp, theDepthDisp;
+
+  GdkRectangle * PlotSize;
+
+  
   float  SpatialFactor;
   string SpatialUnits;
-  int verboseOut;
+  double EdepTotal;
 
-  bool NeedUpdatePV, NeedRepaint, NeedUpdatePalette;
+  string FileName, FileType;
+
+  Point m, M, clip, Clip; // min, max, center, semi-width, clip min, clip max
+  vec3 c;  // center
+  vec4 sw; // semiwidth x, y, z, max
+  bool NeedUpdatePV, NeedUpdatePalette;
   
   unsigned long Hist[100]; //type of interaction
   double Hist2[100];       //edep per interaction
 
-  //Point * r;
   vector<Point> r;
 
   DataObject(); // constructor
@@ -104,16 +99,6 @@ typedef struct DataObject {
 } DataObject;
 
 
-
-typedef struct ShaderID {
-  GLuint programID,
-    mvpID, imvID,  sfID, bfID, // uniforms in shaders
-    pltID, pltSzID, pltDtzID,
-    LightPosID, LightID, LightColorID, greenAttenID, LineColorID,
-    vtxID,  nmlID,   pvlID,                   //layout in shader
-    vtxGPU, nmlGPU,  pvlGPU,                  //GPU buffers
-    vao;                                      //VAO object
-} ShaderID;
 
 
 // Prototypes
@@ -140,7 +125,6 @@ void TranslateScene(int, int);
 void InitShadersIcosahedrons();
 void InitShadersLines();
 void InitShadersText();
-ShaderID * GetShaderIDs( const char *);
 void BindAndAttrib(GLuint, GLuint, GLuint, GLuint, GLuint);
 void UpdateGpuBuffer(GLuint, unsigned int, void *);
 void UpdateTransformMatrices();
@@ -148,7 +132,6 @@ void UpdateTransformMatrices();
 // update gpu-buffer
 void Draw(void);
 void DrawInfo(void);
-void Reshape(int, int);
 void ReshapeInfo(int, int);
 
 #include <gtk/gtk.h>

@@ -6,10 +6,6 @@ extern vector <vec4> posval;
 extern vector <vec4> plt;
 
 mat4 theMVP, theIMV, Rm, Id;
-float FoV = 1.2, AR = 4.0/3.0,
-  theHorizAngle, theVertAngle, theZoom,
-  theHorizDisp, theVertDisp, theDepthDisp;
-
 
 
 GLuint programID, VAO,
@@ -87,17 +83,17 @@ void UpdateTransformMatrices() {
   printDbg(3, "UpdateTransformMatrices\n", "BLUE");
   
   //mat4 Projection = perspective(45.0 * pi<float>()/180.0, 4.0/3.0, 0.1, 100.0);
-  //mat4 Proj = ortho(-FoV,FoV, -FoV,FoV, FoV*2,-FoV);
+  //mat4 Proj = ortho(-FoV,FoV, -FoV,FoV, FoV*2,-FoV)
+  float FoV = d->FoV, AR = d->AR;
   mat4 Proj = ortho(-FoV*AR-AR+1, FoV*AR-AR+1, -FoV,FoV, -FoV*2,FoV*2);
   
   // Camera matrix       Eye          LookAt       Head up
   mat4 View = lookAt( vec3(0,0,1), vec3(0,0,0), vec3(0,1,0) );
- 
   mat4 Id = mat4(1.0);
-  mat4 S  = scale( Id, vec3(theZoom, theZoom, theZoom) );
-  mat4 Rh = rotate( Id, theHorizAngle, vec3(0,1,0) );
-  mat4 Rv = rotate( Id, theVertAngle,  vec3(1,0,0) );
-  mat4 T  = translate( Id, vec3(theHorizDisp, theVertDisp, theDepthDisp) );
+  mat4 S  = scale( Id, d->Scale * d->theZoom );
+  mat4 Rh = rotate( Id, d->theHorizAngle, vec3(0,1,0) );
+  mat4 Rv = rotate( Id, d->theVertAngle,  vec3(1,0,0) );
+  mat4 T  = translate( Id, vec3(d->theHorizDisp, d->theVertDisp, d->theDepthDisp) );
   mat4 Model = T * Rh * Rv * S;
    
   theMVP = Proj * View * Model; // ModelViewProjection : mult 3 matrices

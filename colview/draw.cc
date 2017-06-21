@@ -7,7 +7,7 @@ extern GtkWidget * glw;
 void PlotBalls(DataObject * d) {
   
   double IcoLevel = d->IcosahedronLevel;
-  if(d->vEconomic && d->NumDat > 100000) {
+  if(d->vEconomic && (d->r).size() > 100000) {
     IcoLevel = std::min(IcoLevel, 1.0);
   }
   
@@ -38,8 +38,11 @@ void Draw(void) {
     
   glClearColor(d->Background, d->Background, d->Background, 0.0);
 
-  if( d->rMax < 1.0) BestSpatialUnit(d);
-
+  if( d->sw.w < 1.0) BestSpatialUnit(d);
+  
+  //glEnable(GL_LINE_SMOOTH);
+  glLineWidth(d->LineWidth);
+  
   PlotColorBarText();
   PlotBalls(d);
   PlotOrthoLines();
@@ -49,17 +52,3 @@ void Draw(void) {
        << myclock() -T0 << " sec)" << endl;
 }
 
-
-void Reshape(int w, int h) {
-  printDbg(3, "Reshape", "RED");
-
-  //glViewport(0, 0, w, h);
-  //glMatrixMode(GL_PROJECTION);
-  glMatrixMode(GL_MODELVIEW);
-  glLoadIdentity();                   // "limpiamos" con la matriz identidad.
-  double R = d->Rv;
-  glOrtho(-R,R, -R,R, -R,R);
-  glMatrixMode(GL_MODELVIEW);         // Activamos matriz  modelado/visionado.
-  glLoadIdentity();                   // "Limpiamos" la matriz
-  Draw();
-}

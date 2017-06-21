@@ -5,8 +5,6 @@ extern DataObject * d;
 extern vector <string> tpi, ntpi;
 extern string pn[];
 
-extern GdkRectangle * windowSz;
-
 float BestNear(float x) {
 
   //int N = log10(x);
@@ -97,12 +95,13 @@ void PlotColorBarText(vec3 l, vec3 u) {
   sprintf(lab[0], "Plot: %s", d->Label[d->vType].c_str() );
 
   float rho = 0.0;  // (g/cm3)
-  for(unsigned long i=0; i< d->NumDat; i++) {
+  for(unsigned long i=0; i< (d->r).size(); i++) {
     rho += d->r[i].f[6];
   }
-  rho /= d->NumDat;
+  rho /= (d->r).size();
 
-  float mass = rho * d->Volume/pow(d->SpatialFactor,3)/1e12; // (Kg)
+  float Volume = (d->M.x - d->m.x) * (d->M.y - d->m.y) * (d->M.z - d->m.z);
+  float mass = rho * Volume/pow(d->SpatialFactor,3)/1e12; // (Kg)
   float Dose = d->EdepTotal * 1.60217733e-19 / mass;
     
   sprintf(lab[1], "Density: %g g/cm3", rho);
@@ -110,15 +109,15 @@ void PlotColorBarText(vec3 l, vec3 u) {
   sprintf(lab[3], "Edep:    %g eV",    d->EdepTotal);
   sprintf(lab[4], "         %g Joule", d->EdepTotal*1.60217733e-19);
   sprintf(lab[5], "Dose:    %g Gy",    Dose);
-  sprintf(lab[6], "width:   %g %s", d->xn*2, d->SpatialUnits.c_str() );
-  sprintf(lab[7], "height:  %g %s", d->yn*2, d->SpatialUnits.c_str() );
-  sprintf(lab[8], "depth:   %g %s", d->zn*2, d->SpatialUnits.c_str() );
+  sprintf(lab[6], "width:   %g %s", d->sw.x*2, d->SpatialUnits.c_str() );
+  sprintf(lab[7], "height:  %g %s", d->sw.y*2, d->SpatialUnits.c_str() );
+  sprintf(lab[8], "depth:   %g %s", d->sw.z*2, d->SpatialUnits.c_str() );
 
   if(d->Background > 0.5) color = vec3(0,0,0);
   else                    color = vec3(1,1,1);
 
   for(int i=0; i<9; i++) {
-    float y = windowSz->height/2 -windowSz->height/15 - (i+1)*windowSz->height/35;
+    float y = d->PlotSize->height/2 -d->PlotSize->height/15 - (i+1)*d->PlotSize->height/35;
     RenderText(lab[i], l.x, y, d->FontSize, color);
   }
   
@@ -127,8 +126,8 @@ void PlotColorBarText(vec3 l, vec3 u) {
 
 
 void PlotColorBarText() {
-  vec3 l = vec3(windowSz->width*0.021, windowSz->height*0.507, 0.0);
-  vec3 u = vec3(windowSz->width*0.045, windowSz->height*0.985, 0.0);
+  vec3 l = vec3(d->PlotSize->width*0.021, d->PlotSize->height*0.507, 0.0);
+  vec3 u = vec3(d->PlotSize->width*0.045, d->PlotSize->height*0.985, 0.0);
 
   PlotColorBarText(l, u);
 }

@@ -57,8 +57,8 @@ void UpdatePalette() {
 
   int N = plt.size();
   for(int i=0; i<N; i++) {
-    if(i<N/2) plt[i].w = Interpolate(i,   0, N/2, d->CanvasPoint[0], d->CanvasPoint[1]);
-    else      plt[i].w = Interpolate(i, N/2, N-1, d->CanvasPoint[1], d->CanvasPoint[2]);
+    if(i<N/2) plt[i].w = Interpolate(i,   0, N/2, d->CanvasPoint.x, d->CanvasPoint.y);
+    else      plt[i].w = Interpolate(i, N/2, N-1, d->CanvasPoint.y, d->CanvasPoint.z);
   }
 
   if( d->DiscretizePalette > 15)
@@ -152,7 +152,6 @@ void UpdatePV(DataObject *d) {
   double T1 = myclock();
 
   posval.clear();
-  vec3 c(d->xc, d->yc, d->zc);
 
   float vm = d->m.f[d->vType];
   float vM = d->M.f[d->vType];
@@ -163,38 +162,24 @@ void UpdatePV(DataObject *d) {
   
   cout << "strides " << d->Stride << " " << d->SmartStride << endl;
 
-  // if( d->SmartStride >1) {
-  //   float fac = 1.0/d->SmartStride;
-  //   for(unsigned long i=d->MinDat; i<d->MaxDat; i++) {
-  //     int nd = d->Hist[(int)d->r[i].f[1]];
-  //     float rn = 0;
-  //     if( nd > 100 ) rn = static_cast <float>(rand()) / static_cast <float>(RAND_MAX);
-  //     if( rn < fac ) {
-  // 	vec3  p = vec3(d->r[i].x, d->r[i].y, d->r[i].z);
-  // 	float v = (d->r[i].f[d->vType]-vm)/(vM-vm); // in (0,1)
-  // 	posval.push_back( vec4((p-c)/d->wn, v) );
-
-  //     }
-  //   }
-  // }
 
   if( d->SmartStride >1) {
     float fac = 1.0/d->SmartStride;
-    for(unsigned long i=d->MinDat; i<d->MaxDat; i++) {
+    for(unsigned long i=0; i<(d->r).size(); i++) {
       int Nd = d->Hist[(int)d->r[i].f[1]];
       float rn = static_cast <float>(rand()) / static_cast <float>(RAND_MAX);
       if( rn < fac || Nd < 1000 ) {
    	vec3  p = vec3(d->r[i].x, d->r[i].y, d->r[i].z);
    	float v = (d->r[i].f[d->vType]-vm)/(vM-vm); // in (0,1)
-   	posval.push_back( vec4((p-c)/d->wn, v) );
+   	posval.push_back( vec4((p-d->c)/d->sw.w, v) );
       }
     }
   }
   else {
-    for(unsigned long i=d->MinDat; i<d->MaxDat; i+=d->Stride) {
+    for(unsigned long i=0; i<(d->r).size(); i+=d->Stride) {
       vec3  p = vec3(d->r[i].x, d->r[i].y, d->r[i].z);
       float v = (d->r[i].f[d->vType]-vm)/(vM-vm); // in (0,1)
-      posval.push_back( vec4((p-c)/d->wn, v) );
+      posval.push_back( vec4((p-d->c)/d->sw.w, v) );
     }
   }
 
@@ -202,43 +187,3 @@ void UpdatePV(DataObject *d) {
   
   printDbg(3, "UpdatePV(", Time, ")\n", "PURPLE");
 }
-
-
-// void UpdateP(DataObject *d) {
-//   double T1 = myclock();
-
-//   UpdateCanvasVector();
-    
-//   posval.clear();
-//   vec3 c(d->xc, d->yc, d->zc);
-
-//   for(unsigned long i=d->MinDat; i<d->MaxDat; i+=d->Stride) {
-//     vec3 p = vec3(d->r[i].x, d->r[i].y, d->r[i].z);
-//     posval.push_back( vec4((p-c)/d->wn, 1.0) );
-//   }
-
-//   double Time = myclock()-T1;
-  
-//   printDbg(3, "UpdateP(", Time, ")\n", "PURPLE");
-// }
-
-// // Colors & Sizes
-// void UpdateCS(DataObject *d) {
-//   double T1 = myclock();
-
-//   UpdateCanvasVector();
-  
-//   colors.clear();
-
-//   float vm = d->m.f[d->vType];
-//   float vM = d->M.f[d->vType];
-    
-//   for(unsigned long i=d->MinDat; i<d->MaxDat; i+=d->Stride) {
-//     float v  = d->r[i].f[d->vType];
-//     vec4 clsz = ComputeColorSize( (v-vm)/(vM-vm) );
-//     colors.push_back( clsz );
-//   }
-
-//   double Time = myclock()-T1;
-//   printDbg(3, "UpdateCS   (", Time, ")\n", "PURPLE");
-// }

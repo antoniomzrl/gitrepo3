@@ -40,9 +40,6 @@ DataObject * ReadPetFile(char * Fn) {
   }
 
   cout << "ND2: " << i << endl;
-  d->NumDat = ND;
-  d->MaxDat = ND;
-  d->MinDat = 0;
 
   ComputeFrame(d);
   return(d);

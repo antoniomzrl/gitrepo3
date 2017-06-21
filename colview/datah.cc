@@ -27,36 +27,36 @@ void SortData(DataObject * d) {
 void SwapData(DataObject * d, string tsw) {
 
   if( tsw == string("sxy") ) {
-    for(unsigned long i=0; i< d->NumDat; i++) {
+    for(unsigned long i=0; i< (d->r).size(); i++) {
       float t   = d->r[i].x;
       d->r[i].x = d->r[i].y;
       d->r[i].y = t;
     }
   }
   else if( tsw == string("sxz") ) {
-    for(unsigned long i=0; i< d->NumDat; i++) {
+    for(unsigned long i=0; i< (d->r).size(); i++) {
       float   t = d->r[i].x;
       d->r[i].x = d->r[i].z;
       d->r[i].z = t;
     }
   }
   else if( tsw == string("syz") ) {
-    for(unsigned long i=0; i< d->NumDat; i++) {
+    for(unsigned long i=0; i< (d->r).size(); i++) {
       float t = d->r[i].y;
       d->r[i].y = d->r[i].z;
       d->r[i].z = t;
     }
   }
   else if( tsw == string("sxx") ) {
-    for(unsigned long i=0; i< d->NumDat; i++)
+    for(unsigned long i=0; i< (d->r).size(); i++)
       d->r[i].x = -d->r[i].x;
   }
   else if( tsw == string("syy") ) {
-    for(unsigned long i=0; i< d->NumDat; i++)
+    for(unsigned long i=0; i< (d->r).size(); i++)
       d->r[i].y = -d->r[i].y;
   }
   else if( tsw == string("szz") ) {
-    for(unsigned long i=0; i< d->NumDat; i++)
+    for(unsigned long i=0; i< (d->r).size(); i++)
       d->r[i].z = -d->r[i].z;
   }
   
@@ -71,7 +71,7 @@ void SwapData(DataObject * d, string tsw) {
 
 // void SwapDataXY(DataObject * d) {
 
-//   for(unsigned long i=0; i< d->NumDat; i++) {
+//   for(unsigned long i=0; i< (d->r).size(); i++) {
 //     float t = d->r[i].x;
 //     d->r[i].x = d->r[i].y;
 //     d->r[i].y = t;
@@ -87,7 +87,7 @@ void SwapData(DataObject * d, string tsw) {
 
 // void SwapDataXZ(DataObject * d) {
 
-//   for(unsigned long i=0; i< d->NumDat; i++) {
+//   for(unsigned long i=0; i< (d->r).size(); i++) {
 //     float t = d->r[i].x;
 //     d->r[i].x = d->r[i].z;
 //     d->r[i].z = t;
@@ -103,7 +103,7 @@ void SwapData(DataObject * d, string tsw) {
 
 // void SwapDataYZ(DataObject * d) {
 
-//   for(unsigned long i=0; i< d->NumDat; i++) {
+//   for(unsigned long i=0; i< (d->r).size(); i++) {
 //     float t = d->r[i].y;
 //     d->r[i].y = d->r[i].z;
 //     d->r[i].z = t;
@@ -119,7 +119,7 @@ void SwapData(DataObject * d, string tsw) {
 
 // void SwapDataZZ(DataObject * d) {
 
-//   for(unsigned long i=0; i< d->NumDat; i++) {
+//   for(unsigned long i=0; i< (d->r).size(); i++) {
 //     //float t = d->r[i].y;
 //     d->r[i].z = -d->r[i].z;
 //   }
@@ -132,7 +132,7 @@ void SwapData(DataObject * d, string tsw) {
 
 // void SwapDataYY(DataObject * d) {
 
-//   for(unsigned long i=0; i< d->NumDat; i++) {
+//   for(unsigned long i=0; i< (d->r).size(); i++) {
 //     //float t = d->r[i].y;
 //     d->r[i].y = -d->r[i].y;
 //   }
@@ -156,7 +156,7 @@ void BestSpatialUnit(DataObject * d) {
   string newunit = "         ";
   float uf = 1;
 
-  while( d->rMax < 1.0) {
+  while( d->sw.w < 1.0) {
     bool needChange = false;
 
     for(int i=0; i<6; i++) {
@@ -184,7 +184,7 @@ void ComputeFrame(DataObject * d) {
 
   //static bool FirstCall = true;
  
-  //if(FirstCall && d->NumDat > 0)
+  //if(FirstCall && (d->r).size() > 0)
     {
       //cout << "ComputeFrame FirstCall ------------------ " << FirstCall << endl;
       //FirstCall = false;
@@ -197,7 +197,7 @@ void ComputeFrame(DataObject * d) {
     d->m.f[1] = d->r[0].f[1]; d->M.f[1] = d->r[0].f[1];
     d->m.f[2] = d->r[0].f[2]; d->M.f[2] = d->r[0].f[2];
 
-    for(unsigned long i=0; i< d->NumDat; i++) {
+    for(unsigned long i=0; i< (d->r).size(); i++) {
       if( d->r[i].f[0] < d->m.f[0]) d->m.f[0] = d->r[i].f[0];
       if( d->r[i].f[0] > d->M.f[0]) d->M.f[0] = d->r[i].f[0];
       if( d->r[i].f[1] < d->m.f[1]) d->m.f[1] = d->r[i].f[1];
@@ -219,7 +219,7 @@ void ComputeFrame(DataObject * d) {
   d->m.y = MAXVAL; d->M.y = -MAXVAL;
   d->m.z = MAXVAL; d->M.z = -MAXVAL;
 
-  for(unsigned long i=0; i< d->NumDat; i++) {
+  for(unsigned long i=0; i< (d->r).size(); i++) {
     if( d->r[i].x < d->m.x) d->m.x = d->r[i].x;
     if( d->r[i].x > d->M.x) d->M.x = d->r[i].x;
     if( d->r[i].y < d->m.y) d->m.y = d->r[i].y;
@@ -228,58 +228,17 @@ void ComputeFrame(DataObject * d) {
     if( d->r[i].z > d->M.z) d->M.z = d->r[i].z;
   }
 
-  //rM = sqrt(rM);
-  d->rMax = sqrt(d->M.x*d->M.x + d->M.y*d->M.y + d->M.z*d->M.z);
-  d->Rv = d->rMax*1.1;
 
-  d->xc = (d->m.x + d->M.x)*0.5;
-  d->yc = (d->m.y + d->M.y)*0.5;
-  d->zc = (d->m.z + d->M.z)*0.5;
-  d->xn = (d->M.x - d->m.x)*0.5;
-  d->yn = (d->M.y - d->m.y)*0.5;
-  d->zn = (d->M.z - d->m.z)*0.5;
-  d->wn = std::max(d->xn, d->yn);
-  d->wn = std::max(d->wn, d->zn);
-  d->Diameter = sqrt( pow((d->M.x -d->m.x),2) + pow((d->M.y -d->m.y),2) +
-		      pow((d->M.z -d->m.z),2) );
-  d->Radius = d->Diameter*0.5;
-
-  // d->c.x = d->m.x; d->C.x = d->M.x;
-  // d->c.y = d->m.y; d->C.y = d->M.y;
-  // d->c.z = d->m.z; d->C.z = d->M.z;
-  // d->c.f[3] = d->m.f[3]; d->C.z = d->M.z;
-  // d->ctm = d->tm; d->ctM = d->tM;
-  // d->cem = d->em; d->ceM = d->eM;
-  // d->clm = d->lm; d->clM = d->lM;
-  // d->cpm = d->pm; d->cpM = d->pM;
-  d->c = d->m;  //init clip = min
-  d->C = d->M;   //     Clip = Max
-
-  // d->LightPos.x = d->rMax*5;
-  // d->LightPos.y = -d->rMax*5;
-  // d->LightPos.z = d->rMax*5;
-  d->Volume = (d->M.x - d->m.x) * (d->M.y - d->m.y) * (d->M.z - d->m.z);
-
-  if( d->verboseOut > 0) 
-    cout << "ComputeFrame:" << endl
-	 << "\tNumDat " << d->NumDat
-	 << "\tVol: " << d->Volume
-	 << "\tr |" << d->rMax << "|" << endl
-	 << "\tx (" << d->m.x << "," << d->M.x << ")"
-	 << "\ty (" << d->m.y << "," << d->M.y << ")"
-	 << "\tz (" << d->m.z << "," << d->M.z << ")" << endl
-	 << "\tf[3] (" << d->m.f[3] << "," << d->M.f[3] << ")"
-	 << "\tf[4] (" << d->m.f[4] << "," << d->M.f[4] << ")"
-	 << "\tf[5] (" << d->m.f[5] << "," << d->M.f[5] << ")"
-	 << "\tf[6] (" << d->m.f[6] << "," << d->M.f[6] << ")" << endl
-	 << "\tf[0] (" << d->m.f[0] << "," << d->M.f[0] << ")"
-	 << "\tf[1] (" << d->m.f[1] << "," << d->M.f[1] << ")"
-	 << "\tf[2] (" << d->m.f[2] << "," << d->M.f[2] << ")" << endl
-      //<< "\tcolor (" << d->tm << "," << d->tM << ")\n"
-      // << "\tE     (" << d->em  << "," << d->eM << ")\n"
-      // << "\tEloss (" << d->lm  << "," << d->lM << ")\n"
-      // << "\tPar Ty(" << d->pm  << "," << d->pM << ")\n"
-	 << endl;
+  d->c.x  = (d->m.x + d->M.x)*0.5;
+  d->c.y  = (d->m.y + d->M.y)*0.5;
+  d->c.z  = (d->m.z + d->M.z)*0.5;
+  d->sw.x = (d->M.x - d->m.x)*0.5;
+  d->sw.y = (d->M.y - d->m.y)*0.5;
+  d->sw.z = (d->M.z - d->m.z)*0.5;
+  d->sw.w = std::max(std::max(d->sw.x, d->sw.y), d->sw.z);
+  //      = std::max( {d->sw.x, d->sw.y, d->sw.z} );
+  d->clip = d->m;
+  d->Clip = d->M;
 }
 
 
@@ -293,14 +252,14 @@ void ComputeHistogram(DataObject *d) {
     d->Hist2[i] = 0.0;
   }
 
-  for(unsigned long i=0; i< d->NumDat; i++) {
+  for(unsigned long i=0; i< (d->r).size(); i++) {
     unsigned long j = d->r[i].f[1];
     if( j>=0 && j<tpi.size()) {
       d->Hist[j]++;
       d->Hist2[j] += d->r[i].f[5];
     }
     d->EdepTotal += d->r[i].f[5];
-    //if(d->NumDat < 50) cout << i << " " << d->r[i].d << " " << d->EdepTotal << endl;
+    //if((d->r).size() < 50) cout << i << " " << d->r[i].d << " " << d->EdepTotal << endl;
   }
 
 
@@ -308,9 +267,9 @@ void ComputeHistogram(DataObject *d) {
   //for(int i=0; i<100; i++) {
   //  if( d->Hist[i] || d->Hist[i-1] || d->Hist[i+1] )
   //    cout << "\t"<< i-1 << " " << tpi[i] << " " << d->Hist[i]
-  //	   << " (" << (float)d->Hist[i]/(float)d->NumDat << ")" <<endl;
+  //	   << " (" << (float)d->Hist[i]/(float)(d->r).size() << ")" <<endl;
   //}
-  //cout << "Total: " << d->NumDat << endl;
+  //cout << "Total: " << (d->r).size() << endl;
 }
 
 
@@ -320,7 +279,7 @@ void CenterData(DataObject * d) {
   cout << "visuogl CenterData" << endl;
   //#endif
 
-  for(unsigned long i=0; i< d->NumDat; i++) {
+  for(unsigned long i=0; i< (d->r).size(); i++) {
     d->r[i].x -= (d->m.x + d->M.x)*0.5;
     d->r[i].y -= (d->m.y + d->M.y)*0.5;
     d->r[i].z -= (d->m.z + d->M.z)*0.5;
@@ -335,7 +294,7 @@ void CornerData(DataObject * d) {
   cout << "visuogl CornerData" << endl;
 #endif
 
-  for(unsigned long i=0; i< d->NumDat; i++) {
+  for(unsigned long i=0; i< (d->r).size(); i++) {
     d->r[i].x -= d->m.x;
     d->r[i].y -= d->m.y;
     //d->r[i].z -= d->m.z;
@@ -347,7 +306,7 @@ void CornerData(DataObject * d) {
 
 void ShiftData(DataObject * d, float x, float y, float z) {
   cout << "ShiftData " << x << " " << y << " " << z << endl;
-  for(unsigned long i=0; i< d->NumDat; i++) {
+  for(unsigned long i=0; i< (d->r).size(); i++) {
     d->r[i].x -= x;
     d->r[i].y -= y;
     d->r[i].z -= z;
@@ -357,11 +316,7 @@ void ShiftData(DataObject * d, float x, float y, float z) {
 
 
 void ScaleData(DataObject * d, float sx, float sy, float sz) {
-#ifdef DEBUG
-  cout << "visuogl ScaleData" << endl;
-#endif
-
-  for(unsigned long i=0; i< d->NumDat; i++) {
+  for(unsigned long i=0; i< (d->r).size(); i++) {
     d->r[i].x *= sx;
     d->r[i].y *= sy;
     d->r[i].z *= sz;
@@ -381,17 +336,17 @@ void Interpolate(DataObject * d, int np) {
     cout << "Interpolate FirstCall ------------------ " << FirstCall << endl;
     FirstCall = false;
 
-    b = new Point[d->NumDat];
-    for(unsigned long i=0; i<d->NumDat; i++)
+    b = new Point[(d->r).size()];
+    for(unsigned long i=0; i<(d->r).size(); i++)
       b[i] = d->r[i];
   }
 
-  for(unsigned long i=0; i<d->NumDat; i++) {
+  for(unsigned long i=0; i<(d->r).size(); i++) {
     for(int k=0;k<np; k++) {
       dis[k] = MAXVAL;
       idx[k] = 0;
     }
-    // for(unsigned long j=0; j<d->NumDat, j!=i; j++) {
+    // for(unsigned long j=0; j<(d->r).size(), j!=i; j++) {
       //float D = pow(d->r[i].x-b[j].x,2) +pow(d->r[i].y-b[j].y,2) +pow(d->r[i].z-b[j].z,2);
       //for(int k=0;k<np; k++) {
 

@@ -447,8 +447,8 @@ elif [ $1 == "addcover" ] ; then
 
     
 elif [ $1 == "simu" ] ; then
-    #for (( i=0; i<${#targetpoints[@]}; i++ )) ; do
-    for (( i=0; i<1; i++ )) ; do
+    for (( i=0; i<${#targetpoints[@]}; i++ )) ; do
+    #for (( i=0; i<1; i++ )) ; do
 	CYL=":VOLU   cover  TUBE 0 4*mm 6.3*mm G4_POLYSTYRENE
              :PLACE  cover  1 cube rmy ${targetpoints[i]}
              :COLOUR cover  1 0 0
@@ -460,27 +460,19 @@ elif [ $1 == "simu" ] ; then
              :COLOUR theTarget  0 0 1"
 
 	#KILL="/gamos/setParam UAClock:TimeLimit 3600*4 /gamos/userAction UAClock"
-	KILL="/gamos/setParam UAClock:TimeLimit 3600*24 /gamos/userAction UAClock"
+	KILL="/gamos/setParam UAClock:TimeLimit 3600*10 /gamos/userAction UAClock"
 
 	#RUN="$VIS /run/beamOn 100"
 	RUN="/run/beamOn 1000000000"
-	#BAT="--jobs 100 --btime 4:05:00"
-	BAT="--jobs 10 --btime 24:05:00"
+	#BAT="--jobs 100 --btime 4:0a5:00"
+	BAT="--jobs 10 --btime 11:0:00"
 	EULER="$BAT --ppn 8  --jpn 8  --host euler"
 	DIRAC="$BAT --ppn 12 --jpn 12 --host dirac"
 	CETA="$BAT  --ppn 8  --jpn 8  --host amunoz@193.144.240.176"
 	DESKTOP="--jobs 10 --jpn 10"
 	
-	#JOB="$EULER --seed 2 --SEED 1 --dir oo_p${i}_s2"
-	#JOB="$EULER --seed 3 --SEED 1 --dir oo_p${i}_s3"
-	#JOB="$EULER --seed 4 --SEED 1 --dir oo_p${i}_s4"
-	#JOB="$EULER --seed 5 --SEED 1 --dir oo_p${i}_s5"
-	#JOB="$EULER --seed 6 --SEED 1 --dir oo_p${i}_s6"
-	#JOB="$EULER --seed 7 --SEED 1 --dir oo_p${i}_s7"
-	#JOB="$EULER --seed 8 --SEED 1 --dir oo_p${i}_s8"
-	#JOB="$EULER --seed 9 --SEED 1 --dir oo_p${i}_s9"
-	#JOB="$EULER --seed 0 --SEED 1 --dir oo_p${i}_s0"
-	JOB="$EULER --seed 1 --SEED 1 --dir oo_p${i}_s1"
+	JOB="$EULER --seed 0 --SEED 0 --dir oo_p${i}_s0"
+	
 	jgamos  $JOB $WRL $CUBE $CYL $PHYl $GENVAR $TGV $SCOR $KILL $RUN
 	#jgamos  $JOB $WRL $CUBE $CYL $PHYl $GENVDR $TGV $SCOR $KILL $RUN
     done

@@ -6,7 +6,6 @@
 extern DataObject * d;
 extern vector <vec4> plt;
 extern mat4 theMVP;
-extern GdkRectangle * windowSz;
 
 GLuint proglin, VAOlin,
   mvpIDl,
@@ -146,13 +145,13 @@ void PlotOrthoLines() {
   lin.push_back( vec3( 0.5,  0,  0) );
   
   if(d->vSelection) {
-    vec3 l = vec3(std::min(d->xBegin, d->xEnd), std::min(d->yBegin, d->yEnd),  d->zn/d->wn);
-    vec3 u = vec3(std::max(d->xBegin, d->xEnd), std::max(d->yBegin, d->yEnd), -d->zn/d->wn);
+    vec3 l = vec3(std::min(d->xBegin, d->xEnd), std::min(d->yBegin, d->yEnd),  d->sw.z/d->sw.w);
+    vec3 u = vec3(std::max(d->xBegin, d->xEnd), std::max(d->yBegin, d->yEnd), -d->sw.z/d->sw.w);
     AddOrthoLines(l, u, pvl, dir);
   }
 
   if(d->vFrame) {
-    vec3 u(d->xn/d->wn, d->yn/d->wn, d->zn/d->wn);
+    vec3 u = vec3(d->sw.x, d->sw.y, d->sw.z) / d->sw.w;
     AddOrthoLines(-u, u, pvl, dir);
   }
 
@@ -180,11 +179,11 @@ void PlotColorBarLines() {
   lin.push_back( vec3(-0.5,  0,  0) );
   lin.push_back( vec3( 0.5,  0,  0) );
 
-  vec3 l = vec3(windowSz->width*0.02,  windowSz->height/2,    0.0);
-  vec3 u = vec3(windowSz->width*0.045, windowSz->height*0.98, 0.0);
+  vec3 l = vec3(d->PlotSize->width*0.02,  d->PlotSize->height/2,    0.0);
+  vec3 u = vec3(d->PlotSize->width*0.045, d->PlotSize->height*0.98, 0.0);
   AddColorBarLines(l, u, pvl, dir);
   
-  mat4 Proj = ortho(0.0f, (float)windowSz->width, 0.0f, (float)windowSz->height);
+  mat4 Proj = ortho(0.0f, (float)d->PlotSize->width, 0.0f, (float)d->PlotSize->height);
   theMVP = Proj;
   
   glUniformMatrix4fv( mvpIDl, 1, GL_FALSE, &Proj[0][0] );

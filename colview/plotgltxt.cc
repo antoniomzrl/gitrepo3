@@ -2,7 +2,6 @@
 #include "visu.hh"
 
 extern DataObject * d;
-extern GdkRectangle * windowSz;
 GLuint program;
 
 struct Character {
@@ -159,7 +158,7 @@ void RenderText(string text, float x, float y, float Scale, vec3 color) {
   float scale = Scale * 1.3 / (float)SizeInPixels;
   //cout << "scale: " << scale << endl;
   
-  mat4 projection = ortho(0.0f, (float)windowSz->width, 0.0f, (float)windowSz->height);
+  mat4 projection = ortho(0.0f, (float)d->PlotSize->width, 0.0f, (float)d->PlotSize->height);
  
   glUseProgram(program);
   glUniformMatrix4fv(glGetUniformLocation(program, "projection"),

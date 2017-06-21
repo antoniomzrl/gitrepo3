@@ -207,13 +207,10 @@ DataObject * ReadBinaryFile(string fn, string type) {
     cout << "rbfArce size " << SPA << endl;
   }
 
-  d->NumDat = ND;
-  d->MaxDat = ND;
-  d->MinDat = 0;
   d->FileName = fn;
   d->FileType = type;
 
-  cout << "ReadBinFile ND: " << d->NumDat << " (" << myclock()-T1 << " sec)" << endl;
+  cout << "ReadBinFile ND: " << (d->r).size() << " (" << myclock()-T1 << " sec)" << endl;
   //cout << "xyz " << d->r[0].x << " " << d->r[0].y << " " << d->r[0].z << endl;
 
   ComputeHistogram(d);
@@ -254,9 +251,6 @@ DataObject * ReadInputFile(char * Fn) {
 
   fi.close();
 
-  d->NumDat = (d->r).size();
-  d->MaxDat = d->NumDat;
-  d->MinDat = 0;
   ComputeFrame(d);
   d->NeedUpdatePV = true;
   return(d);
@@ -276,7 +270,7 @@ void WriteBinaryCompressFile(DataObject * d, char * Fn) {
   gzFile gzfo = gzdopen(fdo, "wb");
   if (gzfo==NULL) printf("gzopen error\n");
 
-  int Nd = sizeof(struct Point) * d->NumDat;
+  int Nd = sizeof(struct Point) * (d->r).size();
   int fr = gzwrite(gzfo, &d->r[0], Nd);
   if( fr != Nd) cout << "error writing " << FnB << endl;
 
@@ -289,8 +283,8 @@ void WriteBinaryFile(DataObject * d, char * fn) {
   //int fw = fwrite(r, sizeof(Point), N, fi);
   double sc = 1/d->SpatialFactor;
   ScaleData(d, sc, sc, sc);
-  int fw = fwrite(&d->r[0], sizeof(Point), d->NumDat, fi);
-  cout << "WriteBinaryFile(" << fn << ") (" << fn << ") " << d->NumDat << " " << fw << endl;
+  int fw = fwrite(&d->r[0], sizeof(Point), (d->r).size(), fi);
+  cout << "WriteBinaryFile(" << fn << ") (" << fn << ") " << (d->r).size() << " " << fw << endl;
   cout << "wbf " << sizeof(Point) << " | " <<sizeof(vector<Point>) << endl;
   fclose(fi);
 }
@@ -350,16 +344,8 @@ void SaveParamFile(DataObject * d) {
      << "BallSize     " << d->BallSize     << endl
      << "BallFactor   " << d->BallFactor   << endl
      << "Background   " << d->Background   << endl  
-     << "vAxis        " << d->vAxis        << endl
      << "vFrame       " << d->vFrame       << endl
-     << "vFrameLabels " << d->vFrameLabels << endl
-     << "vColorBar    " << d->vColorBar    << endl
      << "vSelection   " << d->vSelection   << endl  
-     << "vColorScale  " << d->vColorScale  << endl
-     << "vLorLines    " << d->vLorLines    << endl
-     << "vBalls       " << d->vBalls       << endl
-     << "vTracks      " << d->vTracks      << endl
-     << "vElastic     " << d->vElastic     << endl
      << "vType        " << d->vType        << endl
      << "Stride       " << d->Stride       << endl
      << "IcosahedronLevel " << d->IcosahedronLevel   << endl  
@@ -383,16 +369,8 @@ void ReadParamFile(char * fn, DataObject * d) {
   fi >> bf >> d->BallSize
      >> bf >> d->BallFactor
      >> bf >> d->Background
-     >> bf >> d->vAxis
      >> bf >> d->vFrame
-     >> bf >> d->vFrameLabels
-     >> bf >> d->vColorBar
      >> bf >> d->vSelection
-     >> bf >> d->vColorScale
-     >> bf >> d->vLorLines
-     >> bf >> d->vBalls
-     >> bf >> d->vTracks
-     >> bf >> d->vElastic
      >> bf >> d->vType
      >> bf >> d->Stride
      >> bf >> d->IcosahedronLevel
@@ -407,7 +385,7 @@ void WriteASCIIFile(DataObject * d) {
   char FnA[160];
   strcpy(FnA, "save.txt");
   cout << "WriteASCIIFile(" << d->FileName << ") (" << FnA << ")" << endl;
-  cout << "waf " << sizeof(Point) << " " << d->NumDat << endl;
+  cout << "waf " << sizeof(Point) << " " << (d->r).size() << endl;
 
   std::ofstream fi(FnA, std::ios::out);
   if(!fi) { // file couldn't be opened
@@ -415,7 +393,7 @@ void WriteASCIIFile(DataObject * d) {
     exit(-1);
   }
 
-  for(unsigned long i=0; i< d->NumDat; i++) {
+  for(unsigned long i=0; i< (d->r).size(); i++) {
     fi << d->r[i].x  << " " << d->r[i].y  << " " << d->r[i].z  << " "
        << d->r[i].f[3] << " " << d->r[i].f[4] << " " << d->r[i].f[5] << " "
        << d->r[i].f[6] << " " << d->r[i].f[0] << " " << d->r[i].f[1] << " "
@@ -424,90 +402,3 @@ void WriteASCIIFile(DataObject * d) {
 
   fi.close();
 }
-
-/*
-DataObject * ReadInputFile1(char * Fn) {
-
-  double T1 = myclock();
-  cout << "ReadInputFile (" << Fn << ")" << endl;
-
-  // no file
-  if( strlen(Fn) == 0) {
-    DataObject * d = new DataObject();
-    d->NumDat = 0;
-    return(d);
-  }
-
-  unsigned long ND = GetFileSize(Fn);
-  cout << "ND: " << ND << endl;
-
-  DataObject * d = new DataObject();
-  //d->r = new Point[ND];
-
-  strcpy(d->FileName, Fn);
-  cout << "ReadInputFile fn (" << d->FileName << ")" << endl;
-
-  //C++ 
-  std::ifstream fi(Fn ,std::ios::in);
-  if(!fi) { // file couldn't be opened
-    cerr << "Error open file (" << Fn << ")" << endl;
-    exit(-1);
-  }
-
-  int i=0;
-  float t, E, Ed;
-  while(fi >> d->r[i].x >> d->r[i].y >> d->r[i].z
-    >> t >> d->r[i].E >> d->r[i].Ed >> d->r[i].El >> d->r[i].Ti ) {
-    //cout << "kkk " << d->r[i].e << endl;
-    i++;
-    //if( i%1000 == 0 ) cout << "line: " << i << endl;
-  }
-
-  // string s;
-  // float x4, x6, x7;
-  // while( getline(fi, s) ) {
-  //   if(i<6) cout << "(" << s << ")" << endl;
-
-  //   sscanf(s.c_str(), "%g%g%g%g%g%g%g%g",&d->r[i].x, &d->r[i].y,
-  //      &d->r[i].z, &x4, &d->r[i].e, &x6, &x7, &d->r[i].t);
-  //   cout << "kkk " << x6 << " " << d->r[i].e << endl;
-  //   i++;
-  //   if( i%1000 == 0 ) cout << "line: " << i << endl;
-  // }
-  
-  fi.close();
-
-  //  cout << i << "fin "<< d->r[5].x << " " << d->r[5].e << " " << d->r[5].t << endl;
-
-  // C 
-  // FILE * fi = fopen(Fn, "r");
-  // if( fi==NULL ) cout << "Error opening file (" << fi << ")" << endl;
-  
-  // cout << "kkkkk " << d->r[5].x << endl;
-
-  // while( fscanf(fi, "%g %g %g %g %g %g %g %g", &d->r[i].x, &d->r[i].y,
-  //     &d->r[i].z, &t, &d->r[i].e, &Ed, &El, &d->r[i].t) != EOF) {
-  //   if(i<10)
-  //     cout << d->r[i].x << " " << d->r[i].y << " " << t << " "
-  //      << d->r[i].e << " " << d->r[i].t << endl;
-  //   i++;
-  //   //if( i%1000 == 0 ) cout << "line: " << i << endl;
-  // }
-
-  // fclose(fi);
-
-  ND = i;
-  cout << "ND2 " << ND << endl;
-
-  d->NumDat = ND;
-  d->MaxDat = ND;
-  d->MinDat = 0;
-
-  double T2 = myclock();
-  cout << "\t(" << T2-T1 << " sec)" << endl;
-
-  //WriteBinaryFile(d->r, ND, Fn);
-  ComputeFrame(d);
-  return(d);
-}
-*/

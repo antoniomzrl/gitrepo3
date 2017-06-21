@@ -100,9 +100,9 @@ void DisplayInfo(DataObject *d) {
       << "\tx (" << d->m.x << " , " << d->M.x << ")\tDx: " << d->M.x-d->m.x << " " << d->SpatialUnits << endl
       << "\ty (" << d->m.y << " , " << d->M.y << ")\tDy: " << d->M.y-d->m.y << " " << d->SpatialUnits << endl
       << "\tz (" << d->m.z << " , " << d->M.z << ")\tDz: " << d->M.z-d->m.z << " " << d->SpatialUnits << endl
-      << "\tRmax |" << d->rMax << "|" << endl
     //<< "spunit: " << d->SpatialUnits << " spf: " << d->SpatialFactor << endl
-      << "Volume: " << d->Volume << " " << d->SpatialUnits << "3" << endl
+      << "Volume: " << (d->M.x - d->m.x) * (d->M.y - d->m.y) * (d->M.z - d->m.z)
+      << " " << d->SpatialUnits << "3" << endl
       << "\tshift xyz: " << (d->m.x+d->M.x)*0.5 << ","
       << (d->m.y+d->M.y)*0.5 << "," << (d->m.z+d->M.z)*0.5 << endl
 
@@ -114,7 +114,7 @@ void DisplayInfo(DataObject *d) {
       << endl << endl;
 
 
-  sfi << "N# interactions: " << d->NumDat << endl
+  sfi << "N# interactions: " << (d->r).size() << endl
       << "Energy Dep:      " << BestUnitEnergy(d->EdepTotal)
       << endl << endl;
 
@@ -127,7 +127,7 @@ void DisplayInfo(DataObject *d) {
       sfi << right << setw(2) << i << " "
 	  << left  << setw(28) << tpi[i]
   	  << right << setw(12) << d->Hist[i] << "  "
-  	  << left  << setw(12) << (float)d->Hist[i]/(float)d->NumDat
+  	  << left  << setw(12) << (float)d->Hist[i]/(float)(d->r).size()
   	  << right << setw(12) << BestUnitEnergy(d->Hist2[i]);
     if(d->Hist[i] != 0)
       sfi << right << setw(13) << BestUnitEnergy(d->Hist2[i]/d->Hist[i])
@@ -135,12 +135,13 @@ void DisplayInfo(DataObject *d) {
   }
 
   float rho = 0.0;  // (g/cm3)
-  for(unsigned long i=0; i< d->NumDat; i++) {
+  for(unsigned long i=0; i< (d->r).size(); i++) {
     rho += d->r[i].f[6];
   }
-  rho /= d->NumDat;
+  rho /= (d->r).size();
 
-  float mass = rho * d->Volume/pow(d->SpatialFactor,3)/1e12; // (Kg)
+  float Volume = (d->M.x - d->m.x) * (d->M.y - d->m.y) * (d->M.z - d->m.z);
+  float mass = rho * Volume/pow(d->SpatialFactor,3)/1e12; // (Kg)
   float Dose = d->EdepTotal * 1.60217733e-19 / mass;
 
   sfi << endl
@@ -159,7 +160,7 @@ void DisplayNearData(double xM, double yM, DataObject *d) {
   unsigned long Im = 0;
   double Dm = sqrt( pow((d->r[0].x-xM),2)+pow((d->r[0].y-yM),2) );
 
-  for(unsigned long i=0; i< d->NumDat; i++) {
+  for(unsigned long i=0; i< (d->r).size(); i++) {
     double Dist = sqrt( pow((d->r[i].x-xM),2)+pow((d->r[i].y-yM),2) );
     if(Dist < Dm) {
       Dm = Dist;

@@ -151,11 +151,13 @@ int main (int argc, char **argv) {
     }
   }
 
+  string sshp = "sshpass -f $HOME/.ssh/pass ";
+  
   if( HostName == "local" )
     cmd = "cd " + JobDir + "; for j in " + jfiles + " ; do bash $j ; done";
   else if( HostName == "euler" || HostName == "dirac" )
-    cmd = "scp -r " + JobDir + " " + HostName + ":batch ; "
-      + "ssh " + HostName + " 'cd batch/" + JobDir
+    cmd = sshp + "scp -r " + JobDir + " " + HostName + ":batch ; "
+      + sshp + "ssh " + HostName + " 'cd batch/" + JobDir
       + "; for j in " + jfiles + " ; do qsub $j ; done'";
   else // ceta
     cmd = "scp -r " + JobDir + " " + HostName + ":batch ; "

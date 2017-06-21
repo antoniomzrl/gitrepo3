@@ -3,8 +3,6 @@
 
 extern DataObject * d;
 extern GtkWidget * glw;
-extern float FoV, AR;
-extern float verboseFlag;
 
 double xMouse, yMouse;
 int  mouseX, mouseY;
@@ -15,8 +13,12 @@ bool mouseLeft, mouseLeftCtrl, mouseLeftShft,
 
 
 void PositionFromPixel(double * px, double * py, int x, int y) {
-  *px = ( 2.0*x/gtk_widget_get_allocated_width(glw) -1.0) *FoV*AR-AR+1;
-  *py = (-2.0*y/gtk_widget_get_allocated_height(glw) +1.0) *FoV;
+  
+  //*px = ( 2.0*x/gtk_widget_get_allocated_width(glw) -1.0) *d->FoV*d->AR-d->AR+1;
+  //*py = (-2.0*y/gtk_widget_get_allocated_height(glw) +1.0) *d->FoV;
+
+  *px =  (x/(d->PlotSize->width/2.0)  -1.0) * d->FoV*d->AR-d->AR+1;
+  *py = -(y/(d->PlotSize->height/2.0) -1.0) * d->FoV;
 }
 
 
@@ -128,7 +130,7 @@ gboolean butRelease(GtkWidget * glw, GdkEventButton * event) {
 
 
 
-gboolean mouseMotion(GtkWidget * w, GdkEventMotion * event) {
+gboolean mouseMotion(GtkWidget * glw, GdkEventMotion * event) {
   
   GdkModifierType state;
   int x, y;
@@ -136,8 +138,9 @@ gboolean mouseMotion(GtkWidget * w, GdkEventMotion * event) {
   // Avoid lags
   if(event->is_hint) {
     //gdk_window_get_pointer(event->window, &x, &y, &state);
-    gdk_window_get_device_position(gtk_widget_get_window(w),
-				   gtk_get_current_event_device(), &x, &y, &state);
+    gdk_window_get_device_position(gtk_widget_get_window(glw),
+				   gtk_get_current_event_device(),
+				   &x, &y, &state);
   }
   else {
     x = (int)event->x;
