@@ -32,8 +32,8 @@ void PlotColorBarText(vec3 l, vec3 u) {
 
   float dy = (u.y-l.y)/1000;
 
-  float min = d->m.f[d->vType];
-  float max = d->M.f[d->vType];
+  float min = d->m.f[d->ac];
+  float max = d->M.f[d->ac];
 
   if(min <= max) {
     min *= 0.999;
@@ -46,7 +46,7 @@ void PlotColorBarText(vec3 l, vec3 u) {
   
   // labels
   float dt = (max - min)/10;
-  if( d->vType == 1 ) dt =1;
+  if( d->ac == 1 ) dt =1;
 
   char label[80];
   for(int i=0;i<(int)tpi.size(); i++) {
@@ -57,7 +57,7 @@ void PlotColorBarText(vec3 l, vec3 u) {
     float y = l.y + (u.y-l.y)*(t-min)/(max-min);  // Interpolate
 
     char Kilo[4], Mega[4];
-    if(d->vType == 3 || d->vType == 4 || d->vType == 5) {
+    if(d->ac == 3 || d->ac == 4 || d->ac == 5) {
       strcpy(Kilo, "KeV");
       strcpy(Mega, "MeV");
     }
@@ -66,12 +66,12 @@ void PlotColorBarText(vec3 l, vec3 u) {
       strcpy(Mega, "M");
     }
 
-    if(d->vType == 0) sprintf(label, "%s", pn[(int)t].c_str() );
+    if(d->ac == 0) sprintf(label, "%s", pn[(int)t].c_str() );
     else if(t < 1e3)  sprintf(label, "%.3g", t);
     else if(t < 1e6)  sprintf(label, "%.3g %s", t/1e3, Kilo);
     else              sprintf(label, "%.2g %s", t/1e6, Mega);
 
-    if( d->vType == 1 && (unsigned int)t < tpi.size() ) {
+    if( d->ac == 1 && (unsigned int)t < tpi.size() ) {
       if( d->Hist[(int)t] > 0 ) {
 	sprintf(label, "%s %ld", ntpi[(int)t].c_str(), d->Hist[(int)t]);
 	if(d->Background > 0.5) color = vec3(0,0,0);
@@ -92,7 +92,7 @@ void PlotColorBarText(vec3 l, vec3 u) {
 
   char lab[9][128];
 
-  sprintf(lab[0], "Plot: %s", d->Label[d->vType].c_str() );
+  sprintf(lab[0], "Plot: %s", d->Label[d->ac].c_str() );
 
   float rho = 0.0;  // (g/cm3)
   for(unsigned long i=0; i< (d->r).size(); i++) {

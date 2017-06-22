@@ -153,8 +153,8 @@ void UpdatePV(DataObject *d) {
 
   posval.clear();
 
-  float vm = d->m.f[d->vType];
-  float vM = d->M.f[d->vType];
+  float vm = d->m.f[d->ac];
+  float vM = d->M.f[d->ac];
   if(vm == vM) {
     vm *= 0.999;
     vM *= 1.001;
@@ -170,7 +170,7 @@ void UpdatePV(DataObject *d) {
       float rn = static_cast <float>(rand()) / static_cast <float>(RAND_MAX);
       if( rn < fac || Nd < 1000 ) {
    	vec3  p = vec3(d->r[i].x, d->r[i].y, d->r[i].z);
-   	float v = (d->r[i].f[d->vType]-vm)/(vM-vm); // in (0,1)
+   	float v = (d->r[i].f[d->ac]-vm)/(vM-vm); // in (0,1)
    	posval.push_back( vec4((p-d->c)/d->sw.w, v) );
       }
     }
@@ -178,7 +178,7 @@ void UpdatePV(DataObject *d) {
   else {
     for(unsigned long i=0; i<(d->r).size(); i+=d->Stride) {
       vec3  p = vec3(d->r[i].x, d->r[i].y, d->r[i].z);
-      float v = (d->r[i].f[d->vType]-vm)/(vM-vm); // in (0,1)
+      float v = (d->r[i].f[d->ac]-vm)/(vM-vm); // in (0,1)
       posval.push_back( vec4((p-d->c)/d->sw.w, v) );
     }
   }

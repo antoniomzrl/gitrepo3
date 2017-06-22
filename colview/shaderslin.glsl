@@ -46,12 +46,11 @@ void main() {
   vec3 vertexWS = thePV.xyz + vtx * theNormal.y; //scale & translate
   gl_Position =  MVP * vec4(vertexWS,1);
 
-  if(     thePV.w == -1)
-    fragmentColor = vec3(1,1,1);
-  else if(thePV.w == -2)
-    fragmentColor = vec3(0,0,0);
-  else
-    fragmentColor = ComputeColor(thePV.w) *1.5f;
+  if(    thePV.w > -0.1) fragmentColor = ComputeColor(thePV.w) *1.5f;
+  else if(thePV.w == -1) fragmentColor = vec3(1,1,1);
+  else if(thePV.w == -2) fragmentColor = vec3(0,0,0);
+  else if(thePV.w == -3) fragmentColor = vec3(1,1,0);
+  else if(thePV.w == -4) fragmentColor = vec3(0,0,1);
 }
 
 #elif defined(FRAGMENTSHADER)

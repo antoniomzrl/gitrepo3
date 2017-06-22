@@ -4,23 +4,6 @@ extern DataObject * d;
 extern GtkWidget * glw;
 
 
-void PlotBalls(DataObject * d) {
-  
-  double IcoLevel = d->IcosahedronLevel;
-  if(d->vEconomic && (d->r).size() > 100000) {
-    IcoLevel = std::min(IcoLevel, 1.0);
-  }
-  
-  static double IcoLevelAnt = -1;
-  if(IcoLevel != IcoLevelAnt) {
-    ComputeIcosahedronVertex(IcoLevel);
-    IcoLevelAnt = IcoLevel;
-  }
-  
-  PlotIcosahedrons();
-}
-
-
 void Draw(void) {
 
   double T1 = myclock();
@@ -43,10 +26,10 @@ void Draw(void) {
   //glEnable(GL_LINE_SMOOTH);
   glLineWidth(d->LineWidth);
   
-  PlotColorBarText();
-  PlotBalls(d);
+  PlotIcosahedrons();
   PlotOrthoLines();
   PlotColorBarLines();
+  PlotColorBarText();
 
   cout << "Draw (" << NoCalls << ") (" << myclock() -T1 << ") sec Acum("
        << myclock() -T0 << " sec)" << endl;

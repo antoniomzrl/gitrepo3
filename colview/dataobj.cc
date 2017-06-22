@@ -21,8 +21,10 @@ DataObject::DataObject() {
   LightPos = vec3(-3, 3, 3);
   greenAttenuation = 0.25;
   
-  vFrame = 1;
-  vType = 1;
+  ac = 1;
+  vFrame = true;
+  vAutoRotate = false;
+  vSelection = false;
   
   Label[0] = "Particle type";
   Label[1] = "Interaction type";
@@ -30,8 +32,6 @@ DataObject::DataObject() {
   Label[3] = "Energy Lost";
   Label[4] = "Energy Depo";
 	  
-  vAutoRotate = 0;
-  vSelection = 0;
   Stride = 1;
   SmartStride = 1;
 

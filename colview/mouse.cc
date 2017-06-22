@@ -4,7 +4,8 @@
 extern DataObject * d;
 extern GtkWidget * glw;
 
-double xMouse, yMouse;
+float xBegin, yBegin, xEnd, yEnd; // selection
+float xMouse, yMouse; // motion
 int  mouseX, mouseY;
 bool mouseLeft, mouseLeftCtrl, mouseLeftShft,
   mouseRight,   mouseRightCtrl,
@@ -12,8 +13,7 @@ bool mouseLeft, mouseLeftCtrl, mouseLeftShft,
   mouseMoved;
 
 
-void PositionFromPixel(double * px, double * py, int x, int y) {
-  
+void PositionFromPixel(float * px, float * py, int x, int y) {
   //*px = ( 2.0*x/gtk_widget_get_allocated_width(glw) -1.0) *d->FoV*d->AR-d->AR+1;
   //*py = (-2.0*y/gtk_widget_get_allocated_height(glw) +1.0) *d->FoV;
 
@@ -30,11 +30,10 @@ gboolean butScroll(GtkWidget * glw, GdkEventScroll * event) {
 
 
 gboolean butPress(GtkWidget * glw, GdkEventButton * event) {
-
   PositionFromPixel( &xMouse, &yMouse, (int)event->x, (int)event->y);
 
-  d->xBegin = xMouse;
-  d->yBegin = yMouse;
+  xBegin = xMouse;
+  yBegin = yMouse;
 
   if(event->state & GDK_SHIFT_MASK) {
     if(event->button == 1)
@@ -44,7 +43,7 @@ gboolean butPress(GtkWidget * glw, GdkEventButton * event) {
 
   if(event->state & GDK_CONTROL_MASK) {
     if(     event->button == 1) mouseLeftCtrl = true;
-    else if(event->button == 3) mouseMiddleCtrl = true;
+    else if(event->button == 2) mouseMiddleCtrl = true;
     else if(event->button == 3) mouseRightCtrl = true;
     return true;
   }
@@ -68,7 +67,7 @@ gboolean butPress(GtkWidget * glw, GdkEventButton * event) {
 
 
 gboolean butRelease(GtkWidget * glw, GdkEventButton * event) {
-  d->vEconomic = 0;
+  d->vEconomic = false;
 
   if(mouseMoved) {
     Invalidate(glw);
@@ -104,7 +103,7 @@ gboolean butRelease(GtkWidget * glw, GdkEventButton * event) {
     mouseLeft = false;
     if(mouseLeftCtrl) {
       mouseLeftCtrl = false;
-      d->vSelection = 0;
+      d->vSelection = false;
       ClipData(d);
       Invalidate(glw);
     }
@@ -159,7 +158,7 @@ gboolean mouseMotion(GtkWidget * glw, GdkEventMotion * event) {
     return true;
   }
 
-  double px, py;
+  float px, py;
   PositionFromPixel( &px, &py, x, y);
 
   mouseMoved = false;
@@ -179,21 +178,23 @@ gboolean mouseMotion(GtkWidget * glw, GdkEventMotion * event) {
     mouseMoved = true;
   }
   else if( mouseLeftCtrl) { // Mark Selection rectangle
-    d->xEnd = px;
-    d->yEnd = py;
-    d->vSelection = 1;
+    xEnd = px;
+    yEnd = py;
+    d->vSelection = true;
     mouseMoved = true;
+  }
+  else if( mouseRightCtrl) { // Mark Selection rectangle
+    xEnd = px;
+    yEnd = py;
+    d->LightPos.x = px*3;
+    d->LightPos.y = py*3;
+    Invalidate(glw);
+    cout << "mouseRight\n";
   }
   else if( mouseMiddleCtrl) { 
     d->LightPos.z += dx+dy;
     Invalidate(glw);
-  }
-  else if( mouseRightCtrl) { // Mark Selection rectangle
-    d->xEnd = px;
-    d->yEnd = py;
-    d->LightPos.x = px;
-    d->LightPos.y = py;
-    Invalidate(glw);
+    cout << "mouseMiddle\n";
   }
 
   mouseX = x;
@@ -201,9 +202,12 @@ gboolean mouseMotion(GtkWidget * glw, GdkEventMotion * event) {
 
   if( mouseMoved) {
     cout << "mouseMoved " << endl;
-    d->vEconomic = 1;
+    d->vEconomic = true;
     Invalidate(glw);
   }
 
+  d->MouseSelection = vec4(std::min(xBegin, xEnd), std::max(xBegin, xEnd),
+			   std::min(yBegin, yEnd), std::max(yBegin, yEnd));
+  
   return true;
 }

@@ -346,7 +346,7 @@ void SaveParamFile(DataObject * d) {
      << "Background   " << d->Background   << endl  
      << "vFrame       " << d->vFrame       << endl
      << "vSelection   " << d->vSelection   << endl  
-     << "vType        " << d->vType        << endl
+     << "ActiveColumn " << d->ac           << endl
      << "Stride       " << d->Stride       << endl
      << "IcosahedronLevel " << d->IcosahedronLevel   << endl  
      << "SpatialUnits " << d->SpatialUnits << endl;
@@ -371,7 +371,7 @@ void ReadParamFile(char * fn, DataObject * d) {
      >> bf >> d->Background
      >> bf >> d->vFrame
      >> bf >> d->vSelection
-     >> bf >> d->vType
+     >> bf >> d->ac
      >> bf >> d->Stride
      >> bf >> d->IcosahedronLevel
      >> bf >> d->SpatialUnits;

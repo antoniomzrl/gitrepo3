@@ -40,11 +40,11 @@ void TranslateScene(int dx, int dy) {
 
 void ClipData(DataObject * d) {
   
-  float xm = std::min(d->xBegin, d->xEnd);
-  float xM = std::max(d->xBegin, d->xEnd);
-  float ym = std::min(d->yBegin, d->yEnd);
-  float yM = std::max(d->yBegin, d->yEnd);
-
+  float xm = d->MouseSelection.x;
+  float xM = d->MouseSelection.y;
+  float ym = d->MouseSelection.z;
+  float yM = d->MouseSelection.w;
+  
   cout << "xcyc " << d->c.x << " " << d->c.y << endl;
   
   xm = xm * d->sw.w + d->c.x;
@@ -67,8 +67,7 @@ void ClipData(DataObject * d) {
     (d->r).resize(nd);
     ComputeFrame(d);
   }
-  cout << "2 Clip ND " << (d->r).size() << " " << d->xBegin << " "
-       <<  d->xEnd << " " << d->yBegin << " " << d->yEnd << endl;
+  cout << "2 Clip ND " << (d->r).size() << endl;
 
   ComputeHistogram(d);
   d->NeedUpdatePV = true;

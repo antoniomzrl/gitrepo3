@@ -60,14 +60,13 @@ using namespace std;
 
 typedef struct DataObject {
   float BallSize, BallFactor, BallScale, Background, DiscretizePalette, greenAttenuation;
+  float FontSize, LineWidth;
   vec4 Light; //Ambient, Diffuse, Specular, Intensity
   vec3 LightPos;
   vec3 CanvasPoint;
   bool vFrame, vSelection, vEconomic, vAutoRotate;
   string Label[10];
   int IcosahedronLevel, Stride, SmartStride;
-  float FontSize;
-  float LineWidth;
   vec3 Scale;
   vec4 MouseSelection; // xBegin, yBegin, xEnd, yEnd
 

@@ -83,7 +83,7 @@ void CB_SaveImage() {
 
 void CB_SwapPar(GtkToggleButton * but, gpointer Data) {
   string dt = string( (char *)Data );
-  int bt = gtk_toggle_button_get_active(but);
+  bool bt = gtk_toggle_button_get_active(but);
 
   if(      dt == "frm" ) d->vFrame = bt;
   else if( dt == "sxy" ) SwapData(d, string(dt));
@@ -138,13 +138,13 @@ void CB_TpiFile(void) {
 void CB_PlotType(GtkComboBox * combo) {
   string txt = gtk_combo_box_text_get_active_text(GTK_COMBO_BOX_TEXT(combo) );
     
-  if(     txt == "Particle")    d->vType = 0;
-  else if(txt == "Interaction") d->vType = 1;
-  else if(txt == "Energy")      d->vType = 3;
-  else if(txt == "ELost")       d->vType = 4;
-  else if(txt == "EDep")        d->vType = 5;
+  if(     txt == "Particle")    d->ac = 0;
+  else if(txt == "Interaction") d->ac = 1;
+  else if(txt == "Energy")      d->ac = 3;
+  else if(txt == "ELost")       d->ac = 4;
+  else if(txt == "EDep")        d->ac = 5;
   
-  cout << "CB_PlotType " << txt << " " << d->vType << endl;
+  cout << "CB_PlotType " << txt << " " << d->ac << endl;
   d->NeedUpdatePV = true;
   Invalidate(glw);
 }

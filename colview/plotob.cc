@@ -133,10 +133,20 @@ void UpdateGpuStreamBuffer(GLuint bufGPU, unsigned int SZ, void * ptr) {
 }
 
 
+
 void PlotIcosahedrons() {
   printDbg(3, "PlotIcosahedrons\n", "BLUE");
 
-  glUseProgram(programID);
+  double IcoLevel = d->IcosahedronLevel;
+  if(d->vEconomic && (d->r).size() > 100000) {
+    IcoLevel = std::min(IcoLevel, 1.0);
+  }
+  
+  static double IcoLevelAnt = -1;
+  if(IcoLevel != IcoLevelAnt) {
+    ComputeIcosahedronVertex(IcoLevel);
+    IcoLevelAnt = IcoLevel;
+  }
 
   
   vec4 Light;
@@ -144,7 +154,7 @@ void PlotIcosahedrons() {
   GLuint primitive;
   LightColor = vec3(1,1,1);
 
-  if(vertices.size() == 1) {        // points
+  if(vertices.size() == 1) {  // points
     primitive = GL_POINTS;
     Light     = vec4(0.4, 1.0, 0.0, 10.0);
     LightPos  = vec3(0,0,-3);
@@ -175,6 +185,10 @@ void PlotIcosahedrons() {
     UpdateGpuBuffer(vtxVBO, Nvertices*sizeof(vec3), &vertices[0]);
     UpdateGpuBuffer(nmlVBO, Nvertices*sizeof(vec3),  &normals[0]);
   }
+  
+  glUseProgram(programID);
+
+  cout << "------- "; printglm(LightPos);
   
   // Send our transformation to the currently bound shader, in the "MVP" uniform
   glUniformMatrix4fv( mvpID, 1, GL_FALSE, &theMVP[0][0] );
