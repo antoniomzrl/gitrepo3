@@ -59,23 +59,23 @@ using namespace std;
 
 
 typedef struct DataObject {
-  float BallSize, BallFactor, BallScale, Background, DiscretizePalette, greenAttenuation;
+  float BallSize, BallFactor, BallScale,
+    Background, FontSize, LineWidth,
+    DiscretizePalette, greenAttenuation,
+    FoV, AR,
+    theHorizAngle, theVertAngle, theZoom,
+    theHorizDisp, theVertDisp, theDepthDisp;
+
+  int IcosahedronLevel, Stride, SmartStride;
+    
   vec4 Light; //Ambient, Diffuse, Specular, Intensity
-  vec3 LightPos;
-  vec3 CanvasPoint;
+  vec3 LightPos, CanvasPoint, Scale;
   bool vFrame, vSelection, vEconomic, vAutoRotate;
   string Label[10];
-  int IcosahedronLevel, Stride, SmartStride;
-  float FontSize;
-  float LineWidth;
-  vec3 Scale;
   vec4 MouseSelection; // xBegin, yBegin, xEnd, yEnd
 
   int ac; // active column
 
-  float FoV, AR,
-    theHorizAngle, theVertAngle, theZoom,
-    theHorizDisp, theVertDisp, theDepthDisp;
 
   GdkRectangle * PlotSize;
 
