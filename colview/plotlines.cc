@@ -184,11 +184,11 @@ void PlotColorBarLines() {
   lin.push_back( vec3(-0.5,  0,  0) );
   lin.push_back( vec3( 0.5,  0,  0) );
 
-  vec3 l = vec3(d->PlotSize->width*0.02,  d->PlotSize->height/2,    0.0);
-  vec3 u = vec3(d->PlotSize->width*0.045, d->PlotSize->height*0.98, 0.0);
+  vec3 l = vec3(d->PlotSize.x*0.02,  d->PlotSize.y/2,    0.0);
+  vec3 u = vec3(d->PlotSize.x*0.045, d->PlotSize.y*0.98, 0.0);
   AddColorBarLines(l, u, pvl, dir);
   
-  mat4 Proj = ortho(0.0f, (float)d->PlotSize->width, 0.0f, (float)d->PlotSize->height);
+  mat4 Proj = ortho(0.0f, d->PlotSize.x, 0.0f, d->PlotSize.y);
   
   RenderLines(lin, pvl, dir, Proj);
 }

@@ -171,6 +171,7 @@ void InitControlWidget(GtkWidget * butwin) {
   //MyCombo("Spatial Units:",   G_CALLBACK(CB_SpatialUnits),boxa3, "mm μm nm Angstrom Best");
 
   MyClickButton("TPI File",    G_CALLBACK(CB_TpiFile), boxa2);
+  MyClickButton("Compress SB",    G_CALLBACK(CB_CompressTpi), boxa2);
 
   MyLabelScale("Icosah Lvl   ", "isl",  boxa3,  0,   6, 1,    0);
   MyLabelScale("Ball Size    ", "bsz",  boxa3,  0,   9, 0.1, d->BallSize/0.3);

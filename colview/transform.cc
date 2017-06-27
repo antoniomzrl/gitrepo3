@@ -25,14 +25,14 @@ void RotateScene(int dx, int dy, int dz) {
 
 
 void ScaleScene(int dy) {
-  d->theZoom += (float)dy / (d->PlotSize->height/2.0);
+  d->theZoom += (float)dy / (d->PlotSize.y/2.0);
   if(d->theZoom < 0) d->theZoom = 0;
 }
 
 
 void TranslateScene(int dx, int dy) {
-  d->theHorizDisp += (float)dx / (d->PlotSize->height/2.0) * d->FoV;
-  d->theVertDisp  -= (float)dy / (d->PlotSize->height/2.0) * d->FoV;
+  d->theHorizDisp += (float)dx / (d->PlotSize.y/2.0) * d->FoV;
+  d->theVertDisp  -= (float)dy / (d->PlotSize.y/2.0) * d->FoV;
 }
 
 

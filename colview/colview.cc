@@ -29,6 +29,7 @@ void Init(int argc, char **argv) {
   }
 
   InitTpi(TpiFn);
+  
   if(verboseFlag >6)
     for(int i=tpi.size()-1; i>=0; i--)
       cout << setw(4) << TPI(tpi[i]) << setw(40) << tpi[i]
@@ -109,7 +110,7 @@ int main(int argc, char **argv) {
   GdkRectangle * screenSz = ScreenDimensions(tw);
 
   d->PlotSize = WindowDimensions(screenSz);  
-  d->FontSize = d->PlotSize->height * 13.0/1000.0;
+  d->FontSize = d->PlotSize.y * 13.0/1000.0;
 
   btw = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
   InitControlWidget(btw);
@@ -119,21 +120,21 @@ int main(int argc, char **argv) {
 
 
   if(JoinWindows) {
-    gtk_widget_set_size_request(box1, d->PlotSize->width, d->PlotSize->height);
-    gtk_widget_set_size_request(box2, 300, d->PlotSize->height);
+    gtk_widget_set_size_request(box1, d->PlotSize.x, d->PlotSize.y);
+    gtk_widget_set_size_request(box2, 300, d->PlotSize.y);
     gtk_box_pack_start(GTK_BOX(box), box2, true, true, 0);
     gtk_box_pack_start(GTK_BOX(box), box1, true, true, 0);
     gtk_container_add(GTK_CONTAINER(tw), box);
   }
   else {  
-    gtk_window_set_default_size(GTK_WINDOW(tw), d->PlotSize->width, d->PlotSize->height);
+    gtk_window_set_default_size(GTK_WINDOW(tw), d->PlotSize.x, d->PlotSize.y);
     gtk_container_add(GTK_CONTAINER(tw), box1);
     gtk_container_add(GTK_CONTAINER(tw2), box2);
     gtk_window_move(GTK_WINDOW(tw2), 10, 10);
     gtk_widget_show_all(tw2);
   }
 
-  gtk_window_move(GTK_WINDOW(tw), screenSz->width-d->PlotSize->width-3, 3);
+  gtk_window_move(GTK_WINDOW(tw), screenSz->width-d->PlotSize.x-3, 3);
   gtk_widget_show_all(tw);
 
 

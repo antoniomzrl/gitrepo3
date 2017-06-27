@@ -117,7 +117,7 @@ void PlotColorBarText(vec3 l, vec3 u) {
   else                    color = vec3(1,1,1);
 
   for(int i=0; i<9; i++) {
-    float y = d->PlotSize->height/2 -d->PlotSize->height/15 - (i+1)*d->PlotSize->height/35;
+    float y = d->PlotSize.y/2 -d->PlotSize.y/15 - (i+1)*d->PlotSize.y/35;
     RenderText(lab[i], l.x, y, d->FontSize, color);
   }
   
@@ -126,8 +126,8 @@ void PlotColorBarText(vec3 l, vec3 u) {
 
 
 void PlotColorBarText() {
-  vec3 l = vec3(d->PlotSize->width*0.021, d->PlotSize->height*0.507, 0.0);
-  vec3 u = vec3(d->PlotSize->width*0.045, d->PlotSize->height*0.985, 0.0);
+  vec3 l = vec3(d->PlotSize.x*0.021, d->PlotSize.y*0.507, 0.0);
+  vec3 u = vec3(d->PlotSize.x*0.045, d->PlotSize.y*0.985, 0.0);
 
   PlotColorBarText(l, u);
 }

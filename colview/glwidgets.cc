@@ -4,13 +4,12 @@
 extern DataObject * d;
 
 
-GdkRectangle * WindowDimensions(GdkRectangle * screenSz) {
-  GdkRectangle * wsz = new GdkRectangle();
-  wsz = new GdkRectangle();
-  wsz->height = screenSz->height * 0.85;
-  wsz->width  = screenSz->height * 0.85 *4/3;
+vec4 WindowDimensions(GdkRectangle * screenSz) {
+  vec4 wsz = vec4(0,0,0,0);
+  wsz.y = screenSz->height * 0.85;
+  wsz.x = screenSz->height * 0.85 *4/3;
   
-  cout << "Widget size: " << wsz->width << " x " << wsz->height << endl;
+  cout << "Widget size: " << wsz.x << " x " << wsz.y << endl;
 
   return wsz;
 }

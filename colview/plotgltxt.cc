@@ -158,7 +158,7 @@ void RenderText(string text, float x, float y, float Scale, vec3 color) {
   float scale = Scale * 1.3 / (float)SizeInPixels;
   //cout << "scale: " << scale << endl;
   
-  mat4 projection = ortho(0.0f, (float)d->PlotSize->width, 0.0f, (float)d->PlotSize->height);
+  mat4 projection = ortho(0.0f, (float)d->PlotSize.x, 0.0f, (float)d->PlotSize.y);
  
   glUseProgram(program);
   glUniformMatrix4fv(glGetUniformLocation(program, "projection"),

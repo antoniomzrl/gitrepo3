@@ -17,8 +17,8 @@ void PositionFromPixel(float * px, float * py, int x, int y) {
   //*px = ( 2.0*x/gtk_widget_get_allocated_width(glw) -1.0) *d->FoV*d->AR-d->AR+1;
   //*py = (-2.0*y/gtk_widget_get_allocated_height(glw) +1.0) *d->FoV;
 
-  *px =  (x/(d->PlotSize->width/2.0)  -1.0) * d->FoV*d->AR-d->AR+1;
-  *py = -(y/(d->PlotSize->height/2.0) -1.0) * d->FoV;
+  *px =  (x/(d->PlotSize.x/2.0)  -1.0) * d->FoV*d->AR-d->AR+1;
+  *py = -(y/(d->PlotSize.y/2.0) -1.0) * d->FoV;
 }
 
 

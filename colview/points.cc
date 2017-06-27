@@ -40,8 +40,8 @@ string GetAbsoluteFile(string Fn) {
 
 
 
-void InitTpi(string Fn) {
 
+void ReadTpiFile(string Fn) {
   tpi.clear();
   string fn = GetAbsoluteFile(Fn);
  
@@ -60,6 +60,14 @@ void InitTpi(string Fn) {
 
   tpi.push_back("-----"); // 0-index
 
+  cout << "TPI File: " << fn << " " << tpi.size() << endl;
+}
+
+
+
+void InitTpi(string Fn) {
+  ReadTpiFile(Fn);
+  
   //Reverse order
   for(unsigned int i=0; i<tpi.size()/2; i++) {
     string tmp = tpi[i];
@@ -117,9 +125,6 @@ void InitTpi(string Fn) {
   for(int i=0; i<6; i++)
     pn.push_back(p[i]);
   
-  cout << "TPI File: " << fn << " " << tpi.size() << endl;
-
-
 }
 
 

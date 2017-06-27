@@ -76,7 +76,7 @@ void CB_SaveImage() {
   //GdkGLContext * glcontext = gtk_widget_get_gl_context(glw);
   //GdkGLDrawable * gldrawable = gtk_widget_get_gl_drawable(glw);
   
-  SaveImage(0, 0, d->PlotSize->width, d->PlotSize->height);
+  SaveImage(0, 0, d->PlotSize.x, d->PlotSize.y);
 }
 
 
@@ -134,6 +134,10 @@ void CB_TpiFile(void) {
 }
 
 
+void CB_CompressTpi(void) {
+  CompressTpi();
+  Invalidate(glw);
+}
 
 void CB_PlotType(GtkComboBox * combo) {
   string txt = gtk_combo_box_text_get_active_text(GTK_COMBO_BOX_TEXT(combo) );

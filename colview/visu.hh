@@ -73,11 +73,9 @@ typedef struct DataObject {
   bool vFrame, vSelection, vEconomic, vAutoRotate;
   string Label[10];
   vec4 MouseSelection; // xBegin, yBegin, xEnd, yEnd
+  vec4 PlotSize;
 
   int ac; // active column
-
-
-  GdkRectangle * PlotSize;
 
   
   float  SpatialFactor;
@@ -242,7 +240,7 @@ void InitControlWidget(GtkWidget *);
 void InitTopWidget(GtkWidget *, const char *); 
 void InitGlWidget(GtkWidget *);
 GdkRectangle * ScreenDimensions(GtkWidget *);
-GdkRectangle * WindowDimensions(GdkRectangle *);
+vec4 WindowDimensions(GdkRectangle *);
 void MakeGlWidgetColorBar(void);
 void TimerRotate();
 
@@ -274,6 +272,8 @@ void CB_OpenDataFile(void);
 
 string ChooseFile(string, string);
 void CB_TpiFile(void);
+void CB_CompressTpi(void);
+void CompressTpi(void);
 void CB_ReOpenDataFile(void);
 void CB_WriteBinaryFile();
 void CB_WriteASCIIFile();
