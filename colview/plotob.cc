@@ -99,9 +99,9 @@ void UpdateTransformMatrices() {
   theMVP = Proj * View * Model; // ModelViewProjection : mult 3 matrices
   theIMV = transpose(inverse(View * Model));
   Rm     = Rh * Rv;
-  //cout << "IMV\n"; printgsl(IMV); //printgsl(ModelMat);
-  cout << "AxisToMe: " << AxisToMe() << endl;
 
+  //cout << "IMV\n"; printgsl(IMV); //printgsl(ModelMat);
+  //cout << "AxisToMe: " << AxisToMe() << endl;
 }
 
 
@@ -188,7 +188,7 @@ void PlotIcosahedrons() {
   
   glUseProgram(programID);
 
-  cout << "------- "; printglm(LightPos);
+  //cout << "------- "; printglm(LightPos);
   
   // Send our transformation to the currently bound shader, in the "MVP" uniform
   glUniformMatrix4fv( mvpID, 1, GL_FALSE, &theMVP[0][0] );

@@ -201,7 +201,6 @@ gboolean mouseMotion(GtkWidget * glw, GdkEventMotion * event) {
   mouseY = y;
 
   if( mouseMoved) {
-    cout << "mouseMoved " << endl;
     d->vEconomic = true;
     Invalidate(glw);
   }

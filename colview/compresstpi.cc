@@ -35,8 +35,6 @@ void CompressTpi() {
   tpi.resize(idx.size());
   ntpi.resize(idx.size());
 
-  
-  
   for(unsigned int i=0; i<(d->r).size(); i++)
     for(unsigned int j=0; j<idx.size(); j++)
       if( d->r[i].f[1] == idx[j]) 
@@ -44,7 +42,8 @@ void CompressTpi() {
 
   ComputeFrame(d);
   ComputeHistogram(d);
-      
+  d->NeedUpdatePV = true;
+  
   for(unsigned int i=0; i<tpi.size(); i++) {
     cout << right << setw(4) << i << " "
 	 << left  << setw(32) << tpi[i]

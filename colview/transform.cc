@@ -19,8 +19,9 @@ void RotateScene(int dx, int dy, int dz) {
   static float inc = glm::pi<float>()/180.0 *0.1;
   d->theHorizAngle += dy * inc;
   d->theVertAngle  += dx * inc;
-  cout << "angs " << d->theHorizAngle*180.0/glm::pi<float>()
-       << " " << d->theVertAngle*180.0/glm::pi<float>() << endl;
+
+  //cout << "angs " << d->theHorizAngle*180.0/glm::pi<float>()
+  //     << " " << d->theVertAngle*180.0/glm::pi<float>() << endl;
 }
 
 

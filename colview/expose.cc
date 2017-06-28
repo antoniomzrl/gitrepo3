@@ -2,7 +2,10 @@
 #include "visu.hh"
 
 void Invalidate(GtkWidget * w) {
-  cout << endl << "Invalidate " << gtk_widget_get_name(w) << endl;
+  //cout << endl << "Invalidate " << gtk_widget_get_name(w) << endl;
+  string text = "Invalidate " + (string) gtk_widget_get_name(w) + "\n";
+  printDbg(3, text, "RED");
+
   gtk_widget_queue_draw(GTK_WIDGET(w) );
 }
 

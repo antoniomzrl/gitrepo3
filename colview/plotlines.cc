@@ -176,8 +176,6 @@ void PlotOrthoLines() {
 
 
 void PlotColorBarLines() {
-  cout << "PlotColorBarLines\n";
-  
   vector <vec3> lin, dir;
   vector <vec4> pvl;
  
