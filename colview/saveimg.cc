@@ -1,4 +1,4 @@
-//#include "visu.hh"
+//#include "colv.hh"
 #include <GL/gl.h>
 #include <cstdlib>
 #include<iostream>

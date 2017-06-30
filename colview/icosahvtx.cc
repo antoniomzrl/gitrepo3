@@ -1,4 +1,4 @@
-#include "visu.hh"
+#include "colv.hh"
 
 vector <vec3> vertices, normals;
 

@@ -1,6 +1,6 @@
 //orthoendrons and colorbar lines
 
-#include "visu.hh"
+#include "colv.hh"
 
 
 extern DataObject * d;

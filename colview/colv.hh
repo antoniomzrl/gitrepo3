@@ -1,6 +1,6 @@
 
-#ifndef _VISU_HH_
-#define _VISU_HH_
+#ifndef _COLV_HH_
+#define _COLV_HH_
 
 	 
 #include <string.h>
@@ -287,4 +287,4 @@ void CB_PlotType(GtkComboBox * );
 void CB_SwapPar(GtkToggleButton *, gpointer);
 void CB_ScaleValue(GtkAdjustment *, gpointer);
 
-#endif //_VISU_HH_
+#endif //_COLV_HH_

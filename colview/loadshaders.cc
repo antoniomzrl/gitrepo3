@@ -1,4 +1,4 @@
-#include "visu.hh"
+#include "colv.hh"
 extern float verboseFlag, glslVersionFlag;
 
 string ErrorMsg = "";

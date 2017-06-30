@@ -1,5 +1,5 @@
 
-#include "visu.hh"
+#include "colv.hh"
 
 void Invalidate(GtkWidget * w) {
   //cout << endl << "Invalidate " << gtk_widget_get_name(w) << endl;

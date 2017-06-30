@@ -1,5 +1,5 @@
 
-#include "visu.hh"
+#include "colv.hh"
 
 
 //extern GdkGLConfig * glconfig;

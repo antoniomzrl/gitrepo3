@@ -1,4 +1,4 @@
-#include "visu.hh"
+#include "colv.hh"
 
 extern DataObject * d;
 extern vector <vec3> vertices, normals;

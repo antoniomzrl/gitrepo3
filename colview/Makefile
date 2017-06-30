@@ -61,20 +61,19 @@ colview: $(OBJS) colview.o
 colview.exe: $(WOBJS) colview.obj
 	$(WCXX) -o $@ $^ $(WLDFLG)
 
+DEPS = colv.hh points.hh
 
-%.o: %.cc
-	$(CXX) $(CXXFLG) -c -o $@ $^
+%.o: %.cc $(DEPS)
+	$(CXX) $(CXXFLG) -c -o $@ $<
 
-%.obj: %.cc
-	$(WCXX) $(WCXXFLG) -c -o $@ $^
+%.obj: %.cc $(DEPS)
+	$(WCXX) $(WCXXFLG) -c -o $@ $<
 
 
 clean:
 	rm -f *.o *.obj *.exe *~  a.out
 
 
-#make 'CXX=g++ -DDEBUG -g'
-#g++ demowidget.cc -lglut -lfltk_gl
 
 # objdump -p colview.exe | grep DLL
 
