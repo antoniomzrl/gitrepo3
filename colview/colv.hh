@@ -71,7 +71,6 @@ typedef struct DataObject {
   vec4 Light; //Ambient, Diffuse, Specular, Intensity
   vec3 LightPos, CanvasPoint, Scale;
   bool vFrame, vSelection, vEconomic, vAutoRotate;
-  string Label[10];
   vec4 MouseSelection; // xBegin, yBegin, xEnd, yEnd
   vec4 PlotSize;
 

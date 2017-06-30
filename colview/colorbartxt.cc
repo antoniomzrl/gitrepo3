@@ -92,7 +92,14 @@ void PlotColorBarText(vec3 l, vec3 u) {
 
   char lab[9][128];
 
-  sprintf(lab[0], "Plot: %s", d->Label[d->ac].c_str() );
+  string Label[10];
+  Label[0] = "Particle type";
+  Label[1] = "Interaction type";
+  Label[2] = "Energy";
+  Label[3] = "Energy Lost";
+  Label[4] = "Energy Depo";
+
+  sprintf(lab[0], "Plot: %s", Label[d->ac].c_str() );
 
   float rho = 0.0;  // (g/cm3)
   for(unsigned long i=0; i< (d->r).size(); i++) {

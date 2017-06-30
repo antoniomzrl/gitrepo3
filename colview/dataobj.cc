@@ -25,13 +25,7 @@ DataObject::DataObject() {
   vFrame = true;
   vAutoRotate = false;
   vSelection = false;
-  
-  Label[0] = "Particle type";
-  Label[1] = "Interaction type";
-  Label[2] = "Energy";
-  Label[3] = "Energy Lost";
-  Label[4] = "Energy Depo";
-	  
+ 
   Stride = 1;
   SmartStride = 1;
 
