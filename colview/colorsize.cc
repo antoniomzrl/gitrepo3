@@ -73,11 +73,11 @@ void UpdatePalette() {
   //   plt[i] = vec4( col, w);
   // }
 
-  cout << "UpdatePalette" << endl;
-  for(unsigned int i=0; i<plt.size(); i++) {
-    cout << "palette " << i << " (";
-    printglm(plt[i]);
-  }
+  // cout << "UpdatePalette" << endl;
+  // for(unsigned int i=0; i<plt.size(); i++) {
+  //   cout << "palette " << i << " (";
+  //   printglm(plt[i]);
+  // }
 }
 
 

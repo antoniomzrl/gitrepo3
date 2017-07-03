@@ -1,7 +1,5 @@
 #include "colv.hh"
 
-DataObject * d;
-
 
 // constructor 
 DataObject::DataObject() {

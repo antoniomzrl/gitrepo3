@@ -2,7 +2,7 @@
 #include "colv.hh"
 #include "points.hh"
 extern vector <string> tpi, ntpi;
-extern DataObject * d;
+DataObject * d;
 
 bool JoinWindows = false;
 GtkWidget *glw, *btw;
