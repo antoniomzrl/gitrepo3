@@ -1,6 +1,7 @@
 #include "uactions.hh"
 
-TH1D *hgA, *hgE, *hgEfw, *hgEfwItg, *hgEbwItg, *hgEbw, *hgEvfw, *hgEfwph, *hgEfwel;
+TH1D *hgA, *hgE, *hgEfw, *hgEfwItg, *hgEbwItg, *hgEbw, *hgEfwph, *hgEfwel,
+  *hgEel20, *hgEph20, *hgEel80, *hgEph80;
 
 UAExit::UAExit() : GmUserRunAction(), GmUserEventAction(),
 			 GmUserSteppingAction() {
@@ -18,15 +19,18 @@ void UAExit::BeginOfRunAction( const G4Run* ) {
   G4double Nb   = GmParameterMgr::GetInstance()->GetNumericValue("UAExit:EnergyBins", 1000);
   G4double EMax = GmParameterMgr::GetInstance()->GetNumericValue("UAExit:EnergyMax", 1*MeV);
 
-  hgA     = new TH1D("Angular",     "Ang(deg)",180,  0.0, 180);
-  hgE     = new TH1D("E",           "E(eV)",   Nb, 0.0, EMax);
-  hgEfw   = new TH1D("Eforward",    "E(eV)",   Nb, 0.0, EMax);
-  hgEfwItg= new TH1D("EforwardInteg", "E(eV)",   Nb, 0.0, EMax);
-  hgEfwph = new TH1D("Eforward_ph", "E(eV)",   Nb, 0.0, EMax);
-  hgEfwel = new TH1D("Eforward_el", "E(eV)",   Nb, 0.0, EMax);
-  hgEbw   = new TH1D("Ebackward",   "E(eV)",   Nb, 0.0, EMax);
+  hgA     = new TH1D("Angular",        "Ang(deg)",180,  0.0, 180);
+  hgE     = new TH1D("E",              "E(eV)",   Nb, 0.0, EMax);
+  hgEfw   = new TH1D("Eforward",       "E(eV)",   Nb, 0.0, EMax);
+  hgEfwItg= new TH1D("EforwardInteg",  "E(eV)",   Nb, 0.0, EMax);
+  hgEfwph = new TH1D("Eforward_ph",    "E(eV)",   Nb, 0.0, EMax);
+  hgEfwel = new TH1D("Eforward_el",    "E(eV)",   Nb, 0.0, EMax);
+  hgEbw   = new TH1D("Ebackward",      "E(eV)",   Nb, 0.0, EMax);
   hgEbwItg= new TH1D("EbackwardInteg", "E(eV)",   Nb, 0.0, EMax);
-  hgEvfw  = new TH1D("E30deg",      "E(eV)",   Nb, 0.0, EMax);
+  hgEel20  = new TH1D("Eel20deg",      "E(eV)",   Nb, 0.0, EMax);
+  hgEph20  = new TH1D("Eph20deg",      "E(eV)",   Nb, 0.0, EMax);
+  hgEel80  = new TH1D("Eel80deg",      "E(eV)",   Nb, 0.0, EMax);
+  hgEph80  = new TH1D("Eph80deg",      "E(eV)",   Nb, 0.0, EMax);
 } 
 
 
@@ -54,7 +58,10 @@ void UAExit::EndOfRunAction( const G4Run* ) {
   hgEfwel->Write();
   hgEbw->Write();
   hgEbwItg->Write();
-  hgEvfw->Write();
+  hgEel20->Write();
+  hgEph20->Write();
+  hgEel80->Write();
+  hgEph80->Write();
   fexit->Close();
 } 
 
@@ -102,8 +109,6 @@ void UAExit::UserSteppingAction(const G4Step* aStep) {
 
   if(ang < 90.0) {
     hgEfw->Fill(KinE2);
-    if(ang < 30.0)
-      hgEvfw->Fill(KinE2);
     if( pn == "gamma")
       hgEfwph->Fill(KinE2);
     else if( pn == "e-")
@@ -111,5 +116,19 @@ void UAExit::UserSteppingAction(const G4Step* aStep) {
   }
   else
     hgEbw->Fill(KinE2);
+
+
+  if( pn == "gamma") {
+    if(ang < 20)
+      hgEph20->Fill(KinE2);
+    else if(ang > 80 && ang < 100)
+      hgEph80->Fill(KinE2);
+  }
+  else if( pn == "e-") {
+    if(ang < 20)
+      hgEel20->Fill(KinE2);
+    else if(ang > 80 && ang < 100)
+      hgEel80->Fill(KinE2);
+  }
 }
 
