@@ -16,14 +16,18 @@ string ToUpper(string str) {
 }
 
 
-string Pad(int i, int N) {
-  string si;
-  if( N < 10)
-    si = to_string(i);
-  else
-    si = string( 1+log10(N-1) -to_string(i).length(), '0') + to_string(i);
-  return si;
-}
+// string Pad(int i, int N) {
+//   string si;
+//   if( N < 10)
+//     si = to_string(i);
+//   else {
+//     int l = 1+log10(N-1);
+//     int l2 = to_string(i).length();
+//     cout << "ll " << l << " " << l2 << endl;
+//       si = string( 1+log10(N-1) -to_string(i).length(), '0') + to_string(i);
+//   }
+//   return si;
+// }
 
 
 string FindKeyWord( string s) {
@@ -111,7 +115,8 @@ int main (int argc, char **argv) {
   for(int i=0; i<iNoJobs; i++) {
     int iseed = stoi(seed)+i;
     int ISEED = stoi(SEED)+i;
-    string jn = JobName + "_" + Pad(iseed,iNoJobs) + "_" + Pad(ISEED,iNoJobs);
+    //string jn = JobName + "_" + Pad(iseed,iNoJobs) + "_" + Pad(ISEED,iNoJobs);
+    string jn = JobName + "_" + to_string(iseed) + "_" + to_string(ISEED);
 
     // input file
     string fni = JobDir + "/" + jn + ".inp";

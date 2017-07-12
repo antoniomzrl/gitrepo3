@@ -474,7 +474,7 @@ elif [ $1 == "simu" ] ; then
 
 	s=1000
 	s=1010
-	JOB="$EULER --jobs 10 --btime 20:05:00 --seed $s --SEED $s --dir oo_p${ii}_s0"
+	JOB="$EULER --jobs 10 --btime 20:05:00 --seed $s --SEED $s --dir oo_p${ii}_s${s}"
 	
 	jgamos  $JOB $WRL $CUBE $CYL $PHYl $GENVAR $TGV $SCOR $UAS $KILL $RUN
 	#jgamos  $JOB $WRL $CUBE $CYL $PHYl $GENVDR $TGV $SCOR $UAS $KILL $RUN
