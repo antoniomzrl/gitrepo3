@@ -472,8 +472,8 @@ elif [ $1 == "simu" ] ; then
 	CETA="--ppn 8  --jpn 8  --host amunoz@193.144.240.176"
 	PRU="--jobs 1 --jpn 1"
 
-	# 1000 (10), 1010 (10), 1020 (10), 2000 (40)
-	s=2000
+	# 1000 (10), 1010 (10), 1020 (10), 2000 (40), 2040 (40)
+	s=2040
 	JOB="$EULER --jobs 40 --btime 20:05:00 --seed $s --SEED $s --dir oo_p${ii}_s${s}"
 	
 	jgamos  $JOB $WRL $CUBE $CYL $PHYl $GENVAR $TGV $SCOR $UAS $KILL $RUN
