@@ -117,8 +117,9 @@ void UAScoreVolume::EndOfRunAction( const G4Run* ) {
   hgNp->Fill( (G4String)"#3_Volume(mm3)",     targetVolume/mm3);
   hgNp->Fill( (G4String)"#4_Mass(g)",         Mass/g);
   hgNp->Fill( (G4String)"#5_Dose(Gy)",        Dose/Gy);
-  hgNp->Fill( (G4String)"#6_Charge(Coulomb)", Charge/coulomb);
-  hgNp->Fill( (G4String)"#7_NoIonisations",   NoIonis);
+  hgNp->Fill( (G4String)"#6_Dose(cGy/h*MBq)", Dose/Gy*100.0/3600.0/1e6);
+  hgNp->Fill( (G4String)"#7_Charge(Coulomb)", Charge/coulomb);
+  hgNp->Fill( (G4String)"#8_NoIonisations",   NoIonis);
 
   cout << "UAScoreVolume summary:" << endl;
   for (int i=0; i <= hgNp->GetNbinsX()+1; i++) {
