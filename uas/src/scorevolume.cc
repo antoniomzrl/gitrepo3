@@ -92,6 +92,7 @@ void UAScoreVolume::EndOfRunAction( const G4Run* ) {
        << "Edep/primary:  " << Depo/eV/PrimCount << " eV " << endl
        << "Dose:          " << Dose/Gy << " Gy" << endl
        << "Dose/primary:  " << Dose/Gy/PrimCount << " Gy" << endl
+       << "               " << Dose/Gy/PrimCount*100.0/3600.0/1e6 << " cGy/(h*MBq)" << endl
        << "Dose/t:        " << Dose/Time/(Gy/second) << " Gy/sec" << endl
        << "               " << Dose/Time/(Gy/hour)*100 << " cGy/hour" << endl
        << "No Ionis:      " << NoIonis << endl

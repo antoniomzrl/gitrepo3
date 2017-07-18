@@ -48,9 +48,6 @@ CAPS=":VOLU   caps TUBE 0.7*mm/2 0.9*mm/2 3.5*mm/2+0.065 steel316L
       :PLACE  tapa 2 world rmy -3.5*mm/2-0.065*mm-0.2/2*mm 0 0	
       :COLOUR tapa 0 1 1"
 
-CAPSV=":VOLU  capsv TUBE 0 0.9*mm/2 3.5*mm/2+0.065 vacuum
-       :PLACE capsv 1 world rmy 0 0 0
-       :COLOUR capsv 1 0 0"
 
 VIS="/vis/scene/create 
      /vis/open VRML2FILE 
@@ -124,7 +121,7 @@ elif [ $1 == "spectrcaps" ] ; then
        	    /gamos/physics/userLimits/setMinEKin ulig limang gamma 9*MeV"
 
     UAS="/gamos/userAction UAClock"
-    RUN="/run/beamOn 1000000"
+    RUN="/run/beamOn 30000000"
     #RUN="$VIS /run/beamOn 100"
     #jgamos --dir oosc1 $WRL $PHY $GIR $CAPS         $UAS $CFT $RUN
     #jgamos --dir oosc2 $WRL $PHY $GIR $CAPS $LIMANG $UAS $CFB $RUN
@@ -135,35 +132,42 @@ elif [ $1 == "spectrcaps" ] ; then
 
 
 elif [ $1 == "simu" ] ; then
-    SWAT=":VOLU  sphewat ORB 500*mm G4_WATER_VAPOR
-          :PLACE sphewat 1 world rm0 0 0 0"
-    GEN="/gamos/setParam GmGeneratorFromTextFile:FileName //${HOME}/varian/Ir192caps.phsp
+    WRLS="$MATS $RMT
+     	 :VOLU world BOX 70*cm 70*cm 70*cm vacuum
+         :VOLU sphewat ORB 55*cm G4_WATER_VAPOR
+         :PLACE sphewat 1 world rm0 0 0 0
+	 :COLOUR sphewat 0 1 0"
+    CILV=":VOLU  cilv TUBE 0 0.9*mm/2 3.5*mm/2+0.065 vacuum
+          :PLACE cilv 1 sphewat rmy 0 0 0
+          :COLOUR cilv 1 0 0"
+    GENF="/gamos/setParam GmGeneratorFromTextFile:FileName //${HOME}/varian/Ir192caps.phsp
           /gamos/generator GmGeneratorFromTextFile"
-    TGV="/gamos/setParam   UATargetVolume:TargetName theTarget
-         /gamos/setParam   UATargetVolume:NoPhotInside 1000000
-         /gamos/userAction UATargetVolume"
+
+    TGTV="/gamos/setParam   UATargetVolume:TargetName theTarget
+          /gamos/setParam   UATargetVolume:NoPhotInside 1000000
+          /gamos/userAction UATargetVolume"
     SCOR="/gamos/setParam   UAScoreVolume:TargetName theTarget
           /gamos/setParam   UAScoreVolume:SourceActivity 1.955*Ci/1000
           /gamos/userAction UAScoreVolume"
 
-    KILL="/gamos/setParam UAClock:TimeLimit 3600*20 /gamos/userAction UAClock"
-    KILL="/gamos/setParam UAClock:TimeLimit 100 /gamos/userAction UAClock"
     UAS="/gamos/userAction UAInteraction
 	 /gamos/userAction GmCountProcessesUA"
+    KILL="/gamos/setParam UAClock:TimeLimit 3600*20 /gamos/userAction UAClock"
     
     #RUN="$VIS /run/beamOn 100"
-    RUN="/gamos/userAction UAWIF $VIS /run/beamOn 100"
-    #RUN="/run/beamOn 100000"
+    #RUN="/gamos/setParam WriteTransport 1 /gamos/userAction UAWIF /run/beamOn 1000"
+    RUN="/gamos/userAction UAClock /run/beamOn 100000"
 
-    #for (( i=0; i<${#tp[@]}; i++ )) ; do
-    for (( i=0; i<1; i++ )) ; do
-	TGT=":VOLU   theTarget ORB 2*mm G4_WATER_VAPOR
-	     :PLACE  theTarget 1 world rm0 0 ${tp[i]}*mm 0
+    tp=(005 400)
+    for (( i=0; i<${#tp[@]}; i++ )) ; do
+	rad=${tp[i]}*0.2
+	TGT=":VOLU   theTarget ORB ${rad}*mm G4_WATER_VAPOR
+	     :PLACE  theTarget 1 sphewat rm0 0 ${tp[i]}*mm 0
 	     :COLOUR theTarget 1 0 0"
 	
-	jgamos --dir oo $WRL $SWAT $PHYl $GEN $CAPSV $TGT $TGV $SCOR $UAS $RUN
+	jgamos --dir oo${tp[i]} $WRLS $CILV $PHYl $GENF $TGTV $SCOR $TGT $UAS $RUN &
     done
-
+    wait
 fi
 
 exit
