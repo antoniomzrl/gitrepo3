@@ -35,7 +35,8 @@ void UAScoreVolume::BeginOfRunAction( const G4Run* ) {
     if( touchs[it]->GetName() == targetName[0] ) {
       G4VSolid *theTarget = (G4VSolid *)touchs[it]->GetSolid();
       targetVolume = theTarget->GetCubicVolume();
-      G4cout << "\t<-- ScoreVol: " << targetVolume << " (mm3)"; 
+      G4cout << "\t<-- ScoreVol: " << targetVolume << " (mm3) radius: "
+	     << pow( targetVolume*3.0/4.0/3.141592, 0.3333) << " (mm)"; 
     }
     G4cout << G4endl;
   }
@@ -75,9 +76,11 @@ void UAScoreVolume::EndOfRunAction( const G4Run* ) {
 
   double hour = second*3600;
   double Gy   = joule/kg;
-  double pC   = coulomb *1e-12;
-  double ug   = g *1e-6;
-
+  double cGy  = Gy/100;
+  double pC   = coulomb*1e-12;
+  double ug   = g*1e-6;
+  double MBq  = Bq*1e6;
+  
   cout << "Activity       " << Activity/mCi << " mCi = " << Activity/Bq << " Bq" << endl
        << "No Primaries:  " << PrimCount            << endl
        << "Time           " << Time/second << " seg  = " << Time/millisecond << " ms" << endl
@@ -91,8 +94,8 @@ void UAScoreVolume::EndOfRunAction( const G4Run* ) {
        << "Edep:          " << Depo/eV  << " eV " << endl
        << "Edep/primary:  " << Depo/eV/PrimCount << " eV " << endl
        << "Dose:          " << Dose/Gy << " Gy" << endl
-       << "Dose/primary:  " << Dose/Gy/PrimCount << " Gy" << endl
-       << "               " << Dose/Gy/PrimCount*100.0/3600.0/1e6 << " cGy/(h*MBq)" << endl
+       << "Dose/primary:  " << Dose/PrimCount/Gy << " Gy" << endl
+       << "Dose/primary:  " << Dose/PrimCount/(cGy/hour/MBq) << " cGy/(h*MBq)" << endl
        << "Dose/t:        " << Dose/Time/(Gy/second) << " Gy/sec" << endl
        << "               " << Dose/Time/(Gy/hour)*100 << " cGy/hour" << endl
        << "No Ionis:      " << NoIonis << endl
@@ -117,7 +120,7 @@ void UAScoreVolume::EndOfRunAction( const G4Run* ) {
   hgNp->Fill( (G4String)"#3_Volume(mm3)",     targetVolume/mm3);
   hgNp->Fill( (G4String)"#4_Mass(g)",         Mass/g);
   hgNp->Fill( (G4String)"#5_Dose(Gy)",        Dose/Gy);
-  hgNp->Fill( (G4String)"#6_Dose(cGy/h*MBq)", Dose/Gy*100.0/3600.0/1e6);
+  hgNp->Fill( (G4String)"#6_Dose(cGy/h*MBq)", Dose/(cGy/hour/MBq) );
   hgNp->Fill( (G4String)"#7_Charge(Coulomb)", Charge/coulomb);
   hgNp->Fill( (G4String)"#8_NoIonisations",   NoIonis);
 

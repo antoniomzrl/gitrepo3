@@ -72,7 +72,7 @@ KEE="/gamos/physics/userLimits/setMinEKin ulie gir e- 2*MeV
      /gamos/physics/userLimits/setMinEKin ulip gir e+ 2*MeV"
 
 #tp=(5 10 20 30 40 45 50 55 60 70 80 90 100 120 140 150 200 250 300 350 400)
-tp=(005 010 020 030 050 070 100 150 200 250 300 400)
+tp=( 005 010 020 030 050 070 100 150 200 250 300 400 )
 
 
 if [ $1 == "vis" ] ; then
@@ -152,29 +152,59 @@ elif [ $1 == "simu" ] ; then
 
     UAS="/gamos/userAction UAInteraction
 	 /gamos/userAction GmCountProcessesUA"
-    KILL="/gamos/setParam UAClock:TimeLimit 3600*20 /gamos/userAction UAClock"
-    
-    #RUN="$VIS /run/beamOn 100"
-    #RUN="/gamos/setParam WriteTransport 1 /gamos/userAction UAWIF /run/beamOn 1000"
-    RUN="/gamos/userAction UAClock /run/beamOn 100000"
 
-    tp=(005 400)
+ 
+    # Vis target spheres
+    # RUN="$VIS /run/beamOn 1"
+    # for (( i=0; i<${#tp[@]}; i++ )) ; do
+    # 	rad='sqrt('${tp[i]}')'
+    # 	TGT="$TGT
+    # 	     :VOLU   theTarget${i} ORB ${rad}*mm G4_WATER_VAPOR
+    # 	     :PLACE  theTarget${i} 1 sphewat rm0 0 ${tp[i]}*mm 0
+    # 	     :COLOUR theTarget${i} 1 0 0"
+    # done
+    # jgamos --dir oo${tp[i]} $WRLS $CILV $PHYl $GENF $TGTV $SCOR $TGT $UAS $RUN
+
+    #RUN="/gamos/setParam WriteTransport 1 /gamos/userAction UAWIF /run/beamOn 1000"
+
+    CLKEND="/gamos/setParam UAClock:TimeLimit 3600*20
+    	    /gamos/setParam UAClock:TimeMark 600
+	    /gamos/userAction UAClock"
+
+    RUN="/run/beamOn 10000000"
+    RUN="/run/beamOn 100000"
+    tp=( 005 )
     for (( i=0; i<${#tp[@]}; i++ )) ; do
-	rad=${tp[i]}*0.2
-	TGT=":VOLU   theTarget ORB ${rad}*mm G4_WATER_VAPOR
-	     :PLACE  theTarget 1 sphewat rm0 0 ${tp[i]}*mm 0
-	     :COLOUR theTarget 1 0 0"
-	
-	jgamos --dir oo${tp[i]} $WRLS $CILV $PHYl $GENF $TGTV $SCOR $TGT $UAS $RUN &
+     	rad='sqrt('${tp[i]}')/2'
+     	TGT=":VOLU   theTarget ORB ${rad}*mm G4_WATER_VAPOR
+     	     :PLACE  theTarget 1 sphewat rm0 0 ${tp[i]}*mm 0
+     	     :COLOUR theTarget 1 0 0"
+
+	s=1000
+	#JOB="--host dirac --ppn 1 --jpn 1 --jobs 1 --btime 20:05:00"
+	#SEED="--dir ooiri${tp[i]}_${s} --seed $s --SEED $s"
+	jgamos $JOB $SEED $WRLS $CILV $PHYl $GENF $TGTV $SCOR $TGT $CLKEND $RUN
     done
     wait
+
 fi
 
 exit
 
+for (( i=0; i<${#tp[@]}; i++ )) ; do
+    myhadd.sh hgscore${tp[i]}.root ooiri${tp[i]}*/UAScoreVol*root
+done
+
+for f in hgscore*root ; do
+    hgm.sh tabh $f
+done
+
+cat hgscore*Pri*  > tab.csv; echo ',' >> tab.csv
+cat hgscore*Err* >> tab.csv; echo ',' >> tab.csv
+head -1 tab.csv      > tab2.csv
+grep -v '#' tab.csv >> tab2.csv
 
 
-RUN="/run/beamOn 500000000"
 s=2000
 DIRAC="--ppn 12 --jpn 12 --host dirac"
 PAR="$DIRAC --jobs 50 --btime 15:00:00 --seed $s --SEED $s --dir oo_sourceiri"

@@ -1,0 +1,23 @@
+#!/bin/sh
+/gamos/setParam GmAnalysisMgr:FileNameSuffix j_
+# GEOMETRY
+/gamos/setParam GmGeometryFromText:FileName j.geom
+/gamos/geometry GmGeometryFromText
+/gamos/setParam JobName j_1_1
+#/gamos/random/setSeeds 
+/gamos/random/restoreSeeds 1 1
+
+/gamos/physicsList GmLeptsPhysics 
+/run/initialize 
+/gamos/setParam GmGeneratorFromTextFile:FileName ///home/roldan/varian/Ir192caps.phsp 
+/gamos/generator GmGeneratorFromTextFile 
+/gamos/setParam UATargetVolume:TargetName theTarget 
+/gamos/setParam UATargetVolume:NoPhotInside 1000000 
+/gamos/userAction UATargetVolume 
+/gamos/setParam UAScoreVolume:TargetName theTarget 
+/gamos/setParam UAScoreVolume:SourceActivity 1.955*Ci/1000 
+/gamos/userAction UAScoreVolume 
+/gamos/setParam UAClock:TimeLimit 3600*20 
+/gamos/setParam UAClock:TimeMark 600 
+/gamos/userAction UAClock 
+/run/beamOn 100000 
