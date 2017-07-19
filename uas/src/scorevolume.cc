@@ -120,7 +120,7 @@ void UAScoreVolume::EndOfRunAction( const G4Run* ) {
   hgNp->Fill( (G4String)"#3_Volume(mm3)",     targetVolume/mm3);
   hgNp->Fill( (G4String)"#4_Mass(g)",         Mass/g);
   hgNp->Fill( (G4String)"#5_Dose(Gy)",        Dose/Gy);
-  hgNp->Fill( (G4String)"#6_Dose(cGy/h*MBq)", Dose/(cGy/hour/MBq) );
+  hgNp->Fill( (G4String)"#6_Dose(cGy/h/MBq)", Dose/(cGy/hour/MBq) );
   hgNp->Fill( (G4String)"#7_Charge(Coulomb)", Charge/coulomb);
   hgNp->Fill( (G4String)"#8_NoIonisations",   NoIonis);
 
