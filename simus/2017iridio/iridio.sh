@@ -182,17 +182,14 @@ elif [ $1 == "simu" ] ; then
 
     RUN="/run/beamOn 10000000"
 
-    tp=(005)
-    RUN="/run/beamOn 10000"
-
     for (( i=0; i<${#tp[@]}; i++ )) ; do
      	rad='sqrt('${tp[i]}')/2'
      	TGT=":VOLU   theTarget ORB ${rad}*mm G4_WATER_VAPOR
      	     :PLACE  theTarget 1 sphewat rm0 0 ${tp[i]}*mm 0
      	     :COLOUR theTarget 1 0 0"
 
-	s=3000 #2000 #1000
-	#JOB="--host euler --ppn 8 --jpn 10 --jobs 20 --btime 24:05:00"
+	s=3000 #500 #600 #2000 #1000
+	JOB="--host euler --ppn 8 --jpn 10 --jobs 20 --btime 24:05:00"
 	SEED="--dir ooiri${tp[i]}_${s} --seed $s --SEED $s"
 	jgamos $JOB $SEED $WRLS $CILV $PHYl $GENF $TGTV $SCOR $TGT $CLKEND $RUN
     done
@@ -216,8 +213,3 @@ cat hgscore*Pri*  > tab.csv; echo ',' >> tab.csv
 cat hgscore*Err* >> tab.csv; echo ',' >> tab.csv
 head -1 tab.csv      > tab2.csv
 grep -v '#' tab.csv >> tab2.csv
-
-
-s=2000
-DIRAC="--ppn 12 --jpn 12 --host dirac"
-PAR="$DIRAC --jobs 50 --btime 15:00:00 --seed $s --SEED $s --dir oo_sourceiri"
