@@ -129,7 +129,15 @@ elif [ $1 == "spectrcaps" ] ; then
     
     mv oosc/Ir192caps.phsp ~/varian
 
-
+    Para la fuente he simulado 30 millones de fotones en la física de Geant4y con distribución energética de acuerdo con el espectro que se me dio.
+    Tras atravesar la cápsula desecho los que salen hacia abajo y me quedo con la mitad que salen hacia arriba, almacenándolos en un fichero "phasespace" para utilizarlos como fuente en la siguiente simulación.
+    11473692 total
+    11458654 gamma
+       15038 electron
+       El factor entre fotones de la fuente desnuda y la encapsulada tomando solo la mitad es:
+      11458654 / 30000000 = 0.382
+      y su inverso: 2.6181
+      
 
 elif [ $1 == "simu" ] ; then
     WRLS="$MATS $RMT
@@ -148,6 +156,7 @@ elif [ $1 == "simu" ] ; then
           /gamos/userAction UATargetVolume"
     SCOR="/gamos/setParam   UAScoreVolume:TargetName theTarget
           /gamos/setParam   UAScoreVolume:SourceActivity 1.955*Ci/1000
+   	  /gamos/setParam   UAScoreVolume:TimeMark 3600
           /gamos/userAction UAScoreVolume"
 
     UAS="/gamos/userAction UAInteraction
@@ -172,24 +181,28 @@ elif [ $1 == "simu" ] ; then
 	    /gamos/userAction UAClock"
 
     RUN="/run/beamOn 10000000"
-    RUN="/run/beamOn 100000"
-    tp=( 005 )
+
+    tp=(005)
+    RUN="/run/beamOn 10000"
+
     for (( i=0; i<${#tp[@]}; i++ )) ; do
      	rad='sqrt('${tp[i]}')/2'
      	TGT=":VOLU   theTarget ORB ${rad}*mm G4_WATER_VAPOR
      	     :PLACE  theTarget 1 sphewat rm0 0 ${tp[i]}*mm 0
      	     :COLOUR theTarget 1 0 0"
 
-	s=1000
-	#JOB="--host dirac --ppn 1 --jpn 1 --jobs 1 --btime 20:05:00"
-	#SEED="--dir ooiri${tp[i]}_${s} --seed $s --SEED $s"
+	s=3000 #2000 #1000
+	#JOB="--host euler --ppn 8 --jpn 10 --jobs 20 --btime 24:05:00"
+	SEED="--dir ooiri${tp[i]}_${s} --seed $s --SEED $s"
 	jgamos $JOB $SEED $WRLS $CILV $PHYl $GENF $TGTV $SCOR $TGT $CLKEND $RUN
     done
     wait
 
+    
 fi
 
 exit
+
 
 for (( i=0; i<${#tp[@]}; i++ )) ; do
     myhadd.sh hgscore${tp[i]}.root ooiri${tp[i]}*/UAScoreVol*root

@@ -289,12 +289,14 @@ public:
   void EndOfEventAction(  const G4Event *);
   void UserSteppingAction(const G4Step *);
   bool IsInside(const G4Step *);
+  void WriteHistograms();
     
   unsigned PrimCount, PhotCount;
   TH1D *hgNp, *hgEd;
   double targetVolume, Activity;
   std::vector<G4String> targetName;
   Clock *theClock;
+  int TimeMark;
 };
 
 

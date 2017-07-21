@@ -85,8 +85,7 @@ int main (int argc, char **argv) {
       string ss = string(argv[i+1]);
       
       if(      s == "--version" || s == "/version") GamosVersion = ss;
-      //else if( s == "--dir"     || s == "/dir"    ) { JobDir = ss; JobName = ss; }
-      else if( s == "--dir"     || s == "/dir"    )  JobDir = ss;
+      else if( s == "--dir"     || s == "/dir"    ) { JobDir = ss; JobName = ss; }
       else if( s == "--jn"      || s == "/jn"     ) JobName = ss;
       else if( s == "--btime"   || s == "/btime"  ) BatchTime = ss;
       else if( s == "--host"    ) HostName = ss;

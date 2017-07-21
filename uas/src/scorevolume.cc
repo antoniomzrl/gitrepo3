@@ -23,6 +23,7 @@ void UAScoreVolume::BeginOfRunAction( const G4Run* ) {
 
   Activity = GmParameterMgr::GetInstance()->GetNumericValue(theName+":SourceActivity", 0.777*mCi);
   targetName = GmParameterMgr::GetInstance()->GetVStringValue(theName+":TargetName", targetName);
+  TimeMark = GmParameterMgr::GetInstance()->GetNumericValue(theName+":TimeMark",3600);
   
   if( targetName.size() == 0 ) {
     G4Exception("UAScoreVolume Constructor", " xxx", FatalException,
@@ -49,24 +50,27 @@ void UAScoreVolume::BeginOfRunAction( const G4Run* ) {
 } 
 
 
-void UAScoreVolume::EndOfRunAction( const G4Run* ) {
-  cout << "UAScoreVolume EndOfRunAction" << endl;
+void UAScoreVolume::WriteHistograms() {
+  cout << "UAScoreVolume WriteHistograms" << endl;
 
-  hgNp->LabelsOption("a", "X");
-  hgEd->LabelsOption("a", "X");
+  TH1D * hNp = (TH1D*)hgNp->Clone();
+  TH1D * hEd = (TH1D*)hgEd->Clone();
+  
+  hNp->LabelsOption("a", "X");
+  hEd->LabelsOption("a", "X");
 
   unsigned int NoIonis = 0;
-  for (int i=0; i <= hgNp->GetNbinsX()+1; i++) {
-    string theLabel = hgNp->GetXaxis()->GetBinLabel(i);
+  for (int i=0; i <= hNp->GetNbinsX()+1; i++) {
+    string theLabel = hNp->GetXaxis()->GetBinLabel(i);
     if( theLabel.find("IonisationS") != std::string::npos)
-      NoIonis += hgNp->GetBinContent(i);
+      NoIonis += hNp->GetBinContent(i);
     if( theLabel.find("IonisationD") != std::string::npos)
-      NoIonis += hgNp->GetBinContent(i) *2;
+      NoIonis += hNp->GetBinContent(i) *2;
     if( theLabel.find("IonisationK") != std::string::npos)
-      NoIonis += hgNp->GetBinContent(i) *2;
+      NoIonis += hNp->GetBinContent(i) *2;
   }
   
-  double Depo = hgEd->GetSum(); // Depo in voxel
+  double Depo = hEd->GetSum(); // Depo in voxel
   double Mass = targetVolume*1*g/cm3;
   double Dose = Depo/Mass;
   double Time = PrimCount/Activity;
@@ -84,7 +88,7 @@ void UAScoreVolume::EndOfRunAction( const G4Run* ) {
   cout << "Activity       " << Activity/mCi << " mCi = " << Activity/Bq << " Bq" << endl
        << "No Primaries:  " << PrimCount            << endl
        << "Time           " << Time/second << " seg  = " << Time/millisecond << " ms" << endl
-       << "Voxel No Coll: " << hgNp->GetEntries()  << endl
+       << "Voxel No Coll: " << hNp->GetEntries()  << endl
        << "No Photoel:    " << PhotCount            << endl
        << "Volume:        " << targetVolume/mm3 << " mm3" << endl
        << "Mass:          " << Mass/g   << " g" << endl
@@ -115,20 +119,20 @@ void UAScoreVolume::EndOfRunAction( const G4Run* ) {
        << "  index: Charge_pCugHour  = " << ctm/(pC/ug/hour) << " +-(REL) 0 sumV2= 0" << endl
        << " theScore SUM ALL: "          << PrimCount << " +-(REL) 0" << endl;
 
-  hgNp->Fill( (G4String)"#1_NoPrimaries",     PrimCount);
-  hgNp->Fill( (G4String)"#2_Edep(MeV)",       Depo);
-  hgNp->Fill( (G4String)"#3_Volume(mm3)",     targetVolume/mm3);
-  hgNp->Fill( (G4String)"#4_Mass(g)",         Mass/g);
-  hgNp->Fill( (G4String)"#5_Dose(Gy)",        Dose/Gy);
-  hgNp->Fill( (G4String)"#6_Dose(cGy/h/MBq)", Dose/(cGy/hour/MBq) );
-  hgNp->Fill( (G4String)"#7_Charge(Coulomb)", Charge/coulomb);
-  hgNp->Fill( (G4String)"#8_NoIonisations",   NoIonis);
+  hNp->Fill( (G4String)"#1_NoPrimaries",     PrimCount);
+  hNp->Fill( (G4String)"#2_Edep(MeV)",       Depo);
+  hNp->Fill( (G4String)"#3_Volume(mm3)",     targetVolume/mm3);
+  hNp->Fill( (G4String)"#4_Mass(g)",         Mass/g);
+  hNp->Fill( (G4String)"#5_Dose(Gy)",        Dose/Gy);
+  hNp->Fill( (G4String)"#6_Dose(cGy/h/MBq)", Dose/(cGy/hour/MBq) );
+  hNp->Fill( (G4String)"#7_Charge(Coulomb)", Charge/coulomb);
+  hNp->Fill( (G4String)"#8_NoIonisations",   NoIonis);
 
   cout << "UAScoreVolume summary:" << endl;
-  for (int i=0; i <= hgNp->GetNbinsX()+1; i++) {
-    if(hgNp->GetBinContent(i) != 0) {
-      cout << right << setw(16) << hgNp->GetBinContent(i)
-	   << "\t" << left << hgNp->GetXaxis()->GetBinLabel(i)
+  for (int i=0; i <= hNp->GetNbinsX()+1; i++) {
+    if(hNp->GetBinContent(i) != 0) {
+      cout << right << setw(16) << hNp->GetBinContent(i)
+	   << "\t" << left << hNp->GetXaxis()->GetBinLabel(i)
 	   << endl;
     }
   }
@@ -136,9 +140,16 @@ void UAScoreVolume::EndOfRunAction( const G4Run* ) {
   G4String JobName = GmParameterMgr::GetInstance()->GetStringValue("JobName", "job");
   G4String fn = theName + "_" + JobName + ".root";
   TFile * Fintsp = new TFile(fn.c_str(), "RECREATE");
-  hgNp->Write();
-  hgEd->Write();
+  hNp->Write();
+  hEd->Write();
   Fintsp->Close();
+}
+
+
+void UAScoreVolume::EndOfRunAction( const G4Run* ) {
+  cout << "UAScoreVolume EndOfRunAction" << endl;
+
+  WriteHistograms();
 }
 
 
@@ -149,6 +160,16 @@ void UAScoreVolume::BeginOfEventAction( const G4Event* ) {
 
 void UAScoreVolume::EndOfEventAction( const G4Event* evt ) {
   PrimCount++;
+
+  static double TimeWrite = TimeMark;
+  double eTime = theClock->Elapsed();
+
+  if(eTime > TimeWrite) {
+    TimeWrite += TimeMark;
+    int eid = evt->GetEventID() +1;
+    cout << "Clk Ev " << eid << " " << eTime << " sec" << endl;
+    WriteHistograms();
+  }
 }
 
 
