@@ -198,7 +198,7 @@ cleandevel() {
 eulerdevel() {
     cd ${LEPTSDIR}
     gitcompush.sh
-    ssh euler 'cd lepts; git pull; source bin/conflepts.sh; gmanager.sh compiledevel'}
+    ssh euler 'cd lepts; git pull; source bin/conflepts.sh; gmanager.sh compiledevel'
 }
 
 compileuas() {
@@ -221,7 +221,7 @@ cleanlepts() {
 update() {
     cd ${LEPTSDIR}
     gitcompush.sh
-    ssh $1 'cd lepts; git pull; source bin/conflepts.sh; gmanager.sh compilelepts compileuas'
+    sshpass -f $HOME/.ssh/pass ssh $1 'cd lepts; git pull; source bin/conflepts.sh; gmanager.sh compilelepts compileuas'
 }
 
 updateeuler() {
