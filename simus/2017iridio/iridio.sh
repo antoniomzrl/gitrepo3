@@ -129,15 +129,7 @@ elif [ $1 == "spectrcaps" ] ; then
     
     mv oosc/Ir192caps.phsp ~/varian
 
-    Para la fuente he simulado 30 millones de fotones en la física de Geant4y con distribución energética de acuerdo con el espectro que se me dio.
-    Tras atravesar la cápsula desecho los que salen hacia abajo y me quedo con la mitad que salen hacia arriba, almacenándolos en un fichero "phasespace" para utilizarlos como fuente en la siguiente simulación.
-    11473692 total
-    11458654 gamma
-       15038 electron
-       El factor entre fotones de la fuente desnuda y la encapsulada tomando solo la mitad es:
-      11458654 / 30000000 = 0.382
-      y su inverso: 2.6181
-      
+
 
 elif [ $1 == "simu" ] ; then
     WRLS="$MATS $RMT
@@ -213,3 +205,15 @@ cat hgscore*Pri*  > tab.csv; echo ',' >> tab.csv
 cat hgscore*Err* >> tab.csv; echo ',' >> tab.csv
 head -1 tab.csv      > tab2.csv
 grep -v '#' tab.csv >> tab2.csv
+
+
+Para la fuente he simulado 30 millones de fotones en la física de Geant4 y con distribución energética de acuerdo con el espectro que se me dio.
+Tras atravesar la cápsula desecho los que salen hacia abajo y me quedo con la mitad que salen hacia arriba, almacenándolos en un fichero "phasespace" para utilizarlos como fuente en la siguiente simulación.
+    11473692 total
+    11458654 gamma
+       15038 electron
+
+El factor entre fotones de la fuente desnuda y la encapsulada tomando solo la mitad es:
+      11458654 / 30000000 = 0.382
+      y su inverso: 2.6181
+      

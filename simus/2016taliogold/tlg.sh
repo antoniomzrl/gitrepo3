@@ -2,6 +2,16 @@
 
 source $HOME/lepts/bin/gdefs.sh
 
+wrl() {
+    echo "//WORLD
+         :MATE vacuum  1 1*g/mole 1e-25*g/cm3
+         :ROTM rmz 0 90 0
+         :ROTM rm0 0 0 0
+         :VOLU world BOX ${1} ${2} ${3} vacuum
+         :COLOUR world 1 1 1"
+}
+
+
 VAC=":MATE vacuum 1 1*g/mole 1e-25*g/cm3"
 WRL=$(wrl 5*mm 5*mm 5*mm)
 COIN=$(coin G4_Au 1*mm 100*um 0)
@@ -117,6 +127,12 @@ elif [ $1 == "simu" ] ; then
     DXS="000 020 040 060 100"
     #DXS="000 020"
     RUN="/run/beamOn 50000000"
+
+    COIN=$(coin G4_Au 1*mm 40*um 0)
+    #jgamos $WRL $COIN $PHY $UAS $ULI $GENEL $RUN
+    jgamos $WRL $COIN $PHY $UAS $ULI $GENPH $RUN
+    exit
+
     
     for dx in $DXS ; do
 	if [ $dx == "000" ] ; then
