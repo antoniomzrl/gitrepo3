@@ -31,14 +31,14 @@ gas2liq() {
 
 
 # wrl 1*m 1*m 1*m
-#wrl() {
-#    echo "//WORLD
-#         :MATE vacuum  1 1*g/mole 1e-25*g/cm3
-#         :ROTM rmz 0 90 0
-#         :ROTM rm0 0 0 0
-#         :VOLU world BOX ${1} ${2} ${3} vacuum
-#         :COLOUR world 1 1 1"
-#}
+wrl() {
+    echo "//WORLD
+         :MATE vacuum  1 1*g/mole 1e-25*g/cm3
+         :ROTM rmz 0 90 0
+         :ROTM rm0 0 0 0
+         :VOLU world BOX ${1} ${2} ${3} vacuum
+         :COLOUR world 1 1 1"
+}
 
 # chb water chbwat 1*m 1*m 1*m 0.5*m
 chb() {

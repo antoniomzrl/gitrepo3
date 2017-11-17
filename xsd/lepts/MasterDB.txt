@@ -201,15 +201,15 @@ end
 
 ========================================================== Pyridine
 begin PYRIDINE C5H5N
-      IP   9.22
+      IP   9.27
       IIP  284.0
       IIP2 532.0
       
       e-  IXS    pyridine-IXS-2017nov.csv
-      e-  DXS    furfural_iDXS.csv
-      e-  DXSROT furfural_iDXSROT.csv
-      e-  ELDEXC furfural_ELDEXC.txt
-      e-  ELDION furfural_ELDION.txt
+      e-  DXS    pyridine-iDXS.csv
+      e-  DXSROT pyridine-iDXSROT.csv
+      e-  ELDEXC pyridine-ELDEXC.txt
+      e-  ELDION pyridine-ELDION.txt
       e-  ELDROT furfural_ELDROT.txt
       e-  ELDVIB furfural_ELDVIB.txt
 end
