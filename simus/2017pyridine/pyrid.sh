@@ -62,10 +62,7 @@ if [ $1 == "ncol" ] ; then
     
 elif [ $1 == "simu" ] ; then
     ege=( 03  10 20 )
-    pre=( 0.2 10 )
-
-    ege=( 10 )
-    pre=( 0 )
+    pre=( 0  0.2 10 )
     
     UAS="#/gamos/userAction UAVerbose
          /gamos/userAction UAClock
@@ -89,11 +86,14 @@ elif [ $1 == "simu" ] ; then
 	    HGS="/gamos/setParam   UAExit:EnergyMax ${hgm}*eV
                  /gamos/setParam   UAExit:EnergyBins ${hgm}00
                  /gamos/userAction UAExit"
-	    
+	    RUN="/run/beamOn 1000"
+
+	    #PAR="--host dirac --ppn 1 --jobs 1 --btime 4:29:00"
 	    #PAR="--host euler --ppn 10 --jobs 250 --btime 4:29:00 --seed 1400 --SEED 1400"
 	    #PAR="--jobs 10 --ppn 10"
 	    DIR=${ege[j]}_${pre[i]}
 	    jgamos $PAR --dir oo_${DIR} $WRL $CHB $UMAT $PHYsmf $GEN $UAS $HGS $RUN  &
+	    #jgamos $PAR --dir oo_${DIR} $WRL             $PHYsmf $GEN $UAS $HGS $RUN  &
 	done
     done
     wait
