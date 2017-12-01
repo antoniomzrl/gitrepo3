@@ -44,7 +44,7 @@ void hgtabjoin(const char* filename)  {
   //write tab csv:
   string fo = string(filename) + string(".csv");
   fi.open( fo.c_str() );
-  fi << "#Table:" << endl << setw(16) << "#x(mm) ,";
+  fi << "#Table:" << endl << setw(16) << "#x(mm)/E(MeV) ,";
   
   for(int j=0; j<nhi; j++)
     fi << setw(16) << hi[j]->GetName() << " ,";

@@ -31,6 +31,9 @@ GdkRectangle * ScreenDimensions(GtkWidget * widget) {
   GdkRectangle * sc = new GdkRectangle();
   gdk_monitor_get_geometry(mon, sc);
 
+  if( sc->width == 0) sc->width = 400;
+  if( sc->height == 0) sc->height = 300;
+  
   double fac = (double)sc->width/sc->height;
   cout << "Screen size: " << sc->width << " x " << sc->height;
   if( fac > 1.7 )     cout << " 16:9" << endl;

@@ -201,13 +201,14 @@ elif [ $1 == "diezev" ] ; then
 
     Dens=1.0*${mTorr}*${MM}'/('${Temp}*${KbNa}')'
     UMAT=":MATE USERMAT 1 1*g/mole 1e6*g/cm3
-                  $(coin USERMAT  9*cm 1*cm -18*cm)"
+          $(coin USERMAT  9*cm 1*cm -18*cm)"
     HGS="/gamos/setParam   UAExit:EnergyMax 12*eV
          /gamos/setParam   UAExit:EnergyBins 1200
          /gamos/userAction UAExit"
-    RUN="/run/beamOn 1000"
+    RUN="/run/beamOn 100000"
 
-    for M in FURFURAL FURFURAL_DXS10 FURFURAL_NOROT FURFURAL_NOROT_DXS10 ; do
+    #for M in FURFURAL FURFURAL_DXS10 FURFURAL_NOROT FURFURAL_NOROT_DXS10 ; do
+    for M in FURFURAL ; do
 	CHB=":MIXT_BY_NATOMS $M $Dens 3  C 5  H 4  O 2
              $(coin $M 9*cm 24*cm 0)"
 	#jgamos $PAR --dir oo_${DIR}svac $WRL               $PHYsmf $GENDIST $UAS $HGS $RUN  &

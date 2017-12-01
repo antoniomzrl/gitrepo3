@@ -1,0 +1,38 @@
+(1) 15eV 2mTorr volteando los que salen hacia atrás:
+
+        No Ints     Avg Elost         Elost     Avg Elost   Process
+    1.85589e+06       1.05555   1.95898e+06       1.05555   Elastic
+          62131       8.79301        546319       8.79301   ElectronicExcit
+    1.23206e+06     0.0012206       1503.85     0.0012206   ExcitRotat
+          80488       1.23342       99275.9       1.23342   ExcitVibrat
+          10910             0        151836       13.9171   Ionisation
+
+
+(2) 15eV 2mTorr olvidando los que salen hacia atrás:
+
+        No Ints     Avg Elost         Elost     Avg Elost   Process
+    1.47307e+06       1.14492   1.68655e+06       1.14492   Elastic
+          59197       8.80627        521305       8.80627   ElectronicExcit
+         770013    0.00127011           978    0.00127011   ExcitRotat
+          62271       1.31038       81598.8       1.31038   ExcitVibrat
+          10250             0        142888       13.9403   Ionisation
+
+
+(3) 15eV 9.5mTorr volteando los que salen hacia atrás:
+
+       No Ints     Avg Elost         Elost     Avg Elost   Process
+   1.13207e+07       0.79437   8.99283e+06       0.79437   Elastic
+        161096        8.7429   1.40845e+06        8.7429   ElectronicExcit
+   1.20014e+07    0.00113946         13675    0.00113946   ExcitRotat
+        539051       1.01971        549678       1.01971   ExcitVibrat
+         26860             0        366406       13.6413   Ionisation
+
+
+(4) 15eV 9.5mTorr olvidando los que salen hacia atrás:
+
+       No Ints     Avg Elost         Elost     Avg Elost   Process
+   7.99852e+06      0.872458   6.97838e+06      0.872458   Elastic
+        150601       8.76017   1.31929e+06       8.76017   ElectronicExcit
+   7.24747e+06    0.00115749       8388.91    0.00115749   ExcitRotat
+        376434       1.07456        404503       1.07456   ExcitVibrat
+         25341             0        347187       13.7006   Ionisation

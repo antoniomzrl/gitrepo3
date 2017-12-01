@@ -32,6 +32,7 @@ if [ $1 == "setup" ] ; then
     #Pres=1.5*${mTorr}
     GEN=$(genang e- 10*keV 5*um -1*cm)
     MAG="/gamos/field/setMagField 0.01*tesla 0 0"
+    STP="/gamos/physics/userLimits/setMaxStep uliw ch_LEPTS_WATER e- 1*mm"
     Pres=1000*${mTorr}
 
     Dens=$(dens 18*g/mole ${Pres})
@@ -48,10 +49,10 @@ if [ $1 == "setup" ] ; then
     ULIg=$(uli $Wg e- 0.5*eV)
 
     RUN="/run/beamOn 10"
-    CFL="$WRL $MATl $CHBl $PHYl $UAS $GEN $ULIl $(vis) $MAG $RUN"
-    jgamos --dir osl $CFL
-    CFL="$WRL $MATg $CHBg $PHYd $UAS $GEN $ULIg $(vis) $MAG $RUN"
-    time jlepts --dir osd $CFL
+    CFL="$WRL $MATl $CHBl $PHYl $UAS $GEN $ULIl $(vis) $STP $MAG $RUN"
+    jgamos --dir oosl $CFL
+    CFL="$WRL $MATg $CHBg $PHYd $UAS $GEN $ULIg $(vis)      $MAG $RUN"
+    time jlepts --dir oosd $CFL
 fi
 
 
