@@ -2,7 +2,12 @@
 
 source $HOME/lepts/bin/gdefs.sh
 
-WRL=$(wrl 50*cm 50*cm 50*cm)
+WRL=":MATE vacuum 1 1*g/mole 0*g/cm3 
+     :ROTM rmz 0 90 0 
+     :ROTM rm0 0 0 0 
+     :VOLU world BOX 20*cm 20*cm 20*cm vacuum 
+     :COLOUR world 1 1 1"
+
 PHY="/gamos/physicsList GmLeptsPhysics /run/initialize"
 PHYsmf="/gamos/physicsList GmLeptsSMFPhysics /run/initialize"
 
@@ -35,9 +40,9 @@ if [ $1 == "helix" ] ; then
          :VOLU chb TUBE 0.0 9*cm/2 4*cm/2 PYRIDINE 
          :PLACE chb 1 world rmz 0 0 0 
          :COLOUR chb 0.6 0.6 0.0"
-    GENANG="//G_BALL
+    GEN="//G_BALL
          :VOLU   gbox ORB 3*mm vacuum
-         :PLACE  gbox 1 world rmz -2.5*cm 0 0
+         :PLACE  gbox 1 world rmz -15*cm 0 0
          :COLOUR gbox 1 0 0
          /gamos/generator GmGenerator
          /gamos/generator/addSingleParticleSource gn e- 10*eV
@@ -48,46 +53,23 @@ if [ $1 == "helix" ] ; then
          /gamos/userAction UAExit
          /gamos/userAction UAWIF
          $(vis)"
-    RUN="/run/beamOn 5"
-    MAG="/gamos/physics/userLimits/setMaxStep uli chb e- 1*mm
-         /gamos/field/setMagField 1e-3*tesla 0 0"
-	    
-    jgamos --dir ooh $WRL $CHB $PHY $MAG $GENANG $UAS $HGS $RUN  &
+    RUN="/run/beamOn 10"
+    STP="/gamos/physics/userLimits/setMaxStep ulich chb   e- 1*mm
+         /gamos/physics/userLimits/setMaxStep uliw  world e- 1*mm"
 
-    
-elif [ $1 == "ncol" ] ; then
-    UAS="/gamos/userAction UAClock
-         /gamos/userAction GmCountProcessesUA
-         /gamos/userAction UAInteraction
-         #/gamos/userAction UAWIF
-         #/gamos/userAction UAVerbose
-         /gamos/setParam   UAExit:EnergyMax 10*eV
-         /gamos/setParam   UAExit:EnergyBins 100
-         /gamos/userAction UAExit"
-    
-    GEN=$(gen e- 8*eV 0.2*um -1*cm)
-    RUN="/run/beamOn 10000000"
-    
-    pre=( 1 0.5 0.1 0.01 )
-    MT=FURFURAL_ELAST
-    for (( i=0; i<${#pre[@]}; i++ )) ; do
-	Dens=${pre[i]}*${mTorr}*${MM}'/('${Temp}*${KbNa}')'
-	MAT=":MIXT_BY_NATOMS $MT $Dens 3  C 5  H 4  O 2"
-	CHB="$(coin $MT 5*cm 24*cm 0)"
-
-	#PAR="--jobs 10 --ppn 10"
-	#PAR="--host euler --ppn 10 --jobs 250 --btime 4:29:00 --seed 1400 --SEED 1400"
-	jgamos $PAR --dir ooels${i} $WRL $MAT $CHB $PHYsmf $GEN $UAS $RUN &
-	jgamos $PAR --dir oodxs${i} $WRL $MAT $CHB $PHY    $GEN $UAS $RUN &
-    done
+    MAG1="$STP /gamos/field/setMagField 0.001*tesla 0 0"
+    MAG2="$STP /gamos/field/setMagField 0.01*tesla 0 0"
+    jgamos --dir ooh0 $WRL $CHB $PHY       $GEN $UAS $HGS $RUN  &
+    jgamos --dir ooh1 $WRL $CHB $PHY $MAG1 $GEN $UAS $HGS $RUN  &
+    jgamos --dir ooh2 $WRL $CHB $PHY $MAG2 $GEN $UAS $HGS $RUN  &
     wait
-
+  
 
 elif [ $1 == "simu" ] ; then
     pre=( 00 02 9.5 10 )
     ege=( 03 10 15 20 )
-    pre=( 00 02 9.5 )
-    ege=( 15 )
+    pre=( 00 02 10 )
+    ege=( 03 )
 
     
     UAS="#/gamos/userAction UAVerbose
