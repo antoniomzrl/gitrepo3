@@ -1,26 +1,25 @@
 #include "uactions.hh"
 
-TH1D *hgA, *hgE, *hgEfw, *hgEfwItg, *hgEbwItg, *hgEbw, *hgEfwph, *hgEfwel,
-  *hgEel20, *hgEph20, *hgEel80, *hgEph80;
-string anapar;
 
-UAExit::UAExit() : GmUserRunAction(), GmUserEventAction(),
+UAAnalyser::UAAnalyser() : GmUserRunAction(), GmUserEventAction(),
 			 GmUserSteppingAction() {
-  cout << "UAExit Constructor" << endl;
+  cout << "UAAnalyser Constructor" << endl;
 }
 
 
-UAExit::~UAExit() {
-  cout << "UAExit Destructor" << endl;
+UAAnalyser::~UAAnalyser() {
+  cout << "UAAnalyser Destructor" << endl;
 }
 
 
-void UAExit::BeginOfRunAction( const G4Run* ) {
-  cout << "UAExit BeginOfRun" << endl;
+void UAAnalyser::BeginOfRunAction( const G4Run* ) {
+  cout << "UAAnalyser BeginOfRun" << endl;
 
-  G4double Nb   = GmParameterMgr::GetInstance()->GetNumericValue("UAExit:EnergyBins", 1000);
-  G4double EMax = GmParameterMgr::GetInstance()->GetNumericValue("UAExit:EnergyMax", 1*MeV);
-  anapar = GmParameterMgr::GetInstance()->GetStringValue("UAExit:AnalizerParallel", "NO");
+  G4double Nb   = GmParameterMgr::GetInstance()->GetNumericValue("UAAnalyser:EnergyBins", 1000);
+  G4double EMax = GmParameterMgr::GetInstance()->GetNumericValue("UAAnalyser:EnergyMax", 1*MeV);
+  anapar = GmParameterMgr::GetInstance()->GetStringValue("UAAnalyser:AnalizerParallel", "NO");
+  nameOut = GmParameterMgr::GetInstance()->GetStringValue("UAAnalyser:VolumeOut", "world");
+  nameIn  = GmParameterMgr::GetInstance()->GetStringValue("UAAnalyser:VolumeIn", "null");
 
   hgA     = new TH1D("Angular",        "Ang(deg)",180,  0.0, 180);
   hgE     = new TH1D("E",              "E(eV)",   Nb, 0.0, EMax);
@@ -37,8 +36,8 @@ void UAExit::BeginOfRunAction( const G4Run* ) {
 } 
 
 
-void UAExit::EndOfRunAction( const G4Run* ) {
-  cout << "UAExit EndOfRun" << endl;
+void UAAnalyser::EndOfRunAction( const G4Run* ) {
+  cout << "UAAnalyser EndOfRun" << endl;
   
   // Integrado desde la derecha:
   G4double Sum=0, Sam=0;
@@ -50,7 +49,7 @@ void UAExit::EndOfRunAction( const G4Run* ) {
   }
 
   G4String JobName = GmParameterMgr::GetInstance()->GetStringValue("JobName", "job");
-  G4String fn = "hexit" + JobName + ".root";
+  G4String fn = "analyser" + JobName + ".root";
   TFile * fexit = new TFile(fn.c_str(), "RECREATE");
 
   hgA->Write();
@@ -69,15 +68,15 @@ void UAExit::EndOfRunAction( const G4Run* ) {
 } 
 
 
-void UAExit::BeginOfEventAction( const G4Event* evt) {
+void UAAnalyser::BeginOfEventAction( const G4Event* evt) {
 }
 
 
-void UAExit::EndOfEventAction( const G4Event* evt) {
+void UAAnalyser::EndOfEventAction( const G4Event* evt) {
 }
 
 
-void UAExit::UserSteppingAction(const G4Step* aStep) {
+void UAAnalyser::UserSteppingAction(const G4Step* aStep) {
   G4String partName = aStep->GetTrack()->GetDefinition()->GetParticleName();
   G4double Edep     = aStep->GetTotalEnergyDeposit();
 
@@ -93,11 +92,11 @@ void UAExit::UserSteppingAction(const G4Step* aStep) {
   if(pv  )  phvlName  = pv->GetName();
   if(pv2 )  phvlName2 = pv2->GetName();
 
-  //if(phvlName != phvlName2) cout << "UAExit phvl change" << endl;
+  //if(phvlName != phvlName2) cout << "UAAnalyser phvl change" << endl;
 
-  if(phvlName2 != "null") return;
+  if(phvlName != nameOut || phvlName2 != nameIn) return;
 
-  //cout << "UAExit phvl2 null" << endl;
+  //cout << "UAAnalyser phvl2 null" << endl;
 
   G4double     KinE = Pt2->GetKineticEnergy();
   G4ThreeVector Pos = Pt2->GetPosition();

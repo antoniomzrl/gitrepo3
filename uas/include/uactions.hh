@@ -201,6 +201,24 @@ public:
 };
 
 
+class UAAnalyser : public GmUserRunAction,
+		   public GmUserEventAction,
+		   public GmUserSteppingAction {
+public:
+  UAAnalyser();
+  ~UAAnalyser();
+  void BeginOfRunAction(  const G4Run *);
+  void EndOfRunAction(    const G4Run *);
+  void BeginOfEventAction(const G4Event *);
+  void EndOfEventAction(  const G4Event *);
+  void UserSteppingAction(const G4Step *);
+
+  TH1D *hgA, *hgE, *hgEfw, *hgEfwItg, *hgEbwItg, *hgEbw, *hgEfwph, *hgEfwel,
+  *hgEel20, *hgEph20, *hgEel80, *hgEph80;
+
+  G4String nameOut, nameIn, anapar;
+};
+
 class UAReflex : public GmUserRunAction,
 		 public GmUserEventAction,
 		 public GmUserSteppingAction {

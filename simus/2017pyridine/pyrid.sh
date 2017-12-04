@@ -5,7 +5,7 @@ source $HOME/lepts/bin/gdefs.sh
 WRL=":MATE vacuum 1 1*g/mole 0*g/cm3 
      :ROTM rmz 0 90 0 
      :ROTM rm0 0 0 0 
-     :VOLU world BOX 20*cm 20*cm 20*cm vacuum 
+     :VOLU world BOX 10*cm 10*cm 10*cm vacuum 
      :COLOUR world 1 1 1"
 
 PHY="/gamos/physicsList GmLeptsPhysics /run/initialize"
@@ -37,38 +37,49 @@ if [ $1 == "helix" ] ; then
     pre=2*${mTorr}
     Dens=${pre[i]}*${MM}'/('${Temp}*${KbNa}')'
     CHB=":MIXT_BY_NATOMS PYRIDINE $Dens 3  C 5  H 5  N 1
-         :VOLU chb TUBE 0.0 9*cm/2 4*cm/2 PYRIDINE 
-         :PLACE chb 1 world rmz 0 0 0 
+         :VOLU chb TUBE 0.0 8*cm/2 4*cm/2 PYRIDINE 
+         :PLACE chb 1 world rmz 4*cm/2 0 0 
          :COLOUR chb 0.6 0.6 0.0"
-    GEN="//G_BALL
-         :VOLU   gbox ORB 3*mm vacuum
-         :PLACE  gbox 1 world rmz -15*cm 0 0
-         :COLOUR gbox 1 0 0
+    ANA=":VOLU chbana TUBE 0.0 9*cm/2 1*cm/2 vacuum 
+         :PLACE chbana 1 world rmz 4.5*cm 0 0 
+         :COLOUR chbana  0 1 1"
+    BCK=":VOLU chbbck TUBE 0.0 9*cm/2 2*cm/2 vacuum 
+         :PLACE chbbck 1 world rmz -1*cm 0 0 
+         :COLOUR chbbck  0 1 1"
+    GEN=":VOLU   gbox ORB 2*mm vacuum
+         :PLACE  gbox 1 world rmz -5*mm 0 0
+         :COLOUR gbox 1 1 1
          /gamos/generator GmGenerator
          /gamos/generator/addSingleParticleSource gn e- 10*eV
          /gamos/generator/positionDist  gn GmGenerDistPositionInG4Volumes gbox
          /gamos/generator/directionDist gn GmGenerDistDirectionConst 1 0 0"
     UAS="/gamos/userAction GmCountProcessesUA
          /gamos/userAction UAInteraction
+	 /gamos/setParam   UAExit:EnergyMax 12*eV
+         /gamos/setParam   UAExit:EnergyBins 1200
          /gamos/userAction UAExit
-         /gamos/userAction UAWIF
+	 /gamos/setParam   UAAnalyser:EnergyMax 12*eV
+         /gamos/setParam   UAAnalyser:EnergyBins 1200
+         /gamos/setParam   UAAnalyser:VolumeOut chb
+         /gamos/setParam   UAAnalyser:VolumeIn  chbana
+	 /gamos/setParam   UAAnalyser:AnalizerParallel no
+         /gamos/userAction UAAnalyser
          $(vis)"
-    RUN="/run/beamOn 10"
-    STP="/gamos/physics/userLimits/setMaxStep ulich chb   e- 1*mm
-         /gamos/physics/userLimits/setMaxStep uliw  world e- 1*mm"
+    RUN="/run/beamOn 30"
 
-    MAG1="$STP /gamos/field/setMagField 0.001*tesla 0 0"
-    MAG2="$STP /gamos/field/setMagField 0.01*tesla 0 0"
-    jgamos --dir ooh0 $WRL $CHB $PHY       $GEN $UAS $HGS $RUN  &
-    jgamos --dir ooh1 $WRL $CHB $PHY $MAG1 $GEN $UAS $HGS $RUN  &
-    jgamos --dir ooh2 $WRL $CHB $PHY $MAG2 $GEN $UAS $HGS $RUN  &
+    MAG="/gamos/physics/userLimits/setMaxStep ulich  chb    e- 1*mm
+         /gamos/physics/userLimits/setMaxStep ulibck chbbck e- 1*mm
+         /gamos/field/setLocalMagField 0.001*tesla 0 0 chbbck
+         /gamos/field/setLocalMagField 0.01*tesla 0 0 chb"
+    
+    jgamos --dir ooh1 $WRL $BCK $CHB $ANA $PHY $MAG $GEN $UAS $HGS $RUN  &
     wait
   
 
 elif [ $1 == "simu" ] ; then
     pre=( 00 02 9.5 10 )
     ege=( 03 10 15 20 )
-    pre=( 00 02 10 )
+    pre=( 00 02 )
     ege=( 03 )
 
     
@@ -82,30 +93,34 @@ elif [ $1 == "simu" ] ; then
 	for (( i=0; i<${#pre[@]}; i++ )) ; do
 	    fge='el'${ege[j]}'eV.txt'
 	    ((hgm=ege[j]+2))
-	    GENMONO=$(gen e- ${ege[j]}*eV 0.5*cm -15*cm)
-	    GEN=$(gen e- 1*eV 0.5*cm -15*cm $fge)
+	    GENMONO=$(gen e- ${ege[j]}*eV 1*mm -5*cm)
+	    GEN=$(gen e- 1*eV 1*mm -5*cm $fge)
+	    
 	    Dens=${pre[i]}*${mTorr}*${MM}'/('${Temp}*${KbNa}')'
 	    CHB=":MIXT_BY_NATOMS PYRIDINE $Dens 3  C 5  H 5  N 1
-                 $(coin PYRIDINE 9*cm 4*cm 0)"
-	    #furfu
-	    #MM=96.0842*g/mole
-	    #Dens=${pre[i]}*${mTorr}*${MM}'/('${Temp}*${KbNa}')'
-	    #CHB=":MIXT_BY_NATOMS FURFURAL $Dens 3  C 5  H 4  O 2
-            #     $(coin FURFURAL 9*cm 4*cm 0)"
+            	 :VOLU chb TUBE 0.0 9*cm/2 4*cm/2 PYRIDINE 
+         	 :PLACE chb 1 world rmz 6*cm 0 0"
 	    UMAT=":MATE USERMAT 1 1*g/mole 1e6*g/cm3
-                  $(coin USERMAT  9*cm 1*cm -18*cm)"
+                  :VOLU chu TUBE 0.0 9*cm/2 1*mm/2 USERMAT 
+		  :PLACE chu 1 world rmz -1*mm/2 0 0"
 	    HGS="/gamos/setParam   UAExit:EnergyMax ${hgm}*eV
                  /gamos/setParam   UAExit:EnergyBins ${hgm}00
+                 /gamos/setParam   UAExit:AnalizerParallel yes
                  /gamos/userAction UAExit"
-	    RUN="/run/beamOn 1000000"
-	    #RUN="/gamos/userAction UAWIF /run/beamOn 10000"
+
+	    MAG="/gamos/physics/userLimits/setMaxStep ulich chb   e- 1*mm
+                 /gamos/physics/userLimits/setMaxStep uliw  world e- 1*mm
+                 /gamos/field/setMagField 0.001*tesla 0 0"
+
+	    RUN="/run/beamOn 10000"
+	    #RUN="/gamos/userAction UAWIF /run/beamOn 1000"
 	    
 	    #PAR="--host dirac --ppn 1 --jobs 1 --btime 4:29:00"
 	    #PAR="--host euler --ppn 10 --jobs 250 --btime 4:29:00 --seed 1400 --SEED 1400"
 	    #PAR="--jobs 10 --ppn 10"
 	    DIR=${ege[j]}_${pre[i]}
-	    jgamos $PAR --dir oor_${DIR} $WRL $CHB $UMAT $PHYsmf $GEN $UAS $HGS $RUN  &
-	    jgamos $PAR --dir oon_${DIR} $WRL $CHB       $PHYsmf $GEN $UAS $HGS $RUN  &
+	    jgamos $PAR --dir oor_${DIR} $WRL $CHB $UMAT $PHY $MAG $GEN $UAS $HGS $RUN  &
+	    jgamos $PAR --dir oon_${DIR} $WRL $CHB       $PHY $MAG $GEN $UAS $HGS $RUN  &
 	done
     done
     wait

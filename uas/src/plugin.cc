@@ -28,6 +28,7 @@ PLUGINSVC_FACTORY(UAEloss,           GmUserAction*());
 PLUGINSVC_FACTORY(UAWIF,             GmUserAction*());
 PLUGINSVC_FACTORY(UAContinuationFile,GmUserAction*());
 PLUGINSVC_FACTORY(UAExit,            GmUserAction*());
+PLUGINSVC_FACTORY(UAAnalyser,        GmUserAction*());
 PLUGINSVC_FACTORY(UAReflex,          GmUserAction*());
 
 PLUGINSVC_FACTORY(UAClock,           GmUserAction*());
