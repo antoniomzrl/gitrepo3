@@ -18,61 +18,54 @@ k_Boltzmann=8.617343e-11*MeV/kelvin
 KbNa=${k_Boltzmann}'*'${Avogadro}
 MM=79.10*g/mole
 Temp=301*kelvin
+pre=2*${mTorr}
+Dens=${pre[i]}*${MM}'/('${Temp}*${KbNa}')'
 
-Pres=1${mTorr}
-Dens=${Pres}*${MM}'/('${Temp}*${KbNa}')'
-# MAT=":MIXT_BY_NATOMS FURFURAL $Dens 3  C 5  H 4  O 2"
-# MAT=":MATE FURFURAL 1.0 ${MM} ${Dens}"
 
-UAS="#/gamos/userAction UAWIF
-     #/gamos/userAction UAVerbose
+ANA=":VOLU chbana TUBE 0.0 9*cm/2 1*cm/2 vacuum 
+     :PLACE chbana 1 world rmz 4.5*cm 0 0 
+     :COLOUR chbana  0 1 1"
+BCK=":VOLU chbbck TUBE 0.0 9*cm/2 2*cm/2 vacuum 
+     :PLACE chbbck 1 world rmz -1*cm 0 0 
+     :COLOUR chbbck  0 1 1"
+REFL=":MATE USERMAT 1 1*g/mole 1e6*g/cm3
+      :VOLU chu TUBE 0.0 9*cm/2 1*mm/2 USERMAT 
+      :PLACE chu 1 world rmz -3*cm 0 0"
+CHB=":MIXT_BY_NATOMS PYRIDINE $Dens 3  C 5  H 5  N 1
+     :VOLU chb TUBE 0.0 8*cm/2 4*cm/2 PYRIDINE 
+     :PLACE chb 1 world rmz 4*cm/2 0 0 
+     :COLOUR chb 0.6 0.6 0.0"
+STP="/gamos/physics/userLimits/setMaxStep ulich  chb    e- 1*mm
+     /gamos/physics/userLimits/setMaxStep ulibck chbbck e- 1*mm"
+MAG="$STP
+     /gamos/field/setLocalMagField 0.001*tesla 0 0 chbbck
+     /gamos/field/setLocalMagField 0.01*tesla 0 0 chb"
+
+GEN=":VOLU   gbox ORB 2*mm vacuum
+     :PLACE  gbox 1 world rmz -5*mm 0 0
+     :COLOUR gbox 1 1 1
+     /gamos/generator GmGenerator
+     /gamos/generator/addSingleParticleSource gn e- 10*eV
+     /gamos/generator/positionDist  gn GmGenerDistPositionInG4Volumes gbox
+     /gamos/generator/directionDist gn GmGenerDistDirectionConst 1 0 0"
+
+HGS="/gamos/userAction GmCountProcessesUA
      /gamos/userAction UAInteraction
-     /gamos/userAction UAClock
-     /gamos/setParam   UAExit:EnergyMax 22*eV
-     /gamos/setParam   UAExit:EnergyBins 220
-     /gamos/userAction UAExit"
+     /gamos/setParam   UAExit:EnergyMax 12*eV
+     /gamos/setParam   UAExit:EnergyBins 1200
+     /gamos/userAction UAExit
+     /gamos/setParam   UAAnalyser:EnergyMax 12*eV
+     /gamos/setParam   UAAnalyser:EnergyBins 1200
+     /gamos/setParam   UAAnalyser:VolumeOut chb
+     /gamos/setParam   UAAnalyser:VolumeIn  chbana
+     /gamos/setParam   UAAnalyser:AnalizerParallel no
+     /gamos/userAction UAAnalyser"
 
-    
+
 if [ $1 == "helix" ] ; then
-    pre=2*${mTorr}
-    Dens=${pre[i]}*${MM}'/('${Temp}*${KbNa}')'
-    CHB=":MIXT_BY_NATOMS PYRIDINE $Dens 3  C 5  H 5  N 1
-         :VOLU chb TUBE 0.0 8*cm/2 4*cm/2 PYRIDINE 
-         :PLACE chb 1 world rmz 4*cm/2 0 0 
-         :COLOUR chb 0.6 0.6 0.0"
-    ANA=":VOLU chbana TUBE 0.0 9*cm/2 1*cm/2 vacuum 
-         :PLACE chbana 1 world rmz 4.5*cm 0 0 
-         :COLOUR chbana  0 1 1"
-    BCK=":VOLU chbbck TUBE 0.0 9*cm/2 2*cm/2 vacuum 
-         :PLACE chbbck 1 world rmz -1*cm 0 0 
-         :COLOUR chbbck  0 1 1"
-    GEN=":VOLU   gbox ORB 2*mm vacuum
-         :PLACE  gbox 1 world rmz -5*mm 0 0
-         :COLOUR gbox 1 1 1
-         /gamos/generator GmGenerator
-         /gamos/generator/addSingleParticleSource gn e- 10*eV
-         /gamos/generator/positionDist  gn GmGenerDistPositionInG4Volumes gbox
-         /gamos/generator/directionDist gn GmGenerDistDirectionConst 1 0 0"
-    UAS="/gamos/userAction GmCountProcessesUA
-         /gamos/userAction UAInteraction
-	 /gamos/setParam   UAExit:EnergyMax 12*eV
-         /gamos/setParam   UAExit:EnergyBins 1200
-         /gamos/userAction UAExit
-	 /gamos/setParam   UAAnalyser:EnergyMax 12*eV
-         /gamos/setParam   UAAnalyser:EnergyBins 1200
-         /gamos/setParam   UAAnalyser:VolumeOut chb
-         /gamos/setParam   UAAnalyser:VolumeIn  chbana
-	 /gamos/setParam   UAAnalyser:AnalizerParallel no
-         /gamos/userAction UAAnalyser
-         $(vis)"
-    RUN="/run/beamOn 30"
-
-    MAG="/gamos/physics/userLimits/setMaxStep ulich  chb    e- 1*mm
-         /gamos/physics/userLimits/setMaxStep ulibck chbbck e- 1*mm
-         /gamos/field/setLocalMagField 0.001*tesla 0 0 chbbck
-         /gamos/field/setLocalMagField 0.01*tesla 0 0 chb"
-    
-    jgamos --dir ooh1 $WRL $BCK $CHB $ANA $PHY $MAG $GEN $UAS $HGS $RUN  &
+    UAS="$(vis)"
+    RUN="/run/beamOn 50"
+    jgamos --dir ooh1 $WRL $REFL $BCK $CHB $ANA $PHY $MAG $GEN $UAS $HGS $RUN  &
     wait
   
 
@@ -93,7 +86,6 @@ elif [ $1 == "simu" ] ; then
 	for (( i=0; i<${#pre[@]}; i++ )) ; do
 	    fge='el'${ege[j]}'eV.txt'
 	    ((hgm=ege[j]+2))
-	    GENMONO=$(gen e- ${ege[j]}*eV 1*mm -5*cm)
 	    GEN=$(gen e- 1*eV 1*mm -5*cm $fge)
 	    
 	    Dens=${pre[i]}*${mTorr}*${MM}'/('${Temp}*${KbNa}')'
