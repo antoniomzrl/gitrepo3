@@ -30,15 +30,14 @@ BCK=":VOLU chbbck TUBE 0.0 9*cm/2 2*cm/2 vacuum
      :COLOUR chbbck  0 1 1"
 REFL=":MATE USERMAT 1 1*g/mole 1e6*g/cm3
       :VOLU chu TUBE 0.0 9*cm/2 1*mm/2 USERMAT 
-      :PLACE chu 1 world rmz -3*cm 0 0"
+      :PLACE chu 1 world rmz -2.1*cm 0 0"
 CHB=":MIXT_BY_NATOMS PYRIDINE $Dens 3  C 5  H 5  N 1
      :VOLU chb TUBE 0.0 8*cm/2 4*cm/2 PYRIDINE 
      :PLACE chb 1 world rmz 4*cm/2 0 0 
      :COLOUR chb 0.6 0.6 0.0"
-STP="/gamos/physics/userLimits/setMaxStep ulich  chb    e- 1*mm
-     /gamos/physics/userLimits/setMaxStep ulibck chbbck e- 1*mm"
-MAG="$STP
-     /gamos/field/setLocalMagField 0.001*tesla 0 0 chbbck
+MAG="/gamos/physics/userLimits/setMaxStep ulich  chb    e- 0.1*mm
+     /gamos/physics/userLimits/setMaxStep ulibck chbbck e- 0.1*mm
+     /gamos/field/setLocalMagField 0.01*tesla 0 0 chbbck
      /gamos/field/setLocalMagField 0.01*tesla 0 0 chb"
 
 GEN=":VOLU   gbox ORB 2*mm vacuum
@@ -65,54 +64,48 @@ HGS="/gamos/userAction GmCountProcessesUA
 if [ $1 == "helix" ] ; then
     UAS="$(vis)"
     RUN="/run/beamOn 50"
-    jgamos --dir ooh1 $WRL $REFL $BCK $CHB $ANA $PHY $MAG $GEN $UAS $HGS $RUN  &
+    jgamos --dir ooh1 $WRL $REFL $BCK $CHB $ANA $PHY $MAG $GEN $HGS $UAS $RUN  &
     wait
   
 
 elif [ $1 == "simu" ] ; then
     pre=( 00 02 9.5 10 )
     ege=( 03 10 15 20 )
-    pre=( 00 02 )
-    ege=( 03 )
+    ege=( 10 15 )
 
-    
-    UAS="#/gamos/userAction UAVerbose
-         /gamos/userAction UAClock
-         #/gamos/userAction GmCountProcessesUA
-	 #/gamos/userAction UAWIF
-         /gamos/userAction UAInteraction"
+    UAS="/gamos/userAction GmCountProcessesUA
+         /gamos/userAction UAInteraction
+         #/gamos/setParam TimeMark 1
+         /gamos/userAction UAClock"
     
     for (( j=0; j<${#ege[@]}; j++ )) ; do
+	fge='el'${ege[j]}'eV.txt'
+	((hgm=ege[j]+2))
+	GEN=$(gen e- 1*eV 1*mm -5*mm $fge)
+
 	for (( i=0; i<${#pre[@]}; i++ )) ; do
-	    fge='el'${ege[j]}'eV.txt'
-	    ((hgm=ege[j]+2))
-	    GEN=$(gen e- 1*eV 1*mm -5*cm $fge)
-	    
 	    Dens=${pre[i]}*${mTorr}*${MM}'/('${Temp}*${KbNa}')'
 	    CHB=":MIXT_BY_NATOMS PYRIDINE $Dens 3  C 5  H 5  N 1
-            	 :VOLU chb TUBE 0.0 9*cm/2 4*cm/2 PYRIDINE 
-         	 :PLACE chb 1 world rmz 6*cm 0 0"
-	    UMAT=":MATE USERMAT 1 1*g/mole 1e6*g/cm3
-                  :VOLU chu TUBE 0.0 9*cm/2 1*mm/2 USERMAT 
-		  :PLACE chu 1 world rmz -1*mm/2 0 0"
-	    HGS="/gamos/setParam   UAExit:EnergyMax ${hgm}*eV
-                 /gamos/setParam   UAExit:EnergyBins ${hgm}00
-                 /gamos/setParam   UAExit:AnalizerParallel yes
-                 /gamos/userAction UAExit"
+                 :VOLU chb TUBE 0.0 8*cm/2 4*cm/2 PYRIDINE 
+            	 :PLACE chb 1 world rmz 4*cm/2 0 0 
+		 :COLOUR chb 0.6 0.6 0.0"
+	    HGS="/gamos/setParam   UAAnalyser:EnergyMax ${hgm}*eV
+                 /gamos/setParam   UAAnalyser:EnergyBins ${hgm}00
+                 /gamos/setParam   UAAnalyser:VolumeOut chb
+                 /gamos/setParam   UAAnalyser:VolumeIn  chbana
+                 /gamos/setParam   UAAnalyser:AnalizerParallel yes
+                 /gamos/userAction UAAnalyser"
 
-	    MAG="/gamos/physics/userLimits/setMaxStep ulich chb   e- 1*mm
-                 /gamos/physics/userLimits/setMaxStep uliw  world e- 1*mm
-                 /gamos/field/setMagField 0.001*tesla 0 0"
-
-	    RUN="/run/beamOn 10000"
-	    #RUN="/gamos/userAction UAWIF /run/beamOn 1000"
+	    #RUN="$(vis) /run/beamOn 50"
+	    RUN="/run/beamOn 100000"
 	    
-	    #PAR="--host dirac --ppn 1 --jobs 1 --btime 4:29:00"
+	    PAR="--host dirac --ppn 1 --jobs 1 --btime 4:29:00"
 	    #PAR="--host euler --ppn 10 --jobs 250 --btime 4:29:00 --seed 1400 --SEED 1400"
 	    #PAR="--jobs 10 --ppn 10"
 	    DIR=${ege[j]}_${pre[i]}
-	    jgamos $PAR --dir oor_${DIR} $WRL $CHB $UMAT $PHY $MAG $GEN $UAS $HGS $RUN  &
-	    jgamos $PAR --dir oon_${DIR} $WRL $CHB       $PHY $MAG $GEN $UAS $HGS $RUN  &
+	    jgamos $PAR --dir oor_${DIR} $WRL $REFL $BCK $CHB $ANA $PHY $MAG $GEN $HGS $UAS $RUN  &
+	    jgamos $PAR --dir oon_${DIR} $WRL       $BCK $CHB $ANA $PHY $MAG $GEN $HGS $UAS $RUN  &
+	    wait
 	done
     done
     wait
