@@ -71,11 +71,13 @@ if [ $1 == "helix" ] ; then
 elif [ $1 == "simu" ] ; then
     pre=( 00 02 9.5 10 )
     ege=( 03 10 15 20 )
-    ege=( 10 15 )
 
+    #ege=( 10 ) ; pre=( 00 02 10 )
+    ege=( 15 ) ; pre=( 00 02 9.5 )
+    ege=( 15 ) ; pre=( 02 )
     UAS="/gamos/userAction GmCountProcessesUA
          /gamos/userAction UAInteraction
-         #/gamos/setParam TimeMark 1
+         /gamos/setParam UAClock:TimeMark 1
          /gamos/userAction UAClock"
     
     for (( j=0; j<${#ege[@]}; j++ )) ; do
@@ -95,17 +97,15 @@ elif [ $1 == "simu" ] ; then
                  /gamos/setParam   UAAnalyser:VolumeIn  chbana
                  /gamos/setParam   UAAnalyser:AnalizerParallel yes
                  /gamos/userAction UAAnalyser"
-
+	    ULI="/gamos/physics/userLimits/setMinEKin ulie chb e- 0.1*eV"
 	    #RUN="$(vis) /run/beamOn 50"
-	    RUN="/run/beamOn 100000"
+	    RUN="/run/beamOn 10000"
 	    
-	    PAR="--host dirac --ppn 1 --jobs 1 --btime 4:29:00"
-	    #PAR="--host euler --ppn 10 --jobs 250 --btime 4:29:00 --seed 1400 --SEED 1400"
-	    #PAR="--jobs 10 --ppn 10"
+	    #PAR="--host dirac --ppn 12 --jobs 24 --btime 2:00:00 --seed 100 --SEED 100"
+	    PAR="--seed 100 --SEED 100"
 	    DIR=${ege[j]}_${pre[i]}
-	    jgamos $PAR --dir oor_${DIR} $WRL $REFL $BCK $CHB $ANA $PHY $MAG $GEN $HGS $UAS $RUN  &
+	    #jgamos $PAR --dir oor_${DIR} $WRL $REFL $BCK $CHB $ANA $PHY $MAG $GEN $HGS $UAS $RUN  &
 	    jgamos $PAR --dir oon_${DIR} $WRL       $BCK $CHB $ANA $PHY $MAG $GEN $HGS $UAS $RUN  &
-	    wait
 	done
     done
     wait

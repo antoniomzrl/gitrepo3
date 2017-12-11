@@ -86,13 +86,17 @@ void UAInteractionSp::EndOfRunAction( const G4Run* ) {
   hgP->Write();
 
   for(int j=0; j<6; j++) {
-    for(int i=0; i <= hgENx[j]->GetNbinsX()+1; i++) {
-      if(hgENx[j]->GetBinContent(i) != 0) {
-	G4double vm = hgEx[j]->GetBinContent(i) / hgENx[j]->GetBinContent(i);
-	hgEx[j]->SetBinContent(i, vm);
+    if(hgEx[j]->GetEntries() > 0) {
+      hgEx[j]->Write();
+      for(int i=0; i <= hgEx[j]->GetNbinsX()+1; i++) {
+       	G4double vm = 0.0;
+       	if(hgENx[j]->GetBinContent(i) != 0)
+       	  vm = hgEx[j]->GetBinContent(i) / hgENx[j]->GetBinContent(i);
+       	hgEx[j]->SetBinContent(i, vm);
       }
+      hgENx[j]->Write();
+      hgEx[j]->Write();
     }
-    if(hgEx[j]->GetEntries() > 0) hgEx[j]->Write();
   }
 
 
@@ -133,6 +137,7 @@ void UAInteractionSp::EndOfEventAction( const G4Event* evt ) {
 void UAInteractionSp::UserSteppingAction(const G4Step* aStep) {
  
   G4StepPoint * P = aStep->GetPostStepPoint();
+  //G4StepPoint * P = aStep->GetPreStepPoint();
   G4ThreeVector r = P->GetPosition();
   G4double     Ke = P->GetKineticEnergy();
   G4double     Ed = aStep->GetTotalEnergyDeposit();
