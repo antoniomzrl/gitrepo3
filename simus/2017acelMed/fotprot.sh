@@ -38,16 +38,16 @@ GEN=$(gen gamma 1*MeV 1*nm -20*cm)
 ISP="/gamos/setParam UAInteractionSp:Title Edep-Depth
      /gamos/setParam UAInteractionSp:x 2500 0 5000*mm
      /gamos/userAction UAInteractionSp"
-RUN="/run/beamOn 5000000"
-#jgamos --dir ooph $PAR $WRL $CHB $PHY $UAS $ISP $GEN $ULI $RUN &
+RUN="/run/beamOn 100000"
+jgamos --dir ooph $PAR $WRL $CHB $PHY $UAS $ISP $GEN $ULI $RUN &
 
 GEN=$(gen proton 250*MeV 1*nm -20*cm)
 ISP="/gamos/setParam UAInteractionSp:Title Edep-Depth
      /gamos/setParam UAInteractionSp:x 500 0 500*mm
      /gamos/userAction UAInteractionSp"
 RUN="/run/beamOn 100000"
-RUN="/run/beamOn 1"
-jgamos --dir oopr $PAR $WRL $CHB $PHY $UAS $ISP $GEN $ULI $RUN &
+RUN="/run/beamOn 1000"
+#jgamos --dir oopr $PAR $WRL $CHB $PHY $UAS $ISP $GEN $ULI $RUN &
 
 wait
 

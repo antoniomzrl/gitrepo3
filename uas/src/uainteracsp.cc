@@ -5,7 +5,7 @@ double sdx;
 extern vector <string> tpi, ntpi, pn;
 
 #define NTPI 50
-TH1D *hgP, *hgNI, *hgEx[6], *hgENx[6], *hgNx[NTPI], *hgEdx[NTPI], *hgEdxAxis,
+TH1D *hgP, *hgNI, *hgEx[6], *hgEx2[6], *hgENx[6], *hgNx[NTPI], *hgEdx[NTPI], *hgEdxAxis,
      *hgNsx[NTPI], *hgEsx[NTPI];
 
 
@@ -64,8 +64,10 @@ void UAInteractionSp::BeginOfRunAction( const G4Run* ) {
     string name = "E_" + pn[j];
     string title = "E" + name + " - Depth - " + Title;
     hgEx[j] = new TH1D(name.c_str(), title.c_str(), x[0], x[1], x[2]);
-    name = "aux_" + pn[j];
-    title = "aux_" + pn[j];
+    name = "E2_" + pn[j];
+    hgEx2[j] = new TH1D(name.c_str(), title.c_str(), x[0], x[1], x[2]);
+    name = "E_aux_" + pn[j];
+    title = "E_aux_" + pn[j];
     hgENx[j] = new TH1D(name.c_str(), title.c_str(), x[0], x[1], x[2]);
   }
 
@@ -87,15 +89,20 @@ void UAInteractionSp::EndOfRunAction( const G4Run* ) {
 
   for(int j=0; j<6; j++) {
     if(hgEx[j]->GetEntries() > 0) {
-      hgEx[j]->Write();
       for(int i=0; i <= hgEx[j]->GetNbinsX()+1; i++) {
        	G4double vm = 0.0;
        	if(hgENx[j]->GetBinContent(i) != 0)
        	  vm = hgEx[j]->GetBinContent(i) / hgENx[j]->GetBinContent(i);
-       	hgEx[j]->SetBinContent(i, vm);
+       	hgEx2[j]->SetBinContent(i, vm);
+	// cout << "xxx" << pn[j]
+	//      << "\t" << hgENx[j]->GetBinContent(i)/MeV
+	//      << "\t" << hgEx[j]->GetBinContent(i)/MeV
+	//      << "\t" << hgEx2[j]->GetBinContent(i)/MeV
+	//      << endl;
       }
-      hgENx[j]->Write();
       hgEx[j]->Write();
+      hgENx[j]->Write();
+      hgEx2[j]->Write();
     }
   }
 
@@ -146,7 +153,7 @@ void UAInteractionSp::UserSteppingAction(const G4Step* aStep) {
   // Particle energy
   G4String partName = aStep->GetTrack()->GetDefinition()->GetParticleName();
   int ip = PN(partName);
-  hgEx[ip]->Fill(r[0], Ke/eV);
+  hgEx[ip]->Fill(r[0], Ke);
   hgENx[ip]->Fill(r[0], 1);
 
 
@@ -163,12 +170,12 @@ void UAInteractionSp::UserSteppingAction(const G4Step* aStep) {
     //int it = TPI(procName, 0, 29);
     int it = TPI(procName);
     hgNx[it]->Fill(r[0]);
-    hgEdx[it]->Fill(r[0], Ed/eV);
-    hgEdx[tpi.size()]->Fill(r[0], Ed/eV);
+    hgEdx[it]->Fill(r[0], Ed);
+    hgEdx[tpi.size()]->Fill(r[0], Ed);
     hgNI->Fill(procName, 1);
 
     if( abs(r[1]) < sdx && abs(r[2]) < sdx)
-      hgEdxAxis->Fill(r[0], Ed/eV);
+      hgEdxAxis->Fill(r[0], Ed);
   }
   
 
