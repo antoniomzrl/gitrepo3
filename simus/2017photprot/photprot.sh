@@ -4,9 +4,9 @@ source $HOME/lepts/bin/gdefs.sh
 
 # physics lists
 INI="/run/initialize"
-PHY1="/gamos/physicsList GmEMPhysics          $INI"
+PHY="/gamos/physicsList GmEMPhysics          $INI"
 PHY="/gamos/physicsList GmEMExtendedPhysics  $INI"
-#PHY="/gamos/physicsList HadrontherapyPhysics $INI"
+PHY="/gamos/physicsList HadrontherapyPhysics $INI"
 
 MATS=":MATE vacuum 1 1*g/mole 0*g/cm3 
       :MIXT_BY_NATOMS G4_WATER 1*g/cm3 2  O 1 H 2"
@@ -23,8 +23,7 @@ CHB=":MIXT_BY_NATOMS G4_WATER 1*g/cm3 2  O 1 H 2
 
 UAS="#/gamos/userAction UAVerbose
      #/gamos/userAction UAWIF
-     /gamos/userAction UAInteraction
-     /gamos/userAction UAInteractionSp
+     #/gamos/userAction UAInteraction
      /gamos/userAction UAClock"
 ULI="/gamos/userAction GmKillAtStackingActionUA GmElectronFilter"
 #RUN="$(vis) /run/beamOn 10"
@@ -35,19 +34,19 @@ ULI="/gamos/userAction GmKillAtStackingActionUA GmElectronFilter"
 #Edep versus depth
 
 GEN=$(gen gamma 1*MeV 1*nm -20*cm)
-ISP="/gamos/setParam UAInteractionSp:Title Edep-Depth
-     /gamos/setParam UAInteractionSp:x 2500 0 5000*mm
+ISP="/gamos/setParam UAInteractionSp:x 600 0 3000*mm
+     /gamos/setParam UAInteractionSp:Title Edep-Depth
      /gamos/userAction UAInteractionSp"
 RUN="/run/beamOn 100000"
-jgamos --dir ooph $PAR $WRL $CHB $PHY $UAS $ISP $GEN $ULI $RUN &
+#jgamos --dir ooph $PAR $WRL $CHB $PHY $UAS $ISP $GEN $ULI $RUN &
 
-GEN=$(gen proton 250*MeV 1*nm -20*cm)
-ISP="/gamos/setParam UAInteractionSp:Title Edep-Depth
-     /gamos/setParam UAInteractionSp:x 500 0 500*mm
+#250MeV->400mm 180MeV->225mm
+GEN=$(gen proton 180*MeV 1*nm -20*cm)
+ISP="/gamos/setParam UAInteractionSp:x 500 0 250*mm 
+     /gamos/setParam UAInteractionSp:Title Edep-Depth
      /gamos/userAction UAInteractionSp"
-RUN="/run/beamOn 100000"
-RUN="/run/beamOn 1000"
-#jgamos --dir oopr $PAR $WRL $CHB $PHY $UAS $ISP $GEN $ULI $RUN &
+RUN="/run/beamOn 1000000"
+jgamos --dir oopr $PAR $WRL $CHB $PHY $UAS $ISP $GEN $ULI $RUN &
 
 wait
 

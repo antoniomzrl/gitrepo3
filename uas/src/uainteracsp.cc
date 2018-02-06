@@ -5,8 +5,8 @@ double sdx;
 extern vector <string> tpi, ntpi, pn;
 
 #define NTPI 50
-TH1D *hgP, *hgNI, *hgEx[6], *hgEx2[6], *hgENx[6], *hgNx[NTPI], *hgEdx[NTPI], *hgEdxAxis,
-     *hgNsx[NTPI], *hgEsx[NTPI];
+TH1D *hgP, *hgNI, *hgEdxT, *hgEdxAxis, *hgEx[6], *hgEx2[6], *hgENx[6],
+  *hgEdx[NTPI], *hgNx[NTPI], *hgNsx[NTPI], *hgEsx[NTPI];
 
 
 UAInteractionSp::UAInteractionSp() : GmUserRunAction(), GmUserEventAction(),
@@ -56,8 +56,8 @@ void UAInteractionSp::BeginOfRunAction( const G4Run* ) {
     title    = name + " - Depth - " + Title;
     hgEsx[j] = new TH1D(name.c_str(), title.c_str(), x[0], x[1], x[2]);    
   }
-
-  hgEdx[tpi.size()] = new TH1D("EdepTotal", "EdepTotal", x[0], x[1], x[2]);
+  
+  hgEdxT = new TH1D("EdepTotal", "EdepTotal", x[0], x[1], x[2]);
   hgEdxAxis = new TH1D("EdepAxis", "EdepAxis", x[0], x[1], x[2]);
  
   for(int j=0; j<6; j++) {
@@ -87,6 +87,10 @@ void UAInteractionSp::EndOfRunAction( const G4Run* ) {
   hgP->LabelsOption("a", "X");
   hgP->Write();
 
+  if(hgEdxT->GetEntries() > 0) hgEdxT->Write();
+  if(hgEdxAxis->GetEntries() > 0) hgEdxAxis->Write();
+
+
   for(int j=0; j<6; j++) {
     if(hgEx[j]->GetEntries() > 0) {
       for(int i=0; i <= hgEx[j]->GetNbinsX()+1; i++) {
@@ -114,16 +118,15 @@ void UAInteractionSp::EndOfRunAction( const G4Run* ) {
 	hgEsx[j]->SetBinContent(i, vm);
       }
     }
-    
-    if(hgNx[j]->GetEntries() > 0)  hgNx[j]->Write();
-    if(hgEdx[j]->GetEntries() > 0) hgEdx[j]->Write();
     if(hgNsx[j]->GetEntries() > 0) hgNsx[j]->Write();
     if(hgEsx[j]->GetEntries() > 0) hgEsx[j]->Write();
   }
-  
-  if(hgEdx[tpi.size()]->GetEntries() > 0) hgEdx[tpi.size()]->Write();
-  if(hgEdxAxis->GetEntries() > 0) hgEdxAxis->Write();
-  
+
+  for(int j=0; j<tpi.size(); j++) {
+    if(hgNx[j]->GetEntries() > 0)  hgNx[j]->Write();
+    if(hgEdx[j]->GetEntries() > 0) hgEdx[j]->Write();
+  }
+
   Fintsp->Close();
 } 
 
@@ -143,11 +146,12 @@ void UAInteractionSp::EndOfEventAction( const G4Event* evt ) {
 
 void UAInteractionSp::UserSteppingAction(const G4Step* aStep) {
  
-  G4StepPoint * P = aStep->GetPostStepPoint();
-  //G4StepPoint * P = aStep->GetPreStepPoint();
-  G4ThreeVector r = P->GetPosition();
-  G4double     Ke = P->GetKineticEnergy();
-  G4double     Ed = aStep->GetTotalEnergyDeposit();
+  G4StepPoint * P2 = aStep->GetPostStepPoint();
+  //G4StepPoint * P1 = aStep->GetPreStepPoint();
+  //G4ThreeVector  r = (P1->GetPosition() + P2->GetPosition())*0.5;
+  G4ThreeVector  r = P2->GetPosition();
+  G4double      Ke = P2->GetKineticEnergy();
+  G4double      Ed = aStep->GetTotalEnergyDeposit();
   
 
   // Particle energy
@@ -164,14 +168,14 @@ void UAInteractionSp::UserSteppingAction(const G4Step* aStep) {
 
 
   // process Edep / Depth
-  const G4VProcess * proc = P->GetProcessDefinedStep();
+  const G4VProcess * proc = P2->GetProcessDefinedStep();
   if(proc) {
     G4String procName = proc->GetProcessName();
     //int it = TPI(procName, 0, 29);
     int it = TPI(procName);
     hgNx[it]->Fill(r[0]);
     hgEdx[it]->Fill(r[0], Ed);
-    hgEdx[tpi.size()]->Fill(r[0], Ed);
+    hgEdxT->Fill(r[0], Ed);
     hgNI->Fill(procName, 1);
 
     if( abs(r[1]) < sdx && abs(r[2]) < sdx)
