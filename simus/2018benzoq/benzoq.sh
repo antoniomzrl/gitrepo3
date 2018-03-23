@@ -36,8 +36,8 @@ CHB=":MIXT_BY_NATOMS PYRIDINE $Dens 3  C 5  H 5  N 1
      :COLOUR chb 1 1 0"
 MAG="/gamos/physics/userLimits/setMaxStep ulich  chb    e- 0.1*mm
      /gamos/physics/userLimits/setMaxStep ulibck chbbck e- 0.1*mm
-     /gamos/field/setLocalMagField 0.01*tesla 0 0 chbbck
-     /gamos/field/setLocalMagField 0.01*tesla 0 0 chb"
+     /gamos/field/setLocalMagField 0.076*tesla 0 0 chbbck
+     /gamos/field/setLocalMagField 0.076*tesla 0 0 chb"
 
 
 GENMONO=":VOLU   gbox ORB 1*mm vacuum
