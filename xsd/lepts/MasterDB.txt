@@ -198,6 +198,21 @@ begin FURFURAL_ISO5k
       e-  DXS furfural_iDXSiso5k.csv
 end
 
+ 
+========================================================== Benzoq
+begin BENZOQUINONE C6H4O2
+      IP   9.67
+      IIP  284.0
+      IIP2 532.0
+      
+      e-  IXS    benzoq-IXS-2018mar.csv
+      e-  DXS    benzoq-iDXS.csv
+      e-  ELDEXC benzoq-ELDEXC.txt
+      e-  ELDION benzoq-ELDION.txt
+      e-  ELDVIB benzoq-ELDVIB.txt
+end
+
+========================================================== Benzoq
 
 ========================================================== Pyridine
 begin PYRIDINE C5H5N
