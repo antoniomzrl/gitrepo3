@@ -21,18 +21,18 @@ void UAAnalyser::BeginOfRunAction( const G4Run* ) {
   nameOut = GmParameterMgr::GetInstance()->GetStringValue("UAAnalyser:VolumeOut", "world");
   nameIn  = GmParameterMgr::GetInstance()->GetStringValue("UAAnalyser:VolumeIn", "null");
 
-  hgA     = new TH1D("Angular",        "Ang(deg)",180,  0.0, 180);
-  hgE     = new TH1D("E",              "E(eV)",   Nb, 0.0, EMax);
-  hgEfw   = new TH1D("Eforward",       "E(eV)",   Nb, 0.0, EMax);
-  hgEfwItg= new TH1D("EforwardInteg",  "E(eV)",   Nb, 0.0, EMax);
-  hgEfwph = new TH1D("Eforward_ph",    "E(eV)",   Nb, 0.0, EMax);
-  hgEfwel = new TH1D("Eforward_el",    "E(eV)",   Nb, 0.0, EMax);
-  hgEbw   = new TH1D("Ebackward",      "E(eV)",   Nb, 0.0, EMax);
-  hgEbwItg= new TH1D("EbackwardInteg", "E(eV)",   Nb, 0.0, EMax);
-  hgEel20  = new TH1D("Eel20deg",      "E(eV)",   Nb, 0.0, EMax);
-  hgEph20  = new TH1D("Eph20deg",      "E(eV)",   Nb, 0.0, EMax);
-  hgEel80  = new TH1D("Eel80deg",      "E(eV)",   Nb, 0.0, EMax);
-  hgEph80  = new TH1D("Eph80deg",      "E(eV)",   Nb, 0.0, EMax);
+  hgAnaA     = new TH1D("Angular",        "Ang(deg)",180,  0.0, 180);
+  hgAnaE     = new TH1D("E",              "E(eV)",   Nb, 0.0, EMax);
+  hgAnaEfw   = new TH1D("Eforward",       "E(eV)",   Nb, 0.0, EMax);
+  hgAnaEfwItg= new TH1D("EforwardInteg",  "E(eV)",   Nb, 0.0, EMax);
+  hgAnaEfwph = new TH1D("Eforward_ph",    "E(eV)",   Nb, 0.0, EMax);
+  hgAnaEfwel = new TH1D("Eforward_el",    "E(eV)",   Nb, 0.0, EMax);
+  hgAnaEbw   = new TH1D("Ebackward",      "E(eV)",   Nb, 0.0, EMax);
+  hgAnaEbwItg= new TH1D("EbackwardInteg", "E(eV)",   Nb, 0.0, EMax);
+  hgAnaEel20  = new TH1D("Eel20deg",      "E(eV)",   Nb, 0.0, EMax);
+  hgAnaEph20  = new TH1D("Eph20deg",      "E(eV)",   Nb, 0.0, EMax);
+  hgAnaEel80  = new TH1D("Eel80deg",      "E(eV)",   Nb, 0.0, EMax);
+  hgAnaEph80  = new TH1D("Eph80deg",      "E(eV)",   Nb, 0.0, EMax);
 } 
 
 
@@ -41,29 +41,29 @@ void UAAnalyser::EndOfRunAction( const G4Run* ) {
   
   // Integrado desde la derecha:
   G4double Sum=0, Sam=0;
-  for (int i=hgEfw->GetNbinsX(); i >=0; i--) {
-    Sum += hgEfw->GetBinContent(i);
-    Sam += hgEbw->GetBinContent(i);
-    hgEfwItg->SetBinContent(i, Sum);
-    hgEbwItg->SetBinContent(i, Sam);
+  for (int i=hgAnaEfw->GetNbinsX(); i >=0; i--) {
+    Sum += hgAnaEfw->GetBinContent(i);
+    Sam += hgAnaEbw->GetBinContent(i);
+    hgAnaEfwItg->SetBinContent(i, Sum);
+    hgAnaEbwItg->SetBinContent(i, Sam);
   }
 
   G4String JobName = GmParameterMgr::GetInstance()->GetStringValue("JobName", "job");
   G4String fn = "analyser" + JobName + ".root";
   TFile * fexit = new TFile(fn.c_str(), "RECREATE");
 
-  hgA->Write();
-  hgE->Write();
-  hgEfw->Write();
-  hgEfwItg->Write();
-  hgEfwph->Write();
-  hgEfwel->Write();
-  hgEbw->Write();
-  hgEbwItg->Write();
-  hgEel20->Write();
-  hgEph20->Write();
-  hgEel80->Write();
-  hgEph80->Write();
+  hgAnaA->Write();
+  hgAnaE->Write();
+  hgAnaEfw->Write();
+  hgAnaEfwItg->Write();
+  hgAnaEfwph->Write();
+  hgAnaEfwel->Write();
+  hgAnaEbw->Write();
+  hgAnaEbwItg->Write();
+  hgAnaEel20->Write();
+  hgAnaEph20->Write();
+  hgAnaEel80->Write();
+  hgAnaEph80->Write();
   fexit->Close();
 } 
 
@@ -113,31 +113,31 @@ void UAAnalyser::UserSteppingAction(const G4Step* aStep) {
   
   //cout << "exit " << KinE/eV << " xeV " << ang << endl;
 
-  hgE->Fill(KinE);
-  hgA->Fill(ang);
+  hgAnaE->Fill(KinE);
+  hgAnaA->Fill(ang);
 
   if(ang < 90.0) {
-    hgEfw->Fill(KinE);
+    hgAnaEfw->Fill(KinE);
     if( pn == "gamma")
-      hgEfwph->Fill(KinE);
+      hgAnaEfwph->Fill(KinE);
     else if( pn == "e-")
-      hgEfwel->Fill(KinE);
+      hgAnaEfwel->Fill(KinE);
   }
   else
-    hgEbw->Fill(KinE);
+    hgAnaEbw->Fill(KinE);
 
 
   if( pn == "gamma") {
     if(ang < 20)
-      hgEph20->Fill(KinE);
+      hgAnaEph20->Fill(KinE);
     else if(ang > 80 && ang < 100)
-      hgEph80->Fill(KinE);
+      hgAnaEph80->Fill(KinE);
   }
   else if( pn == "e-") {
     if(ang < 20)
-      hgEel20->Fill(KinE);
+      hgAnaEel20->Fill(KinE);
     else if(ang > 80 && ang < 100)
-      hgEel80->Fill(KinE);
+      hgAnaEel80->Fill(KinE);
   }
 }
 

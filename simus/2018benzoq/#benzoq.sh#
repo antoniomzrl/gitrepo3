@@ -66,13 +66,14 @@ if [ $1 == "gen" ] ; then
     jgamos --dir oog $WRL $PHY $GENDIST $HEXIT /run/beamOn 1000000
 
     
-elif [ $1 == "helix" ] ; then
+elif [ $1 == "vis" ] ; then
     RUN="/run/beamOn 50"
     MAG2="/gamos/physics/userLimits/setMaxStep ulich  chb    e- 0.1*mm
           /gamos/physics/userLimits/setMaxStep ulibck chbbck e- 0.1*mm
           /gamos/field/setLocalMagField 0.0076*tesla 0 0 chbbck
           /gamos/field/setLocalMagField 0.0076*tesla 0 0 chb"
 
+    jgamos --dir ooh1 $WRL $REFL $BCK $CHB $ANA $PHY $MAG $GENMONO $HGS $(vis) $RUN  &
     jgamos --dir ooh1 $WRL $REFL $BCK $CHB $ANA $PHY $MAG $GENMONO $HGS $(vis) $RUN  &
     wait
  

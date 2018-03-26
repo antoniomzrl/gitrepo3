@@ -213,8 +213,8 @@ public:
   void EndOfEventAction(  const G4Event *);
   void UserSteppingAction(const G4Step *);
 
-  TH1D *hgA, *hgE, *hgEfw, *hgEfwItg, *hgEbwItg, *hgEbw, *hgEfwph, *hgEfwel,
-  *hgEel20, *hgEph20, *hgEel80, *hgEph80;
+  TH1D *hgAnaA, *hgAnaE, *hgAnaEfw, *hgAnaEfwItg, *hgAnaEbwItg, *hgAnaEbw, *hgAnaEfwph, *hgAnaEfwel,
+  *hgAnaEel20, *hgAnaEph20, *hgAnaEel80, *hgAnaEph80;
 
   G4String nameOut, nameIn, anapar;
 };
