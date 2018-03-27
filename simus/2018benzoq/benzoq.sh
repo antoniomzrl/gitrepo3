@@ -30,8 +30,8 @@ BCK=":VOLU chbbck TUBE 0.0 9*cm/2 2*cm/2 vacuum
 REFL=":MATE USERMAT 1 1*g/mole 1e6*g/cm3
       :VOLU chu TUBE 0.0 9*cm/2 1*mm/2 USERMAT 
       :PLACE chu 1 world rmz -2.1*cm 0 0"
-CHB=":MIXT_BY_NATOMS PYRIDINE $Dens 3  C 5  H 5  N 1
-     :VOLU chb TUBE 0.0 8*cm/2 4*cm/2 PYRIDINE 
+CHB=":MIXT_BY_NATOMS BENZOQUINONE $Dens 3  C 6 H 4 O 2
+     :VOLU chb TUBE 0.0 8*cm/2 4*cm/2 BENZOQUINONE
      :PLACE chb 1 world rmz 4*cm/2 0 0 
      :COLOUR chb 1 1 0"
 MAG="/gamos/physics/userLimits/setMaxStep ulich  chb    e- 0.1*mm
@@ -66,40 +66,45 @@ if [ $1 == "gen" ] ; then
     jgamos --dir oog $WRL $PHY $GENDIST $HEXIT /run/beamOn 1000000
 
     
-elif [ $1 == "helix" ] ; then
+elif [ $1 == "vis" ] ; then
+    RUN="/run/beamOn 50"
+    MAGpeq="/gamos/physics/userLimits/setMaxStep ulich  chb    e- 0.1*mm
+            /gamos/physics/userLimits/setMaxStep ulibck chbbck e- 0.1*mm
+            /gamos/field/setLocalMagField 0.0076*tesla 0 0 chbbck
+            /gamos/field/setLocalMagField 0.0076*tesla 0 0 chb"
+    jgamos --dir oov  $WRL $REFL $BCK $CHB $ANA $PHY $MAG    $GENDIST $HGS $(vis) $RUN  &
+    jgamos --dir oovb $WRL $REFL $BCK $CHB $ANA $PHY $MAGpeq $GENDIST $HGS $(vis) $RUN  &
+    wait
+
+
+elif [ $1 == "vis2" ] ; then
     RUN="/run/beamOn 50"
     MAG2="/gamos/physics/userLimits/setMaxStep ulich  chb    e- 0.1*mm
-          /gamos/physics/userLimits/setMaxStep ulibck chbbck e- 0.1*mm
-          /gamos/field/setLocalMagField 0.0076*tesla 0 0 chbbck
           /gamos/field/setLocalMagField 0.0076*tesla 0 0 chb"
-
-    jgamos --dir ooh1 $WRL $REFL $BCK $CHB $ANA $PHY $MAG $GENMONO $HGS $(vis) $RUN  &
-    wait
+    jgamos --dir oov2 $WRL $REFL $CHB $PHY $MAG2 $GENDIST /gamos/userAction UAWIF $(vis) $RUN
  
 
 elif [ $1 == "simu" ] ; then
-    pre=( 00 02 9.5 10 )
-    ege=( 03 10 15 20 )
+    pre=( 00 02 05 )
+    ege=( 15 )
 
-    #ege=( 10 ) ; pre=( 00 02 10 )
-    ege=( 15 ) ; pre=( 00 02 9.5 )
-    ege=( 15 ) ; pre=( 02 )
     UAS="/gamos/userAction GmCountProcessesUA
          /gamos/userAction UAInteraction
          /gamos/setParam UAClock:TimeMark 1
          /gamos/userAction UAClock"
     
     for (( j=0; j<${#ege[@]}; j++ )) ; do
-	fge='el'${ege[j]}'eV.txt'
+	fge='e'${ege[j]}'eVbenzoq.txt'
 	((hgm=ege[j]+2))
-	GEN=$(gen e- 1*eV 1*mm -5*mm $fge)
+	GEN="$GENMONO
+             /gamos/generator/energyDist gn GmGenerDistEnergyFromFile $fge interpolate 1*eV"
 
 	for (( i=0; i<${#pre[@]}; i++ )) ; do
 	    Dens=${pre[i]}*${mTorr}*${MM}'/('${Temp}*${KbNa}')'
-	    CHB=":MIXT_BY_NATOMS PYRIDINE $Dens 3  C 5  H 5  N 1
-                 :VOLU chb TUBE 0.0 8*cm/2 4*cm/2 PYRIDINE 
-            	 :PLACE chb 1 world rmz 4*cm/2 0 0 
-		 :COLOUR chb 0.6 0.6 0.0"
+	    CHB=":MIXT_BY_NATOMS BENZOQUINONE $Dens 3  C 6 H 4 O 2
+                 :VOLU chb TUBE 0.0 8*cm/2 4*cm/2 BENZOQUINONE
+                 :PLACE chb 1 world rmz 4*cm/2 0 0 
+                 :COLOUR chb 1 1 0"
 	    HGS="/gamos/setParam   UAAnalyser:EnergyMax ${hgm}*eV
                  /gamos/setParam   UAAnalyser:EnergyBins ${hgm}00
                  /gamos/setParam   UAAnalyser:VolumeOut chb
@@ -111,10 +116,9 @@ elif [ $1 == "simu" ] ; then
 	    RUN="/run/beamOn 10000"
 	    
 	    #PAR="--host dirac --ppn 12 --jobs 24 --btime 2:00:00 --seed 100 --SEED 100"
-	    PAR="--seed 100 --SEED 100"
+	    #PAR="--seed 100 --SEED 100 --jobs 10"
 	    DIR=${ege[j]}_${pre[i]}
-	    #jgamos $PAR --dir oor_${DIR} $WRL $REFL $BCK $CHB $ANA $PHY $MAG $GEN $HGS $UAS $RUN  &
-	    jgamos $PAR --dir oon_${DIR} $WRL       $BCK $CHB $ANA $PHY $MAG $GEN $HGS $UAS $RUN  &
+	    jgamos $PAR --dir oo_${DIR} $WRL $REFL $BCK $CHB $ANA $PHY $MAG $GEN $HGS $UAS $RUN &
 	done
     done
     wait
@@ -138,3 +142,4 @@ Eloss Vibrational:  furfural, promedio: 0.1866 eV
 IXS Vibrational: furfural
 Ionis Pot:  10.1 eV (p9.27 furfural 9.22 y pirimidina 9.23)
 Cámara 4cm
+Distribuciones de pérdida valores medios: ION 10.5651, EXC 6.90152 y VIB 0.157359
