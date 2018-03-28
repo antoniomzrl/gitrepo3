@@ -111,35 +111,39 @@ elif [ $1 == "simu" ] ; then
                  /gamos/setParam   UAAnalyser:VolumeIn  chbana
                  /gamos/setParam   UAAnalyser:AnalizerParallel yes
                  /gamos/userAction UAAnalyser"
-	    ULI="/gamos/physics/userLimits/setMinEKin ulie chb e- 0.1*eV"
+	    ULI="/gamos/physics/userLimits/setMinEKin ulie1 chb    e- 0.1*eV
+ 	         /gamos/physics/userLimits/setMinEKin ulie2 chbbck e- 0.1*eV"
 	    #RUN="$(vis) /run/beamOn 50"
-	    RUN="/run/beamOn 10000"
+	    RUN="/run/beamOn 100000"
 	    
 	    #PAR="--host dirac --ppn 12 --jobs 24 --btime 2:00:00 --seed 100 --SEED 100"
 	    #PAR="--seed 100 --SEED 100 --jobs 10"
 	    DIR=${ege[j]}_${pre[i]}
-	    jgamos $PAR --dir oo_${DIR} $WRL $REFL $BCK $CHB $ANA $PHY $MAG $GEN $HGS $UAS $RUN &
+	    jgamos $PAR --dir oosmf_${DIR} $WRL $REFL $BCK $CHB $ANA $PHYsmf   $GEN $HGS $UAS $ULI $RUN &
+	    jgamos $PAR --dir oohlx_${DIR} $WRL $REFL $BCK $CHB $ANA $PHY $MAG $GEN $HGS $UAS $ULI $RUN &
 	done
     done
     wait
 
+    
 fi
 
 exit
 
+Resultados de las simulaciones con benzoquinona.
 
-Por de bajo de 1 eV, sólo consideramos elásticos con la misma DCS que la de 1 eV.
-No tiene momento dipolar, no hay rotacionales
-Cámara ahora son 40 mm
-0.1 Tesla pero primero quiero ver la simulación sin movimiento helicoidal, hay que pensar un poco en las implicacione sde ese movimiento.
-Los espectros enviados corresponden a un campo magnético de 760 G (0.076 T)
+(1) Descripción:
+   No tiene momento dipolar, no hay rotacionales
+   Por de bajo de 1 eV solo consideramos elásticos con la misma DCS que la de 1 eV.
+   Con y sin movimiento helicoidal.
+   Campo magnético de 760 G (0.076 T)
+   Molecular Mass: 108.1*g/mole
+   Ionis Pot:  10.1 eV
+   Distribuciones de pérdida valores medios (eV): ION 10.5651, EXC 6.90152 y VIB 0.157359
+   Cámara de 40 mm. Los e- que salen de ella hacia adelante se analizan en energía, y los que salen hacia atrás se devuelven con la misma energía que llevaban. He puesto una especie de reflector casero y listos.
 
-Molecular Mass: 108.1*g/mole
-Eloss Rotational: 9.95e-4 eV furfural
-Eloss Ionisation: nueva distribución, promedio: 14.9716 eV
-Eloss Excitation: nueva distribución, promedio:  7.5169 eV
-Eloss Vibrational:  furfural, promedio: 0.1866 eV
-IXS Vibrational: furfural
-Ionis Pot:  10.1 eV (p9.27 furfural 9.22 y pirimidina 9.23)
-Cámara 4cm
-Distribuciones de pérdida valores medios: ION 10.5651, EXC 6.90152 y VIB 0.157359
+(2) He utilizado dos modelos:
+
+-Modelo SMF (strong mag field) consistente en suponer que el campo es infinito y eliminar la energía transversal tras el choque en el primario y al generar secundarios. Esto me obligó en tiempos a escribir una física modificada para generar la aproximación.
+
+-Modelo HLX (helix) simulando completamente el movimiento helicoidal en la cámara inmersa en un campo magnético de valor finito. Esta simu es mucho más lenta porque debe añadir los cálculos relacionados con la física del campo de geant4 y porque los electrones recorren más camino, pero se hace con la física LEPTS de siempre. He tenido que aprender a mezclar nuestra física con el campo de geant4. En este modelo supongo además que el analizador solamente ve la energía asociada a la componente longitudinal de los e- que acaban de salir de la cámara.
