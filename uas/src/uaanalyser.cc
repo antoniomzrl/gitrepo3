@@ -48,9 +48,10 @@ void UAAnalyser::EndOfRunAction( const G4Run* ) {
     hgAnaEbwItg->SetBinContent(i, Sam);
   }
 
-  G4String JobName = GmParameterMgr::GetInstance()->GetStringValue("JobName", "job");
-  G4String fn = "analyser" + JobName + ".root";
-  TFile * fexit = new TFile(fn.c_str(), "RECREATE");
+  G4String jn = GmParameterMgr::GetInstance()->GetStringValue("JobName", "job");
+  G4String fn = GmParameterMgr::GetInstance()->GetStringValue("UAAnalyser:FileName", "Analyser");
+  G4String Fn = jn + fn + ".root";
+  TFile * fexit = new TFile(Fn.c_str(), "RECREATE");
 
   hgAnaA->Write();
   hgAnaE->Write();
