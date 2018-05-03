@@ -6,8 +6,10 @@ TH1D *hgAngE, *hgAngEdeg, *hgAngR, *hgAngI, *hgAngIo;
 int NoEvents=0, NoCols=0, NoColsEl=0, NoColsIo=0;
 double Edepo=0, Elo=0;
 
-int NoIntEv[100];
-int NoIntThisEv;
+string proclabel[10];
+int NoIntThisEv[10];
+int NoIntEv[10][100];
+
 
 UAInteraction::UAInteraction() : GmUserRunAction(), GmUserEventAction(),
 				 GmUserSteppingAction() {
@@ -21,6 +23,17 @@ UAInteraction::~UAInteraction() {
 void UAInteraction::BeginOfRunAction( const G4Run* ) {
   cout << "UAInteraction BeginOfRunAction" << endl;
 
+  proclabel[0] = "Total";
+  proclabel[1] = "Elastic";
+  proclabel[2] = "nicExcit";
+  proclabel[3] = "Vibrat";
+  proclabel[4] = "Ionis";
+  proclabel[5] = "Attach";
+  proclabel[6] = "xxx6";
+  proclabel[7] = "xxx7";
+  proclabel[8] = "xxx8";
+  proclabel[9] = "xxx9";
+  
   hgNi   = new TH1D("Nint",  "Number of ints",      3, 0, 3);
   hgEdi  = new TH1D("Edint", "Edep(eV) /int type",  3, 0, 3);
   hgEli  = new TH1D("Elint", "Eloss(eV) /int type",  3, 0, 3);
@@ -32,7 +45,8 @@ void UAInteraction::BeginOfRunAction( const G4Run* ) {
   hgAngIo = new TH1D("AngIoni", "Ang Disp (deg)", 2000, -10, 190);
 
   for(int i=0; i<100; i++)
-    NoIntEv[i]=0;
+    for(int j=0; j<10; j++)
+      NoIntEv[j][i]=0;
 }
 
 void UAInteraction::EndOfRunAction( const G4Run* ) {
@@ -148,22 +162,33 @@ void UAInteraction::EndOfRunAction( const G4Run* ) {
   hgAngIo->Write();
   fint->Close();
 
-  cout << "NoIntPerEvent:\n";
-  for(int i=0; i<100; i++)
-    if( NoIntEv[i] != 0 )
-      cout << i << " " << NoIntEv[i] << endl;
-} 
-
+  cout << "# NoIntPerEvent:" << endl
+       << "# N";
+  for(int j=0; j<10; j++)
+    cout << " , " << proclabel[j];
+  cout << endl;
+  
+  for(int i=0; i<100; i++) {
+    if( NoIntEv[0][i] != 0 ) {
+      cout << i;
+      for(int j=0; j<10; j++)
+	cout << ",\t" << NoIntEv[j][i];
+      cout << endl;
+    }
+  } 
+}
 
 void UAInteraction::BeginOfEventAction( const G4Event* ) {
   NoEvents++;
-  NoIntThisEv = 0;
+  for(int j=0; j<10; j++)
+    NoIntThisEv[j] = 0;
 }
 
 
 void UAInteraction::EndOfEventAction( const G4Event* evt ) {
-  if( NoIntThisEv <100)
-    NoIntEv[NoIntThisEv]++;
+  for(int j=0; j<10; j++)
+    if( NoIntThisEv[j] <100)
+      NoIntEv[j][NoIntThisEv[j]]++;
 }
 
 
@@ -221,8 +246,18 @@ void UAInteraction::UserSteppingAction(const G4Step* aStep) {
   else
     hgAngI->Fill(ang);
 
-  if( procName.find("Transportation") == std::string::npos) {
-    NoIntThisEv++;
-    NoCols++;
+
+  
+  // if( procName.find("Transportation") != std::string::npos) {
+  //   NoIntThisEv++;
+  //   NoCols++;
+  // }
+
+  for(int j=1; j<10; j++) {
+    if( procName.find(proclabel[j]) != std::string::npos) {
+      NoIntThisEv[j]++;
+      NoIntThisEv[0]++; //Total
+    }
   }
+      
 }

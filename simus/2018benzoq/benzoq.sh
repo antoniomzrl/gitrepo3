@@ -58,13 +58,6 @@ HGS="/gamos/userAction GmCountProcessesUA
      /gamos/setParam   UAAnalyser:VolumeIn  chbana
      /gamos/setParam   UAAnalyser:AnalizerParallel no
      /gamos/setParam   UAAnalyser:FileName Forward
-     /gamos/userAction UAAnalyser
-     /gamos/setParam   UAAnalyser:EnergyMax 17*eV
-     /gamos/setParam   UAAnalyser:EnergyBins 1700
-     /gamos/setParam   UAAnalyser:VolumeOut chb
-     /gamos/setParam   UAAnalyser:VolumeIn  chbbck
-     /gamos/setParam   UAAnalyser:AnalizerParallel no
-     /gamos/setParam   UAAnalyser:FileName Backward
      /gamos/userAction UAAnalyser"
 
 if [ $1 == "gen" ] ; then
@@ -116,29 +109,32 @@ elif [ $1 == "simu" ] ; then
                  :COLOUR chb 1 1 0"
 	    HGS="/gamos/setParam   UAAnalyser:EnergyMax ${hgm}*eV
                  /gamos/setParam   UAAnalyser:EnergyBins ${hgm}00
-                 /gamos/setParam   UAAnalyser:AnalizerParallel yes"
-	    HGSFW="$HGS
+                 /gamos/setParam   UAAnalyser:AnalizerParallel yes
                  /gamos/setParam   UAAnalyser:VolumeOut chb
                  /gamos/setParam   UAAnalyser:VolumeIn  chbana
                  /gamos/setParam   UAAnalyser:FileName Forward
                  /gamos/userAction UAAnalyser"
-	    HGSBW="$HGS
-                 /gamos/setParam   UAAnalyser:VolumeOut chb
-                 /gamos/setParam   UAAnalyser:VolumeIn  chbbck
-                 /gamos/setParam   UAAnalyser:FileName Backward
-                 /gamos/userAction UAAnalyser"
+	    HGS2="/gamos/analysis/histo1NBins *Ener* ${hgm}00
+	          /gamos/analysis/histo1Max   *Ener* ${hgm}*eV
+		  /gamos/filter vfout GmExitLogicalVolumeFilter  chb
+                  /gamos/filter vfinp GmEnterLogicalVolumeFilter chbana
+                  /gamos/filter volfl GmANDFilter vfout vfinp
+		  /gamos/setParam GmStepDataHistosUA_volfl:FileName xxxxx
+                  /gamos/setParam GmStepDataHistosUA_volfl:DataList FinalKineticEnergy
+                  /gamos/userAction GmStepDataHistosUA volfl"
+	 
 	    ULI="/gamos/physics/userLimits/setMinEKin ulie1 chb    e- 0.01*eV
  	         /gamos/physics/userLimits/setMinEKin ulie2 chbbck e- 0.01*eV"
 	    #RUN="$(vis) /run/beamOn 50"
-	    RUN="/run/beamOn 1000000"
+	    RUN="/run/beamOn 10000"
 	    
 	    #PAR="--host dirac --ppn 12 --jobs 24 --btime 2:00:00 --seed 100 --SEED 100"
 	    #PAR="--seed 100 --SEED 100 --jobs 10"
 	    DIR=${ege[j]}_${pre[i]}
 	    #jgamos $PAR --dir oohlx_${DIR} $WRL $REFL $BCK $CHB $ANA $PHY $MAG $GEN $HGS $UAS $ULI $RUN &
-	    #jgamos $PAR --dir oosmf_${DIR} $WRL $REFL $BCK $CHB $ANA $PHYsmf   $GEN $HGS $UAS $ULI $RUN &
-	    jgamos $PAR --dir oofw_${DIR} $WRL $REFL $BCK $CHB $ANA $PHYsmf $GEN $HGSFW $UAS $ULI $RUN &
-	    jgamos $PAR --dir oobw_${DIR} $WRL $REFL $BCK $CHB $ANA $PHYsmf $GEN $HGSBW $UAS $ULI $RUN &
+	    jgamos $PAR --dir oosmf_${DIR} $WRL $REFL $BCK $CHB $ANA $PHYsmf $GEN $HGS $UAS $ULI $RUN &
+	    jgamos $PAR --dir o3_${DIR}    $WRL $REFL $BCK $CHB $ANA $PHYsmf $GEN $HGS3 $UAS $ULI $RUN &
+
 	done
     done
     wait
