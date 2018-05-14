@@ -59,7 +59,7 @@ GENVAR="#/gamos/setParam RTGeneratorPhaseSpace_EGS:MaxNReuse 5
         /gamos/setParam  RTGeneratorPhaseSpace_EGS:FileName //${HOME}/varian/varian.egsphsp1
         /gamos/generator RTGeneratorPhaseSpace_EGS"
 
-# Activate vrml vis macros
+# vrml vis macros
 VIS="/vis/scene/create 
      /vis/open VRML2FILE 
      /vis/viewer/flush 
