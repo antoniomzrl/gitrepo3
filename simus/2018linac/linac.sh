@@ -508,7 +508,7 @@ electrones de alta energía en agua líquida
 excel con los datos de entrada tal como los utiliza Rafa en el planificador de dosis para el LINAC
 trabajando directamente con electrones
 
-Vamos a empezar con los datos de 10 MeV. Las columnas más importantes son la de electrones totales (incluye los dispersados en los colimadores) y la de fotones que se generan por colisión (frenado) con los colimadores.
+Las columnas más importantes son la de electrones totales (incluye los dispersados en los colimadores) y la de fotones que se generan por colisión (frenado) con los colimadores.
 
 La columna de ángulos está un poco confusa tengo todavía que pensar cómo incluirla pero de momento con los espectros de electrones y fotones vamos bien.
 
@@ -517,3 +517,11 @@ empezamos con la física Livermore hasta llegar a los 10 keV que metemos la nues
 Hay que incluir la ionización múltiple de Champion  que nos permitió resolver la discrepancia del poder de frenado con el NIST.
 
 La superficie de 10x10 cm está en la superficie del agua.
+
+
+
+Vamos a hacer la simulación para dos de los espectros y ángulos de entrada  correspondientes  a 5 MV y 6MV. Es un fichero excel con varias hojas, sólo nos fijamos en los espectros de 5 y 6 MeV junto con sus datos de dosis en profundidad.
+
+Primero simulamos la dosis en función de la profundidad para los  puntos dados, en los que suponemos un volumen (esfera) pequeño a lo largo del eje de penetración (lo más pequeño que te permita la estadística) y después el número y tipo de procesos en cada lámina. Como siempre, nos interesa una buena estadística para ver detalles al final del alcance.
+
+También nos interesa obtener un buen dibujo de trayectorias.
