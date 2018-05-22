@@ -11,8 +11,8 @@ PHYd="/gamos/physicsList GmDNAPhysics         $INI"
 PHYl="/gamos/physicsList GmLeptsPhysics       $INI"
 
 # materials
-#WAT=G4_WATER
-WAT=G4_WATER_VAPOR
+WAT=G4_WATER
+#WAT=G4_WATER_VAPOR
 MATS=":MATE vacuum 1 1*g/mole 1e-25*g/cm3 
       :MIXT_BY_NATOMS $WAT 1*g/cm3 2  O 1 H 2
       :MIXT_BY_NATOMS G4_AIR 1.2*mg/cm3 2  O 1 H 2"
@@ -29,7 +29,7 @@ WRL="$MATS
 # 1m3 liquid water cube
 CUBE=":VOLU   cube BOX 0.5*m 0.5*m 0.5*m $WAT
       :PLACE  cube 1 world rm0 0.5*m 0 0
-      :COLOUR cube 0.2 0.2 0.5
+      :COLOUR cube 0.1 0.1 0.9
       #/gamos/geometry/createRegion cubeRegion cube"
 
 # 2mm lead slab
@@ -111,6 +111,7 @@ KEP="/gamos/physics/userLimits/setMinEKin ulie cube e- 9*MeV
      /gamos/physics/userLimits/print"
 
 
+# pocillos
 targetpoints=("-394.7   0    4.3"
 	      "-394.7   8.6  4.3"
 	      "-394.7  17.2  4.3"
@@ -128,28 +129,12 @@ targetpoints=("-394.7   0    4.3"
 	      "-394.7 120.4  4.3"
 	     )
 
+# esferitas
+tps=( 2 4 8 10 15 20 30 40 50 60 70 500 1000)
+tps=( 2 4 8 10 15 20 30 40 50 60 70 )
 
 # Visualize geometry
-if [ $1 == "vis1" ] ; then
-    targetpoints=("0 0 0" "-450 200 0" "-450 0 0" )
-
-    for (( i=0; i<${#targetpoints[@]}; i++ )) ; do
-	CYLS="$CYLS
-	      :VOLU   cover${i}  TUBE 0 4*cm 6*cm G4_POLYSTYRENE
-              :PLACE  cover${i}  1 cube rmy ${targetpoints[i]}
-              :COLOUR cover${i}  1 0 0
-              :VOLU   pad${i}    TUBE 0 3*cm 1.7*cm G4_AIR
-              :PLACE  pad${i}    1 cover${i} rm0 0 0 3.3*cm
-              :COLOUR pad${i}    0 1 0
-              :VOLU   target${i} TUBE 0 3*cm 3.3*cm $WAT
-              :PLACE  target${i} 1 cover${i} rm0 0 0 -1.7*cm
-              :COLOUR target${i} 0 0 1"
-    done
-    jgamos --dir oovis1 $WRL $CUBE $SLAB $CYLS $PHYl $VIS
-
-    
-
-elif [ $1 == "vis" ] ; then
+if [ $1 == "vis" ] ; then
     for (( i=0; i<${#targetpoints[@]}; i++ )) ; do
 	CYLS="$CYLS
 	      :VOLU   cover${i}  TUBE 0 4*mm 6*mm G4_POLYSTYRENE
@@ -160,12 +145,19 @@ elif [ $1 == "vis" ] ; then
               :COLOUR pad${i}    0 1 0
               :VOLU   target${i} TUBE 0 3*mm 3.3*mm $WAT
               :PLACE  target${i} 1 cover${i} rm0 0 0 -1.7*mm
-              :COLOUR target${i} 0 0 1"	
+              :COLOUR target${i} 0 0 1"
+	
+	(( x = ${tps[i]} -500 ))
+	SPHERES="$SPHERES
+		 :VOLU   target${i} ORB 20*mm $WAT
+              	 :PLACE  target${i} 1 cube rm0 $x 0 0
+              	 :COLOUR target${i} 1 0 0"
     done
 
     ULI="/gamos/physics/userLimits/setMinEKin ulicube cube e- 10*MeV"
     RUN="/run/beamOn 50"
-    jgamos --dir oovis $WRL $CUBE $CYLS $PHYl $GENVAR $VIS $ULI $RUN
+    #jgamos --dir oovis $WRL $CUBE $CYLS $PHYl $GENVAR $VIS $ULI $RUN
+    jgamos --dir oovis $WRL $CUBE $SPHERES $PHYl $GENVAR $VIS $ULI $RUN
 
 
 

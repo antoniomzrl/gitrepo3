@@ -225,7 +225,11 @@ update() {
 }
 
 updateeuler() {
-    update euler
+    #update euler
+    i=$HOME/lepts/
+    o=euler:lepts/
+    rsync -av --exclude='.git' --exclude='*~' --exclude='*.o' $i $o
+    ssh euler 'cd lepts; source bin/conflepts.sh; gmanager.sh compilelepts compileuas'
 }
 
 updateceta() {
@@ -257,4 +261,3 @@ done
 #Quitar -Wl,--no-undefined
 #LDFLAGS       = -m64 $(OPT) $(EXTRA_LDFLAGS) -Wl,--no-undefined -Wl,--as-needed
 #LDFLAGS       = -m64 $(OPT) $(EXTRA_LDFLAGS) -Wl,--as-needed
-
