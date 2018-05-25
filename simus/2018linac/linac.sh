@@ -39,7 +39,7 @@ SLAB=":VOLU   slab BOX 1*mm 0.5*m 0.5*m G4_Pb
 
 # Vendor spectrum generator
 GENVDR=":VOLU gbox BOX 5*cm 5*cm 5*cm vacuum 
-        :PLACE gbox 1 world rmz -70*cm 0 0 
+        :PLACE gbox 1 world rmz -5*cm 0 0 
         :COLOUR gbox 1 0 0
         /gamos/generator GmGenerator 
         /gamos/generator/addSingleParticleSource gn gamma 1*MeV 
@@ -59,17 +59,25 @@ GENVAR="#/gamos/setParam RTGeneratorPhaseSpace_EGS:MaxNReuse 5
         /gamos/setParam  RTGeneratorPhaseSpace_EGS:FileName //${HOME}/varian/varian.egsphsp1
         /gamos/generator RTGeneratorPhaseSpace_EGS"
 
-# vrml vis macros
-VIS="/vis/scene/create 
-     /vis/open VRML2FILE 
-     /vis/viewer/flush 
-     /tracking/storeTrajectory 1 
-     /vis/scene/add/trajectories 
-     /vis/scene/endOfEventAction accumulate 
-     /vis/viewer/update 
-     /vis/viewer/flush"
+# Rafa's generators: genrafa e- EgyFile AngFile
+genrafa() {
+    GBOX=":VOLU gbox BOX 5*cm 5*cm 5*cm vacuum 
+          :PLACE gbox 1 world rmz -5*cm 0 0 
+          :COLOUR gbox 1 0 0"
+    GEN="/gamos/generator GmGenerator 
+         /gamos/generator/addSingleParticleSource gn $1 1*MeV 
+         /gamos/generator/positionDist gn GmGenerDistPositionInG4Volumes gbox 
+         /gamos/generator/energyDist gn GmGenerDistEnergyFromFile $2 interpolate 1*MeV
+         #/gamos/generator/directionDist gn GmGenerDistDirectionFromFile $3
+         /gamos/generator/directionDist gn GmGenerDistDirectionConst 1 0 0"
+    echo $GBOX $GEN
+}
+GENph5=$(genrafa gamma linac_ph5MeV_egy.txt linac_ph5MeV_ang.txt)
+GENph6=$(genrafa gamma linac_ph6MeV_egy.txt linac_ph6MeV_ang.txt)
+GENel5=$(genrafa e-    linac_e5MeV_egy.txt  linac_e5MeV_ang.txt)
+GENel6=$(genrafa e-    linac_e6MeV_egy.txt  linac_e6MeV_ang.txt)
 
-# Multifuncional detector
+# Multifunctional detector
 MFDT="/gamos/scoring/createMFDetector theDet       theTarget
       /gamos/scoring/addScorer2MFD    theEnergyDep GmG4PSEnergyDeposit theDet 1
       /gamos/scoring/addScorer2MFD    theDosis     GmG4PSDoseDeposit   theDet 2
@@ -110,6 +118,15 @@ KEP="/gamos/physics/userLimits/setMinEKin ulie cube e- 9*MeV
      /gamos/physics/userLimits/setMinEKin ulip cube e+ 9*MeV 
      /gamos/physics/userLimits/print"
 
+# vrml vis macros
+VIS="/vis/scene/create 
+     /vis/open VRML2FILE 
+     /vis/viewer/flush 
+     /tracking/storeTrajectory 1 
+     /vis/scene/add/trajectories 
+     /vis/scene/endOfEventAction accumulate 
+     /vis/viewer/update 
+     /vis/viewer/flush"
 
 # pocillos
 targetpoints=("-394.7   0    4.3"
@@ -130,8 +147,9 @@ targetpoints=("-394.7   0    4.3"
 	     )
 
 # esferitas
-tps=( 2 4 8 10 15 20 30 40 50 60 70 500 1000)
-tps=( 2 4 8 10 15 20 30 40 50 60 70 )
+tps=( 2 4 8 10 15 20 30 40 50 60 70)  # 500 1000)
+
+
 
 # Visualize geometry
 if [ $1 == "vis" ] ; then
@@ -146,54 +164,62 @@ if [ $1 == "vis" ] ; then
               :VOLU   target${i} TUBE 0 3*mm 3.3*mm $WAT
               :PLACE  target${i} 1 cover${i} rm0 0 0 -1.7*mm
               :COLOUR target${i} 0 0 1"
-	
-	(( x = ${tps[i]} -500 ))
-	SPHERES="$SPHERES
-		 :VOLU   target${i} ORB 20*mm $WAT
-              	 :PLACE  target${i} 1 cube rm0 $x 0 0
-              	 :COLOUR target${i} 1 0 0"
     done
 
     ULI="/gamos/physics/userLimits/setMinEKin ulicube cube e- 10*MeV"
     RUN="/run/beamOn 50"
-    #jgamos --dir oovis $WRL $CUBE $CYLS $PHYl $GENVAR $VIS $ULI $RUN
-    jgamos --dir oovis $WRL $CUBE $SPHERES $PHYl $GENVAR $VIS $ULI $RUN
+    jgamos --dir oovis $WRL $CUBE $CYLS $PHYl $GENVAR $VIS $ULI $RUN
 
 
 
+# Vis geom esferitas
+elif [ $1 == "visorb" ] ; then
+    for (( i=0; i<${#targetpoints[@]}; i++ )) ; do
+	(( x = ${tps[i]} -500 ))
+	SPHS="$SPHS
+	      :VOLU   target${i} ORB 5*mm $WAT
+              :PLACE  target${i} 1 cube rm0 $x 0 0
+              :COLOUR target${i} 1 0 0"
+    done
+
+    ULI="/gamos/physics/userLimits/setMinEKin ulicube cube e- 10*MeV"
+    #ULI="/gamos/userAction GmKillAtStackingActionUA GmElectronFilter"
+    RUN="/run/beamOn 10"
+    jgamos --dir oovisorb $WRL $CUBE $SPHS $PHYl $GENVDR $VIS $ULI $RUN
+
+
+# Vis generator   
+elif [ $1 == "visgen" ] ; then
+    jgamos --dir oovigen $WRL $PHYl $GENVDR $VIS $RUN /run/beamOn 100
+
+    
+#Vis trajectories complete / eco 
+elif [ $1 == "vistraj" ] ; then
+    GEN=":VOLU gbox BOX 1*um 1*um 1*um vacuum
+         :PLACE gbox 1 world rmz -1*um 0 0 
+         :COLOUR gbox 0 0 1 
+         /gamos/generator GmGenerator /gamos/generator/addSingleParticleSource gn e- 1*MeV
+         /gamos/generator/positionDist gn GmGenerDistPositionInG4Volumes gbox
+         /gamos/generator/directionDist gn GmGenerDistDirectionConst 1 0 0"
+    SPH=":VOLU   theTarget ORB 2*mm $WAT
+         :PLACE  theTarget 1 cube rm0 -494 0 0
+         :COLOUR theTarget 1 0 0"
+    UAS="/gamos/userAction UAWIF
+         #/gamos/userAction UAVerbose
+         #/gamos/userAction UAInteraction"
+    RUN="/run/beamOn 1"
+    #jgamos --dir oovtj  $WRL $PHYl $GEN $CUBE                       $UAS $RUN &
+    jgamos --dir oovtj2 $WRL $PHYl $GEN $CUBE $SPH $TGV $MFDT $SCOR $UAS $RUN &
+    wait
+
+
+ 
+# Vis 
 elif [ $1 == "visw" ] ; then
     ULI="/gamos/physics/userLimits/setMinEKin ulicube cube e- 10*MeV"
     UAS="/gamos/userAction UAWIF"
-    RUN="/run/beamOn 100000"
-    jgamos --dir oovisw $WRL $CUBE $PHYl $GENVAR $ULI $UAS $RUN
-
-
-    
-elif [ $1 == "viszone" ] ; then
-    WRL="$MATS
-         :VOLU world BOX 1*cm 1*cm 1*cm vacuum 
-         :ROTM rm0  0  0 0 
-         :ROTM rmx 90  0 0 
-         :ROTM rmy  0 90 0
-         :ROTM rmz  0  0 90"
-    MINICUBE=":VOLU   cube BOX 50*um 50*um 50*um $WAT
-      	     :PLACE  cube 1 world rm0 1*mm 0.1*mm 0
-             :COLOUR cube 0.2 0.2 0.5"
-    MINIGENVDR=":VOLU gbox BOX 0.1*mm 0.1*mm 0.1*mm vacuum 
-                :PLACE gbox 1 world rmz -1*mm 0 0 
-                :COLOUR gbox 1 0 0
-                /gamos/generator GmGenerator 
-                /gamos/generator/addSingleParticleSource gn gamma 1*MeV 
-                /gamos/generator/positionDist gn GmGenerDistPositionInG4Volumes gbox 
-                /gamos/generator/directionDist gn GmGenerDistDirectionConst 1 0 0 
-                /gamos/generator/energyDist gn GmGenerDistEnergyFromFile photonSpec5p9MeV.txt interpolate 1*MeV"
-    #ULI="/gamos/physics/userLimits/setMinEKin ulicube cube e- 1*keV"
-    UAS="/gamos/userAction UAInteraction
-         /gamos/userAction UAWIF
-         /gamos/userAction UAClock"
-    RUN="$VIS /run/beamOn 100"
-    #RUN="/run/beamOn 10000000"
-    jgamos --dir oovisz $WRL $MINICUBE $PHYl $MINIGENVDR $ULI $UAS $RUN
+    RUN="/run/beamOn 1000"
+    jgamos --dir oovisw $WRL $CUBE $PHYl $GENph5 $ULI $UAS $RUN
 
 
     
@@ -206,8 +232,10 @@ elif [ $1 == "gener" ] ; then
          /gamos/userAction GmGenerHistosUA
          /gamos/userAction UAClock"
     RUN="/run/beamOn 4000000"
+    #RUN="$VIS /run/beamOn 100"
     jgamos --dir oog1 $WRL $PHYl $UAS $GENVDR $RUN &
-    jgamos --dir oog2 $WRL $PHYl $UAS $GENVAR $RUN &
+    #jgamos --dir oog2 $WRL $PHYl $UAS $GENVAR $RUN &
+    jgamos --dir oog3 $WRL $PHYl $UAS $GENel5  $RUN &
     wait
 
 
@@ -361,6 +389,7 @@ elif [ $1 == "atenu_Pb" ] ; then
     done
 
 
+
 elif [ $1 == "seco" ] ; then
     SECO="/gamos/analysis/histo1Max *Ener* 6*MeV
           /gamos/analysis/histo1NBins *Ener* 100
@@ -380,6 +409,7 @@ elif [ $1 == "seco" ] ; then
     RUN="/run/beamOn 100000"
     #PAR="--jobs 10 --ppn 10"
     jgamos --dir oosec${i} $PAR $WRL $CUBE $PHYl $GENVDR $UAS $SECO $ULI $RUN
+
 
 
 # e- approaching small target

@@ -55,8 +55,8 @@ void UATargetVolume::EndOfRunAction( const G4Run* ) {
 
 // Max Reach (mm) vs Energy (MeV)
 double MaxReach(double E )  {
-  static double e[10] = {  0   , 0.1e-3,   1e-3,   3e-3,  10e-3, 30e-3, 0.1   , 0.3, 1  , 10 };
-  static double r[10] = { 20e-6,  20e-6, 130e-6, 0.6e-3, 4.2e-3, 26e-3, 180e-3, 1  , 4.6, 55 };
+  static double e[10] = {  0   , 0.1e-3,   1e-3,   3e-3,  10e-3, 30e-3, 0.1   , 0.3, 1  , 100 };
+  static double r[10] = { 20e-6,  20e-6, 130e-6, 0.6e-3, 4.2e-3, 26e-3, 180e-3, 1  , 4.6, 550 };
 
   double mreach = DBL_MAX;
   
