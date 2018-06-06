@@ -139,8 +139,8 @@ elif [ $1 == "simu" ] ; then
 	    #PAR="--seed 100 --SEED 100 --jobs 10"
 	    DIR=${ege[j]}_${pre[i]}
 	    #jgamos $PAR --dir oohlx_${DIR} $WRL $REFL $BCK $CHB $ANA $PHY $MAG $GEN $HGS $UAS $ULI $RUN &
-	    jgamos $PAR --dir oosmf_fw_${DIR} $WRL $REFL $BCK $CHB $ANA $PHYsmf $GEN $HGS  $UAS $ULI $RUN &
-	    jgamos $PAR --dir oosmf_bw_${DIR} $WRL $REFL $BCK $CHB $ANA $PHYsmf $GEN $HGS2  $UAS $ULI $RUN &
+	     jgamos $PAR --dir oosmf_fw_${DIR} $WRL $REFL $BCK $CHB $ANA $PHYsmf $GEN $HGS  $UAS $ULI $RUN &
+	     jgamos $PAR --dir oosmf_bw_${DIR} $WRL $REFL $BCK $CHB $ANA $PHYsmf $GEN $HGS2 $UAS $ULI $RUN &
 	    #jgamos $PAR --dir o3_${DIR}    $WRL $REFL $BCK $CHB $ANA $PHYsmf $GEN $HGS3 $UAS $ULI $RUN &
 
 	done

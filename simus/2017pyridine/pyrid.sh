@@ -74,7 +74,7 @@ elif [ $1 == "simu" ] ; then
 
     #ege=( 10 ) ; pre=( 00 02 10 )
     ege=( 15 ) ; pre=( 00 02 9.5 )
-    ege=( 15 ) ; pre=( 02 )
+    ege=( 15 ) ; pre=( 9.5 )
     UAS="/gamos/userAction GmCountProcessesUA
          /gamos/userAction UAInteraction
          /gamos/setParam UAClock:TimeMark 1
@@ -105,7 +105,7 @@ elif [ $1 == "simu" ] ; then
 	    PAR="--seed 100 --SEED 100"
 	    DIR=${ege[j]}_${pre[i]}
 	    #jgamos $PAR --dir oor_${DIR} $WRL $REFL $BCK $CHB $ANA $PHY $MAG $GEN $HGS $UAS $RUN  &
-	    jgamos $PAR --dir oon_${DIR} $WRL       $BCK $CHB $ANA $PHY $MAG $GEN $HGS $UAS $RUN  &
+	    jgamos $PAR --dir oon_${DIR} $WRL       $BCK $CHB $ANA $PHYsmf $MAG $GEN $HGS $UAS $RUN  &
 	done
     done
     wait

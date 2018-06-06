@@ -68,8 +68,8 @@ genrafa() {
          /gamos/generator/addSingleParticleSource gn $1 1*MeV 
          /gamos/generator/positionDist gn GmGenerDistPositionInG4Volumes gbox 
          /gamos/generator/energyDist gn GmGenerDistEnergyFromFile $2 interpolate 1*MeV
-         #/gamos/generator/directionDist gn GmGenerDistDirectionFromFile $3
-         /gamos/generator/directionDist gn GmGenerDistDirectionConst 1 0 0"
+         #/gamos/generator/directionDist gn GmGenerDistDirectionConst 1 0 0
+         /gamos/generator/directionDist gn GmGenerDistDirectionThetaFromFile $3 interpolate 1 0 0 1*degree"
     echo $GBOX $GEN
 }
 GENph5=$(genrafa gamma linac_ph5MeV_egy.txt linac_ph5MeV_ang.txt)
@@ -146,11 +146,6 @@ targetpoints=("-394.7   0    4.3"
 	      "-394.7 120.4  4.3"
 	     )
 
-# esferitas
-tps=( 2 4 8 10 15 20 30 40 50 60 70)  # 500 1000)
-
-
-
 # Visualize geometry
 if [ $1 == "vis" ] ; then
     for (( i=0; i<${#targetpoints[@]}; i++ )) ; do
@@ -174,7 +169,8 @@ if [ $1 == "vis" ] ; then
 
 # Vis geom esferitas
 elif [ $1 == "visorb" ] ; then
-    for (( i=0; i<${#targetpoints[@]}; i++ )) ; do
+    tps=( 2 4 8 10 15 20 30 40 50 60)
+    for (( i=0; i<${#tps[@]}; i++ )) ; do
 	(( x = ${tps[i]} -500 ))
 	SPHS="$SPHS
 	      :VOLU   target${i} ORB 5*mm $WAT
@@ -190,7 +186,8 @@ elif [ $1 == "visorb" ] ; then
 
 # Vis generator   
 elif [ $1 == "visgen" ] ; then
-    jgamos --dir oovigen $WRL $PHYl $GENVDR $VIS $RUN /run/beamOn 100
+    jgamos --dir oovigen  $WRL $PHYl $GENph5 $VIS $RUN /run/beamOn 100
+    jgamos --dir oovigen2 $WRL $PHYl $GENel5 $VIS $RUN /run/beamOn 100
 
     
 #Vis trajectories complete / eco 
@@ -231,11 +228,13 @@ elif [ $1 == "gener" ] ; then
          /gamos/analysis/histo1Max *Ener* 7*MeV
          /gamos/userAction GmGenerHistosUA
          /gamos/userAction UAClock"
-    RUN="/run/beamOn 4000000"
-    #RUN="$VIS /run/beamOn 100"
-    jgamos --dir oog1 $WRL $PHYl $UAS $GENVDR $RUN &
-    #jgamos --dir oog2 $WRL $PHYl $UAS $GENVAR $RUN &
-    jgamos --dir oog3 $WRL $PHYl $UAS $GENel5  $RUN &
+    RUN="/run/beamOn 1000000"
+    #jgamos --dir oog1 $WRL $PHYl $UAS $GENVDR $RUN &
+    #jgamos --dir oog2 $WRL $PHYl $UAS $GENVAR /run/beamOn 4000000 &
+    jgamos --dir ooph5 $WRL $PHYl $UAS $GENph5 $RUN &
+    jgamos --dir ooel5 $WRL $PHYl $UAS $GENel5 $RUN &
+    jgamos --dir ooph6 $WRL $PHYl $UAS $GENph6 $RUN &
+    jgamos --dir ooel6 $WRL $PHYl $UAS $GENel6 $RUN &
     wait
 
 
@@ -325,35 +324,29 @@ elif [ $1 == "dedx" ] ; then
          /gamos/userAction UAInteractionSp
          /gamos/userAction UAClock"
 
-    WV=G4_WATER_VAPOR
     WL=G4_WATER
-    
-    CHBV=":MIXT_BY_NATOMS $WV 1*g/cm3 2  O 1 H 2
-          :VOLU  chb BOX 0.5*m 0.5*m 0.5*m $WV
-          :PLACE chb 1 world rm0 0.5*m 0 0"
-    CHBL=":MIXT_BY_NATOMS $WL 1*g/cm3 2  O 1 H 2
-          :VOLU  chb BOX 0.5*m 0.5*m 0.5*m $WL
-          :PLACE chb 1 world rm0 0.5*m 0 0"
+    CHB=":MIXT_BY_NATOMS $WL 1*g/cm3 2  O 1 H 2
+         :VOLU  chb BOX 0.5*m 0.5*m 0.5*m $WL
+         :PLACE chb 1 world rm0 0.5*m 0 0"
 
-    #RUN="/run/beamOn 1000"
-    #E=( 1    3  10 30 100  300  1000  5000  6000 ) #Incident keV
-    #D=( 0.15 1  10 30 500 3000 10000 60000 80000 ) #depth microns
-
-    RUN="/run/beamOn 10000"
     E=(0.01 0.1  1    3  10 ) #Incident keV
     D=(0.01 0.1  0.15 1  10 ) #depth microns
+
+    E=(6000)
+    D=(60000)
+    RUN="/run/beamOn 1000"
 
     #for (( i=1; i<2; i++ )) ; do
     for (( i=0; i<${#E[@]}; i++ )) ; do
 	GEN=$(gen e- ${E[i]}*keV 1*nm -20*cm)
-	ULI="/gamos/physics/userLimits/setMinEKin ulie chb e- ${E[i]}*keV*0.01"
+	ULI="/gamos/physics/userLimits/setMinEKin ulie chb e- 0.1*keV"
 	ISP="/gamos/setParam UAInteractionSp:Title Edep-Depth
              /gamos/setParam UAInteractionSp:x 100 0 ${D[i]}*um
              /gamos/userAction UAInteractionSp"
 
-	jgamos --dir oog${E[i]} $PAR $WRL $CHBV $PHYg $UAS $ISP $GEN $ULI $RUN'000' &
-	jgamos --dir ool${E[i]} $PAR $WRL $CHBV $PHYl $UAS $ISP $GEN $ULI $RUN &
-	jgamos --dir ood${E[i]} $PAR $WRL $CHBL $PHYd $UAS $ISP $GEN $ULI $RUN &
+	jgamos --dir oog${E[i]} $PAR $WRL $CHB $PHYg $UAS $ISP $GEN $ULI $RUN'000' &
+	jgamos --dir ool${E[i]} $PAR $WRL $CHB $PHYl $UAS $ISP $GEN $ULI $RUN &
+	jgamos --dir ood${E[i]} $PAR $WRL $CHB $PHYd $UAS $ISP $GEN $ULI $RUN &
     done
     wait
 
@@ -468,7 +461,7 @@ elif [ $1 == "addcover" ] ; then
     
 
     
-elif [ $1 == "simu" ] ; then
+elif [ $1 == "simupocillos" ] ; then
     for (( i=0; i<${#targetpoints[@]}; i++ )) ; do
     #for (( i=0; i<1; i++ )) ; do
 	ii=$(printf "%02d" $i)
@@ -503,11 +496,49 @@ elif [ $1 == "simu" ] ; then
     done
     wait
 
+
+
+elif [ $1 == "simu" ] ; then
+    # centros esferitas #tps=( 02 04 08 10 15 20 30 40 50 60 )
+    tps=( 02.25 05.25 08.25 11.30 14.30 20.30 29.30 41.30 50.30 59.30 )
+    rds=( 1     1     1     2     2     2     4     4     4     4 )
+
+    for (( i=0; i<${#tps[@]}; i++ )) ; do
+	#ii=$(printf "%02d" $i)
+	#(( x = ${tps[i]} -500 ))
+	x=$(bc -l <<< "${tps[i]} -500")
+	SPH=":VOLU   theTarget ORB ${rds[i]}*mm $WAT
+             :PLACE  theTarget 1 cube rm0 ${x}*mm 0 0
+             :COLOUR theTarget 1 0 0"
+
+	UAS="/gamos/userAction GmCountProcessesUA"
+
+	#RUN="$VIS /run/beamOn 100"
+	RUN="/run/beamOn 1000000000"
+	#EULER="--ppn 8  --jpn 8  --host euler"
+	EULER="--ppn 8  --jpn 10  --host euler"
+	DIRAC="--ppn 12 --jpn 12 --host dirac"
+	CETA="--ppn 8  --jpn 8  --host amunoz@193.144.240.176"
+	PRU="--jobs 1 --jpn 1"
+
+	# 1000 (10)
+	s=1000
+	KILL="/gamos/setParam UAClock:TimeLimit 3600*20 /gamos/userAction UAClock"
+	JOB="$EULER --jobs 10 --btime 20:09:00 --seed $s --SEED $s"
+
+	DIRe="--dir oo_el5_p${tps[i]}_s${s}"
+	DIRp="--dir oo_ph5_p${tps[i]}_s${s}"
+	#DIReg4="--dir oo_g4el5_p${tps[i]}_s${s}"
+	#jgamos $JOB $DIReg4 $WRL $CUBE $SPH $PHYg $GENel5 $TGV $SCOR $UAS $KILL $RUN
+	jgamos $JOB $DIRe $WRL $CUBE $SPH $PHYl $GENel5 $TGV $SCOR $UAS $KILL $RUN
+	jgamos $JOB $DIRp $WRL $CUBE $SPH $PHYl $GENph5 $TGV $SCOR $UAS $KILL $RUN
+    done
+    wait
+
     
 fi
 
 exit
-
 
 
 for i in 00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 ; do

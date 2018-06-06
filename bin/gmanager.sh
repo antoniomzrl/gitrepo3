@@ -32,7 +32,12 @@ elif [ $GAMOSREP == $HOME/gamos51f ] ; then
     export GEANT4_VER=10.02.gamos
     export ROOT_VER=5.34.34
     DEVELDIR=$LEPTSDIR/devel51f
-fi	
+elif [ $GAMOSREP == $HOME/gamos520 ] ; then
+    export GAMOS_VER=GAMOS.5.2.0
+    export GEANT4_VER=10.03.p03.gamos
+    export ROOT_VER=5.34.36
+    DEVELDIR=$LEPTSDIR/devel51f
+fi
 
 echo GAMOS_VER $GAMOS_VER
 echo GEANT4_VER $GEANT4_VER
@@ -42,7 +47,7 @@ echo DEVELDIR $DEVELDIR
 export GAMOSWEB=http://fismed.ciemat.es/GAMOS/download/${GAMOS_VER}/uncompiled
 export PROCS=${PROCS:-8}
 export LINUX_SYSTEM=Linux-g++
-
+q
 
 CMDS="help  get  untar  cleantar
       compileroot   cleanroot  
