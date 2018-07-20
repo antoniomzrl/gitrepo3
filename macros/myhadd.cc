@@ -47,6 +47,7 @@ void myhadd(string files)  {
       string hisname = hi->GetName();
 
       int ipri = -1; double npri = -1;
+      //cout << "xxxAxisBins: " << xAxis->GetNbins()+1 << endl;
       for( int i=0; i <= xAxis->GetNbins()+1; i++) {
 	string label = xAxis->GetBinLabel(i);
 	if( label.find("Primaries") != std::string::npos) {
@@ -54,20 +55,27 @@ void myhadd(string files)  {
 	  npri = hi->GetBinContent(i);
 	}
       }
+
+      if( ipri == -1) continue;
+      //cout << Nf << " " << " ipri " << ipri << endl;
       
       for (int i=0; i <= xAxis->GetNbins()+1; i++) {
-	string label = hisname + "_" + xAxis->GetBinLabel(i);
+	string label = hisname + "_" + xAxis->GetBinLabel(i) + "/pri";
 	double v = hi->GetBinContent(i)/npri;
-	if(i == ipri) v = hi->GetBinContent(i);
+	if(i == ipri || label.find("Volume") != std::string::npos || label.find("Mass") != std::string::npos ) {
+	  v = hi->GetBinContent(i);
+	  label = hisname + "_" + xAxis->GetBinLabel(i);
+	}
+
 	hs->Fill(  label.c_str(), v   );
 	hsc->Fill( label.c_str(), v*v );
       }
     }
   }
-  
+
   hs->LabelsOption("a", "X");
   hsc->LabelsOption("a", "X");
-      
+
   TAxis * xAxis = hs->GetXaxis();
   for (int i=0; i <= xAxis->GetNbins()+1; i++) {
     string label = xAxis->GetBinLabel(i);

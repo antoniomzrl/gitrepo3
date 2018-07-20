@@ -273,7 +273,7 @@ void LeptsBaseModel::BuildMeanFreePathTable(const G4Material* aMaterial,
 
 G4double LeptsBaseModel::SampleAngle(const G4Material* aMat, G4double ei, G4double el) {
   G4double Ang, Mo, KR, se;
-  
+
   if(ei > 10001 && bDXSMT) {
     Mo = sqrt( pow( (ei/27.2/137),2) +2*ei/27.2);
     KR = theDiffXSMT[aMat]->SampleAngle(ei, el);
@@ -284,11 +284,9 @@ G4double LeptsBaseModel::SampleAngle(const G4Material* aMat, G4double ei, G4doub
     }
     
     Ang = std::asin(se)*2.0;
-    //cout << "xxxsa11 " << KR << " " << Ang*180/pi << endl;
   }
   else {
     Ang = theDiffXS[aMat]->SampleAngle(ei, el) * pi/180;
-    //cout << "xxxsa22 " << Ang*180/pi << endl;
   }
 
   return(Ang);

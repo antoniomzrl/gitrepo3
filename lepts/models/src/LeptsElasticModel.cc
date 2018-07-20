@@ -24,7 +24,6 @@ void LeptsElasticModel::SampleSecondaries(std::vector<G4DynamicParticle*>*,
   const G4Material* aMat = mateCuts->GetMaterial();
   G4double P0KinEn = aDynamicParticle->GetKineticEnergy();
   G4ThreeVector P0Dir = aDynamicParticle->GetMomentumDirection();
-
   //AMR 2015nov
   // if( P0KinEn < theLowestEnergyLimit ) {
   //   // fParticleChange->ProposeMomentumDirection( P0Dir );
@@ -51,10 +50,8 @@ void LeptsElasticModel::SampleSecondaries(std::vector<G4DynamicParticle*>*,
 
   G4double ang = SampleAngle(aMat, P0KinEn/eV, 0.0);
   G4ThreeVector P1Dir = SampleNewDirection(P0Dir, ang);
-
   G4double Elost = ElasticEnergyTransfer(P0KinEn, ang,theMassTarget[aMat],theMassProjectile[aMat]);
   G4double P1KinEn = P0KinEn - Elost;
-
   // cout << "elastion " << P0KinEn/eV << " " << ang << " " << Elost/eV << endl;
   // G4String pn = aDynamicParticle->GetDefinition()->GetParticleName();
   // cout << "elastang " << pn << "\t" << ang*180/pi << "\t" << P0KinEn/eV << "\t" << Elost/eV << endl;
@@ -62,16 +59,16 @@ void LeptsElasticModel::SampleSecondaries(std::vector<G4DynamicParticle*>*,
   fParticleChange->ProposeMomentumDirection( P1Dir );
   fParticleChange->SetProposedKineticEnergy( P1KinEn);
   fParticleChange->ProposeLocalEnergyDeposit( Elost);
-  //
-#ifdef DEBUG_LEPTS
+
+#ifndef DEBUG_LEPTS
   if( verboseLevel >= 2 )
     G4cout << " LeptsElasticModel::SampleSecondaries( P1Dir " << P1Dir
 	   << " P0Dir " << P0Dir << " ang " << ang << G4endl
-	   << " ELASTIC " << P1KinEn << " = " << P0KinEn << " - " << Energylost << G4endl
-	   << " ELASTIC Energylost " << Energylost << " = " << P0KinEn << " " << ang << " "
+	   << " ELASTIC " << P1KinEn << " = " << P0KinEn << " - " << Elost << G4endl
+	   << " ELASTIC Energylost " << Elost << " = " << P0KinEn << " " << ang << " "
 	   << theMassTarget[aMat] << "  " << theMassProjectile[aMat] << G4endl
 	   << " LeptsElasticModel::SampleSecondaries( SetProposedKineticEnergy " << P1KinEn
-	   << " " << P0KinEn << " - " << Energylost << G4endl
+	   << " " << P0KinEn << " - " << Elost << G4endl
 	   << " LeptsElasticModel::SampleSecondaries( ProposeMomentumDirection "
 	   << fParticleChange->GetProposedMomentumDirection() << G4endl;
 #endif

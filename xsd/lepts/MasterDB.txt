@@ -234,6 +234,19 @@ begin PYRIDINE_NOROT
       e-  IXS  pyridine-IXS-2017nov-NOROT.csv  
 end
 
+begin PIRIDINA
+      IP   9.27
+      IIP  284.0
+      IIP2 532.0
+      
+      e-  IXS    piridina-IXS-2018may.csv
+      e-  DXS    piridina-iDXS.csv
+      e-  DXSROT piridina-iDXSROT.csv
+      e-  ELDEXC piridina-ELDEXC.txt
+      e-  ELDION piridina-ELDION.txt
+      e-  ELDROT piridina-ELDROT.txt
+      e-  ELDVIB piridina-ELDVIB.txt
+end
 ========================================================== Pyridine
 
 begin PYRIMIDINE_GAS

@@ -12,10 +12,9 @@
 #include "TLine.h"
 #include "TText.h"
 
-//root -b -p -q .x tabhgshor.cc\(\"MYFILE.root\"\)
-//horizontal tab:
+//root -b -p -q .x tabhgs.cc\(\"MYFILE.root\"\)
 
-void tabhgshor(const char* filename, bool logy = 0)  {
+void tabhgs2(const char* filename, bool logy = 0)  {
 
   TFile File( filename );
 
@@ -23,32 +22,25 @@ void tabhgshor(const char* filename, bool logy = 0)  {
   TKey *HistoKey = 0;
 
   TH1F *histo1;
-
+  
+  
   while ( (HistoKey = (TKey*)ListOfHistograms()) ) { 
     string hisname = HistoKey->GetName();
     TH1* histo = (TH1*) File.Get( HistoKey->GetName() );
     
     histo1 = (TH1F*) File.Get( HistoKey->GetName() );
-    string fn = string(filename) + string("_horiz_") + histo->GetName() + ".csv";
+    string fn = string(filename) + string("_") + histo->GetName() + ".csv";
     ofstream fo;
     fo.open( fn.c_str() );
-
+    fo << histo->GetEntries() << " , " << fn << endl;
 	
     TAxis * xAxis = histo1->GetXaxis();
 
-    fo << "# " << fn;
     for (int i=0; i <= xAxis->GetNbins()+1; i++) {
-      //if( xAxis->GetBinLabel(i) != string("conv") )
-	fo << xAxis->GetBinLabel(i) << ",";
+      fo << xAxis->GetBinLabel(i)      << " , "
+	 << histo1->GetBinContent(i) << endl;
     }
-    fo << endl;
-    fo << fn;
-    for (int i=0; i <= xAxis->GetNbins()+1; i++) {
-      //if( xAxis->GetBinLabel(i) != string("conv") )
-      fo << histo1->GetBinContent(i) << ",";
-    }
-    fo << endl;
-
     fo.close();
   }
+  
 }

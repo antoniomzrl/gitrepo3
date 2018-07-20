@@ -21,7 +21,7 @@ void hgtabjoin(const char* filename)  {
   TKey *HistoKey = 0;
   ofstream fi;
   
-  TH1F * hi[50];
+  TH1F * hi[100];
   TAxis * xAxis;
   int nhi=0;
   
@@ -30,7 +30,7 @@ void hgtabjoin(const char* filename)  {
     string name = string(filename) + string(" ") + hi[nhi]->GetName();
     xAxis = hi[nhi]->GetXaxis();
 
-    if( xAxis->GetNbins() < 100)
+    if( xAxis->GetNbins() < 10)
       cout << "\tignored: " << xAxis->GetNbins() << " " << name << endl;
     else {
       cout << nhi << " " << xAxis->GetNbins()

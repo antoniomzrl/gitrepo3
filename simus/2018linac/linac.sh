@@ -6,10 +6,11 @@ source $HOME/lepts/bin/gdefs.sh
 INI="/run/initialize"
 PHY1="/gamos/physicsList GmEMPhysics          $INI"
 PHY2="/gamos/physicsList GmEMExtendedPhysics  $INI"
-PHYg="/gamos/physicsList HadrontherapyPhysics $INI"
 PHYd="/gamos/physicsList GmDNAPhysics         $INI"
 PHYl="/gamos/physicsList GmLeptsPhysics       $INI"
+PHYg="/gamos/physicsList HadrontherapyPhysics $INI"
 
+       
 # materials
 WAT=G4_WATER
 #WAT=G4_WATER_VAPOR
@@ -61,8 +62,8 @@ GENVAR="#/gamos/setParam RTGeneratorPhaseSpace_EGS:MaxNReuse 5
 
 # Rafa's generators: genrafa e- EgyFile AngFile
 genrafa() {
-    GBOX=":VOLU gbox BOX 5*cm 5*cm 5*cm vacuum 
-          :PLACE gbox 1 world rmz -5*cm 0 0 
+    GBOX=":VOLU gbox BOX 5*cm 1*mm 5*cm vacuum 
+          :PLACE gbox 1 world rmz -2*mm 0 0 
           :COLOUR gbox 1 0 0"
     GEN="/gamos/generator GmGenerator 
          /gamos/generator/addSingleParticleSource gn $1 1*MeV 
@@ -76,6 +77,7 @@ GENph5=$(genrafa gamma linac_ph5MeV_egy.txt linac_ph5MeV_ang.txt)
 GENph6=$(genrafa gamma linac_ph6MeV_egy.txt linac_ph6MeV_ang.txt)
 GENel5=$(genrafa e-    linac_e5MeV_egy.txt  linac_e5MeV_ang.txt)
 GENel6=$(genrafa e-    linac_e6MeV_egy.txt  linac_e6MeV_ang.txt)
+GENel4=$(genrafa e-    linac_e4MeV_egy.txt  linac_e6MeV_ang.txt)
 
 # Multifunctional detector
 MFDT="/gamos/scoring/createMFDetector theDet       theTarget
@@ -186,8 +188,8 @@ elif [ $1 == "visorb" ] ; then
 
 # Vis generator   
 elif [ $1 == "visgen" ] ; then
-    jgamos --dir oovigen  $WRL $PHYl $GENph5 $VIS $RUN /run/beamOn 100
-    jgamos --dir oovigen2 $WRL $PHYl $GENel5 $VIS $RUN /run/beamOn 100
+    jgamos --dir oovigen  $WRL $CUBE $PHYg $GENph5 $VIS $RUN /run/beamOn 10
+    #jgamos --dir oovigen2 $WRL $CUBE $PHYl $GENel5 $VIS $RUN /run/beamOn 10
 
     
 #Vis trajectories complete / eco 
@@ -303,14 +305,14 @@ elif [ $1 == "stp" ] ; then
     CHBV=":MIXT_BY_NATOMS $WV 1*g/cm3 2  O 1 H 2
           :VOLU  chb BOX $DX 0.5*m 0.5*m $WV
           :PLACE chb 1 world rm0 0.5*m 0 0"
-    RUN="/run/beamOn 1000000000"
+    RUN="/run/beamOn 100000000"
     #PAR="--jobs 10 --ppn 10"
-    PAR="--host euler --ppn 2 --jobs 2 --btime 24:00:00"
-    for E in 1 3 5 10 30 100 300 1000 5000 6000 ; do
+    #PAR="--host euler --ppn 2 --jobs 2 --btime 24:00:00"
+    for E in 1 3 10 30 100 300 1000 5000 ; do
 	GEN=$(gen e- ${E}*keV 1*um -20*cm)
-	jgamos --dir oodl${E} $PAR $WRL $CHBL $PHYd $UAS $GEN $ULI $RUN 
-	jgamos --dir oogv${E} $PAR $WRL $CHBV $PHYg $UAS $GEN $ULI $RUN 
-	jgamos --dir oolv${E} $PAR $WRL $CHBV $PHYl $UAS $GEN $ULI $RUN 
+	jgamos --dir ood${E} $PAR $WRL $CHBL $PHYd $UAS $GEN $ULI $RUN &
+	jgamos --dir oog${E} $PAR $WRL $CHBV $PHYg $UAS $GEN $ULI $RUN &
+	jgamos --dir ool${E} $PAR $WRL $CHBV $PHYl $UAS $GEN $ULI $RUN &
     done
     wait
 
@@ -321,32 +323,35 @@ elif [ $1 == "dedx" ] ; then
     UAS="#/gamos/userAction UAVerbose
          #/gamos/userAction UAWIF
          #/gamos/userAction UAInteraction
-         /gamos/userAction UAInteractionSp
+         #/gamos/userAction UAInteractionSp
          /gamos/userAction UAClock"
 
-    WL=G4_WATER
-    CHB=":MIXT_BY_NATOMS $WL 1*g/cm3 2  O 1 H 2
-         :VOLU  chb BOX 0.5*m 0.5*m 0.5*m $WL
-         :PLACE chb 1 world rm0 0.5*m 0 0"
+    E=(10  100  1000  2000  4000) #Incident keV
+    D=(10  300 10000 20000 40000) #depth microns
+    E=( 999)
+    D=(10000)
+    E=(5000)
+    D=(50000)
+    ULI="/gamos/userAction GmKillAtStackingActionUA GmSecondaryFilter
+         /gamos/physics/userLimits/setMinEKin ulie cube e- 10*keV
+         /gamos/physics/userLimits/setMinEKin ulip cube e+ 10*keV"
 
-    E=(0.01 0.1  1    3  10 ) #Incident keV
-    D=(0.01 0.1  0.15 1  10 ) #depth microns
+    RUN="/run/beamOn 100"
 
-    E=(6000)
-    D=(60000)
-    RUN="/run/beamOn 1000"
-
-    #for (( i=1; i<2; i++ )) ; do
     for (( i=0; i<${#E[@]}; i++ )) ; do
 	GEN=$(gen e- ${E[i]}*keV 1*nm -20*cm)
-	ULI="/gamos/physics/userLimits/setMinEKin ulie chb e- 0.1*keV"
 	ISP="/gamos/setParam UAInteractionSp:Title Edep-Depth
              /gamos/setParam UAInteractionSp:x 100 0 ${D[i]}*um
+             #/gamos/setParam UAInteractionSp:Width 5*cm
              /gamos/userAction UAInteractionSp"
 
-	jgamos --dir oog${E[i]} $PAR $WRL $CHB $PHYg $UAS $ISP $GEN $ULI $RUN'000' &
-	jgamos --dir ool${E[i]} $PAR $WRL $CHB $PHYl $UAS $ISP $GEN $ULI $RUN &
-	jgamos --dir ood${E[i]} $PAR $WRL $CHB $PHYd $UAS $ISP $GEN $ULI $RUN &
+	jgamos --dir oog${E[i]} $PAR $WRL $CUBE $PHYg $UAS $ISP $GEN $ULI $RUN'000' &
+	jgamos --dir ool${E[i]} $PAR $WRL $CUBE $PHYl $UAS $ISP $GEN $ULI $RUN &
+	#jgamos --dir ood${E[i]} $PAR $WRL $CUBE $PHYd $UAS $ISP $GEN $ULI $RUN &
+
+	#PAR="--host dirac --ppn 12 --jobs 100 --btime 4:00:00"
+	#RUN="/run/beamOn 10"
+	#jgamos --dir bbood${E[i]} $PAR $WRL $CHB $PHYd $UAS $ISP $GEN $ULI $RUN &
     done
     wait
 
@@ -498,7 +503,7 @@ elif [ $1 == "simupocillos" ] ; then
 
 
 
-elif [ $1 == "simu" ] ; then
+elif [ $1 == "simu1" ] ; then
     # centros esferitas #tps=( 02 04 08 10 15 20 30 40 50 60 )
     tps=( 02.25 05.25 08.25 11.30 14.30 20.30 29.30 41.30 50.30 59.30 )
     rds=( 1     1     1     2     2     2     4     4     4     4 )
@@ -521,11 +526,10 @@ elif [ $1 == "simu" ] ; then
 	CETA="--ppn 8  --jpn 8  --host amunoz@193.144.240.176"
 	PRU="--jobs 1 --jpn 1"
 
-	# 1000 (10)
 	s=1000
 	KILL="/gamos/setParam UAClock:TimeLimit 3600*20 /gamos/userAction UAClock"
 	JOB="$EULER --jobs 10 --btime 20:09:00 --seed $s --SEED $s"
-
+	JOB=
 	DIRe="--dir oo_el5_p${tps[i]}_s${s}"
 	DIRp="--dir oo_ph5_p${tps[i]}_s${s}"
 	#DIReg4="--dir oo_g4el5_p${tps[i]}_s${s}"
@@ -535,24 +539,86 @@ elif [ $1 == "simu" ] ; then
     done
     wait
 
+
+    
+elif [ $1 == "simu" ] ; then
+    UAS="#/gamos/userAction UAVerbose
+         #/gamos/userAction UAWIF
+         /gamos/userAction UAClock
+         /gamos/userAction UAInteraction"
+
+
+    ISP="/gamos/setParam UAInteractionSp:Title Edep-Depth
+         /gamos/setParam UAInteractionSp:x 50 0 50*mm
+         /gamos/setParam UAInteractionSp:Width 1*cm
+         /gamos/userAction UAInteractionSp"
+
+    EULER="--ppn 8 --jpn 10 --host euler"
+    DIRAC="--ppn 12 --jpn 15 --host dirac"
+    #JOB="$EULER --jobs 30 --btime 4:00:00"
+    JOB="$DIRAC --jobs 30 --btime 4:00:00"
+    KILL="/gamos/setParam UAClock:TimeLimit 3600*71 /gamos/userAction UAClock"
+    RUNe="/run/beamOn 400"
+    RUNp="/run/beamOn 2000"
+    
+
+    ULI="#/gamos/userAction GmKillAtStackingActionUA GmSecondaryFilter
+         /gamos/physics/userLimits/setMinEKin ulie cube e- 10*keV
+         /gamos/physics/userLimits/setMinEKin ulip cube e+ 10*keV"
+    RUNe="/run/beamOn 5000"
+    GENMONO=$(gen e- 5*MeV 1*nm -20*cm)
+
+    jgamos --dir oolr $WRL $CUBE $PHYl $GENel5  $UAS $ISP $ULI $RUNe
+exit
+    jgamos --dir oogr $JOB $WRL $CUBE $PHYg $GENel5  $UAS $ISP $ULI $RUNe'000' &
+    jgamos --dir oogm $JOB $WRL $CUBE $PHYg $GENMONO $UAS $ISP $ULI $RUNe'000' &
+    jgamos --dir oolr $JOB $WRL $CUBE $PHYl $GENel5  $UAS $ISP $ULI $RUNe &
+    jgamos --dir oolm $JOB $WRL $CUBE $PHYl $GENMONO $UAS $ISP $ULI $RUNe &
+    wait
+    exit
+
+
+
+    #seeds="1000 ... 1490"
+    for (( i=1500; i<2000; i+=10 )) ; do
+	seeds="$seeds $i"
+    done
+    
+    for s in $seeds ; do
+	SEED="--seed $s --SEED $s"
+	DIRe="--dir ooel_s${s}"
+	DIRp="--dir ooph_s${s}"
+	jgamos $JOB $DIRe  $WRL $CUBE $PHYl $GENel5 $UAS $ULI $KILL $RUNe
+	jgamos $JOB $DIRp  $WRL $CUBE $PHYl $GENph5 $UAS $ULI $KILL $RUNp
+    done
+
     
 fi
-
 exit
 
 
-for i in 00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 ; do
-    myhadd.sh all${i}.root oo_p${i}_s*/UAScoreVol*root
+
+
+######################################
+gns=( el5 g4el5 ph5 )
+tps=( 02.25 05.25 08.25 11.30 14.30 20.30 29.30 41.30 50.30 59.30 )
+for (( j=0; j<${#gns[@]}; j++ )) ; do
+    for (( i=0; i<${#tps[@]}; i++ )) ; do
+	GP=${gns[j]}_p${tps[i]}
+	FR=${GP}.root
+	myhadd.sh $FR oo_${GP}_s*/UAScoreVol*root
+	hgm.sh tab2 $FR
+    done
 done
 
-for f in *root ; do
-    hgm.sh tabh $f
-done
+paste -d "," g4el5*Pri*csv > tab.csv
+paste -d "," el5*Pri*csv  >> tab.csv
+paste -d "," ph5*Pri*csv  >> tab.csv
+sed 's/Nproc_//g' tab.csv | sed 's/_Lepts//g' | sed 's/\/pri//g' | \
+    sed 's/\.root_PerPrimary\.csv//g' | sed 's/_p/ /g' > tab2.csv
+grep -v _Mass tab2.csv | grep -v Charge |grep -v Dose |grep -v Transport > tab3.csv
+######################################
 
-cat all*Pri*  > tab.csv; echo ',' >> tab.csv
-cat all*Err* >> tab.csv; echo ',' >> tab.csv
-head -1 tab.csv      > tab2.csv
-grep -v '#' tab.csv >> tab2.csv
 
 
 

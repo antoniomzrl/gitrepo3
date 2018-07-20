@@ -47,7 +47,7 @@ echo DEVELDIR $DEVELDIR
 export GAMOSWEB=http://fismed.ciemat.es/GAMOS/download/${GAMOS_VER}/uncompiled
 export PROCS=${PROCS:-8}
 export LINUX_SYSTEM=Linux-g++
-q
+
 
 CMDS="help  get  untar  cleantar
       compileroot   cleanroot  

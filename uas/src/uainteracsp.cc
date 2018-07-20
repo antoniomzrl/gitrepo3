@@ -1,7 +1,7 @@
 #include "uactions.hh"
 #include "points.hh"
 
-double sdx;
+double sdx, sdy;
 extern vector <string> tpi, ntpi, pn;
 
 #define NTPI 50
@@ -27,9 +27,12 @@ void UAInteractionSp::BeginOfRunAction( const G4Run* ) {
   string TpiFn = GmParameterMgr::GetInstance()->GetStringValue(theName + ":TpiFile", "tpi_all.txt");
   vector<double> v(3,1);
   vector<double> x = GmParameterMgr::GetInstance()->GetVNumericValue(theName + ":x", v);
-  sdx = 0.5 * (x[2]-x[1]) / x[0];
-  cout << "UAInteractionSp dx = " << G4BestUnit(2*sdx, "Length")
-       << " dx3 = " << G4BestUnit(pow(2*sdx,3), "Volume") << endl;
+  sdy = GmParameterMgr::GetInstance()->GetNumericValue(theName + ":Width", 10*m);
+  sdx = (x[2]-x[1]) / x[0];
+  
+  cout << "UAInteractionSp dx " << G4BestUnit(2*sdx, "Length")
+       << " dy " << G4BestUnit(2*sdy, "Length")
+       << " volume " << G4BestUnit(8*sdx*sdy*sdy, "Volume") << endl;
 
   char * path = getenv("LCVPATH");
   if( path ) TpiFn = string(path) + string("/") + TpiFn;
@@ -104,8 +107,8 @@ void UAInteractionSp::EndOfRunAction( const G4Run* ) {
 	//      << "\t" << hgEx2[j]->GetBinContent(i)/MeV
 	//      << endl;
       }
-      hgEx[j]->Write();
-      hgENx[j]->Write();
+      //hgEx[j]->Write();
+      //hgENx[j]->Write();
       hgEx2[j]->Write();
     }
   }
@@ -150,6 +153,9 @@ void UAInteractionSp::UserSteppingAction(const G4Step* aStep) {
   //G4StepPoint * P1 = aStep->GetPreStepPoint();
   //G4ThreeVector  r = (P1->GetPosition() + P2->GetPosition())*0.5;
   G4ThreeVector  r = P2->GetPosition();
+
+  if( abs(r[1]) > sdy || abs(r[2]) > sdy) return;
+
   G4double      Ke = P2->GetKineticEnergy();
   G4double      Ed = aStep->GetTotalEnergyDeposit();
   
@@ -159,13 +165,6 @@ void UAInteractionSp::UserSteppingAction(const G4Step* aStep) {
   int ip = PN(partName);
   hgEx[ip]->Fill(r[0], Ke);
   hgENx[ip]->Fill(r[0], 1);
-
-
-  //G4String phvlName = "null";
-  //G4VPhysicalVolume * pv = P->GetPhysicalVolume();
-  //if(pv ) phvlName = pv->GetName();
-  //G4String vp = phvlName + " " + partName + procName;
-
 
   // process Edep / Depth
   const G4VProcess * proc = P2->GetProcessDefinedStep();
@@ -178,20 +177,7 @@ void UAInteractionSp::UserSteppingAction(const G4Step* aStep) {
     hgEdxT->Fill(r[0], Ed);
     hgNI->Fill(procName, 1);
 
-    if( abs(r[1]) < sdx && abs(r[2]) < sdx)
-      hgEdxAxis->Fill(r[0], Ed);
+    //if( abs(r[1]) < sdy && abs(r[2]) < sdy)
+    //hgEdxAxis->Fill(r[0], Ed);
   }
-  
-
-  // Secondary E / Depth / parent
-  // if( partName == (G4String)"e-" ) {
-  //   const G4VProcess * parent = aStep->GetTrack()->GetCreatorProcess();
-  //   if(parent) {
-  //     G4String pName = parent->GetProcessName();
-  //     int it = TPI(pName, 0, 29);
-  //     G4double Kes = aStep->GetPreStepPoint()->GetKineticEnergy();
-  //     hgNsx[it]->Fill(r[0]);
-  //     hgEsx[it]->Fill(r[0], Ke/eV);
-  //   }
-  // }
 }

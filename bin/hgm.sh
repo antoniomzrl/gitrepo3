@@ -19,6 +19,10 @@ elif [ $1 == "tab" ] ; then
     f=$2
     time root -b -p -q .x ${LEPTSDIR}/macros/tabhgs.cc'("'$f'")'
 
+elif [ $1 == "tab2" ] ; then
+    f=$2
+    time root -b -p -q .x ${LEPTSDIR}/macros/tabhgs2.cc'("'$f'")'
+
 elif [ $1 == "tabh" ] ; then
     f=$2
     time root -b -p -q .x ${LEPTSDIR}/macros/tabhgshor.cc'("'$f'")'

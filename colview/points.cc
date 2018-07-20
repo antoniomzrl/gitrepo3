@@ -67,7 +67,7 @@ void ReadTpiFile(string Fn) {
 
 void InitTpi(string Fn) {
   ReadTpiFile(Fn);
-  
+
   //Reverse order
   for(unsigned int i=0; i<tpi.size()/2; i++) {
     string tmp = tpi[i];

@@ -167,8 +167,8 @@ void UAScoreVolume::EndOfEventAction( const G4Event* evt ) {
   if(eTime > TimeWrite) {
     TimeWrite += TimeMark;
     int eid = evt->GetEventID() +1;
-    cout << "Clk Ev " << eid << " " << eTime << " sec" << endl;
-    WriteHistograms();
+    cout << "ScoreVolume Clk Ev " << eid << " " << eTime << " sec" << endl;
+    //WriteHistograms();
   }
 }
 
