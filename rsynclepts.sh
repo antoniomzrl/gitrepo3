@@ -10,3 +10,4 @@ for D in $DIRS ; do
 	  --exclude='*~' --exclude='*.o' --exclude='*.obj' --exclude='.git' \
 	   $i $o
 done
+#
