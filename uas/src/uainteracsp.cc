@@ -162,10 +162,12 @@ void UAInteractionSp::UserSteppingAction(const G4Step* aStep) {
 
   // Particle energy
   G4String partName = aStep->GetTrack()->GetDefinition()->GetParticleName();
-  int ip = PN(partName);
-  hgEx[ip]->Fill(r[0], Ke);
-  hgENx[ip]->Fill(r[0], 1);
-
+  if(Ke>0) {
+    int ip = PN(partName);
+    hgEx[ip]->Fill(r[0], Ke);
+    hgENx[ip]->Fill(r[0], 1);
+  }
+  
   // process Edep / Depth
   const G4VProcess * proc = P2->GetProcessDefinedStep();
   if(proc) {

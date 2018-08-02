@@ -92,7 +92,7 @@ elif [ $1 == "simu" ] ; then
 
     UAS="/gamos/userAction GmCountProcessesUA
          /gamos/userAction UAInteraction
-         /gamos/setParam UAClock:TimeMark 1
+         #/gamos/setParam UAClock:TimeMark 1
          /gamos/userAction UAClock"
     
     for (( j=0; j<${#ege[@]}; j++ )) ; do
@@ -133,7 +133,7 @@ elif [ $1 == "simu" ] ; then
 	    ULI="/gamos/physics/userLimits/setMinEKin ulie1 chb    e- 0.01*eV
  	         /gamos/physics/userLimits/setMinEKin ulie2 chbbck e- 0.01*eV"
 	    #RUN="$(vis) /run/beamOn 50"
-	    RUN="/run/beamOn 1000000"
+	    RUN="/run/beamOn 10000000"
 	    
 	    #PAR="--host dirac --ppn 12 --jobs 24 --btime 2:00:00 --seed 100 --SEED 100"
 	    #PAR="--seed 100 --SEED 100 --jobs 10"
@@ -169,3 +169,22 @@ Resultados de las simulaciones con benzoquinona.
 -Modelo SMF (strong mag field) consistente en suponer que el campo es infinito y eliminar la energía transversal tras el choque en el primario y al generar secundarios. Esto me obligó en tiempos a escribir una física modificada para generar la aproximación.
 
 -Modelo HLX (helix) simulando completamente el movimiento helicoidal en la cámara inmersa en un campo magnético de valor finito. Esta simu es mucho más lenta porque debe añadir los cálculos relacionados con la física del campo de geant4 y porque los electrones recorren más camino, pero se hace con la física LEPTS de siempre. He tenido que aprender a mezclar nuestra física con el campo de geant4. En este modelo supongo además que el analizador solamente ve la energía asociada a la componente longitudinal de los e- que acaban de salir de la cámara.
+
+
+
+
+       No Ints       Elost     Avg Elost   Process
+        966106 1.87723e+06       1.94308   Attachment
+   4.60723e+07 4.48905e+07      0.974349   Elastic
+   2.12621e+06 1.73345e+07       8.15278   ElectronicExcitation
+   3.33164e+06 4.74198e+06       1.42332   ExcitVibrat
+   2.2734e+06  2.70727e+07       11.9085   Ionisation
+
+
+   
+       No Ints         Elost     Avg Elost   Process
+        998547   2.16828e+06       2.17144   Attachment
+   4.59832e+07   4.47844e+07       0.97393   Elastic
+   2.12526e+06   1.73305e+07       8.15455   ElectronicExcitation
+   3.28008e+06   4.67795e+06       1.42617   ExcitVibrat
+   2.27616e+06   2.71097e+07       11.9103   Ionisation

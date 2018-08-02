@@ -550,26 +550,47 @@ elif [ $1 == "simu" ] ; then
 
     ISP="/gamos/setParam UAInteractionSp:Title Edep-Depth
          /gamos/setParam UAInteractionSp:x 50 0 50*mm
-         /gamos/setParam UAInteractionSp:Width 1*cm
+         /gamos/setParam UAInteractionSp:Width 5*cm
          /gamos/userAction UAInteractionSp"
 
-    EULER="--ppn 8 --jpn 10 --host euler"
-    DIRAC="--ppn 12 --jpn 15 --host dirac"
+
+
+    EULER="--ppn 8 --jpn 8 --host euler"
+    DIRAC="--ppn 12 --jpn 12 --host dirac"
     #JOB="$EULER --jobs 30 --btime 4:00:00"
-    JOB="$DIRAC --jobs 30 --btime 4:00:00"
+    #JOB="$DIRAC --jobs 30 --btime 4:00:00"
     KILL="/gamos/setParam UAClock:TimeLimit 3600*71 /gamos/userAction UAClock"
     RUNe="/run/beamOn 400"
     RUNp="/run/beamOn 2000"
     
+    #1 MeV g4/lepts/g4dna
+    if [ x$2 == "x999" ] ; then
+	ISP="/gamos/setParam UAInteractionSp:Title Edep-Depth
+             /gamos/setParam UAInteractionSp:x 100 0 10*mm
+             /gamos/setParam UAInteractionSp:Width 5*cm
+             /gamos/userAction UAInteractionSp"
+	ULI="/gamos/userAction GmKillAtStackingActionUA GmSecondaryFilter
+              /gamos/physics/userLimits/setMinEKin ulie cube e- 50*keV
+              /gamos/physics/userLimits/setMinEKin ulip cube e+ 50*keV"
+	s=1000
+	JOB="$EULER --jobs 64 --btime 26:00:00 --seed $s --SEED $s"
+	KILL="/gamos/setParam UAClock:TimeLimit 3600*24 /gamos/userAction UAClock"
+	GENMONO=$(gen e- 999*keV 1*nm -20*cm)
+	RUN="/run/beamOn 100"
 
-    ULI="#/gamos/userAction GmKillAtStackingActionUA GmSecondaryFilter
-         /gamos/physics/userLimits/setMinEKin ulie cube e- 10*keV
-         /gamos/physics/userLimits/setMinEKin ulip cube e+ 10*keV"
-    RUNe="/run/beamOn 5000"
-    GENMONO=$(gen e- 5*MeV 1*nm -20*cm)
+	#jgamos --dir oog  $WRL $CUBE $PHYg $GENMONO $UAS $ISP $ULI /run/beamOn 128000 &
+	#jgamos --dir ool_$s $JOB $WRL $CUBE $PHYl $GENMONO $UAS $ISP      $RUN &
+	#jgamos --dir ood_$s $JOB $WRL $CUBE $PHYd $GENMONO $UAS $ISP $ULI $RUN &
+	jgamos --dir ood_$s $WRL $CUBE $PHYd $GENMONO $UAS $ISP $ULI $RUN &
+	jgamos --dir ool_$s $WRL $CUBE $PHYl $GENMONO $UAS $ISP $ULI $RUN &
+	wait
+	exit
+    fi
+
+
 
     jgamos --dir oolr $WRL $CUBE $PHYl $GENel5  $UAS $ISP $ULI $RUNe
-exit
+    exit
     jgamos --dir oogr $JOB $WRL $CUBE $PHYg $GENel5  $UAS $ISP $ULI $RUNe'000' &
     jgamos --dir oogm $JOB $WRL $CUBE $PHYg $GENMONO $UAS $ISP $ULI $RUNe'000' &
     jgamos --dir oolr $JOB $WRL $CUBE $PHYl $GENel5  $UAS $ISP $ULI $RUNe &

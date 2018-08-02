@@ -169,7 +169,7 @@ elif [ $1 == "simu" ] ; then
     #RUN="/gamos/setParam WriteTransport 1 /gamos/userAction UAWIF /run/beamOn 1000"
 
     CLKEND="/gamos/setParam UAClock:TimeLimit 3600*20
-    	    /gamos/setParam UAClock:TimeMark 600
+    	    /gamos/setParam UAClock:TimeMark 3600
 	    /gamos/userAction UAClock"
 
     RUN="/run/beamOn 10000000"
@@ -180,8 +180,9 @@ elif [ $1 == "simu" ] ; then
      	     :PLACE  theTarget 1 sphewat rm0 0 ${tp[i]}*mm 0
      	     :COLOUR theTarget 1 0 0"
 
-	s=3000 #500 #600 #2000 #1000
-	JOB="--host euler --ppn 8 --jpn 10 --jobs 20 --btime 24:05:00"
+	s=1000 #2000
+	JOB="--host euler --ppn 8  --jpn 10 --jobs 20 --btime 24:05:00"
+	#JOB="--host dirac --ppn 12 --jpn 15 --jobs 30 --btime 24:05:00"
 	SEED="--dir ooiri${tp[i]}_${s} --seed $s --SEED $s"
 	jgamos $JOB $SEED $WRLS $CILV $PHYl $GENF $TGTV $SCOR $TGT $CLKEND $RUN
     done
@@ -216,4 +217,3 @@ Tras atravesar la cápsula desecho los que salen hacia abajo y me quedo con la m
 El factor entre fotones de la fuente desnuda y la encapsulada tomando solo la mitad es:
       11458654 / 30000000 = 0.382
       y su inverso: 2.6181
-      
