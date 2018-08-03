@@ -67,7 +67,7 @@ void UAInteractionSp::BeginOfRunAction( const G4Run* ) {
     string name = "E_" + pn[j];
     string title = "E" + name + " - Depth - " + Title;
     hgEx[j] = new TH1D(name.c_str(), title.c_str(), x[0], x[1], x[2]);
-    name = "E2_" + pn[j];
+    name = "Eprim_" + pn[j];
     hgEx2[j] = new TH1D(name.c_str(), title.c_str(), x[0], x[1], x[2]);
     name = "E_aux_" + pn[j];
     title = "E_aux_" + pn[j];

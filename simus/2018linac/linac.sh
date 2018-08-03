@@ -10,6 +10,12 @@ PHYd="/gamos/physicsList GmDNAPhysics         $INI"
 PHYl="/gamos/physicsList GmLeptsPhysics       $INI"
 PHYg="/gamos/physicsList HadrontherapyPhysics $INI"
 
+#EULER="--ppn 8  --jpn 8  --host euler"
+EULER="--ppn 8  --jpn 8  --host euler"
+DIRAC="--ppn 12 --jpn 12 --host dirac"
+CETA="--ppn 8  --jpn 8  --host amunoz@193.144.240.176"
+
+
        
 # materials
 WAT=G4_WATER
@@ -487,9 +493,6 @@ elif [ $1 == "simupocillos" ] ; then
 
 	#RUN="$VIS /run/beamOn 100"
 	RUN="/run/beamOn 1000000000"
-	EULER="--ppn 8  --jpn 8  --host euler"
-	DIRAC="--ppn 12 --jpn 12 --host dirac"
-	CETA="--ppn 8  --jpn 8  --host amunoz@193.144.240.176"
 	PRU="--jobs 1 --jpn 1"
 
 	# 1000 (10), 1010 (10), 1020 (10), 2000 (40), 2040 (40)
@@ -520,10 +523,6 @@ elif [ $1 == "simu1" ] ; then
 
 	#RUN="$VIS /run/beamOn 100"
 	RUN="/run/beamOn 1000000000"
-	#EULER="--ppn 8  --jpn 8  --host euler"
-	EULER="--ppn 8  --jpn 10  --host euler"
-	DIRAC="--ppn 12 --jpn 12 --host dirac"
-	CETA="--ppn 8  --jpn 8  --host amunoz@193.144.240.176"
 	PRU="--jobs 1 --jpn 1"
 
 	s=1000
@@ -553,10 +552,6 @@ elif [ $1 == "simu" ] ; then
          /gamos/setParam UAInteractionSp:Width 5*cm
          /gamos/userAction UAInteractionSp"
 
-
-
-    EULER="--ppn 8 --jpn 8 --host euler"
-    DIRAC="--ppn 12 --jpn 12 --host dirac"
     #JOB="$EULER --jobs 30 --btime 4:00:00"
     #JOB="$DIRAC --jobs 30 --btime 4:00:00"
     KILL="/gamos/setParam UAClock:TimeLimit 3600*71 /gamos/userAction UAClock"
@@ -579,10 +574,15 @@ elif [ $1 == "simu" ] ; then
 	RUN="/run/beamOn 100"
 
 	#jgamos --dir oog  $WRL $CUBE $PHYg $GENMONO $UAS $ISP $ULI /run/beamOn 128000 &
-	#jgamos --dir ool_$s $JOB $WRL $CUBE $PHYl $GENMONO $UAS $ISP      $RUN &
-	#jgamos --dir ood_$s $JOB $WRL $CUBE $PHYd $GENMONO $UAS $ISP $ULI $RUN &
-	jgamos --dir ood_$s $WRL $CUBE $PHYd $GENMONO $UAS $ISP $ULI $RUN &
+	#jgamos --dir ool_$s $JOB $WRL $CUBE $PHYl $GENMONO $UAS $ISP $RUN &
+	#jgamos --dir ood_$s $JOB $WRL $CUBE $PHYd $GENMONO $UAS $ISP $RUN &
+
+
+	RUN="/run/beamOn 1000"
 	jgamos --dir ool_$s $WRL $CUBE $PHYl $GENMONO $UAS $ISP $ULI $RUN &
+	RUN="/run/beamOn 10"
+	JOB="$DIRAC --jobs 108 --btime 4:00:00 --seed $s --SEED $s"
+	#jgamos --dir ood_$s $JOB $WRL $CUBE $PHYd $GENMONO $UAS $ISP $ULI $RUN &
 	wait
 	exit
     fi
