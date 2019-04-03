@@ -21,28 +21,23 @@ if [ $GAMOSREP == $HOME/gamos51c ] ; then
     export GAMOS_VER=GAMOS.5.1.0
     export GEANT4_VER=10.01.gamos
     export ROOT_VER=5.34.30
-    DEVELDIR=$LEPTSDIR/devel51c
 elif [ $GAMOSREP == $HOME/gamos51d ] ; then
     export GAMOS_VER=GAMOS.5.1.0
     export GEANT4_VER=10.01.gamos
     export ROOT_VER=5.34.30
-    DEVELDIR=$LEPTSDIR/devel51c
 elif [ $GAMOSREP == $HOME/gamos51f ] ; then
     export GAMOS_VER=GAMOS.5.1.0
     export GEANT4_VER=10.02.gamos
     export ROOT_VER=5.34.34
-    DEVELDIR=$LEPTSDIR/devel51f
 elif [ $GAMOSREP == $HOME/gamos520 ] ; then
     export GAMOS_VER=GAMOS.5.2.0
     export GEANT4_VER=10.03.p03.gamos
     export ROOT_VER=5.34.36
-    DEVELDIR=$LEPTSDIR/devel51f
 fi
 
 echo GAMOS_VER $GAMOS_VER
 echo GEANT4_VER $GEANT4_VER
 echo ROOT_VER $ROOT_VER
-echo DEVELDIR $DEVELDIR
 
 export GAMOSWEB=http://fismed.ciemat.es/GAMOS/download/${GAMOS_VER}/uncompiled
 export PROCS=${PROCS:-8}
@@ -181,14 +176,7 @@ cleangeant4() {
 DSTA=$G4INSTALL/source/processes/electromagnetic/dna
 DSTB=$G4INSTALL/source/physics_lists/constructors
 DSTC=$GAMOSINSTALL/source/GamosCore/GamosPhysics
-syncdevel() {
-    SYNC="rsync -av --exclude='*~'"
-    $SYNC $DEVELDIR/processes/         $DSTA/processes/
-    $SYNC $DEVELDIR/models/            $DSTA/models/
-    $SYNC $DEVELDIR/electromagnetic/   $DSTB/electromagnetic/
-    $SYNC $DEVELDIR/OtherPhysicsLists/ $DSTC/OtherPhysicsLists/
-    $SYNC $LEPTSDIR/xsd/lepts/         $G4LEDATA/lepts/
-}
+
 compiledevel() {
     syncdevel
     cd $DSTA ; make -j $PROCS

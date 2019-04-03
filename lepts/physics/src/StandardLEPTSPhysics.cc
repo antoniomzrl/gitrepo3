@@ -149,7 +149,9 @@ void StandardLEPTSPhysics::ConstructProcess()
   G4double highEnergyLimit = 100*MeV;
 
   // Add standard EM Processes
+  auto aParticleIterator=GetParticleIterator();
   aParticleIterator->reset();
+
   while( (*aParticleIterator)() ){
     G4ParticleDefinition* particle = aParticleIterator->value();
     G4String particleName = particle->GetParticleName();

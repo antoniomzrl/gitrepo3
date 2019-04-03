@@ -1,0 +1,9 @@
+#!/bin/sh
+/gamos/setParam GmAnalysisMgr:FileNameSuffix j_
+# GEOMETRY
+/gamos/setParam GmGeometryFromText:FileName j.geom
+/gamos/geometry GmGeometryFromText
+/gamos/setParam JobName j_1_1
+#/gamos/random/setSeeds 
+/gamos/random/restoreSeeds 1 1
+

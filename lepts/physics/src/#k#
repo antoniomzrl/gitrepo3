@@ -1,0 +1,14 @@
+new G4PhotoElectricEffect();
+new G4LivermorePhotoElectricModel();
+      G4ComptonScattering* theComptonScattering = new G4ComptonScattering();
+      G4LivermoreComptonModel* theLivermoreComptonModel = 
+	new G4LivermoreComptonModel();
+      G4GammaConversion* theGammaConversion = new G4GammaConversion();
+      G4LivermoreGammaConversionModel* theLivermoreGammaConversionModel = 
+	new G4LivermoreGammaConversionModel();
+      theLivermoreGammaConversionModel->SetHighEnergyLimit(LivermoreHighEnergyLimit);
+      theGammaConversion->AddEmModel(0, theLivermoreGammaConversionModel);
+      manager->AddDiscreteProcess(theGammaConversion);
+
+      G4RayleighScattering* theRayleigh = new G4RayleighScattering();
+      G4LivermoreRayleighModel* theRayleighModel = new G4LivermoreRayleighModel();

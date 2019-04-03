@@ -186,6 +186,7 @@ void LivermoreLEPTSPhysics::ConstructProcess()
   G4NuclearStopping* pnuc = new G4NuclearStopping();
 
   // Add Livermore EM Processes
+  auto aParticleIterator=GetParticleIterator();
   aParticleIterator->reset();
 
   while( (*aParticleIterator)() ){

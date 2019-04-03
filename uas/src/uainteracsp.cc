@@ -1,13 +1,14 @@
 #include "uactions.hh"
 #include "points.hh"
 
-double sdx, sdy;
 extern vector <string> tpi, ntpi, pn;
 
 #define NTPI 50
 TH1D *hgP, *hgNI, *hgEdxT, *hgEdxAxis, *hgEx[6], *hgEx2[6], *hgENx[6],
   *hgEdx[NTPI], *hgNx[NTPI], *hgNsx[NTPI], *hgEsx[NTPI];
 
+double sdx, sdy, py, pz;
+vector<double> center;
 
 UAInteractionSp::UAInteractionSp() : GmUserRunAction(), GmUserEventAction(),
 				     GmUserSteppingAction() {
@@ -23,12 +24,13 @@ UAInteractionSp::~UAInteractionSp() {
 void UAInteractionSp::BeginOfRunAction( const G4Run* ) {
   G4cout << "UAInteractionSp BeginOfRunAction" << G4endl;
 
-  G4String Title = GmParameterMgr::GetInstance()->GetStringValue(theName + ":Title", "mm");
+  string Title = GmParameterMgr::GetInstance()->GetStringValue(theName + ":Title", "mm");
   string TpiFn = GmParameterMgr::GetInstance()->GetStringValue(theName + ":TpiFile", "tpi_all.txt");
-  vector<double> v(3,1);
-  vector<double> x = GmParameterMgr::GetInstance()->GetVNumericValue(theName + ":x", v);
+  vector<double> v(3,1), u(3,0);
+  vector<double> x = GmParameterMgr::GetInstance()->GetVNumericValue(theName + ":x", v); //N,xl,xu
+  center = GmParameterMgr::GetInstance()->GetVNumericValue(theName + ":c", u); //px,py,pz
   sdy = GmParameterMgr::GetInstance()->GetNumericValue(theName + ":Width", 10*m);
-  sdx = (x[2]-x[1]) / x[0];
+  sdx = (x[2]-x[1]) / x[0]; // (xu-xl)/N
   
   cout << "UAInteractionSp dx " << G4BestUnit(2*sdx, "Length")
        << " dy " << G4BestUnit(2*sdy, "Length")
@@ -154,8 +156,11 @@ void UAInteractionSp::UserSteppingAction(const G4Step* aStep) {
   //G4ThreeVector  r = (P1->GetPosition() + P2->GetPosition())*0.5;
   G4ThreeVector  r = P2->GetPosition();
 
-  if( abs(r[1]) > sdy || abs(r[2]) > sdy) return;
+  if( abs(r[1]-center[1]) > sdy || abs(r[2]-center[2]) > sdy) return;
 
+  //G4cout << "rrr " << r << endl;
+  //cout << "rrr " << r[0] << " " << r[1] << " " << r[2] << endl;
+  
   G4double      Ke = P2->GetKineticEnergy();
   G4double      Ed = aStep->GetTotalEnergyDeposit();
   
@@ -179,7 +184,5 @@ void UAInteractionSp::UserSteppingAction(const G4Step* aStep) {
     hgEdxT->Fill(r[0], Ed);
     hgNI->Fill(procName, 1);
 
-    //if( abs(r[1]) < sdy && abs(r[2]) < sdy)
-    //hgEdxAxis->Fill(r[0], Ed);
   }
 }

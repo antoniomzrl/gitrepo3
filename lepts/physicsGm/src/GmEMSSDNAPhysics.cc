@@ -121,6 +121,7 @@ void GmEMSSDNAPhysics::ConstructProcess()
 void GmEMSSDNAPhysics::ConstructEM()
 {
 
+  auto theParticleIterator=GetParticleIterator();
   theParticleIterator->reset();
 
   while( (*theParticleIterator)() )

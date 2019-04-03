@@ -4,7 +4,8 @@ TH1D *hgNi,  *hgEdi, *hgEli, *hgEmi, *hgEmil, *hgElo;
 TH1D *hgAngE, *hgAngEdeg, *hgAngR, *hgAngI, *hgAngIo;
 
 int NoEvents=0, NoCols=0, NoColsEl=0, NoColsIo=0;
-double Edepo=0, Elo=0;
+double Edepo=0, Elo=0, Eprim=0;
+bool IsBeginOfEvent=false;
 
 string proclabel[10];
 int NoIntThisEv[10];
@@ -121,6 +122,8 @@ void UAInteraction::EndOfRunAction( const G4Run* ) {
        << "\tNoCols:        " << NoCols   << endl
        << "\tNoColsEl:      " << NoColsEl  << endl
        << "\tNoColsIo:      " << NoColsIo  << endl
+       << "\tEprim(eV):     " << Eprim/eV << endl
+       << "\tAvgEprim(eV):  " << Eprim/(double)NoEvents/eV << endl
        << "\tEdepo(eV):     " << Edepo/eV << endl
        << "\tAvgEdepo:      " << Edepo/(double)NoEvents/eV << endl
        << "\tD(g/cm3):      " << Density/(g/cm3)  << endl
@@ -179,6 +182,7 @@ void UAInteraction::EndOfRunAction( const G4Run* ) {
 }
 
 void UAInteraction::BeginOfEventAction( const G4Event* ) {
+  IsBeginOfEvent=true;
   NoEvents++;
   for(int j=0; j<10; j++)
     NoIntThisEv[j] = 0;
@@ -194,17 +198,23 @@ void UAInteraction::EndOfEventAction( const G4Event* evt ) {
 
 void UAInteraction::UserSteppingAction(const G4Step* aStep) {
 
-  G4double Ed = aStep->GetTotalEnergyDeposit();
-  Edepo += Ed;
-
-  //if(Ed == 0) return; // Rayleigh!!
-
   G4StepPoint * Pt1  = aStep->GetPreStepPoint();
   G4StepPoint * Pt2  = aStep->GetPostStepPoint();
 
-  double El = Pt1->GetKineticEnergy() - Pt2->GetKineticEnergy();
+  G4double Ed = aStep->GetTotalEnergyDeposit();
+  Edepo += Ed;
+  //if(Ed == 0) return; // Rayleigh!!
+  double E1 = Pt1->GetKineticEnergy();
+  double E2 = Pt2->GetKineticEnergy();
+  double El = E1 - E2;
   Elo += El;
 
+  if( IsBeginOfEvent) {
+    Eprim += E1;
+    IsBeginOfEvent=false;
+    //cout << "Eprim: " << Eprim/eV << "eV" << endl;
+  }
+  
   G4String phvlName;
   G4VPhysicalVolume * pv = Pt2->GetPhysicalVolume();
   if(pv ) phvlName = pv->GetName();

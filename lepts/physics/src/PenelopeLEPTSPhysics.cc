@@ -190,6 +190,7 @@ void PenelopeLEPTSPhysics::ConstructProcess()
   G4NuclearStopping* pnuc = new G4NuclearStopping();
 
   // Add Penelope EM Processes
+  auto aParticleIterator=GetParticleIterator();
   aParticleIterator->reset();
 
   while( (*aParticleIterator)() ){

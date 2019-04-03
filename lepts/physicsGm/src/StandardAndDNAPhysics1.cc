@@ -115,6 +115,7 @@ void StandardAndDNAPhysics1::ConstructProcess()
 void StandardAndDNAPhysics1::ConstructEM()
 {
 
+  auto theParticleIterator=GetParticleIterator();
   theParticleIterator->reset();
 
   while( (*theParticleIterator)() )

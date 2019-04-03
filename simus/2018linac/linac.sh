@@ -39,21 +39,50 @@ CUBE=":VOLU   cube BOX 0.5*m 0.5*m 0.5*m $WAT
       :COLOUR cube 0.1 0.1 0.9
       #/gamos/geometry/createRegion cubeRegion cube"
 
+MINICUBE=":VOLU   cube BOX 5*mm 15*mm 15*mm $WAT
+      :PLACE  cube 1 world rm0 0.5*m 0 0
+      :COLOUR cube 0.1 0.1 0.9"
+
+SLABW=":VOLU   cube BOX 0.5*cm 0.5*m 0.5*m $WAT
+       :PLACE  cube 1 world rm0 0.5*m 0 0
+       :COLOUR cube 0.1 0.1 0.9"
+
 # 2mm lead slab
 SLAB=":VOLU   slab BOX 1*mm 0.5*m 0.5*m G4_Pb
       :PLACE  slab 1 world rm0 -15*cm 0 0
       :COLOUR slab 1 1 0"
 
+# Mono 1 MeV e-
+GENMONOe=":VOLU gbox BOX 5*cm 5*cm 5*cm vacuum 
+         :PLACE gbox 1 world rmz -5*cm 0 0 
+         :COLOUR gbox 1 0 0
+         /gamos/generator GmGenerator 
+         /gamos/generator/addSingleParticleSource gn e- 0.999*MeV 
+         /gamos/generator/positionDist gn GmGenerDistPositionInG4Volumes gbox 
+         /gamos/generator/directionDist gn GmGenerDistDirectionConst 1 0 0"
+
+
+# Mono 1 MeV
+GENMONO=":VOLU gbox BOX 5*cm 5*cm 5*cm vacuum 
+         :PLACE gbox 1 world rmz -5*cm 0 0 
+         :COLOUR gbox 1 0 0
+         /gamos/generator GmGenerator 
+         /gamos/generator/addSingleParticleSource gn gamma 1*MeV 
+         /gamos/generator/positionDist gn GmGenerDistPositionInG4Volumes gbox 
+         /gamos/generator/directionDist gn GmGenerDistDirectionConst 1 0 0"
+
 # Vendor spectrum generator
-GENVDR=":VOLU gbox BOX 5*cm 5*cm 5*cm vacuum 
-        :PLACE gbox 1 world rmz -5*cm 0 0 
-        :COLOUR gbox 1 0 0
-        /gamos/generator GmGenerator 
-        /gamos/generator/addSingleParticleSource gn gamma 1*MeV 
-        /gamos/generator/positionDist gn GmGenerDistPositionInG4Volumes gbox 
-        /gamos/generator/directionDist gn GmGenerDistDirectionConst 1 0 0 
-        /gamos/generator/energyDist gn GmGenerDistEnergyFromFile
-        photonSpec5p9MeV.txt interpolate 1*MeV"
+GENVDR="$GENMONO
+        /gamos/generator/energyDist gn GmGenerDistEnergyFromFile photonSpec5p9MeV.txt interpolate 1*MeV"
+
+MINIGENVDR=":VOLU gbox BOX 0.5*mm 5*mm 5*mm vacuum 
+         :PLACE gbox 1 world rmz -5*cm 0 0 
+         :COLOUR gbox 1 0 0
+         /gamos/generator GmGenerator 
+         /gamos/generator/addSingleParticleSource gn gamma 1*MeV 
+         /gamos/generator/positionDist gn GmGenerDistPositionInG4Volumes gbox 
+         /gamos/generator/directionDist gn GmGenerDistDirectionConst 1 0 0
+         /gamos/generator/energyDist gn GmGenerDistEnergyFromFile photonSpec5p9MeV.txt interpolate 1*MeV"
 
 # Varian EGS phase space generator
 GENVAR="#/gamos/setParam RTGeneratorPhaseSpace_EGS:MaxNReuse 5 
@@ -125,6 +154,8 @@ UAS="#/gamos/userAction UAVerbose
 KEP="/gamos/physics/userLimits/setMinEKin ulie cube e- 9*MeV
      /gamos/physics/userLimits/setMinEKin ulip cube e+ 9*MeV 
      /gamos/physics/userLimits/print"
+KEP2="/gamos/userAction GmKillAtStackingActionUA GmElectronFilter
+      /gamos/userAction GmKillAtStackingActionUA GmPositronFilter"
 
 # vrml vis macros
 VIS="/vis/scene/create 
@@ -221,28 +252,38 @@ elif [ $1 == "vistraj" ] ; then
  
 # Vis 
 elif [ $1 == "visw" ] ; then
-    ULI="/gamos/physics/userLimits/setMinEKin ulicube cube e- 10*MeV"
-    UAS="/gamos/userAction UAWIF"
-    RUN="/run/beamOn 1000"
-    jgamos --dir oovisw $WRL $CUBE $PHYl $GENph5 $ULI $UAS $RUN
+    UAS="/gamos/userAction UAWIF
+         /gamos/userAction UAInteraction
+         /gamos/userAction UAClock
+    #/gamos/userAction UAVerbose"
+
+    KEP3="/gamos/physics/userLimits/setMinEKin ulie cube e- 50*keV
+          /gamos/physics/userLimits/setMinEKin ulip cube e+ 50*keV"
+    #jgamos --dir oovisw1 $WRL $CUBE $PHYl $GENMONO $KEP $UAS /run/beamOn 20000
+    #jgamos --dir oovisw2 $WRL $CUBE $PHYl $GENMONO $KEP2 $UAS /run/beamOn 20000
+
+    #jgamos --dir oovisw $WRL $CUBE $PHYl $GENph5 $KEP $UAS /run/beamOn 20000
+    #jgamos --dir oovisw $WRL $CUBE $PHYl $GENVAR $KEP $UAS /run/beamOn 20000
+    #jgamos --dir oovisw $WRL $CUBE $PHYl $GENVDR $KEP $UAS /run/beamOn 20000
+    jgamos --dir oovisw $WRL $MINICUBE $PHYl $MINIGENVDR $KEP3 $UAS /run/beamOn 50000
 
 
     
 # Test generators
 elif [ $1 == "gener" ] ; then
     UAS="/gamos/setParam UAExit:EnergyMax 7*MeV
-         /gamos/setParam UAExit:EnergyBins 700
+         /gamos/setParam UAExit:EnergyBins 140
          /gamos/userAction UAExit
          /gamos/analysis/histo1Max *Ener* 7*MeV
          /gamos/userAction GmGenerHistosUA
          /gamos/userAction UAClock"
-    RUN="/run/beamOn 1000000"
-    #jgamos --dir oog1 $WRL $PHYl $UAS $GENVDR $RUN &
-    #jgamos --dir oog2 $WRL $PHYl $UAS $GENVAR /run/beamOn 4000000 &
-    jgamos --dir ooph5 $WRL $PHYl $UAS $GENph5 $RUN &
-    jgamos --dir ooel5 $WRL $PHYl $UAS $GENel5 $RUN &
-    jgamos --dir ooph6 $WRL $PHYl $UAS $GENph6 $RUN &
-    jgamos --dir ooel6 $WRL $PHYl $UAS $GENel6 $RUN &
+    RUN="/run/beamOn 4000000"
+    jgamos --dir oog1 $WRL $PHYl $UAS $GENVDR $RUN &
+    jgamos --dir oog2 $WRL $PHYl $UAS $GENVAR $RUN &
+    #jgamos --dir ooph5 $WRL $PHYl $UAS $GENph5 $RUN &
+    #jgamos --dir ooel5 $WRL $PHYl $UAS $GENel5 $RUN &
+    #jgamos --dir ooph6 $WRL $PHYl $UAS $GENph6 $RUN &
+    #jgamos --dir ooel6 $WRL $PHYl $UAS $GENel6 $RUN &
     wait
 
 
@@ -291,34 +332,43 @@ elif [ $1 == "jets" ] ; then
     jgamos --dir oolo --seed 3 $PAR $WRL $CHBO $PHYl $UAS $ISP $GEN $ULI $RUN &
     jgamos --dir ooln --seed 3 $PAR $WRL $CHB  $PHYl $UAS $ISP $GEN $ULI $RUN &
     jgamos --dir ood  --seed 3 $PAR $WRL $CHB  $PHYd $UAS $ISP $GEN $ULI $RUN &
-    wait    
+    wait
 
 
 
 # Stoping power
-elif [ $1 == "stp" ] ; then
+elif [ $1 == "stpw" ] ; then
+    DX="0.01*nm"
     UAS="#/gamos/userAction UAVerbose
          #/gamos/userAction UAWIF
          /gamos/userAction UAClock
+         /gamos/setParam STPW:MolecularMass 18*g/mole
+         /gamos/setParam STPW:Density 1*g/cm3
+         /gamos/setParam STPW:Length $DX
          /gamos/userAction UAInteraction"
+    
+    CHB=":MIXT_BY_NATOMS G4_WATER 1*g/cm3 2  O 1 H 2
+         :VOLU  chb BOX ${DX}/2 0.5*m 0.5*m G4_WATER
+         :PLACE chb 1 world rm0 0.5*m 0 0"
+    CHBV=":MIXT_BY_NATOMS G4_WATER_OLD 1*g/cm3 2  O 1 H 2
+         :VOLU  chb BOX ${DX}/2 0.5*m 0.5*m G4_WATER_OLD
+         :PLACE chb 1 world rm0 0.5*m 0 0"
 
-    WL=G4_WATER
-    WV=G4_WATER_VAPOR
-    DX=0.01/2.0*nm
-    CHBL=":MIXT_BY_NATOMS $WL 1*g/cm3 2  O 1 H 2
-          :VOLU  chb BOX $DX 0.5*m 0.5*m $WL
-          :PLACE chb 1 world rm0 0.5*m 0 0"
-    CHBV=":MIXT_BY_NATOMS $WV 1*g/cm3 2  O 1 H 2
-          :VOLU  chb BOX $DX 0.5*m 0.5*m $WV
-          :PLACE chb 1 world rm0 0.5*m 0 0"
-    RUN="/run/beamOn 100000000"
-    #PAR="--jobs 10 --ppn 10"
-    #PAR="--host euler --ppn 2 --jobs 2 --btime 24:00:00"
-    for E in 1 3 10 30 100 300 1000 5000 ; do
-	GEN=$(gen e- ${E}*keV 1*um -20*cm)
-	jgamos --dir ood${E} $PAR $WRL $CHBL $PHYd $UAS $GEN $ULI $RUN &
-	jgamos --dir oog${E} $PAR $WRL $CHBV $PHYg $UAS $GEN $ULI $RUN &
-	jgamos --dir ool${E} $PAR $WRL $CHBV $PHYl $UAS $GEN $ULI $RUN &
+    RUN="/run/beamOn 10000000"
+    #JOB="--host euler --jobs 1 --btime 4:29:00"
+
+    for e in 6 ; do
+	for E in 4 5; do
+    #for e in 1 2 3 4 5 6 7; do
+	#for E in 1 3 6 9 ; do
+	    Egy=${E}e${e}
+	    Dir=e${e}_${Egy}
+	    GEN=$(gen e- ${Egy}'*eV' 1*um -20*cm)
+	    #jgamos $JOB --dir oogg${Dir} $WRL $CHB  $PHYg $UAS $GEN $RUN 
+	    #jgamos $JOB --dir oodd${Dir} $WRL $CHB  $PHYd $UAS $GEN $RUN &
+	    jgamos $JOB --dir ooln${Dir} $WRL $CHB  $PHYl $UAS $GEN $RUN 
+	    jgamos $JOB --dir oolv${Dir} $WRL $CHBV $PHYl $UAS $GEN $RUN
+	done
     done
     wait
 
@@ -395,25 +445,46 @@ elif [ $1 == "atenu_Pb" ] ; then
 
 
 elif [ $1 == "seco" ] ; then
-    SECO="/gamos/analysis/histo1Max *Ener* 6*MeV
-          /gamos/analysis/histo1NBins *Ener* 100
-          #seco
+    SECOF="/gamos/analysis/histo1Max *Ener* 6*MeV
+          /gamos/analysis/histo1NBins *Ener* 300
           /gamos/setParam   GmSecondaryTrackDataHistosUA:FileName seco
-          /gamos/setParam   GmSecondaryTrackDataHistosUA:DataList SecoKineticEnergy
+          /gamos/setParam   GmSecondaryTrackDataHistosUA:DataList InitialKineticEnergy
           /gamos/userAction GmSecondaryTrackDataHistosUA
-          #only_seco_e-
-          /gamos/filter secoF GmOnSecondaryFilter GmElectronFilter
-          /gamos/setParam GmSecondaryTrackDataHistosUA_secoF:FileName secoel
-          /gamos/setParam GmSecondaryTrackDataHistosUA_secoF:DataList SecoKineticEnergy
-          /gamos/userAction GmSecondaryTrackDataHistosUA secoF"
-    UAS="/gamos/userAction UAInteraction
-         /gamos/userAction UAClock"
-    ULI="/gamos/physics/userLimits/setMinEKin ulicube cube e- 10*MeV"
-    
-    RUN="/run/beamOn 100000"
-    #PAR="--jobs 10 --ppn 10"
-    jgamos --dir oosec${i} $PAR $WRL $CUBE $PHYl $GENVDR $UAS $SECO $ULI $RUN
 
+          #/gamos/filter secoF GmOnSecondaryFilter GmClassifierByProcess
+          #/gamos/setParam GmSecondaryTrackDataHistosUA_secoF:FileName secoel
+          #/gamos/setParam GmSecondaryTrackDataHistosUA_secoF:DataList InitialKineticEnergy
+          #/gamos/userAction GmSecondaryTrackDataHistosUA secoF
+
+          /gamos/setParam GmTrackDataHistosUA_GmSecondaryFilter_GmClassifierByCreatorProcess:DataList InitialKineticEnergy
+          /gamos/userAction GmTrackDataHistosUA GmSecondaryFilter GmClassifierByCreatorProcess"
+
+
+    #/gamos/setParam GmTrackDataHistosUA_GmSecondaryFilter_GmClassifierByParticle:DataList InitialKineticEnergy
+    #/gamos/userAction GmTrackDataHistosUA GmSecondaryFilter GmClassifierByParticle
+
+    # puedes quitar GmClassifierByParticle y poner un filtro 
+    #/gamos/filter electronOrgammaF GmORFilter GmElectronFilter GmGammaFilter
+    GEN6M=":VOLU gbox BOX 5*cm 5*cm 5*cm vacuum 
+         :PLACE gbox 1 world rmz -5*cm 0 0 
+         :COLOUR gbox 1 0 0
+         /gamos/generator GmGenerator 
+         /gamos/generator/addSingleParticleSource gn gamma 6*MeV 
+         /gamos/generator/positionDist gn GmGenerDistPositionInG4Volumes gbox 
+         /gamos/generator/directionDist gn GmGenerDistDirectionConst 1 0 0"
+    
+    UAS="/gamos/userAction UAInteraction
+         /gamos/userAction GmCountProcessesUA
+         /gamos/analysis/histo1Max *Ener* 6*MeV
+         /gamos/userAction GmGenerHistosUA
+         /gamos/userAction UAClock
+         /gamos/userAction UAVerbose"
+    RUN="/run/beamOn 50000000"
+    RUN="/run/beamOn 50"
+    #jgamos --dir ooseco2 $WRL $CUBE $PHYl $GENVAR $KEP $UAS $SECOF $RUN &
+    jgamos --dir ooseco  $WRL $CUBE $PHYl $GEN6M  $KEP $UAS $SECOF $RUN &
+    #jgamos --dir ooseco  $WRL $SLABW $PHYl $GEN6M  $KEP $UAS $SECOF $RUN &
+    wait
 
 
 # e- approaching small target
@@ -506,7 +577,7 @@ elif [ $1 == "simupocillos" ] ; then
 
 
 
-elif [ $1 == "simu1" ] ; then
+elif [ $1 == "simuesfer" ] ; then
     # centros esferitas #tps=( 02 04 08 10 15 20 30 40 50 60 )
     tps=( 02.25 05.25 08.25 11.30 14.30 20.30 29.30 41.30 50.30 59.30 )
     rds=( 1     1     1     2     2     2     4     4     4     4 )
@@ -539,84 +610,56 @@ elif [ $1 == "simu1" ] ; then
     wait
 
 
-    
-elif [ $1 == "simu" ] ; then
+
+#1 MeV g4/lepts/g4dna  
+elif [ $1 == "simu1MeV" ] ; then
     UAS="#/gamos/userAction UAVerbose
          #/gamos/userAction UAWIF
          /gamos/userAction UAClock
          /gamos/userAction UAInteraction"
 
-
     ISP="/gamos/setParam UAInteractionSp:Title Edep-Depth
-         /gamos/setParam UAInteractionSp:x 50 0 50*mm
-         /gamos/setParam UAInteractionSp:Width 5*cm
+         /gamos/setParam UAInteractionSp:x 100 0 10*mm
+         /gamos/setParam UAInteractionSp:Width 7*mm
          /gamos/userAction UAInteractionSp"
+    ISP2="/gamos/setParam UAInteractionSp:Title Edep-Depth
+         /gamos/setParam UAInteractionSp:x 100 0 10*mm
+         /gamos/setParam UAInteractionSp:c 0 0 40
+         /gamos/setParam UAInteractionSp:Width 7*mm
+         /gamos/userAction UAInteractionSp"
+        
+    ULI="/gamos/userAction GmKillAtStackingActionUA GmSecondaryFilter
+         /gamos/physics/userLimits/setMinEKin ulie cube e- 50*keV
+         /gamos/physics/userLimits/setMinEKin ulip cube e+ 50*keV"
 
+    KILL="/gamos/setParam UAClock:TimeLimit 3600*24 /gamos/userAction UAClock"
+    RUN="/run/beamOn 1000"
     #JOB="$EULER --jobs 30 --btime 4:00:00"
     #JOB="$DIRAC --jobs 30 --btime 4:00:00"
-    KILL="/gamos/setParam UAClock:TimeLimit 3600*71 /gamos/userAction UAClock"
-    RUNe="/run/beamOn 400"
-    RUNp="/run/beamOn 2000"
     
-    #1 MeV g4/lepts/g4dna
-    if [ x$2 == "x999" ] ; then
-	ISP="/gamos/setParam UAInteractionSp:Title Edep-Depth
-             /gamos/setParam UAInteractionSp:x 100 0 10*mm
-             /gamos/setParam UAInteractionSp:Width 5*cm
-             /gamos/userAction UAInteractionSp"
-	ULI="/gamos/userAction GmKillAtStackingActionUA GmSecondaryFilter
-              /gamos/physics/userLimits/setMinEKin ulie cube e- 50*keV
-              /gamos/physics/userLimits/setMinEKin ulip cube e+ 50*keV"
-	s=1000
-	JOB="$EULER --jobs 64 --btime 26:00:00 --seed $s --SEED $s"
-	KILL="/gamos/setParam UAClock:TimeLimit 3600*24 /gamos/userAction UAClock"
-	GENMONO=$(gen e- 999*keV 1*nm -20*cm)
-	RUN="/run/beamOn 100"
-
-	#jgamos --dir oog  $WRL $CUBE $PHYg $GENMONO $UAS $ISP $ULI /run/beamOn 128000 &
-	#jgamos --dir ool_$s $JOB $WRL $CUBE $PHYl $GENMONO $UAS $ISP $RUN &
-	#jgamos --dir ood_$s $JOB $WRL $CUBE $PHYd $GENMONO $UAS $ISP $RUN &
-
-
-	RUN="/run/beamOn 1000"
-	jgamos --dir ool_$s $WRL $CUBE $PHYl $GENMONO $UAS $ISP $ULI $RUN &
-	RUN="/run/beamOn 10"
-	JOB="$DIRAC --jobs 108 --btime 4:00:00 --seed $s --SEED $s"
-	#jgamos --dir ood_$s $JOB $WRL $CUBE $PHYd $GENMONO $UAS $ISP $ULI $RUN &
-	wait
-	exit
-    fi
-
-
-
-    jgamos --dir oolr $WRL $CUBE $PHYl $GENel5  $UAS $ISP $ULI $RUNe
-    exit
-    jgamos --dir oogr $JOB $WRL $CUBE $PHYg $GENel5  $UAS $ISP $ULI $RUNe'000' &
-    jgamos --dir oogm $JOB $WRL $CUBE $PHYg $GENMONO $UAS $ISP $ULI $RUNe'000' &
-    jgamos --dir oolr $JOB $WRL $CUBE $PHYl $GENel5  $UAS $ISP $ULI $RUNe &
-    jgamos --dir oolm $JOB $WRL $CUBE $PHYl $GENMONO $UAS $ISP $ULI $RUNe &
-    wait
-    exit
-
-
-
-    #seeds="1000 ... 1490"
-    for (( i=1500; i<2000; i+=10 )) ; do
-	seeds="$seeds $i"
-    done
+    #seeds="1000 ... 2000"
+    #for (( i=1000; i<2000; i+=10 )) ; do
+    #  seeds="$seeds $i"
+    #done
+    seeds="10000"
     
     for s in $seeds ; do
 	SEED="--seed $s --SEED $s"
-	DIRe="--dir ooel_s${s}"
-	DIRp="--dir ooph_s${s}"
-	jgamos $JOB $DIRe  $WRL $CUBE $PHYl $GENel5 $UAS $ULI $KILL $RUNe
-	jgamos $JOB $DIRp  $WRL $CUBE $PHYl $GENph5 $UAS $ULI $KILL $RUNp
+	#JOB="$EULER --jobs 100 --btime 26:00:00 --seed $s --SEED $s"
+	
+	#jgamos $JOB --dir oog_${s} $WRL $CUBE $PHYg $GENMONOe $UAS $ULI $KILL $RUN &
+	#jgamos $JOB --dir ood_${s} $WRL $CUBE $PHYd $GENMONOe $UAS $ULI $KILL $RUN &
+	#jgamos $JOB --dir ool_${s} $WRL $CUBE $PHYl $GENMONOe $UAS $ULI $KILL $RUN &
+	jgamos $JOB --dir oog_${s} $WRL $CUBE $PHYg $GENMONOe $ISP $UAS $ULI $KILL $RUN &
+	jgamos $JOB --dir oog2_${s} $WRL $CUBE $PHYg $GENMONOe $ISP2 $UAS $ULI $KILL $RUN &
     done
-
+    wait
     
+    exit
 fi
-exit
 
+
+exit
 
 
 
@@ -641,8 +684,28 @@ grep -v _Mass tab2.csv | grep -v Charge |grep -v Dose |grep -v Transport > tab3.
 ######################################
 
 
+Pocillos:
+
+Los 10 cm van hasta la superficie superior de la placa de poliestireno de 1 mm de espesor (que suponemos agua líquida).
+
+A continuación viene la superficie exterior del pocillo.
+La altura del pocillo es de 10,6 mm el tercio superior del pocillo es aire (suponemos agua gaseosa) y los dos tercios siguientes son agua líquida. Es decir después de la superficie superior tenemos una altura de 3,53 mm de aire y luego 7,07 mm de agua.
+
+El diámetro del pocillo es de 6 mm. El volumen total del pocillo es de 300 mm cubicos.
+
+La separación entre los centros de dos pocillos contiguos es de 8,6 mm. Es decir la distancia mínima entre las superficies laterales de dos pocillos contiguos es de 2,6 mm.
 
 
+
+La distancia de la fuente a la superficie del agua en este caso es de 1 m (100 cm). Aunque consideramos el aire como vacío, esto afecta a la divergencia. Después hay 10 cm que tienen que atravesar los fotones hasta llegar a las células, a lo que hay que añadir 1 mm de poliestireno (agua de densidad 1,06)  hasta entrar en el pocillo. Los primeros 3.3 mm del pocillo son aire y los 6.6 restantes son agua (con células que de momento no simulamos). 
+ 
+
+Los cilindros de agua tiene 6mm de diámetro y 10mm de altura. Sólo se rellenó una parte (tengo que confirmarla) pero supongamos que la altura del líquido es de unos 7 mm y los tres restantes son aire (vacío para nosotros). Los cilindros están alineados horizontalmente a una profundidad de 10 cm desde la superficie del agua. La distancia entre los centros de dos cilindos consecutivos es de 9 mm. Se trata de colocar tantos cilindros alineados como sean necesarios para salirnos del campo y llegar a una distancia del centro a la que la radiación no llegue (10-12 cilindros serán suficientes).
+Cada cilindro tiene una tapa de poliestireno de 1 mm. De momento suponemos que es agua de densidad 1,06
+
+
+
+LINAC-electrones
 
 electrones de alta energía en agua líquida
 excel con los datos de entrada tal como los utiliza Rafa en el planificador de dosis para el LINAC
@@ -665,3 +728,30 @@ Vamos a hacer la simulación para dos de los espectros y ángulos de entrada  co
 Primero simulamos la dosis en función de la profundidad para los  puntos dados, en los que suponemos un volumen (esfera) pequeño a lo largo del eje de penetración (lo más pequeño que te permita la estadística) y después el número y tipo de procesos en cada lámina. Como siempre, nos interesa una buena estadística para ver detalles al final del alcance.
 
 También nos interesa obtener un buen dibujo de trayectorias.
+
+
+
+
+2018 Nov:
+
+Volviendo a los temas domésticos tenemos que retomar el tema de los electrones de alta energía
+en la cuba de agua. Las simulaciones anteriores con el generador de Rafa, usando G4, G4-DNA y
+LEPTS no salieron muy bien, en parte por tener que simular en una lámina, por la divergencia del
+haz o por los propios programas de simulación. Ahora iremos paso por paso para ver dónde aparecen
+las desviaciones.
+
+El primer ejercicio será sencillo con un haz monocromático (1 MeV) paralelo irradiando un
+campo de 10x10 cm. El blaco no serán láminas sino un volumen cúbico tan reducido como permita
+la estadística e iremos simulando a lo largo del eje (centro del campo irradiado) en función de 
+la profundidad (hasta donde permita la estadística).
+
+La segunda será repetir la simulación en profundidad desde la zona de penumbra. Es decir empezar
+con el volumen del blanco pegado al límite de la zona irradiada, a un poco más de 5 cm del centro.
+Los datos de salida serán completos: energía depositada, tipo y número de procesos.
+
+Juan Carlos, es una buena oportunidad para que veas todo el proceso y además te encargarás de
+hacer tablas con las secciones eficaces que se están usando para cada tipo de proceso. A la
+vista de los resultados sabremos si  hay algo que esté fallando desde el principio o si las 
+diferencias aparecen más adelante, cuando cambiemos el generador (fuente de electrones).
+
+

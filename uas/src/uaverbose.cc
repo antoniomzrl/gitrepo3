@@ -59,7 +59,7 @@ void UAVerbose::UserSteppingAction(const G4Step* aStep) {
 
   G4ThreeVector Mom1  = Pt1->GetMomentum();
   G4ThreeVector Mom2  = Pt2->GetMomentum();
-  if(Mom2.mag() == 0) return;
+  //if(Mom2.mag() == 0) return;
 
   double ang = Mom1.angle(Mom2)*360/twopi;
 

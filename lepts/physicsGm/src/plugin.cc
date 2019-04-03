@@ -13,8 +13,8 @@ PLUGINSVC_FACTORY(GmLeptsSMFPhysics,G4VUserPhysicsList*())
 PLUGINSVC_FACTORY(StandardAndDNAPhysics1,G4VUserPhysicsList*())
 #include "StandardAndDNAPhysics.hh"
 PLUGINSVC_FACTORY(StandardAndDNAPhysics,G4VUserPhysicsList*())
-#include "EMSSPhysics.hh"
-PLUGINSVC_FACTORY(EMSSPhysics,G4VUserPhysicsList*())
+//#include "EMSSPhysics.hh"
+//PLUGINSVC_FACTORY(EMSSPhysics,G4VUserPhysicsList*())
 
 
 

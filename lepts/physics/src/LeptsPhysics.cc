@@ -112,6 +112,7 @@ void LeptsSMFPhysics::ConstructParticle()
 void LeptsPhysics::ConstructProcess()
 {
 
+  auto aParticleIterator=GetParticleIterator();
   aParticleIterator->reset();
 
   while( (*aParticleIterator)() ){
@@ -338,7 +339,8 @@ void LeptsPhysics::ConstructProcess()
 
 void LeptsSMFPhysics::ConstructProcess()
 {
-
+  
+  auto aParticleIterator=GetParticleIterator();
   aParticleIterator->reset();
 
   while( (*aParticleIterator)() ){
