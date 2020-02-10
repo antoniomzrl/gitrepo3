@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VER=51f
+VER=610
 
 while getopts "gvV:" opt ; do
     case $opt in
@@ -16,6 +16,7 @@ gms=$(echo $HOME/gamos*${VER})
 export GAMOSREP=${gms##* }
 echo gms: $gms
 echo GAMOSREP: $GAMOSREP
+echo
 
 if [ $GAMOSREP == $HOME/gamos51c ] ; then
     export GAMOS_VER=GAMOS.5.1.0
@@ -33,6 +34,10 @@ elif [ $GAMOSREP == $HOME/gamos520 ] ; then
     export GAMOS_VER=GAMOS.5.2.0
     export GEANT4_VER=10.03.p03.gamos
     export ROOT_VER=5.34.36
+elif [ $GAMOSREP == $HOME/gamos610 ] ; then
+    export GAMOS_VER=GAMOS.6.1.0
+    export GEANT4_VER=10.05.p01.gamos
+    export ROOT_VER=6.18.00
 fi
 
 echo GAMOS_VER $GAMOS_VER

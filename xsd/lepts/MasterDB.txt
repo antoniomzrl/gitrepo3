@@ -49,13 +49,10 @@ end
 
 begin G4_WATER
       inherit G4_WATER_VAPOR
-      e-  IXS  wle-IXS-2017mar.csv
+      IP  10.79
+      e-  IXS    wle-IXS-2017mar.csv
 end
 
-begin G4_WATER_OLD
-      inherit G4_WATER
-      e-  IXS  wle-IXS-2015nov.csv
-end
 
 begin G4_POLYSTYRENE
       inherit G4_WATER_VAPOR
@@ -103,7 +100,7 @@ begin G4_WATER_VAPOR_OLD
       hydrogen  ELDION  wl-ELDION-proton-2016marItp.txt
 end
 
-begin G4_WATER_OLD1
+begin G4_WATER_OLD
       inherit G4_WATER_VAPOR_OLD
       IP  10.79
       e-  IXS    wle-IXS-2015nov.csv
@@ -208,8 +205,7 @@ begin BENZOQUINONE C6H4O2
       IIP  284.0
       IIP2 532.0
       
-      #e-  IXS    benzoq-IXS-2018may.csv
-      e-  IXS    benzoq-IXS-2018jul.csv
+      e-  IXS    benzoq-IXS-2018may.csv
       e-  DXS    benzoq-iDXS.csv
       e-  ELDEXC benzoq-ELDEXC.txt
       e-  ELDION benzoq-ELDION.txt
@@ -250,6 +246,18 @@ begin PIRIDINA
       e-  ELDION piridina-ELDION.txt
       e-  ELDROT piridina-ELDROT.txt
       e-  ELDVIB piridina-ELDVIB.txt
+end
+
+begin PIRIDINA_15eV
+      inherit PIRIDINA
+      e-  IXS    piridina-IXS-100eV.csv
+      e-  DXS    piridina-iDXS-100eV.csv
+      e-  DXSROT piridina-iDXSROT-100eV.csv
+      e-  ELDION piridina-ELDION-90eV.txt
+end
+
+begin PIRIDINA_90eV
+      inherit PIRIDINA_15eV
 end
 ========================================================== Pyridine
 
