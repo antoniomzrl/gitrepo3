@@ -1,0 +1,442 @@
+Master file Data Base:
+
+
+========================================================== Water
+
+
+
+begin G4_WATER_VAPOR
+      inherit G4_WATER_VAPOR_OLD
+      IP  12.61
+      IIP 532.0
+      
+      e-  IXS    wge-IXS-2017mar.csv
+      e-  DXS    we-iDXS.csv
+      e-  DXSMT  we-DXSMT-2017marItp.csv
+      e-  DXSROT we-iDXSROT.txt
+      
+      e-  ELD    water_ELD.txt
+      e-  ELDVIB we-ELDVIB-2017mar.txt
+      e-  ELDROT we-ELDROT-2017mar.txt
+      e-  ELDEXC we-ELDEXC-2017mar.txt
+      e-  ELDIS  we-ELDIS-2017mar.txt
+      e-  ELDII  we-ELDII-2017mar.txt
+      e-  ELDID  we-METID-2017mar.txt
+
+      e+  IXS    wge+IXS-2017may.csv
+      e+  DXS    we+iDXS-2015nov.txt
+      e+  DXSMT  we-DXSMT-2017marItp.csv
+      e+  DXSROT we+iDXSROT-2015nov.txt
+      
+      e+  ELD    water_ELD.txt
+      e+  ELDVIB we-ELDVIB-2017mar.txt
+      e+  ELDROT we-ELDROT-2017mar.txt
+      e+  ELDEXC we-ELDEXC-2017mar.txt
+      e+  ELDIS  we-ELDIS-2017mar.txt
+      e+  ELDII  we-ELDII-2017mar.txt
+      e+  ELDID  we-METID-2017mar.txt
+end
+
+begin G4_WATER_VAPOR2ISO
+      inherit G4_WATER_VAPOR
+      e+  DXS    we+iDXS-2015nov2ISO.txt
+end
+begin G4_WATER_VAPOR3EXC
+      inherit G4_WATER_VAPOR
+      e+  IXS    wge+IXS-2017may3EXC.csv
+end
+
+
+begin G4_WATER
+      inherit G4_WATER_VAPOR
+      e-  IXS  wle-IXS-2017mar.csv
+end
+
+begin G4_WATER_OLD
+      inherit G4_WATER
+      e-  IXS  wle-IXS-2015nov.csv
+end
+
+begin G4_POLYSTYRENE
+      inherit G4_WATER_VAPOR
+end
+
+begin G4_AIR
+      inherit G4_WATER_VAPOR
+end
+
+
+
+
+begin NODI
+      e-  IXS    wle-IXS-2017marNODI.csv
+end
+
+begin G4_WATER_VAPOR_OLD
+      IP  12.61
+      IIP 532.0
+
+      e-  IXS    wge-IXS-2015nov.txt
+      e-  DXS    we-iDXS.csv
+      e-  DXSROT we-iDXSROT.txt
+      e-  ELD    water_ELD.txt
+      e-  ELDVIB water_ELDVIB-2015nov.txt
+      e-  ELDROT water_ELDROT.txt
+
+      e+  IXS    wge+IXS-2015nov.csv
+      e+  DXS    we+iDXS-2015nov.txt
+      e+  DXSROT we+iDXSROT-2015nov.txt
+      e+  ELD    water_ELD.txt
+      e+  ELDVIB water_ELDVIB-2015nov.txt
+      e+  ELDROT water_ELDROT.txt
+
+      proton  IXS     wlp-IXS-2015dic.txt
+      proton  DXS     wl-DXS-proton-2016ene.txt
+      proton  DXSSEC  water_liquid_DXSSEC_proton.txt
+      proton  ELDEXC  water_ELD_proton_excit.txt
+      proton  ELDION  wl-ELDION-proton-2016marItp.txt
+      
+      hydrogen  IXS     wlh-IXS-2015dic.txt
+      hydrogen  DXS     wl-DXS-proton-2016ene.txt
+      hydrogen  DXSSEC  water_liquid_DXSSEC_proton.txt
+      hydrogen  ELDEXC  water_ELD_proton_excit.txt
+      hydrogen  ELDION  wl-ELDION-proton-2016marItp.txt
+end
+
+begin G4_WATER_OLD1
+      inherit G4_WATER_VAPOR_OLD
+      IP  10.79
+      e-  IXS    wle-IXS-2015nov.csv
+      e+  IXS    wle+IXS-2015nov.txt
+end
+
+
+========================================================== Furfural
+
+
+begin USERMAT
+      e-  IXS    usermatIXS.csv
+end
+
+
+
+begin FURFURAL C5H4O2
+      IP   9.22
+      IIP  284.0
+      IIP2 532.0
+      
+      e-  IXS    furfural_IXS.csv
+      e-  DXS    furfural_iDXS.csv
+      e-  DXSROT furfural_iDXSROT.csv
+      e-  ELDEXC furfural_ELDEXC.txt
+      e-  ELDION furfural_ELDION.txt
+      e-  ELDROT furfural_ELDROT.txt
+      e-  ELDVIB furfural_ELDVIB.txt
+end
+
+
+
+begin FURFURAL_DXS10
+      inherit FURFURAL
+      e-  DXS furfural_iDXS10.csv
+end
+
+begin FURFURAL_NOROT
+      inherit FURFURAL
+      e-  IXS furfural_IXS_NOROT.csv
+end
+
+begin FURFURAL_NOROT_DXS10
+      inherit FURFURAL
+      e-  IXS furfural_IXS_NOROT.csv
+      e-  DXS furfural_iDXS10.csv
+end
+
+
+begin FURFURAL_ELAST
+      inherit FURFURAL
+      e-  IXS    furfural_IXS_ELAST.csv
+end
+
+
+begin FURFURAL_PRU
+      inherit FURFURAL
+      e-  DXS    furfural_DXS.csv
+      e-  DXSROT furfural_DXSROT.csv
+end
+
+
+# Internal Eloss 20% greater
+begin FURFURAL_ELD120
+      inherit FURFURAL
+      e-  ELD furfural_ELD120.txt
+end
+
+# No Internal Eloss
+begin FURFURAL_ELD0
+      inherit FURFURAL
+      e-  ELD furfural_ELD0.txt
+end
+
+# Elastic isotropic E<100
+begin FURFURAL_ISO100
+      inherit FURFURAL
+      e-  DXS furfural_iDXSiso100.csv
+end
+
+# Elastic isotropic E<10keV
+begin FURFURAL_ISO
+      inherit FURFURAL
+      e-  DXS furfural_iDXSiso.csv
+end
+
+# Elastic isotropic E<3keV
+begin FURFURAL_ISO3k
+      inherit FURFURAL
+      e-  DXS furfural_iDXSiso3k.csv
+end
+# Elastic isotropic E<5keV
+begin FURFURAL_ISO5k
+      inherit FURFURAL
+      e-  DXS furfural_iDXSiso5k.csv
+end
+
+ 
+========================================================== Benzoq
+begin BENZOQUINONE C6H4O2
+      IP   9.67
+      IIP  284.0
+      IIP2 532.0
+      
+      #e-  IXS    benzoq-IXS-2018may.csv
+      e-  IXS    benzoq-IXS-2018jul.csv
+      e-  DXS    benzoq-iDXS.csv
+      e-  ELDEXC benzoq-ELDEXC.txt
+      e-  ELDION benzoq-ELDION.txt
+      e-  ELDVIB benzoq-ELDVIB.txt
+end
+
+========================================================== Benzoq
+
+========================================================== Pyridine
+begin PYRIDINE C5H5N
+      IP   9.27
+      IIP  284.0
+      IIP2 532.0
+      
+      e-  IXS    pyridine-IXS-2017nov.csv
+      e-  DXS    pyridine-iDXS.csv
+      e-  DXSROT pyridine-iDXSROT.csv
+      e-  ELDEXC pyridine-ELDEXC.txt
+      e-  ELDION pyridine-ELDION.txt
+      e-  ELDROT furfural_ELDROT.txt
+      e-  ELDVIB furfural_ELDVIB.txt
+end
+
+begin PYRIDINE_NOROT
+      inherit PYRIDINE
+      e-  IXS  pyridine-IXS-2017nov-NOROT.csv  
+end
+
+begin PIRIDINA
+      IP   9.27
+      IIP  284.0
+      IIP2 532.0
+      
+      e-  IXS    piridina-IXS-2018may.csv
+      e-  DXS    piridina-iDXS.csv
+      e-  DXSROT piridina-iDXSROT.csv
+      e-  ELDEXC piridina-ELDEXC.txt
+      e-  ELDION piridina-ELDION.txt
+      e-  ELDROT piridina-ELDROT.txt
+      e-  ELDVIB piridina-ELDVIB.txt
+end
+========================================================== Pyridine
+
+begin PYRIMIDINE_GAS
+      IP  9.23
+      IIP 277.0
+
+      e-  DXS    pyrimidine_DXS.txt
+      e-  DXSROT pyrimidine_DXSROT.txt
+      e-  ELD    pyrimidine_ELD2.txt
+      e-  ELDVIB pyrimidine_ELDVIB.txt
+      e-  IXS    pyrimg_IXS.txt
+end
+
+
+begin PYRIMIDINE_LIQ PYRIMIDINE G4_PYRIMIDINE
+      inherit PYRIMIDINE_GAS
+      e-  IXS    pyriml_IXS.txt
+end
+
+
+========================================================== Gold
+
+begin GOLD_GAS
+      IP   9.23
+      IIP  1e9
+
+      e-  DXS  gold_DXS.txt
+      e-  ELD  gold_ELD.txt
+      e-  IXS  gold_IXS.txt
+end
+
+
+begin GOLD_SOLID G4_Au
+      inherit GOLD_GAS
+      e- IXS  gold_solid_IXS.txt
+end
+
+
+begin G4_Pt
+      inherit G4_Au
+end
+
+
+
+========================================================== OLD
+
+begin PRU
+      inherit WATER_GAS
+
+      e-  ELD    prueld.txt
+      e-  ELDVIB prueld.txt
+      e+  ELD    prueld.txt
+      e+  ELDVIB prueld.txt
+      proton ELD    prueld.txt
+      proton ELDVIB prueld.txt
+      hydrogen  ELD    prueld.txt
+      hydrogen  ELDVIB prueld.txt
+
+      e-  DXS    prudxs.csv
+      e-  DXSROT prudxs.csv
+      #generator: pruspectr.txt
+end
+
+
+begin PYRIMIDINE_OLD
+      IP  9.23
+      IIP 277.0
+
+      e-  DXS    pyrimidine_DXS.txt
+      e-  DXSROT pyrimidine_DXS.txt
+      e-  ELD    pyrimidine_ELD2.txt
+      e-  ELDVIB pyrimidine_ELDVIBold.txt
+      e-  IXS    pyrimidinepru_liquid_IXS.txt
+end
+
+begin PYRIMIDINE_OLD1
+      IP  9.23
+      IIP 277.0
+
+      e-  DXS    pyrimidine_DXS.txt
+      e-  DXSROT pyrimidine_DXS.txt
+      e-  ELD    pyrimidine_ELD2.txt
+      e-  ELDVIB pyrimidine_ELDVIBold.txt
+      e-  IXS    pyrimidine_liquid_IXS.txt
+end
+
+
+begin WATER_GAS_OLDxx
+      IP  12.61
+      IIP 532.0
+
+      e-  DXS    we-iDXS.txt
+      e-  DXSROT we-iDXSROT.txt
+      e-  ELD    water_ELD.txt
+      e-  ELDVIB water_ELDVIB-2015nov.txt
+      e-  IXS    wge-IXS-2015nov.txt
+
+      e+  DXS    we+iDXS-2015nov.txt
+      e+  DXSROT we+iDXSROT-2015nov.txt
+      e+  ELD    water_ELD.txt
+      e+  ELDVIB water_ELDVIB-2015nov.txt
+      e+  IXS    wge+IXS-2015nov.txt
+
+      proton  IXS     wlp_IXS.txt
+      proton  DXS     water_liquid_DXS_proton.txt
+      proton  DXSSEC  water_liquid_DXSSEC_proton.txt
+      proton  ELDEXC  water_ELD_proton_excit.txt
+      proton  ELDION  water_ELD_proton_ionis.txt
+
+      hydrogen  IXS     wlh_IXS.txt
+      hydrogen  DXS     water_liquid_DXS_proton.txt
+      hydrogen  ELDEXC  water_ELD_proton_excit.txt
+      hydrogen  ELDION  water_ELD_proton_ionis.txt
+end
+
+
+begin WATER_LIQ_OLDxx WATER_OLDxx G4_WATER_OLDxx
+      inherit WATER_GAS_OLD
+      IP  10.79
+      e-  IXS    wle-IXS-2015nov.txt
+      e+  IXS    wle+IXS-2015nov.txt
+end
+
+
+begin WATER_GAS_OLD2
+      IP  12.61
+      IIP 532.0
+
+      e-  DXS    we-DXS.txt
+      e-  DXSROT we-DXSROT.txt
+      e-  ELD    water_ELD.txt
+      e-  ELDVIB water_ELDVIB.txt
+      e-  IXS    wge-IXS.txt
+      e-  RMT    water_RMT.txt
+
+      e+  DXS    we+DXS.txt
+      e+  DXSROT we+DXSROT.txt
+      e+  ELD    water_ELD.txt
+      e+  ELDVIB water_ELDVIB.txt
+      e+  IXS    wge+IXS.txt
+      e+  RMT    water_RMT.txt
+end
+
+begin WATER_LIQ_OLD2 WATER_OLD2 G4_WATER_OLD2
+      IP  10.79
+      IIP 532.0
+
+      e-  DXS    we-DXS.txt
+      e-  DXSROT we-DXSROT.txt
+      e-  ELD    water_ELD.txt
+      e-  ELDVIB water_ELDVIB.txt
+      e-  IXS    wle-IXS.txt
+      e-  RMT    water_RMT.txt
+      
+      e+  DXS    we+DXS.txt
+      e+  DXSROT we+DXSROT.txt
+      e+  ELD    water_ELD.txt
+      e+  ELDVIB water_ELDVIB.txt
+      e+  IXS    wle+IXS.txt
+      e+  RMT    water_RMT.txt
+
+      proton  IXS     wlp_IXS.txt
+      proton  DXS     water_liquid_DXS_proton.txt
+      proton  DXSSEC  water_liquid_DXSSEC_proton.txt
+      proton  ELDEXC  water_ELD_proton_excit.txt
+      proton  ELDION  water_ELD_proton_ionis.txt
+
+      hydrogen  IXS     wlh_IXS.txt
+      hydrogen  DXS     water_liquid_DXS_proton.txt
+      hydrogen  ELDEXC  water_ELD_proton_excit.txt
+      hydrogen  ELDION  water_ELD_proton_ionis.txt
+end
+
+
+begin WATER_GAS_OLD1
+      IP  12.61
+      IIP 532.0
+
+      e-  DXS  water_DXS.txt
+      e-  ELD  water_ELD.txt
+      e-  IXS  water_IXS.txt
+      e-  RMT  water_RMT.txt
+
+      e+  DXS  water_DXS.txt
+      e+  ELD  water_ELD.txt
+      e+  IXS  water_IXS_e+.txt
+      e+  RMT  water_RMT.txt
+end
+
