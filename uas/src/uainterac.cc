@@ -1,7 +1,7 @@
 #include "uactions.hh"
 
 TH1D *hgNi,  *hgEdi, *hgEli, *hgEmi, *hgEmil, *hgElo;
-TH1D *hgAngE, *hgAngEdeg, *hgAngR, *hgAngI, *hgAngIo;
+TH1D *hgAngE, *hgAngR, *hgAngI, *hgAngIo;
 
 int NoEvents=0, NoCols=0, NoColsEl=0, NoColsIo=0;
 double Edepo=0, Elo=0, Eprim=0;
@@ -35,15 +35,14 @@ void UAInteraction::BeginOfRunAction( const G4Run* ) {
   proclabel[8] = "xxx8";
   proclabel[9] = "xxx9";
   
-  hgNi   = new TH1D("Nint",  "Number of ints",      3, 0, 3);
-  hgEdi  = new TH1D("Edint", "Edep(eV) /int type",  3, 0, 3);
-  hgEli  = new TH1D("Elint", "Eloss(eV) /int type",  3, 0, 3);
-  hgElo  = new TH1D("Eloss", "Eloss(eV)",           2000, 0, 200);
-  hgAngE = new TH1D("AngElastic", "Ang Disp (deg)", 2000, -10, 190);
-  hgAngEdeg = new TH1D("AngElasticDeg", "Ang Disp (deg)", 200, -10, 190);
-  hgAngR  = new TH1D("AngRotat",   "Ang Disp (deg)", 2000, -10, 190);
-  hgAngI  = new TH1D("AngInelast", "Ang Disp (deg)", 2000, -10, 190);
-  hgAngIo = new TH1D("AngIoni", "Ang Disp (deg)", 2000, -10, 190);
+  hgNi    = new TH1D("Nint",       "Number of ints",      3, 0, 3);
+  hgEdi   = new TH1D("Edint",      "Edep(eV) /int type",  3, 0, 3);
+  hgEli   = new TH1D("Elint",      "Eloss(eV) /int type",  3, 0, 3);
+  hgElo   = new TH1D("Eloss",      "Eloss(eV)",           2000, 0, 200);
+  hgAngE  = new TH1D("AngElastic", "Ang Disp (deg)", 200, -10, 190);
+  hgAngR  = new TH1D("AngRotat",   "Ang Disp (deg)", 200, -10, 190);
+  hgAngI  = new TH1D("AngInelast", "Ang Disp (deg)", 200, -10, 190);
+  hgAngIo = new TH1D("AngIoni",   "Ang Disp (deg)", 200, -10, 190);
 
   for(int i=0; i<100; i++)
     for(int j=0; j<10; j++)
@@ -51,7 +50,7 @@ void UAInteraction::BeginOfRunAction( const G4Run* ) {
 }
 
 void UAInteraction::EndOfRunAction( const G4Run* ) {
-  cout << "UAInteraction EndOfRunActnion" << endl;
+  cout << "UAInteraction EndOfRunActnion xxxxx" << endl;
 
   //hgEmi = new TH1D("Emint", "Edep(eV) average per int type",20, 0, 20);
   //hgEmi = hcopy(* hgEdi);
@@ -157,9 +156,8 @@ void UAInteraction::EndOfRunAction( const G4Run* ) {
   hgEli->Write();
   hgEmi->Write();
   hgEmil->Write();
-  hgAngE->Write();
   hgElo->Write();
-  hgAngEdeg->Write();
+  hgAngE->Write();
   hgAngR->Write();
   hgAngI->Write();
   hgAngIo->Write();
@@ -244,7 +242,6 @@ void UAInteraction::UserSteppingAction(const G4Step* aStep) {
   
   if( procName.find("Elastic") != std::string::npos) {
     hgAngE->Fill(ang);
-    hgAngEdeg->Fill(ang);
     NoColsEl++;
   }
   else if( procName.find("Ionis") != std::string::npos) {

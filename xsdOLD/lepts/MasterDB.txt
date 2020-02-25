@@ -49,13 +49,10 @@ end
 
 begin G4_WATER
       inherit G4_WATER_VAPOR
+      IP  10.79
       e-  IXS  wle-IXS-2017mar.csv
 end
 
-begin G4_WATER_OLD
-      inherit G4_WATER
-      e-  IXS  wle-IXS-2015nov.csv
-end
 
 begin G4_POLYSTYRENE
       inherit G4_WATER_VAPOR
@@ -103,7 +100,7 @@ begin G4_WATER_VAPOR_OLD
       hydrogen  ELDION  wl-ELDION-proton-2016marItp.txt
 end
 
-begin G4_WATER_OLD1
+begin G4_WATER_OLD
       inherit G4_WATER_VAPOR_OLD
       IP  10.79
       e-  IXS    wle-IXS-2015nov.csv

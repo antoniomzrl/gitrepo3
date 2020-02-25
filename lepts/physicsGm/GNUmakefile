@@ -14,7 +14,8 @@ MYFLAGS =  #-Ofast -w #-Wunused-variable #-w
 CXXFLAGS += $(MYFLAGS)
 CPPFLAGS += -I../processes/include \
             -I../models/include \
-            -I../physics/include
+            -I../physics/include \
+            -I$(GAMOSINSTALL)/source/GamosCore/GamosPhysics/PhysicsList/include
 EXTRALIBS += -lGamosCore_GamosUtils \
              -lGamosCore_GamosPhysics_PhysicsList \
              -llepts-phl -llepts-models -llepts-processes
