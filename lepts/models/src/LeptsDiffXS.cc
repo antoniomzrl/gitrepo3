@@ -53,7 +53,7 @@ void LeptsDiffXS::readDXS( ) {
   replace(line.begin(), line.end(), '#', ' '); // comment
   if( sscanf(line.c_str(), "%d %d %s", &naa, &nee, DXSTypeName) == 0) cout << "readerror\n";
 
-  NL = 11;
+  NL = 51;
   NE = nee +1;
   NA = naa +1;
 
@@ -94,7 +94,7 @@ void LeptsDiffXS::readDXS( ) {
 void LeptsDiffXS::BuildCDXS() {
   if(NE ==0) return;
 
-  for(int l=0; l<11; l++)
+  for(int l=0; l<NL; l++)
     for(G4int e=0; e<NE; e++)
       for(G4int a=0; a<(NA-1); a++)
     	F[idx(l,e,a)]=0.0;
@@ -102,7 +102,7 @@ void LeptsDiffXS::BuildCDXS() {
   // l=10*El/E,  El/E=l/10
   // f(El,E,a) -> f(El,E,a)^(1-El/E)
 
-  for(int l=0; l<11; l++) {
+  for(int l=0; l<NL; l++) {
 
     for(G4int a=0;a<(NA-1);a++)     // e=0
       F[idx(l,0,a)] = f[idx(0,a)];
@@ -112,7 +112,7 @@ void LeptsDiffXS::BuildCDXS() {
       double sum=0.0;
       for (G4int a=0; a<(NA-1); a++){
 	double hi = f[idx(0,a+1)] -f[idx(0,a)];
-	sum += hi * pow(f[idx(e,a)], 1-l*0.1);
+	sum += hi * pow(f[idx(e,a)], 1-l/double(NL-1));
 	F[idx(l,e,a+1)] = sum;
       }
     }
@@ -127,7 +127,7 @@ void LeptsDiffXS::NormalizeCDXS() {
   // Normalize:  1/area
   for(int e=1; e<NE; e++) {
     for (int a=0; a<(NA-1); a++) {
-      for(int l=0; l<11; l++) {
+      for(int l=0; l<NL; l++) {
 	F[idx(l,e,a)] /= F[idx(l,e,NA-2)];//F[l][e][a] /= F[l][e][na-1];
 	f[idx(e,a)] /= F[idx(0,e,NA-2)];
 	//if(f[idx(e,a)] < 1.0e-8 ) f[idx(e,a)] = 1.0e-8;
@@ -136,7 +136,7 @@ void LeptsDiffXS::NormalizeCDXS() {
   }
 
   //Inverse G(eta) -> F(ang)
-  for( int l=0; l<11; l++) {
+  for( int l=0; l<NL; l++) {
     for( int e=1; e<NE; e++) {
       for( int i=0; i<=1000; i++) {
 	double r = i*0.001;
@@ -229,7 +229,7 @@ inline double LeptsDiffXS::ff(int e, int a, double E) {
 
 G4double LeptsDiffXS::SampleAngle(G4double Energy, G4double El) {
   // loc Energy lost bin:
-  int l=10*El/Energy;
+  int l=(NL-1)*El/Energy;
 
   // locate Energy bin
   int a=1, b=NE-1;

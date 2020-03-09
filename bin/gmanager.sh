@@ -54,7 +54,8 @@ CMDS="help  get  untar  cleantar
       compilegeant4 cleangeant4
       compilegamos  cleangamos
       compiledevel  cleandevel  syncdevel   eulerdevel
-      compilelepts  cleanlepts  updateeuler updateceta
+      compilelepts  cleanlepts
+      updateeuler   updateceta  updatexula
       compileuas    cleanuas"
 
 help() {
@@ -232,6 +233,15 @@ updateeuler() {
 
 updateceta() {
     update amunoz@login-hpc.ceta-ciemat.es
+}
+
+updatexula() {
+    i=$HOME/lepts/
+    o=xula01:lepts/
+    SSH="sshpass -f $HOME/.ssh/pass ssh -l u3878"
+    EXC="$HOME/lepts/.gitignore"
+    rsync -vlat --rsh="$SSH" --exclude='.git' --exclude-from=$EXC $i $o
+    $SSH xula01 'source lepts/bin/conflepts.sh; gmanager.sh compilelepts compileuas'
 }
 
 #euler:

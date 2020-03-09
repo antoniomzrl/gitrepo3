@@ -11,6 +11,10 @@ WRL=":MATE vacuum 1 1*g/mole 0*g/cm3
 PHY="/gamos/physicsList GmLeptsPhysics /run/initialize"
 PHYsmf="/gamos/physicsList GmLeptsSMFPhysics /run/initialize"
 
+EULER="--ppn 8  --jpn 8  --host euler"
+DIRAC="--ppn 12 --jpn 12 --host dirac"
+CETA="--ppn 8  --jpn 8  --host amunoz@193.144.240.176"
+
 mTorr=atmosphere/760000
 Avogadro=6.02214179e+23/mole
 k_Boltzmann=8.617343e-11*MeV/kelvin
@@ -123,7 +127,7 @@ elif [ $1 == "dxs" ] ; then
            /gamos/userAction UAExit"
 
     #RUN="$(vis) /run/beamOn 100"
-    RUN="/run/beamOn 1000000"
+    RUN="/run/beamOn 10000000"
 
     jgamos --dir oodxs $WRL $SLAB $PHY    $UAS $HEXIT $GEN $RUN &
     jgamos --dir oosmf $WRL $SLAB $PHYsmf $UAS $HEXIT $GEN $RUN &
