@@ -265,7 +265,7 @@ elif [ $1 == "visw" ] ; then
     #jgamos --dir oovisw $WRL $CUBE $PHYl $GENph5 $KEP $UAS /run/beamOn 20000
     #jgamos --dir oovisw $WRL $CUBE $PHYl $GENVAR $KEP $UAS /run/beamOn 20000
     #jgamos --dir oovisw $WRL $CUBE $PHYl $GENVDR $KEP $UAS /run/beamOn 20000
-    jgamos --dir oovisw $WRL $MINICUBE $PHYl $MINIGENVDR $KEP3 $UAS /run/beamOn 50000
+    jgamos --dir oovisw $WRL $MINICUBE $PHYl $MINIGENVDR $KEP3 $UAS /run/beamOn 5000
 
 
     
