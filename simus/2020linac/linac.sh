@@ -134,15 +134,35 @@ if [ $1 == "gener" ] ; then
     jgamos --dir oog2 $WRL $PHYl $UAS $GENVAR $RUN &
     wait
 
+    
+elif [ $1 == "visgeom" ] ; then
+      i=2
+      FLASK=":VOLU   cover  BOX $COVER_X $COVER_Y $COVER_Z $POLYCARBONATE
+        :PLACE  cover  1 cube rm0 0 0 ${targetpoints[i]}+$CUBE_Z+$FLASK_Z-2*$TARGET_Z
+        :COLOUR cover  1 0 0
+        :VOLU   flask  BOX $FLASK_X  $FLASK_Y $FLASK_Z*10 $WAT
+        :PLACE  flask  1 cover rm0 0 0 0
+        :COLOUR flask  0 1 0
+        :VOLU   theTarget  BOX $TARGET_X $TARGET_Y $TARGET_Z $WAT
+        :PLACE  theTarget  1 flask rm0 0 0 -$FLASK_Z+$TARGET_Z
+        :COLOUR theTarget  0 0 1
+        :CHECK_OVERLAPS cover TRUE
+        :CHECK_OVERLAPS flask TRUE
+        :CHECK_OVERLAPS theTarget TRUE"
+
+
+	KILL="/gamos/setParam UAClock:TimeLimit 3600*20 
+              /gamos/userAction UAClock
+              /gamos/userAction UAVerbose"
+	UAS="/gamos/userAction GmCountProcessesUA"
+	RUN="$VIS /run/beamOn 5"
+	jgamos --dir oovisgeom $WRL $CUBE $FLASK $PHYl $GENVAR $TGV $SCOR $UAS $KILL $RUN
+	    
 
 elif [ $1 == "simuflask" ] ; then
 
-  for (( i=0; i<${#targetpoints[@]}; i++ )) ; do
-  #for (( i=0; i<2; i++ )) ; do
-  
-  DIR_PREF=oo_f_${ENER}_pos${i}
-  
-  FLASK=":VOLU   cover  BOX $COVER_X $COVER_Y $COVER_Z $POLYCARBONATE
+    for (( i=0; i<${#targetpoints[@]}; i++ )) ; do
+	FLASK=":VOLU   cover  BOX $COVER_X $COVER_Y $COVER_Z $POLYCARBONATE
 		    :PLACE  cover  1 cube rm0 0 0 ${targetpoints[i]}+$CUBE_Z+$FLASK_Z-2*$TARGET_Z
         :COLOUR cover  1 0 0
         :VOLU   flask  BOX $FLASK_X  $FLASK_Y $FLASK_Z $WAT
@@ -178,6 +198,9 @@ elif [ $1 == "simuflask" ] ; then
   
   jgamos  $JOB $WRL $CUBE $FLASK $PHYl $GENVAR $TGV $SCOR $UAS $KILL $RUN
   #jgamos  $JOB $WRL $CUBE $FLASK $PHYl $GENVAR   $MFDT   $TGV $SCOR $UAS $KILL $RUN
+ 
+
+
  
  #Generate sum root script
 cat <<- EOF > ${DIR_PREF}.sh
