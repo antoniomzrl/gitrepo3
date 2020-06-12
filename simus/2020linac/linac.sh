@@ -57,6 +57,14 @@ GENVAR="#/gamos/setParam RTGeneratorPhaseSpace_EGS:MaxNReuse 6
         /gamos/setParam  RTGeneratorPhaseSpace_EGS:FileName $EGS_FILENAME
         /gamos/generator RTGeneratorPhaseSpace_EGS"
 
+GENMONO=":VOLU   gbox ORB 1*mm vacuum
+     	 :PLACE  gbox 1 world rmz -5*mm 0 0
+     	 :COLOUR gbox 1 0 0
+     	 /gamos/generator GmGenerator
+     	 /gamos/generator/addSingleParticleSource gn e- 90*eV
+     	 /gamos/generator/positionDist  gn GmGenerDistPositionInG4Volumes gbox
+     	 /gamos/generator/directionDist gn GmGenerDistDirectionConst 1 0 0"
+
 # Multifunctional detector
 MFDT="/gamos/scoring/createMFDetector theDet       theTarget
       /gamos/scoring/addScorer2MFD    theEnergyDep GmG4PSEnergyDeposit theDet
@@ -140,7 +148,7 @@ elif [ $1 == "visgeom" ] ; then
       FLASK=":VOLU   cover  BOX $COVER_X $COVER_Y $COVER_Z $POLYCARBONATE
         :PLACE  cover  1 cube rm0 0 0 ${targetpoints[i]}+$CUBE_Z+$FLASK_Z-2*$TARGET_Z
         :COLOUR cover  1 0 0
-        :VOLU   flask  BOX $FLASK_X  $FLASK_Y $FLASK_Z*10 $WAT
+        :VOLU   flask  BOX $FLASK_X  $FLASK_Y $FLASK_Z $WAT
         :PLACE  flask  1 cover rm0 0 0 0
         :COLOUR flask  0 1 0
         :VOLU   theTarget  BOX $TARGET_X $TARGET_Y $TARGET_Z $WAT
@@ -149,14 +157,13 @@ elif [ $1 == "visgeom" ] ; then
         :CHECK_OVERLAPS cover TRUE
         :CHECK_OVERLAPS flask TRUE
         :CHECK_OVERLAPS theTarget TRUE"
-
-
+      
 	KILL="/gamos/setParam UAClock:TimeLimit 3600*20 
               /gamos/userAction UAClock
               /gamos/userAction UAVerbose"
 	UAS="/gamos/userAction GmCountProcessesUA"
-	RUN="$VIS /run/beamOn 5"
-	jgamos --dir oovisgeom $WRL $CUBE $FLASK $PHYl $GENVAR $TGV $SCOR $UAS $KILL $RUN
+	RUN="$VIS /run/beamOn 50"
+	jgamos --dir oovisgeom $WRL $CUBE $PHYl $GENVAR $TGV $SCOR $UAS $KILL $RUN
 	    
 
 elif [ $1 == "simuflask" ] ; then
