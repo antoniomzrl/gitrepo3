@@ -158,16 +158,13 @@ elif [ $1 == "visgeom" ] ; then
         :CHECK_OVERLAPS flask TRUE
         :CHECK_OVERLAPS theTarget TRUE"
       
-	KILL="/gamos/setParam UAClock:TimeLimit 3600*20 
-              /gamos/userAction UAClock
-              /gamos/userAction UAVerbose"
-	UAS="/gamos/userAction GmCountProcessesUA"
+	UAS="/gamos/userAction GmCountProcessesUA
+             /gamos/userAction UAClock
+             #/gamos/userAction UAVerbose"
 
-	RUN="$VIS /run/beamOn 50"
-	jgamos --dir oog $WRL       $PHYl $GENVAR $UAS $KILL $RUN
-	RUN="/run/beamOn 1000"
-	##jgamos --dir oov $WRL $CUBE $PHYl $GENVAR $UAS $KILL $RUN
-
+	jgamos --dir oog $WRL       $PHYl $GENVAR $UAS $VIS /run/beamOn 50   &
+	jgamos --dir oov $WRL $CUBE $PHYl $GENVAR $UAS      /run/beamOn 1000 &
+	wait
 
 elif [ $1 == "simuflask" ] ; then
 
