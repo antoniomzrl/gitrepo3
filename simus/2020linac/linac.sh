@@ -203,7 +203,7 @@ elif [ $1 == "simuflask" ] ; then
 	s=2040
   JOB="$XULA --jobs 40 --btime 20:05:00 --seed $s --SEED $s --dir ${DIR_PREF}"
   
-  jgamos  $JOB $WRL $CUBE $FLASK $PHYl $GENVAR $TGV $SCOR $UAS $KILL $RUN
+  jgamos  $JOB $WRL $CUBE $FLASK $PHYl $GENVAR $UAS $KILL $RUN
   #jgamos  $JOB $WRL $CUBE $FLASK $PHYl $GENVAR   $MFDT   $TGV $SCOR $UAS $KILL $RUN
  
 
