@@ -166,7 +166,7 @@ elif [ $1 == "visgeom" ] ; then
 	RUN="$VIS /run/beamOn 50"
 	jgamos --dir oog $WRL       $PHYl $GENVAR $UAS $KILL $RUN
 	RUN="/run/beamOn 1000"
-	#jgamos --dir oov $WRL $CUBE $PHYl $GENVAR $UAS $KILL $RUN
+	##jgamos --dir oov $WRL $CUBE $PHYl $GENVAR $UAS $KILL $RUN
 
 
 elif [ $1 == "simuflask" ] ; then
