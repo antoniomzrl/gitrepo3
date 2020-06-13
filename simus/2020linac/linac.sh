@@ -162,9 +162,12 @@ elif [ $1 == "visgeom" ] ; then
               /gamos/userAction UAClock
               /gamos/userAction UAVerbose"
 	UAS="/gamos/userAction GmCountProcessesUA"
+
 	RUN="$VIS /run/beamOn 50"
-	jgamos --dir oovisgeom $WRL $CUBE $PHYl $GENVAR $TGV $SCOR $UAS $KILL $RUN
-	    
+	jgamos --dir oog $WRL       $PHYl $GENVAR $UAS $KILL $RUN
+	RUN="/run/beamOn 1000"
+	#jgamos --dir oov $WRL $CUBE $PHYl $GENVAR $UAS $KILL $RUN
+
 
 elif [ $1 == "simuflask" ] ; then
 
