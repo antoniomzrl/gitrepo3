@@ -22,7 +22,8 @@ void Draw(void) {
   glClearColor(d->Background, d->Background, d->Background, 0.0);
 
   if( d->sw.w < 1.0) BestSpatialUnit(d);
-  
+
+  cout << "LineWidth: " << d->LineWidth << endl;
   //glEnable(GL_LINE_SMOOTH);
   glLineWidth(d->LineWidth);
   

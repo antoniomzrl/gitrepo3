@@ -144,28 +144,30 @@ if [ $1 == "gener" ] ; then
 
     
 elif [ $1 == "visgeom" ] ; then
-      i=2
-      FLASK=":VOLU   cover  BOX $COVER_X $COVER_Y $COVER_Z $POLYCARBONATE
-        :PLACE  cover  1 cube rm0 0 0 ${targetpoints[i]}+$CUBE_Z+$FLASK_Z-2*$TARGET_Z
-        :COLOUR cover  1 0 0
-        :VOLU   flask  BOX $FLASK_X  $FLASK_Y $FLASK_Z $WAT
-        :PLACE  flask  1 cover rm0 0 0 0
-        :COLOUR flask  0 1 0
-        :VOLU   theTarget  BOX $TARGET_X $TARGET_Y $TARGET_Z $WAT
-        :PLACE  theTarget  1 flask rm0 0 0 -$FLASK_Z+$TARGET_Z
-        :COLOUR theTarget  0 0 1
-        :CHECK_OVERLAPS cover TRUE
-        :CHECK_OVERLAPS flask TRUE
-        :CHECK_OVERLAPS theTarget TRUE"
-      
-	UAS="/gamos/userAction GmCountProcessesUA
-             /gamos/userAction UAClock
-             #/gamos/userAction UAVerbose"
+    
+    UAS="/gamos/userAction UAClock
+         /gamos/userAction UAWIF
+         /gamos/userAction GmCountProcessesUA
+         #/gamos/userAction UAVerbose"
+    
+    #jgamos --dir oog $WRL       $PHYl $GENVAR $UAS $VIS /run/beamOn 100
+    #view3dscene oog/g4_01.wrl
 
-	jgamos --dir oog $WRL       $PHYl $GENVAR $UAS $VIS /run/beamOn 50   &
-	jgamos --dir oov $WRL $CUBE $PHYl $GENVAR $UAS      /run/beamOn 1000 &
-	wait
+    KEP="/gamos/physics/userLimits/setMinEKin ulie cube e- 0.1*MeV
+         /gamos/physics/userLimits/setMinEKin ulip cube e+ 0.1*MeV
+ 	 /gamos/physics/userLimits/print"
+    
+    ISP="/gamos/setParam UAInteractionSp:Title E vs Depth
+         /gamos/setParam UAInteractionSp:x 100000 0 100*mm
+         /gamos/setParam UAInteractionSp:Width 0.5*m
+         /gamos/userAction UAInteractionSp"
 
+    RUN="/run/beamOn 1000"
+    jgamos --dir oov $WRL $CUBE $PHYl $GENVAR $UAS $KEP $RUN
+    #cd oov ; hgm.sh rebin hgsp_oov_1_1.root 1000
+
+
+    
 elif [ $1 == "simuflask" ] ; then
 
     for (( i=0; i<${#targetpoints[@]}; i++ )) ; do
@@ -203,7 +205,7 @@ elif [ $1 == "simuflask" ] ; then
 	s=2040
   JOB="$XULA --jobs 40 --btime 20:05:00 --seed $s --SEED $s --dir ${DIR_PREF}"
   
-  jgamos  $JOB $WRL $CUBE $FLASK $PHYl $GENVAR $UAS $KILL $RUN
+  jgamos  $JOB $WRL $CUBE $FLASK $PHYl $GENVAR $TGV $SCOR $UAS $KILL $RUN
   #jgamos  $JOB $WRL $CUBE $FLASK $PHYl $GENVAR   $MFDT   $TGV $SCOR $UAS $KILL $RUN
  
 

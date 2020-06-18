@@ -14,7 +14,7 @@ DataObject::DataObject() {
   CanvasPoint.z = 1.0;
 
   Background = 0;
-
+  LineWidth  = 1;
   Light    = vec4(0.4, 1.0, 1.0, 0.8);
   LightPos = vec3(-3, 3, 3);
   greenAttenuation = 0.25;

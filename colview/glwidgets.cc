@@ -25,14 +25,25 @@ GdkRectangle * ScreenDimensions(GtkWidget * widget) {
   //wHeight = gdk_screen_height();
 
   GdkDisplay * dpy = gtk_widget_get_display(widget);
+  //GdkDisplay * dpy = gdk_display_get_default();
+  
   //GdkWindow  * win = gtk_widget_get_window(widget);
   //GdkMonitor * mon = gdk_display_get_monitor_at_window(dpy, win);
   GdkMonitor * mon = gdk_display_get_primary_monitor(dpy);
   GdkRectangle * sc = new GdkRectangle();
   gdk_monitor_get_geometry(mon, sc);
 
-  if( sc->width == 0) sc->width = 400;
-  if( sc->height == 0) sc->height = 300;
+  // Wayland
+  if( sc->width == 0 || sc->height == 0) {
+    GdkScreen * screen = gdk_screen_get_default();
+    guint monitor = gdk_screen_get_primary_monitor(screen);
+    gdk_screen_get_monitor_geometry(screen, monitor, sc);
+    cout << "Wayland Size: " << sc->width << " x " << sc->height << endl;
+  }
+
+  
+  if( sc->width == 0 ) sc->width  = 800;
+  if( sc->height == 0) sc->height = 600;
   
   double fac = (double)sc->width/sc->height;
   cout << "Screen size: " << sc->width << " x " << sc->height;
