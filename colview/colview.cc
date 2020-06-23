@@ -7,7 +7,7 @@ DataObject * d;
 bool JoinWindows = false;
 GtkWidget *glw, *btw;
 float verboseFlag=0, glslVersionFlag=-1.0;
-
+int WidgetSize=0;
 
 void Init(int argc, char **argv) {
   string TpiFn = string("tpi_all.txt");
@@ -25,6 +25,9 @@ void Init(int argc, char **argv) {
     }
     if( (string)argv[i]==(string)"-jw") {
       JoinWindows = true;
+    }
+    if( (string)argv[i]==(string)"-wsize") {
+      WidgetSize = atoi( argv[i+1] );
     }
   }
 
@@ -107,10 +110,15 @@ int main(int argc, char **argv) {
   glw = gtk_gl_area_new();
   InitGlWidget(glw);
 
-  GdkRectangle * screenSz = ScreenDimensions(tw);
-
-  d->PlotSize = WindowDimensions(screenSz);  
-  d->FontSize = d->PlotSize.y * 13.0/1000.0;
+  if( WidgetSize == 0) {
+    GdkRectangle * screenSz = ScreenDimensions(tw);
+    d->PlotSize = WindowDimensions(screenSz);
+    d->FontSize = d->PlotSize.y * 13.0/1000.0;
+  }
+  else {
+    d->PlotSize.x = WidgetSize;
+    d->PlotSize.y = WidgetSize *3/4;
+  }
 
   btw = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
   InitControlWidget(btw);
@@ -134,7 +142,7 @@ int main(int argc, char **argv) {
     gtk_widget_show_all(tw2);
   }
 
-  gtk_window_move(GTK_WINDOW(tw), screenSz->width-d->PlotSize.x-3, 3);
+  //gtk_window_move(GTK_WINDOW(tw), screenSz->width-d->PlotSize.x-3, 3);
   gtk_widget_show_all(tw);
 
 

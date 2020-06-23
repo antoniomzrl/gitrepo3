@@ -5,6 +5,8 @@ extern GtkWidget * glw;
 
 
 void Draw(void) {
+  
+  printDbg(3, "Draw\n", "RED");
 
   double T1 = myclock();
   static double T0;
@@ -23,7 +25,6 @@ void Draw(void) {
 
   if( d->sw.w < 1.0) BestSpatialUnit(d);
 
-  cout << "LineWidth: " << d->LineWidth << endl;
   //glEnable(GL_LINE_SMOOTH);
   glLineWidth(d->LineWidth);
   
