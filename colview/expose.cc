@@ -4,7 +4,7 @@
 void Invalidate(GtkWidget * w) {
   //cout << endl << "Invalidate " << gtk_widget_get_name(w) << endl;
   string text = "Invalidate " + (string) gtk_widget_get_name(w) + "\n";
-  printDbg(3, text, "RED");
+  printDbg(0, text, "RED");
 
   gtk_widget_queue_draw(GTK_WIDGET(w) );
 }
@@ -33,7 +33,7 @@ void Invalidate(GtkWidget * w) {
 
 gboolean configure(GtkGLArea *area, GdkEventConfigure *event, gpointer user_data) {
  
-  printDbg(3, "configure\n", "RED");
+  printDbg(0, "configure\n", "RED");
 
   // We need to make the context current if we want to
   // call GL API
@@ -51,7 +51,7 @@ gboolean configure(GtkGLArea *area, GdkEventConfigure *event, gpointer user_data
 
 gboolean expose(GtkGLArea *area, GdkEventExpose *event, gpointer user_data) {
 
-  printDbg(3, "expose\n", "RED");
+  printDbg(0, "expose\n", "RED");
 
   if(event->type ==GDK_NOTHING          ) cout << "NOTHING          " << endl;
   if(event->type ==GDK_DELETE           ) cout << "DELETE           " << endl;

@@ -60,27 +60,29 @@ void InitTopWidget(GtkWidget * twg, const char * title) {
 
   gtk_window_set_title(GTK_WINDOW(twg), title);
 
-  g_signal_connect_swapped(twg, "destroy", G_CALLBACK(gtk_main_quit), NULL);
-  g_signal_connect(twg, "key_press_event", G_CALLBACK(keyPress),  NULL);
+  g_signal_connect_swapped(twg, "destroy",   G_CALLBACK(gtk_main_quit), NULL);
+  g_signal_connect(twg, "key_press_event",   G_CALLBACK(keyPress),      NULL);
+  g_signal_connect(twg, "key_release_event", G_CALLBACK(keyRelease),    NULL);
   //gtk_window_set_gravity(GTK_WINDOW(twg), GDK_GRAVITY_NORTH_WEAST);
 }
 
 
-
-void InitGlWidget(GtkWidget * gla) {
+GtkWidget * GetGlWidget() {
+  GtkWidget * gla = gtk_gl_area_new();
 
   gtk_gl_area_set_has_depth_buffer(GTK_GL_AREA(gla), true); //z-buffer
   //gtk_gl_area_set_has_stencil_buffer(GTK_GL_AREA(gla), true);
   
-  gtk_widget_set_events(gla,
-   			GDK_EXPOSURE_MASK |
+  gtk_widget_set_events(gla, GDK_EXPOSURE_MASK |
 			GDK_BUTTON_PRESS_MASK |
    			GDK_BUTTON_RELEASE_MASK |
    			GDK_POINTER_MOTION_MASK |
-   			GDK_POINTER_MOTION_HINT_MASK |
+   			//GDK_POINTER_MOTION_HINT_MASK |
    			GDK_CONTROL_MASK |
    			GDK_KEY_PRESS_MASK |
-   			GDK_SCROLL_MASK );
+			GDK_KEY_RELEASE_MASK |
+  			GDK_SCROLL_MASK
+			);
 
   // /* prepare GL */
   // GdkGLConfig * glconfig = gdk_gl_config_new_by_mode( (GdkGLConfigMode)
@@ -115,4 +117,7 @@ void InitGlWidget(GtkWidget * gla) {
   g_signal_connect(gla,   "button_release_event", G_CALLBACK(butRelease),  NULL);
   g_signal_connect(gla,   "motion_notify_event",  G_CALLBACK(mouseMotion), NULL);
   g_signal_connect(gla,   "scroll-event",         G_CALLBACK(butScroll),   NULL);
+  //g_signal_connect(gla, "key_press_event", G_CALLBACK(keyPress),  NULL);
+
+  return(gla);
 }

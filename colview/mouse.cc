@@ -23,8 +23,12 @@ void PositionFromPixel(float * px, float * py, int x, int y) {
 
 
 gboolean butScroll(GtkWidget * glw, GdkEventScroll * event) {
-  g_message("scrolled!");
-  cout << "butScroll: " << event->direction << endl;
+  //g_message("scrolled!");
+  cout << "Mouse wheel scroll: " << event->direction << endl;
+
+  if(event->direction == GDK_SCROLL_DOWN)    ScaleScene(10);
+  else if(event->direction == GDK_SCROLL_UP) ScaleScene(-10);
+  Invalidate(glw);  
   return true;
 }
 
@@ -32,6 +36,7 @@ gboolean butScroll(GtkWidget * glw, GdkEventScroll * event) {
 gboolean butPress(GtkWidget * glw, GdkEventButton * event) {
   PositionFromPixel( &xMouse, &yMouse, (int)event->x, (int)event->y);
 
+  cout << "butPress " << endl;
   xBegin = xMouse;
   yBegin = yMouse;
 
@@ -67,6 +72,7 @@ gboolean butPress(GtkWidget * glw, GdkEventButton * event) {
 
 
 gboolean butRelease(GtkWidget * glw, GdkEventButton * event) {
+  cout << "butRelease " << endl;
   d->vEconomic = false;
 
   if(mouseMoved) {
@@ -130,6 +136,7 @@ gboolean butRelease(GtkWidget * glw, GdkEventButton * event) {
 
 
 gboolean mouseMotion(GtkWidget * glw, GdkEventMotion * event) {
+  //cout << "mouseMotion " << endl;
   
   GdkModifierType state;
   int x, y;
@@ -145,7 +152,7 @@ gboolean mouseMotion(GtkWidget * glw, GdkEventMotion * event) {
     x = (int)event->x;
     y = (int)event->y;
     state = (GdkModifierType) event->state;
-    cout << "mouseMotion NOT-HINT" << endl;
+    //cout << "mouseMotion NOT-HINT" << endl;
   }
 
   int dx = x-mouseX;

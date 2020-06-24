@@ -221,6 +221,7 @@ void Invalidate(GtkWidget *);
 gboolean configure(GtkGLArea *, GdkEventConfigure *, gpointer);
 gboolean expose(GtkGLArea *, GdkEventExpose *, gpointer);
 gboolean keyPress(GtkWidget *, GdkEventKey *);
+gboolean keyRelease(GtkWidget *, GdkEventKey *);
 gboolean butPress(GtkWidget *, GdkEventButton *);
 gboolean butRelease(GtkWidget *, GdkEventButton *);
 gboolean mouseMotion(GtkWidget *, GdkEventMotion *);
@@ -237,7 +238,8 @@ void InitControlWidget(GtkWidget *);
 
 //void GlWidget(char *);
 void InitTopWidget(GtkWidget *, const char *); 
-void InitGlWidget(GtkWidget *);
+//void InitGlWidget(GtkWidget *);
+GtkWidget * GetGlWidget();
 GdkRectangle * ScreenDimensions(GtkWidget *);
 vec4 WindowDimensions(GdkRectangle *);
 void MakeGlWidgetColorBar(void);
