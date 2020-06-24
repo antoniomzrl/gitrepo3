@@ -234,13 +234,13 @@ void printDbg(int, string, string);
 void printDbg(int, string, double, string, string);
 void printDbg(int, string);
 
-void InitControlWidget(GtkWidget *);
+GtkWidget * GetControlWidget();
 
 //void GlWidget(char *);
 void InitTopWidget(GtkWidget *, const char *); 
 //void InitGlWidget(GtkWidget *);
 GtkWidget * GetGlWidget();
-GdkRectangle * ScreenDimensions(GtkWidget *);
+GdkRectangle * ScreenDimensions();
 vec4 WindowDimensions(GdkRectangle *);
 void MakeGlWidgetColorBar(void);
 void TimerRotate();

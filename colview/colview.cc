@@ -9,6 +9,7 @@ GtkWidget *glw, *btw;
 float verboseFlag=0, glslVersionFlag=-1.0;
 int WidgetSize=0;
 
+
 void Init(int argc, char **argv) {
   string TpiFn = string("tpi_all.txt");
 
@@ -108,9 +109,13 @@ int main(int argc, char **argv) {
   InitTopWidget(tw, d->FileName.c_str() );
 
   glw = GetGlWidget();
+  btw = GetControlWidget();
   
+  gtk_box_pack_start(GTK_BOX(box1), glw, true, true, 0);
+  gtk_box_pack_start(GTK_BOX(box2), btw, true, true, 0);
+
   if( WidgetSize == 0) {
-    GdkRectangle * screenSz = ScreenDimensions(tw);
+    GdkRectangle * screenSz = ScreenDimensions();
     d->PlotSize = WindowDimensions(screenSz);
     d->FontSize = d->PlotSize.y * 13.0/1000.0;
   }
@@ -118,13 +123,6 @@ int main(int argc, char **argv) {
     d->PlotSize.x = WidgetSize;
     d->PlotSize.y = WidgetSize *3/4;
   }
-
-  btw = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
-  InitControlWidget(btw);
-
-  gtk_box_pack_start(GTK_BOX(box1), glw, true, true, 0);
-  gtk_box_pack_start(GTK_BOX(box2), btw, true, true, 0);
-
 
   if(JoinWindows) {
     gtk_widget_set_size_request(box1, d->PlotSize.x, d->PlotSize.y);

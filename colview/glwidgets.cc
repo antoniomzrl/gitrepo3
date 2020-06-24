@@ -16,15 +16,15 @@ vec4 WindowDimensions(GdkRectangle * screenSz) {
 
 
 
-GdkRectangle * ScreenDimensions(GtkWidget * widget) {
+GdkRectangle * ScreenDimensions() {
   //int sw = glutGet(GLUT_SCREEN_WIDTH);
   //int sh = glutGet(GLUT_SCREEN_HEIGHT);
   //GtkWidget * gla = GlWidgetArea();
 
   //wWidth  = gdk_screen_width();
   //wHeight = gdk_screen_height();
-
-  GdkDisplay * dpy = gtk_widget_get_display(widget);
+  GtkWidget * tw   = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+  GdkDisplay * dpy = gtk_widget_get_display(tw);
   //GdkDisplay * dpy = gdk_display_get_default();
   
   //GdkWindow  * win = gtk_widget_get_window(widget);
