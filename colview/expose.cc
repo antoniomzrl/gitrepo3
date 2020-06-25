@@ -6,7 +6,7 @@ bool Invalidated;
 void Invalidate(GtkWidget * w) {
   //cout << endl << "Invalidate " << gtk_widget_get_name(w) << endl;
   string text = "Invalidate " + (string) gtk_widget_get_name(w) + "\n";
-  printDbg(0, text, "RED");
+  printDbg(1, text, "RED");
 
   gtk_widget_queue_draw(GTK_WIDGET(w) );
   Invalidated = true;
@@ -35,8 +35,7 @@ void Invalidate(GtkWidget * w) {
 
 
 gboolean configure(GtkGLArea *area, GdkEventConfigure *event, gpointer user_data) {
- 
-  printDbg(0, "configure\n", "RED");
+  printDbg(1, "configure\n", "GREEN");
 
   // We need to make the context current if we want to
   // call GL API
@@ -45,31 +44,38 @@ gboolean configure(GtkGLArea *area, GdkEventConfigure *event, gpointer user_data
   // If there were errors during the initialization or
   // when trying to make the context current, this
   // function will return a #GError for you to catch
-  if (gtk_gl_area_get_error (area) != NULL)
+  if (gtk_gl_area_get_error (area) != NULL) {
+    g_message(" *** Error configure ***");
     return true;
+  }
 
   return true;
 }
 
 
 gboolean expose(GtkGLArea *area, GdkEventExpose *event, gpointer user_data) {
-  printDbg(0, "expose\n", "RED");
 
-  static int NoCalls = 0;
+  static int NoCalls = 0, NoDraws=0;
   NoCalls++;
-  cout << "expose (" << NoCalls << ")" << endl;
-  
-  gtk_gl_area_make_current(area);
 
+  // GdkEventType ty = gdk_event_get_event_type( GTK_EVENT(event) );
+  // if( ty == GDK_BUTTON_PRESS ) cout << "butpress" << endl;
+  // if( ty == GDK_KEY_PRESS ) cout << "keypress" << endl;
+  
   /* draw only last expose */
   //if( event->count > 1) return true;
 
-  if( Invalidated == true  || NoCalls ==1) {
-    cout << "Invalidated -> Draw" << endl;
+  if( Invalidated == true  || NoCalls == 1) {
     Draw();
+    NoDraws++;
     Invalidated = false;
   }
   //glFlush();
-
+  
+  ostringstream oss;
+  oss << "expose " << gtk_widget_get_name(GTK_WIDGET(area) )
+      << " (" << NoDraws << "/" << NoCalls << ")" << endl;
+  printDbg(1, oss.str(), "RED");
+  
   return true;
 }

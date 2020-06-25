@@ -93,8 +93,9 @@ void UpdateTransformMatrices() {
   mat4 S  = scale( Id, d->Scale * d->theZoom );
   mat4 Rh = rotate( Id, d->theHorizAngle, vec3(0,1,0) );
   mat4 Rv = rotate( Id, d->theVertAngle,  vec3(1,0,0) );
+  mat4 Rf = rotate( Id, d->theFrontAngle, vec3(0,0,1) );
   mat4 T  = translate( Id, vec3(d->theHorizDisp, d->theVertDisp, d->theDepthDisp) );
-  mat4 Model = T * Rh * Rv * S;
+  mat4 Model = T * Rh * Rv * Rf * S;
    
   theMVP = Proj * View * Model; // ModelViewProjection : mult 3 matrices
   theIMV = transpose(inverse(View * Model));

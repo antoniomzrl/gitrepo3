@@ -6,7 +6,7 @@ INSTALLDIR = /usr/local
 
      CXX = g++
   DEFFLG = -DDEFAULTPATH=\"$(INSTALLDIR)/colview\"
-   MYFLG = -g #-O3 -Wall #-pg -g  #-fbounds-check
+   MYFLG = -O3 #-g #-O3 -Wall #-pg -g  #-fbounds-check
    LDOPT =
 
  GTK3INC = $(shell pkg-config --cflags gio-2.0 gtk+-3.0 epoxy) -I/usr/include/freetype2

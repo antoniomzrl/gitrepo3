@@ -63,7 +63,7 @@ typedef struct DataObject {
     Background, FontSize, LineWidth,
     DiscretizePalette, greenAttenuation,
     FoV, AR,
-    theHorizAngle, theVertAngle, theZoom,
+    theHorizAngle, theVertAngle, theFrontAngle, theZoom,
     theHorizDisp, theVertDisp, theDepthDisp;
 
   int IcosahedronLevel, Stride, SmartStride;

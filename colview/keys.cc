@@ -18,13 +18,7 @@ gboolean keyRelease(GtkWidget * glwNotUsed, GdkEventKey * event) {
   bool needInvalidate = true;
   
   if(event->state & GDK_CONTROL_MASK) {
-    if(     event->keyval == GDK_KEY_y ) d->LightPos.y -= 0.2;
-    else if(event->keyval == GDK_KEY_Y ) d->LightPos.y += 0.2;
-    else if(event->keyval == GDK_KEY_x ) d->LightPos.x -= 0.2;
-    else if(event->keyval == GDK_KEY_X ) d->LightPos.x += 0.2;
-    else if(event->keyval == GDK_KEY_z ) d->LightPos.z -= 0.2;
-    else if(event->keyval == GDK_KEY_Z ) d->LightPos.z += 0.2;
-    else if(event->keyval == GDK_KEY_Return) CommitRotationHalfPi();
+    if(event->keyval == GDK_KEY_Return) CommitRotationHalfPi();
     else needInvalidate = false;
     cout << "LightPos: "; printglm(d->LightPos);
   }
@@ -33,6 +27,8 @@ gboolean keyRelease(GtkWidget * glwNotUsed, GdkEventKey * event) {
     else if(event->keyval == GDK_KEY_Down ) RotateScene( 30,   0, 0);
     else if(event->keyval == GDK_KEY_Right) RotateScene(  0,  30, 0);
     else if(event->keyval == GDK_KEY_Left ) RotateScene(  0, -30, 0);
+    else if(event->keyval == GDK_KEY_r)     RotateScene(  0,  0, 30);
+    else if(event->keyval == GDK_KEY_R)     RotateScene(  0,  0,-30);
     else if(event->keyval == GDK_KEY_Return) CommitRotation();
     else needInvalidate = false;
   }
@@ -44,6 +40,18 @@ gboolean keyRelease(GtkWidget * glwNotUsed, GdkEventKey * event) {
 
 gboolean keyPress(GtkWidget * glwNotUsed, GdkEventKey * event) {
   cout << "keyPress " << event->keyval << endl;
+  bool needInvalidate = true;
+    
+  if(event->state & GDK_CONTROL_MASK) {
+    if(     event->keyval == GDK_KEY_y ) d->LightPos.y -= 0.2;
+    else if(event->keyval == GDK_KEY_Y ) d->LightPos.y += 0.2;
+    else if(event->keyval == GDK_KEY_x ) d->LightPos.x -= 0.2;
+    else if(event->keyval == GDK_KEY_X ) d->LightPos.x += 0.2;
+    else if(event->keyval == GDK_KEY_z ) d->LightPos.z -= 0.2;
+    else if(event->keyval == GDK_KEY_Z ) d->LightPos.z += 0.2;
+    else needInvalidate = false;
+  }
   
+  if( needInvalidate) Invalidate(glw);  
   return true;
 }
