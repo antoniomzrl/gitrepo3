@@ -52,7 +52,14 @@ gboolean configure(GtkGLArea *area, GdkEventConfigure *event, gpointer user_data
   return true;
 }
 
+gboolean resize(GtkGLArea *area, gint w, gint h, gpointer user_data) {
+  printDbg(1, "resize\n", "GREEN");
+  Draw();
+  Invalidated = false;
+  return true;
+}
 
+  
 gboolean expose(GtkGLArea *area, GdkEventExpose *event, gpointer user_data) {
 
   static int NoCalls = 0, NoDraws=0;
@@ -65,7 +72,13 @@ gboolean expose(GtkGLArea *area, GdkEventExpose *event, gpointer user_data) {
   /* draw only last expose */
   //if( event->count > 1) return true;
 
-  if( Invalidated == true  || NoCalls == 1) {
+  if( Invalidated == true) {
+    Draw();
+    NoDraws++;
+    Invalidated = false;
+  }
+  else if( NoCalls == 1) {
+    cout << "        expose -> Draw NoCalls =1" << endl;
     Draw();
     NoDraws++;
     Invalidated = false;

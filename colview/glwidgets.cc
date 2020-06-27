@@ -56,14 +56,17 @@ GdkRectangle * ScreenDimensions() {
 
 
 
-void InitTopWidget(GtkWidget * twg, const char * title) {
+GtkWidget * GetTopWidget(const char * title) {
 
+  GtkWidget * twg = gtk_window_new(GTK_WINDOW_TOPLEVEL);
   gtk_window_set_title(GTK_WINDOW(twg), title);
 
   g_signal_connect(twg, "key_press_event",   G_CALLBACK(keyPress),    NULL);
   g_signal_connect(twg, "key_release_event", G_CALLBACK(keyRelease),  NULL);
   g_signal_connect_swapped(twg, "destroy",   G_CALLBACK(gtk_main_quit), NULL);
   //gtk_window_set_gravity(GTK_WINDOW(twg), GDK_GRAVITY_NORTH_WEAST);
+
+  return(twg);
 }
 
 
@@ -111,7 +114,8 @@ GtkWidget * GetGlWidget() {
  
   //window was exposed - need redraw
   g_signal_connect(gla, "render", G_CALLBACK(expose), NULL);
-
+  g_signal_connect(gla, "resize", G_CALLBACK(resize), NULL);
+  
   //Button events
   g_signal_connect(gla, "button_press_event",   G_CALLBACK(butPress),    NULL);
   g_signal_connect(gla, "button_release_event", G_CALLBACK(butRelease),  NULL);

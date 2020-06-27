@@ -101,15 +101,14 @@ int main(int argc, char **argv) {
 
   gtk_init(&argc, &argv);
 
-  GtkWidget * tw   = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+  glw = GetGlWidget();
+  btw = GetControlWidget();
+  GtkWidget * tw   = GetTopWidget(d->FileName.c_str() );
   GtkWidget * tw2  = gtk_window_new(GTK_WINDOW_TOPLEVEL);
   GtkWidget * box  = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
   GtkWidget * box1 = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
   GtkWidget * box2 = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
-  InitTopWidget(tw, d->FileName.c_str() );
-
-  glw = GetGlWidget();
-  btw = GetControlWidget();
+  
   
   gtk_box_pack_start(GTK_BOX(box1), glw, true, true, 0);
   gtk_box_pack_start(GTK_BOX(box2), btw, true, true, 0);

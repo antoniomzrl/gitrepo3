@@ -220,6 +220,7 @@ string GetAbsoluteFile(string);
 void Invalidate(GtkWidget *);
 gboolean configure(GtkGLArea *, GdkEventConfigure *, gpointer);
 gboolean expose(GtkGLArea *, GdkEventExpose *, gpointer);
+gboolean resize(GtkGLArea *, gint, gint, gpointer);
 gboolean keyPress(GtkWidget *, GdkEventKey *);
 gboolean keyRelease(GtkWidget *, GdkEventKey *);
 gboolean butPress(GtkWidget *, GdkEventButton *);
@@ -237,7 +238,7 @@ void printDbg(int, string);
 GtkWidget * GetControlWidget();
 
 //void GlWidget(char *);
-void InitTopWidget(GtkWidget *, const char *); 
+GtkWidget * GetTopWidget(const char *); 
 //void InitGlWidget(GtkWidget *);
 GtkWidget * GetGlWidget();
 GdkRectangle * ScreenDimensions();
