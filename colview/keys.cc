@@ -5,6 +5,12 @@ extern GtkWidget * glw;
 //extern GLfloat RefPoint[4];
 
 
+gboolean keyPress(GtkWidget * glwNotUsed, GdkEventKey * event) {
+  cout << "keyPress " << event->keyval << endl;
+  return true;
+}
+
+
 gboolean keyRelease(GtkWidget * glwNotUsed, GdkEventKey * event) {
   cout << "keyRelease " << event->keyval << endl;
 
@@ -40,11 +46,5 @@ gboolean keyRelease(GtkWidget * glwNotUsed, GdkEventKey * event) {
   }
 
   if(needInvalidate) Invalidate(glw);
-  return true;
-}
-
-
-gboolean keyPress(GtkWidget * glwNotUsed, GdkEventKey * event) {
-  cout << "keyPress " << event->keyval << endl;
   return true;
 }
