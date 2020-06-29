@@ -53,9 +53,17 @@ gboolean configure(GtkGLArea *area, GdkEventConfigure *event, gpointer user_data
 }
 
 gboolean resize(GtkGLArea *area, gint w, gint h, gpointer user_data) {
-  printDbg(1, "resize\n", "GREEN");
-  Draw();
-  Invalidated = false;
+  ostringstream oss;
+  oss << "resize " << w << " x " << h << endl;
+  printDbg(1, oss.str(), "GREEN");
+
+  static int wha=0;
+  if( abs(w+h-wha) > 20 ) {
+    wha = w+h;
+    cout << "resize draw > 5" << endl;
+    Draw();
+    Invalidated = false;
+  }
   return true;
 }
 
@@ -79,6 +87,7 @@ gboolean expose(GtkGLArea *area, GdkEventExpose *event, gpointer user_data) {
   }
   else if( NoCalls == 1) {
     cout << "        expose -> Draw NoCalls =1" << endl;
+    
     Draw();
     NoDraws++;
     Invalidated = false;
