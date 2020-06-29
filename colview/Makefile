@@ -21,7 +21,7 @@ INSTALLDIR = /usr/local
 
 SRCS = readfiles.cc readpetfiles.cc datah.cc dataobj.cc printp.cc \
        colorbartxt.cc  plotgltxt.cc \
-       expose.cc keys.cc callbacks.cc saveimg.cc \
+       events.cc keys.cc callbacks.cc saveimg.cc \
        glwidgets.cc txtwidgets.cc  timer.cc points.cc compresstpi.cc\
        icosahvtx.cc plotob.cc plotlines.cc transform.cc \
        draw.cc mouse.cc colorsize.cc butwidgets.cc \
