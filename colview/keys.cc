@@ -23,8 +23,13 @@ gboolean keyRelease(GtkWidget * glwNotUsed, GdkEventKey * event) {
 
   bool needInvalidate = true;
   
-  if(event->state & GDK_CONTROL_MASK) {
-    if(     event->keyval == GDK_KEY_y ) d->LightPos.y -= 0.2;
+  if(event->state & (GDK_CONTROL_MASK | GDK_SHIFT_MASK) ) {
+    if(     event->keyval == GDK_KEY_Up   ) RotateScene( 0, 0,  30);
+    else if(event->keyval == GDK_KEY_Down ) RotateScene( 0, 0, -30);
+    else if(event->keyval == GDK_KEY_Right) RotateScene( 0, 0,  30);
+    else if(event->keyval == GDK_KEY_Left ) RotateScene( 0, 0, -30);
+
+    else if(event->keyval == GDK_KEY_y ) d->LightPos.y -= 0.2;
     else if(event->keyval == GDK_KEY_Y ) d->LightPos.y += 0.2;
     else if(event->keyval == GDK_KEY_x ) d->LightPos.x -= 0.2;
     else if(event->keyval == GDK_KEY_X ) d->LightPos.x += 0.2;
@@ -39,8 +44,6 @@ gboolean keyRelease(GtkWidget * glwNotUsed, GdkEventKey * event) {
     else if(event->keyval == GDK_KEY_Down ) RotateScene( 30,   0, 0);
     else if(event->keyval == GDK_KEY_Right) RotateScene(  0,  30, 0);
     else if(event->keyval == GDK_KEY_Left ) RotateScene(  0, -30, 0);
-    else if(event->keyval == GDK_KEY_r)     RotateScene(  0,  0, 30);
-    else if(event->keyval == GDK_KEY_R)     RotateScene(  0,  0,-30);
     else if(event->keyval == GDK_KEY_Return) CommitRotationHalfPi();
     else needInvalidate = false;
   }

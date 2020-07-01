@@ -80,6 +80,8 @@ gboolean expose(GtkGLArea *area, GdkEventExpose *event, gpointer user_data) {
   // GdkEventType ty = gdk_event_get_event_type( GTK_EVENT(event) );
   // if( ty == GDK_BUTTON_PRESS ) cout << "butpress" << endl;
   // if( ty == GDK_KEY_PRESS ) cout << "keypress" << endl;
+  if( event->type & GDK_EXPOSE ) cout << "expose expose" << endl;
+  if( event->type & GDK_DAMAGE ) cout << "expose damage" << endl;
   
   /* draw only last expose */
   //if( event->count > 1) return true;
