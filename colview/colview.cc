@@ -116,13 +116,14 @@ int main(int argc, char **argv) {
   if( WidgetSize == 0) {
     GdkRectangle * screenSz = ScreenDimensions();
     d->PlotSize = WindowDimensions(screenSz);
-    d->FontSize = d->PlotSize.y * 13.0/1000.0;
   }
   else {
     d->PlotSize.x = WidgetSize;
     d->PlotSize.y = WidgetSize *3/4;
   }
 
+  d->FontSize = d->PlotSize.y * 13.0/1000.0;
+    
   if(JoinWindows) {
     gtk_widget_set_size_request(box1, d->PlotSize.x, d->PlotSize.y);
     gtk_widget_set_size_request(box2, 300, d->PlotSize.y);
