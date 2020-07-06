@@ -1,14 +1,16 @@
 
 #include "colv.hh"
 
+extern GtkWidget * glw;
+
 bool Invalidated;
 
-void Invalidate(GtkWidget * w) {
+void InvalidateGlw() {
   //cout << endl << "Invalidate " << gtk_widget_get_name(w) << endl;
-  string text = "Invalidate " + (string) gtk_widget_get_name(w) + "\n";
+  string text = "Invalidate " + (string) gtk_widget_get_name(glw) + "\n";
   printDbg(1, text, "RED");
 
-  gtk_widget_queue_draw(GTK_WIDGET(w) );
+  gtk_widget_queue_draw(GTK_WIDGET(glw) );
   Invalidated = true;
 }
 

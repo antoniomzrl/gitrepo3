@@ -9,9 +9,7 @@ DataObject::DataObject() {
   BallSize = 0.3;
   BallFactor = 0.2;
   DiscretizePalette = 16;
-  CanvasPoint.x = 0.0;
-  CanvasPoint.y = 0.5;
-  CanvasPoint.z = 1.0;
+  CanvasPoint = vec3(0.0, 0.5, 1.0);
 
   Background = 0;
   LineWidth  = 1;

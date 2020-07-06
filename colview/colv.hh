@@ -217,7 +217,7 @@ DataObject * ReadBinaryFile(string, string);
 double myclock();
 string GetAbsoluteFile(string);
 
-void Invalidate(GtkWidget *);
+void InvalidateGlw();
 gboolean configure(GtkGLArea *, GdkEventConfigure *, gpointer);
 gboolean expose(GtkGLArea *, GdkEventExpose *, gpointer);
 gboolean resize(GtkGLArea *, gint, gint, gpointer);

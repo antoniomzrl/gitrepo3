@@ -2,7 +2,6 @@
 #include "colv.hh"
 
 extern DataObject * d;
-extern GtkWidget * glw;
 
 float xBegin, yBegin, xEnd, yEnd; // selection
 float xMouse, yMouse; // motion
@@ -28,7 +27,7 @@ gboolean butScroll(GtkWidget * glw, GdkEventScroll * event) {
 
   if(event->direction == GDK_SCROLL_DOWN)    ScaleScene(10);
   else if(event->direction == GDK_SCROLL_UP) ScaleScene(-10);
-  Invalidate(glw);  
+  InvalidateGlw();  
   return true;
 }
 
@@ -76,7 +75,7 @@ gboolean butRelease(GtkWidget * glw, GdkEventButton * event) {
   d->vEconomic = false;
 
   if(mouseMoved) {
-    Invalidate(glw);
+    InvalidateGlw();
     mouseMoved = false;
   }
   
@@ -111,7 +110,7 @@ gboolean butRelease(GtkWidget * glw, GdkEventButton * event) {
       mouseLeftCtrl = false;
       d->vSelection = false;
       ClipData(d);
-      Invalidate(glw);
+      InvalidateGlw();
     }
     return true;
   }
@@ -125,7 +124,7 @@ gboolean butRelease(GtkWidget * glw, GdkEventButton * event) {
     mouseRight  = false;
     if(mouseRightCtrl) {
       mouseRightCtrl = false;
-      Invalidate(glw);
+      InvalidateGlw();
     }
     return true;
   }
@@ -195,12 +194,12 @@ gboolean mouseMotion(GtkWidget * glw, GdkEventMotion * event) {
     yEnd = py;
     d->LightPos.x = px*3;
     d->LightPos.y = py*3;
-    Invalidate(glw);
+    InvalidateGlw();
     cout << "mouseRight\n";
   }
   else if( mouseMiddleCtrl) { 
     d->LightPos.z += dx+dy;
-    Invalidate(glw);
+    InvalidateGlw();
     cout << "mouseMiddle\n";
   }
 
@@ -209,7 +208,7 @@ gboolean mouseMotion(GtkWidget * glw, GdkEventMotion * event) {
 
   if( mouseMoved) {
     d->vEconomic = true;
-    Invalidate(glw);
+    InvalidateGlw();
   }
 
   d->MouseSelection = vec4(std::min(xBegin, xEnd), std::max(xBegin, xEnd),

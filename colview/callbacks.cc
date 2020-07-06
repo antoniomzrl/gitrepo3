@@ -2,14 +2,14 @@
 #include "colv.hh"
 
 extern DataObject * d;
-extern GtkWidget * glw, * btw;
+extern GtkWidget * btw;
 
 
 void CB_Init(void) {
   cout << "CB Init" << endl;
   glLoadIdentity();
   InitialPosition();
-  Invalidate(glw);
+  InvalidateGlw();
 }
 
 
@@ -39,7 +39,7 @@ void CB_OpenDataFile(void) {
     d = ReadBinaryFile(fn.c_str(), string("BCD") );
   
   ComputeFrame(d);
-  Invalidate(glw);
+  InvalidateGlw();
 }
 
 
@@ -53,7 +53,7 @@ void CB_ReOpenDataFile(void) {
   d = ReadBinaryFile(Fn, Ft);
   ComputeFrame(d);
   glLoadIdentity();
-  Invalidate(glw);
+  InvalidateGlw();
 }
 
 
@@ -112,7 +112,7 @@ void CB_SwapPar(GtkToggleButton * but, gpointer Data) {
   //   else   LightsOff();
   // }
   
-  Invalidate(glw);
+  InvalidateGlw();
 }
 
 
@@ -130,13 +130,13 @@ void CB_TpiFile(void) {
   string Ft = d->FileType;
   delete d;
   d = ReadBinaryFile(Fn, Ft);
-  Invalidate(glw);
+  InvalidateGlw();
 }
 
 
 void CB_CompressTpi(void) {
   CompressTpi();
-  Invalidate(glw);
+  InvalidateGlw();
 }
 
 void CB_PlotType(GtkComboBox * combo) {
@@ -150,7 +150,7 @@ void CB_PlotType(GtkComboBox * combo) {
   
   cout << "CB_PlotType " << txt << " " << d->ac << endl;
   d->NeedUpdatePV = true;
-  Invalidate(glw);
+  InvalidateGlw();
 }
 
 
@@ -244,7 +244,7 @@ void CB_ScaleValue(GtkAdjustment * adj, gpointer Data) {
 
 
   // Provisional xxxxx
-  Invalidate(glw);
+  InvalidateGlw();
 }
 
 
@@ -255,7 +255,7 @@ void CB_ScaleValue(GtkAdjustment * adj, gpointer Data) {
 // void CB_Interpolate(GtkAdjustment * adj) {
 //   int np = (int)adj->value;
 //   Interpolate(d, np);
-//   Invalidate(glw);
+//   InvalidateGlw();
 // }
 
 
@@ -278,13 +278,13 @@ void CB_FontPlot(void) {
   cout << "CB FontPlot" << endl;
   //d->vFontList = 1;
   //PlotFontList();
-  Invalidate(glw);
+  InvalidateGlw();
 }
 
 void CB_SortData(void) {
   cout << "CB SortData" << endl;
   SortData(d);
-  Invalidate(glw);
+  InvalidateGlw();
 }
 
 // void CB_FontSelection(GtkWidget *widget, gpointer label) {
@@ -311,7 +311,7 @@ void CB_SortData(void) {
 //   delete d;
 //   d = ReadBinaryFile((char*)Fn, (char*)"BCD");
 //   ComputeFrame(d);
-//     Invalidate(glw);
+//     InvalidateGlw();
 //   gtk_widget_destroy(fileWg);
 // }
 
@@ -396,7 +396,7 @@ void CB_ReadParamFile(GtkWidget * widget, GtkWidget * fileWg) {
 
   // ReadParamFile((char*)Fn, d);
   // ComputeFrame(d);
-  // Invalidate(glw);
+  // InvalidateGlw();
   // gtk_widget_destroy(fileWg);
 }
 
@@ -435,7 +435,7 @@ void CB_OpenParamFile(void) {
   if( fn != NULL) {
     ReadParamFile(fn, d);
     ComputeFrame(d);
-    Invalidate(glw);
+    InvalidateGlw();
   }
 
 }

@@ -1,7 +1,6 @@
 
 #include "colv.hh"
 extern DataObject * d;
-extern GtkWidget * glw;
 
 extern mat4 Rm;
 

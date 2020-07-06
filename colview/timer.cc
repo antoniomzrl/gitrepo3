@@ -1,14 +1,13 @@
 #include "colv.hh"
 
 extern DataObject * d;
-extern GtkWidget * glw;
 
 gboolean AutoRotate( gpointer ang) {
   //cout << "AutoRotate" << endl;
 
   if(d->vAutoRotate) {
     RotateScene( 0, 10, 0);
-    Invalidate(glw);
+    InvalidateGlw();
   }
   return TRUE;
 }
