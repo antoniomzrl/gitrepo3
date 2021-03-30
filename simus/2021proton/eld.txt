@@ -1,0 +1,6 @@
+  No Ints    Avg Edep    Avg Elost   Process
+    41293     9.76431    9.76431     proton_LEPTSExcitation
+   416704       12.61    30.5457     proton_LEPTSIonisation
+
+    40291     11.2128    11.2128     proton_DNAExcitation
+   441796     15.2783    63.5629     proton_DNAIonisation

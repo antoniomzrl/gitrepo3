@@ -40,7 +40,6 @@ private:
 
   //New dxs=f, cdxs=F[El/E*10][Ebin][aBin], Finv=Fs(direct sample)
   //G4double f[40][300], F[11][40][300]; //, G[11][40][1001];
-
   int NL, NE, NA;
 
   double *f, *F;

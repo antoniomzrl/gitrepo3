@@ -1,0 +1,27 @@
+#!/bin/sh
+/gamos/setParam GmAnalysisMgr:FileNameSuffix j_
+# GEOMETRY
+/gamos/setParam GmGeometryFromText:FileName j.geom
+/gamos/geometry GmGeometryFromText
+/gamos/setParam JobName j_1_1
+#/gamos/random/setSeeds 
+/gamos/random/restoreSeeds 1 1
+
+#/gamos/geometry/createRegion ch_region ch_G4_WATER 
+/gamos/physicsList GmLeptsPhysics 
+/run/initialize 
+#/gamos/userAction UAVerbose 
+#/gamos/userAction UAWIF 
+#/gamos/userAction GmCountProcessesUA 
+#/gamos/userAction UAInteraction 
+/gamos/setParam TimeMark 600 
+/gamos/userAction UAClock 
+/gamos/setParam UAInteractionSp:Title 1MeV-protons 
+/gamos/setParam UAInteractionSp:x 2000 0 10*um 
+#/gamos/userAction UAInteractionSp 
+#GENERATOR_proton_250*keV 
+/gamos/generator GmGenerator 
+/gamos/generator/addSingleParticleSource gn proton 250*keV 
+/gamos/generator/positionDist gn GmGenerDistPositionInG4Volumes gbox 
+/gamos/generator/directionDist gn GmGenerDistDirectionConst 1 0 0 
+/run/beamOn 5 

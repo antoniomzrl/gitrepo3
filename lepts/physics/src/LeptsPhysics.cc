@@ -47,6 +47,7 @@
 #include "LeptsAttachmentModel.hh"
 #include "LeptsPositroniumModel.hh"
 //H+ H0:
+#include "LeptsElasticIonModel.hh"
 #include "LeptsIonisationIonModel.hh"
 #include "LeptsElectronicExcitationIonModel.hh"
 #include "LeptsChargeTransferModel.hh"
@@ -225,7 +226,7 @@ void LeptsPhysics::ConstructProcess()
     
     else if ( particleName == "proton" ) {
       LeptsElastic * elast = new LeptsElastic("proton_LeptsElastic");
-      elast->SetEmModel( new LeptsElasticModel);
+      elast->SetEmModel( new LeptsElasticIonModel);
       manager->AddDiscreteProcess( elast);
 
       LeptsElastic * excit = new LeptsElastic("proton_LeptsElectronicExcitation");
@@ -242,7 +243,7 @@ void LeptsPhysics::ConstructProcess()
     }
     else if (particleName == "hydrogen") {
       LeptsElastic * elast = new LeptsElastic("hydrogen_LeptsElastic");
-      elast->SetEmModel( new LeptsElasticModel);
+      elast->SetEmModel( new LeptsElasticIonModel);
       manager->AddDiscreteProcess( elast);
 
       LeptsElastic * excit = new LeptsElastic("hydrogen_LeptsElectronicExcitation");

@@ -1,22 +1,22 @@
 
-#include "LeptsElasticModel.hh"
+#include "LeptsElasticIonModel.hh"
 
-LeptsElasticModel::LeptsElasticModel(const G4String& modelName) : LeptsBaseModel( modelName)
+LeptsElasticIonModel::LeptsElasticIonModel(const G4String& modelName) : LeptsBaseModel( modelName)
 {
   theXSType = XSElastic;
   theType = (G4String)"Elastic";
   cout << "xxx constructor Elastic " << modelName << endl;
 
   bDXS   = true;
-  bDXSMT = true;
+  bDXSMT = false;
 }
 
 
-LeptsElasticModel::~LeptsElasticModel() {
+LeptsElasticIonModel::~LeptsElasticIonModel() {
 }
 
 
-void LeptsElasticModel::SampleSecondaries(std::vector<G4DynamicParticle*>*,
+void LeptsElasticIonModel::SampleSecondaries(std::vector<G4DynamicParticle*>*,
                                  const G4MaterialCutsCouple* mateCuts,
                                  const G4DynamicParticle* aDynamicParticle,
                                  G4double, G4double)
@@ -62,21 +62,21 @@ void LeptsElasticModel::SampleSecondaries(std::vector<G4DynamicParticle*>*,
 
 #ifndef DEBUG_LEPTS
   if( verboseLevel >= 2 )
-    G4cout << " LeptsElasticModel::SampleSecondaries( P1Dir " << P1Dir
+    G4cout << " LeptsElasticIonModel::SampleSecondaries( P1Dir " << P1Dir
 	   << " P0Dir " << P0Dir << " ang " << ang << G4endl
 	   << " ELASTIC " << P1KinEn << " = " << P0KinEn << " - " << Elost << G4endl
 	   << " ELASTIC Energylost " << Elost << " = " << P0KinEn << " " << ang << " "
 	   << theMassTarget[aMat] << "  " << theMassProjectile[aMat] << G4endl
-	   << " LeptsElasticModel::SampleSecondaries( SetProposedKineticEnergy " << P1KinEn
+	   << " LeptsElasticIonModel::SampleSecondaries( SetProposedKineticEnergy " << P1KinEn
 	   << " " << P0KinEn << " - " << Elost << G4endl
-	   << " LeptsElasticModel::SampleSecondaries( ProposeMomentumDirection "
+	   << " LeptsElasticIonModel::SampleSecondaries( ProposeMomentumDirection "
 	   << fParticleChange->GetProposedMomentumDirection() << G4endl;
 #endif
 }
 
 
 
-void LeptsElasticSMFModel::SampleSecondaries(std::vector<G4DynamicParticle*>*,
+void LeptsElasticSMFIonModel::SampleSecondaries(std::vector<G4DynamicParticle*>*,
                                  const G4MaterialCutsCouple* mateCuts,
                                  const G4DynamicParticle* aDynamicParticle, G4double, G4double)
 {

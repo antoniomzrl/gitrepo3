@@ -10,7 +10,8 @@ class LeptsElastic : public G4VEmProcess
 {
   
 public: 
-  LeptsElastic(const G4String& processName ="LeptsElastic",
+  //LeptsElastic(const G4String& processName ="LeptsElastic",
+  LeptsElastic(const G4String& processName,
 	       G4ProcessType type = fElectromagnetic);
 
   virtual ~LeptsElastic();

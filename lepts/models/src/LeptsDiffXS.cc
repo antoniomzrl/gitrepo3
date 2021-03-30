@@ -57,6 +57,8 @@ void LeptsDiffXS::readDXS( ) {
   NE = nee +1;
   NA = naa +1;
 
+  //  cout << "NE " << NE << " NA " << NA << " " << fileName << endl;
+
   try {
     f = new double[NE*NA];
     F = new double[NL*NE*NA];
@@ -228,6 +230,8 @@ inline double LeptsDiffXS::ff(int e, int a, double E) {
 
 
 G4double LeptsDiffXS::SampleAngle(G4double Energy, G4double El) {
+  //  cout << "sampleang " << NE << " " << NL << " " << NA<< " " <<Energy << " " << El << endl;
+  
   // loc Energy lost bin:
   int l=(NL-1)*El/Energy;
 
@@ -294,12 +298,8 @@ G4double LeptsDiffXS::SampleAngle(G4double Energy, G4double El) {
   // int i = lrint(1000*r);
   // double x = G[l][e][i];
 
-  // cout << "sampleang " << NE <<"-"<< Energy << " " << setw(8)
-  //      << El << " " << e << " " << l << " " << x << endl
-  //      << "samleangle " << x << " " << l<< " " << e<< " " << a
-  //      << " " << dx<< " " << s << " "<< r << endl
-  //      << endl;
-
+  //  cout << "sampleang " << NE << " " << NL << " " << NA<< " " <<Energy << " " << El
+  //<< " " << e << " " << l << " " << x << endl << endl;
   return( x);
 }
 
