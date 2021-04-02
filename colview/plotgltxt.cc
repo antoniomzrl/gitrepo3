@@ -1,7 +1,6 @@
 
 #include "colv.hh"
 
-extern DataObject * d;
 GLuint program;
 
 struct Character {
@@ -153,12 +152,13 @@ void InitShadersText() {
 
 
 
-void RenderText(string text, float x, float y, float Scale, vec3 color) {
+void RenderText(string text, vec3 xys, vec3 plotsize, vec3 color) {
+  float x = xys.x;
+  float y = xys.y;
+  float scale = xys.z * 1.3 / (float)SizeInPixels;
+  //cout << "Scale: " << scale << " inv " << 1.0/scale << endl;
 
-  float scale = Scale * 1.3 / (float)SizeInPixels;
-  //cout << "scale: " << scale << endl;
-  
-  mat4 projection = ortho(0.0f, (float)d->PlotSize.x, 0.0f, (float)d->PlotSize.y);
+  mat4 projection = ortho(0.0f, (float)plotsize.x, 0.0f, (float)plotsize.y);
  
   glUseProgram(program);
   glUniformMatrix4fv(glGetUniformLocation(program, "projection"),

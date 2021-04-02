@@ -2,7 +2,6 @@
 #include "colv.hh"
 
 extern DataObject * d;
-extern GtkWidget * glw;
 
 float xBegin, yBegin, xEnd, yEnd; // selection
 float xMouse, yMouse; // motion
@@ -23,8 +22,12 @@ void PositionFromPixel(float * px, float * py, int x, int y) {
 
 
 gboolean butScroll(GtkWidget * glw, GdkEventScroll * event) {
-  g_message("scrolled!");
-  cout << "butScroll: " << event->direction << endl;
+  //g_message("scrolled!");
+  cout << "Mouse wheel scroll: " << event->direction << endl;
+
+  if(event->direction == GDK_SCROLL_DOWN)    ScaleScene(10);
+  else if(event->direction == GDK_SCROLL_UP) ScaleScene(-10);
+  InvalidateGlw();  
   return true;
 }
 
@@ -32,6 +35,7 @@ gboolean butScroll(GtkWidget * glw, GdkEventScroll * event) {
 gboolean butPress(GtkWidget * glw, GdkEventButton * event) {
   PositionFromPixel( &xMouse, &yMouse, (int)event->x, (int)event->y);
 
+  cout << "butPress " << endl;
   xBegin = xMouse;
   yBegin = yMouse;
 
@@ -67,10 +71,11 @@ gboolean butPress(GtkWidget * glw, GdkEventButton * event) {
 
 
 gboolean butRelease(GtkWidget * glw, GdkEventButton * event) {
+  cout << "butRelease " << endl;
   d->vEconomic = false;
 
   if(mouseMoved) {
-    Invalidate(glw);
+    InvalidateGlw();
     mouseMoved = false;
   }
   
@@ -105,7 +110,7 @@ gboolean butRelease(GtkWidget * glw, GdkEventButton * event) {
       mouseLeftCtrl = false;
       d->vSelection = false;
       ClipData(d);
-      Invalidate(glw);
+      InvalidateGlw();
     }
     return true;
   }
@@ -119,7 +124,7 @@ gboolean butRelease(GtkWidget * glw, GdkEventButton * event) {
     mouseRight  = false;
     if(mouseRightCtrl) {
       mouseRightCtrl = false;
-      Invalidate(glw);
+      InvalidateGlw();
     }
     return true;
   }
@@ -130,6 +135,7 @@ gboolean butRelease(GtkWidget * glw, GdkEventButton * event) {
 
 
 gboolean mouseMotion(GtkWidget * glw, GdkEventMotion * event) {
+  //cout << "mouseMotion " << endl;
   
   GdkModifierType state;
   int x, y;
@@ -145,7 +151,7 @@ gboolean mouseMotion(GtkWidget * glw, GdkEventMotion * event) {
     x = (int)event->x;
     y = (int)event->y;
     state = (GdkModifierType) event->state;
-    cout << "mouseMotion NOT-HINT" << endl;
+    //cout << "mouseMotion NOT-HINT" << endl;
   }
 
   int dx = x-mouseX;
@@ -188,12 +194,12 @@ gboolean mouseMotion(GtkWidget * glw, GdkEventMotion * event) {
     yEnd = py;
     d->LightPos.x = px*3;
     d->LightPos.y = py*3;
-    Invalidate(glw);
+    InvalidateGlw();
     cout << "mouseRight\n";
   }
   else if( mouseMiddleCtrl) { 
     d->LightPos.z += dx+dy;
-    Invalidate(glw);
+    InvalidateGlw();
     cout << "mouseMiddle\n";
   }
 
@@ -202,7 +208,7 @@ gboolean mouseMotion(GtkWidget * glw, GdkEventMotion * event) {
 
   if( mouseMoved) {
     d->vEconomic = true;
-    Invalidate(glw);
+    InvalidateGlw();
   }
 
   d->MouseSelection = vec4(std::min(xBegin, xEnd), std::max(xBegin, xEnd),

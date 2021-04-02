@@ -1,5 +1,161 @@
-GNU DDD 3.3.12 (x86_64-pc-linux-gnu)
-Copyright (C) 1995-1999 Technische Universität Braunschweig, Germany.
-Copyright (C) 1999-2001 Universität Passau, Germany.
-Copyright (C) 2001 Universität des Saarlandes, Germany.
-Copyright (C) 2001-2009 Free Software Foundation, Inc.
+TPI File: ./tpi_all.txt 54
+ReadBinaryFile (1traj.bcd) BCD
+ double 8 float 4 int 4 sh int 2 Point 56
+constructor DataObject
+rbf bcd 95389 56
+ReadBinFile ND: 95389 (0.003329 sec)
+ComputeHistogram
+visuogl CenterData
+word: Particle
+word: Interaction
+word: Energy
+word: ELost
+word: EDep
+[1;31mconfigure
+[0mname: DejaVuSansMono
+fontFile: /usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf
+Font: /usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf
+[1;31mLoadShaders
+[0m4.50 (4.5)
+Compiling VERTEX   shader: ./shaderstxt.glsl
+Compiling FRAGMENT shader: ./shaderstxt.glsl
+Linking shaders : ./shaderstxt.glsl
+loadshaders : (0.000428 sec)
+[1;31mLoadShaders
+[0m4.50 (4.5)
+Compiling VERTEX   shader: ./shaders.glsl
+Compiling FRAGMENT shader: ./shaders.glsl
+Linking shaders : ./shaders.glsl
+loadshaders : (0.000407 sec)
+[1;31mLoadShaders
+[0m4.50 (4.5)
+Compiling VERTEX   shader: ./shaderslin.glsl
+Compiling FRAGMENT shader: ./shaderslin.glsl
+Linking shaders : ./shaderslin.glsl
+loadshaders : (0.000371 sec)
+[1;31mexpose
+[0m[1;31mDraw
+[0mBestSpatialUnit1: mm 1
+BestSpatialUnit2: micron 1000
+BestSpatialUnit1: micron 1000
+BestSpatialUnit2: nm 1e+06
+[1;34mPlotIcosahedrons
+[0m[1;34mUpdateTransformMatrices
+[0mstrides 1 1
+[1;35mUpdatePV(0.006648)
+[0m[1;34mVBO GPU MODE IcoLvl 0 Tri/Ico 0 Npos 95389 NoTri 31796
+ mem(MB): 0 / 0 used 
+[0m[1;34mPlotcolorBarText
+[0mDraw (1) (0.027136) sec Acum(0.027145 sec)
+[1;31mexpose
+[0m[1;31mDraw
+[0m[1;34mPlotIcosahedrons
+[0m[1;34mUpdateTransformMatrices
+[0m[1;34mVBO GPU MODE IcoLvl 0 Tri/Ico 0 Npos 95389 NoTri 31796
+ mem(MB): 0 / 0 used 
+[0m[1;34mPlotcolorBarText
+[0mDraw (2) (0.005381) sec Acum(0.040269 sec)
+[1;31mexpose
+[0m[1;31mDraw
+[0m[1;34mPlotIcosahedrons
+[0m[1;34mUpdateTransformMatrices
+[0m[1;34mVBO GPU MODE IcoLvl 0 Tri/Ico 0 Npos 95389 NoTri 31796
+ mem(MB): 0 / 0 used 
+[0m[1;34mPlotcolorBarText
+[0mDraw (3) (0.0041) sec Acum(0.060833 sec)
+[1;31mexpose
+[0m[1;31mDraw
+[0m[1;34mPlotIcosahedrons
+[0m[1;34mUpdateTransformMatrices
+[0m[1;34mVBO GPU MODE IcoLvl 0 Tri/Ico 0 Npos 95389 NoTri 31796
+ mem(MB): 0 / 0 used 
+[0m[1;34mPlotcolorBarText
+[0mDraw (4) (0.003965) sec Acum(0.067313 sec)
+[1;31mexpose
+[0m[1;31mDraw
+[0m[1;34mPlotIcosahedrons
+[0m[1;34mUpdateTransformMatrices
+[0m[1;34mVBO GPU MODE IcoLvl 0 Tri/Ico 0 Npos 95389 NoTri 31796
+ mem(MB): 0 / 0 used 
+[0m[1;34mPlotcolorBarText
+[0mDraw (5) (0.008163) sec Acum(0.276953 sec)
+[1;31mexpose
+[0m[1;31mDraw
+[0m[1;34mPlotIcosahedrons
+[0m[1;34mUpdateTransformMatrices
+[0m[1;34mVBO GPU MODE IcoLvl 0 Tri/Ico 0 Npos 95389 NoTri 31796
+ mem(MB): 0 / 0 used 
+[0m[1;34mPlotcolorBarText
+[0mDraw (6) (0.008411) sec Acum(0.308689 sec)
+[1;31mexpose
+[0m[1;31mDraw
+[0m[1;34mPlotIcosahedrons
+[0m[1;34mUpdateTransformMatrices
+[0m[1;34mVBO GPU MODE IcoLvl 0 Tri/Ico 0 Npos 95389 NoTri 31796
+ mem(MB): 0 / 0 used 
+[0m[1;34mPlotcolorBarText
+[0mDraw (7) (0.008209) sec Acum(0.319004 sec)
+[1;31mexpose
+[0m[1;31mDraw
+[0m[1;34mPlotIcosahedrons
+[0m[1;34mUpdateTransformMatrices
+[0m[1;34mVBO GPU MODE IcoLvl 0 Tri/Ico 0 Npos 95389 NoTri 31796
+ mem(MB): 0 / 0 used 
+[0m[1;34mPlotcolorBarText
+[0mDraw (8) (0.008207) sec Acum(0.329327 sec)
+[1;31mexpose
+[0m[1;31mDraw
+[0m[1;34mPlotIcosahedrons
+[0m[1;34mUpdateTransformMatrices
+[0m[1;34mVBO GPU MODE IcoLvl 0 Tri/Ico 0 Npos 95389 NoTri 31796
+ mem(MB): 0 / 0 used 
+[0m[1;34mPlotcolorBarText
+[0mDraw (9) (0.008263) sec Acum(0.339697 sec)
+[1;31mexpose
+[0m[1;31mDraw
+[0m[1;34mPlotIcosahedrons
+[0m[1;34mUpdateTransformMatrices
+[0m[1;34mVBO GPU MODE IcoLvl 0 Tri/Ico 0 Npos 95389 NoTri 31796
+ mem(MB): 0 / 0 used 
+[0m[1;34mPlotcolorBarText
+[0mDraw (10) (0.008292) sec Acum(0.350067 sec)
+[1;31mexpose
+[0m[1;31mDraw
+[0m[1;34mPlotIcosahedrons
+[0m[1;34mUpdateTransformMatrices
+[0m[1;34mVBO GPU MODE IcoLvl 0 Tri/Ico 0 Npos 95389 NoTri 31796
+ mem(MB): 0 / 0 used 
+[0m[1;34mPlotcolorBarText
+[0mDraw (11) (0.008233) sec Acum(0.36037 sec)
+[1;31mexpose
+[0m[1;31mDraw
+[0m[1;34mPlotIcosahedrons
+[0m[1;34mUpdateTransformMatrices
+[0m[1;34mVBO GPU MODE IcoLvl 0 Tri/Ico 0 Npos 95389 NoTri 31796
+ mem(MB): 0 / 0 used 
+[0m[1;34mPlotcolorBarText
+[0mDraw (12) (0.006519) sec Acum(0.368976 sec)
+[1;31mexpose
+[0m[1;31mDraw
+[0m[1;34mPlotIcosahedrons
+[0m[1;34mUpdateTransformMatrices
+[0m[1;34mVBO GPU MODE IcoLvl 0 Tri/Ico 0 Npos 95389 NoTri 31796
+ mem(MB): 0 / 0 used 
+[0m[1;34mPlotcolorBarText
+[0mDraw (13) (0.006576) sec Acum(0.37741 sec)
+[1;31mexpose
+[0m[1;31mDraw
+[0m[1;34mPlotIcosahedrons
+[0m[1;34mUpdateTransformMatrices
+[0m[1;34mVBO GPU MODE IcoLvl 0 Tri/Ico 0 Npos 95389 NoTri 31796
+ mem(MB): 0 / 0 used 
+[0m[1;34mPlotcolorBarText
+[0mDraw (14) (0.00659) sec Acum(0.385909 sec)
+[1;31mexpose
+[0m[1;31mDraw
+[0m[1;34mPlotIcosahedrons
+[0m[1;34mUpdateTransformMatrices
+[0m[1;34mVBO GPU MODE IcoLvl 0 Tri/Ico 0 Npos 95389 NoTri 31796
+ mem(MB): 0 / 0 used 
+[0m[1;34mPlotcolorBarText
+[0mDraw (15) (0.006577) sec Acum(0.394329 sec)

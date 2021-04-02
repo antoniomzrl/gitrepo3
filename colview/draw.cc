@@ -1,8 +1,6 @@
 #include "colv.hh"
 
 extern DataObject * d;
-extern GtkWidget * glw;
-
 
 void Draw(void) {
   

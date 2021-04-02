@@ -63,7 +63,7 @@ typedef struct DataObject {
     Background, FontSize, LineWidth,
     DiscretizePalette, greenAttenuation,
     FoV, AR,
-    theHorizAngle, theVertAngle, theZoom,
+    theHorizAngle, theVertAngle, theFrontAngle, theZoom,
     theHorizDisp, theVertDisp, theDepthDisp;
 
   int IcosahedronLevel, Stride, SmartStride;
@@ -72,7 +72,7 @@ typedef struct DataObject {
   vec3 LightPos, CanvasPoint, Scale;
   bool vFrame, vSelection, vEconomic, vAutoRotate;
   vec4 MouseSelection; // xBegin, yBegin, xEnd, yEnd
-  vec4 PlotSize;
+  vec3 PlotSize;
 
   int ac; // active column
 
@@ -198,7 +198,7 @@ void PlotIcosahedrons();
 GLuint LoadShaders(const char *,const char *);
 GLuint LoadShaders(const char *);
 string ShowGPUResources();
-void RenderText(string, float, float, float, vec3);
+void RenderText(string, vec3, vec3, vec3);
 
 unsigned long GetFileSize(char *);
 unsigned long GetBinaryFileSize(const char *);
@@ -217,10 +217,12 @@ DataObject * ReadBinaryFile(string, string);
 double myclock();
 string GetAbsoluteFile(string);
 
-void Invalidate(GtkWidget *);
+void InvalidateGlw();
 gboolean configure(GtkGLArea *, GdkEventConfigure *, gpointer);
 gboolean expose(GtkGLArea *, GdkEventExpose *, gpointer);
+gboolean resize(GtkGLArea *, gint, gint, gpointer);
 gboolean keyPress(GtkWidget *, GdkEventKey *);
+gboolean keyRelease(GtkWidget *, GdkEventKey *);
 gboolean butPress(GtkWidget *, GdkEventButton *);
 gboolean butRelease(GtkWidget *, GdkEventButton *);
 gboolean mouseMotion(GtkWidget *, GdkEventMotion *);
@@ -233,12 +235,13 @@ void printDbg(int, string, string);
 void printDbg(int, string, double, string, string);
 void printDbg(int, string);
 
-void InitControlWidget(GtkWidget *);
+GtkWidget * GetControlWidget();
 
 //void GlWidget(char *);
-void InitTopWidget(GtkWidget *, const char *); 
-void InitGlWidget(GtkWidget *);
-GdkRectangle * ScreenDimensions(GtkWidget *);
+GtkWidget * GetTopWidget(const char *); 
+//void InitGlWidget(GtkWidget *);
+GtkWidget * GetGlWidget();
+GdkRectangle * ScreenDimensions();
 vec4 WindowDimensions(GdkRectangle *);
 void MakeGlWidgetColorBar(void);
 void TimerRotate();

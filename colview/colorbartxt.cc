@@ -85,7 +85,8 @@ void PlotColorBarText(vec3 l, vec3 u) {
     }
 
     if( y < u.y*1.01) {
-      RenderText(label, u.x+dy*20, y-dy*20, d->FontSize, color);
+      vec3 ps = vec3(u.x+dy*20, y-dy*20, d->FontSize);
+      RenderText(label, ps, d->PlotSize, color);
     }
   }
 
@@ -125,7 +126,8 @@ void PlotColorBarText(vec3 l, vec3 u) {
 
   for(int i=0; i<9; i++) {
     float y = d->PlotSize.y/2 -d->PlotSize.y/15 - (i+1)*d->PlotSize.y/35;
-    RenderText(lab[i], l.x, y, d->FontSize, color);
+    vec3 ps = vec3(l.x, y, d->FontSize);
+    RenderText(lab[i], ps, d->PlotSize, color);
   }
   
   glDisable(GL_BLEND);

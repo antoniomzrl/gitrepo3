@@ -1,13 +1,13 @@
 
 #include "colv.hh"
 extern DataObject * d;
-extern GtkWidget * glw;
 
 extern mat4 Rm;
 
 void InitialPosition() {
   d->theHorizAngle = 0; //glm::pi<float>(); // Initial
   d->theVertAngle  = 0;
+  d->theFrontAngle = 0;
   d->theHorizDisp  = 0;
   d->theVertDisp   = 0;
   d->theDepthDisp  = 0;
@@ -19,6 +19,7 @@ void RotateScene(int dx, int dy, int dz) {
   static float inc = glm::pi<float>()/180.0 *0.1;
   d->theHorizAngle += dy * inc;
   d->theVertAngle  += dx * inc;
+  d->theFrontAngle += dz * inc;
 
   //cout << "angs " << d->theHorizAngle*180.0/glm::pi<float>()
   //     << " " << d->theVertAngle*180.0/glm::pi<float>() << endl;
@@ -99,11 +100,13 @@ void CommitRotationHalfPi() {
 
   d->theHorizAngle = glm::round( d->theHorizAngle / pim) * pim;
   d->theVertAngle  = glm::round( d->theVertAngle  / pim) * pim;
+  d->theFrontAngle = glm::round( d->theFrontAngle / pim) * pim;
 
   mat4 Id = mat4(1.0);
   mat4 Rh = rotate( Id, d->theHorizAngle, vec3(0,1,0) );
   mat4 Rv = rotate( Id, d->theVertAngle,  vec3(1,0,0) );
-  Rm      = Rh * Rv;
+  mat4 Rf = rotate( Id, d->theFrontAngle, vec3(0,0,1) );
+  Rm      = Rh * Rv * Rf;
   
   CommitRotation();
 }

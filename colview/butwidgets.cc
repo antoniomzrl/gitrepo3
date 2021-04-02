@@ -104,8 +104,10 @@ void MyLabelScale(const gchar * label, const gchar * Data, GtkWidget * box,
 }
 
 
-void InitControlWidget(GtkWidget * butwin) {
+GtkWidget * GetControlWidget() {
 
+  GtkWidget * butwin = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
+ 
   //gint ww, wh;
   //gtk_window_get_size(GTK_WINDOW(window), &ww, &wh);
   //cout << "w width "  << ww << endl;
@@ -245,4 +247,6 @@ void InitControlWidget(GtkWidget * butwin) {
   gtk_notebook_append_page(GTK_NOTEBOOK(notebook), boxc,  gtk_label_new("Scale") );
   gtk_notebook_append_page(GTK_NOTEBOOK(notebook), boxd,  gtk_label_new("Clip") );
   gtk_notebook_append_page(GTK_NOTEBOOK(notebook), boxe,  gtk_label_new("Misc") );
+
+  return butwin;
 }

@@ -9,6 +9,7 @@ GtkWidget *glw, *btw;
 float verboseFlag=0, glslVersionFlag=-1.0;
 int WidgetSize=0;
 
+
 void Init(int argc, char **argv) {
   string TpiFn = string("tpi_all.txt");
 
@@ -100,39 +101,36 @@ int main(int argc, char **argv) {
 
   gtk_init(&argc, &argv);
 
-  GtkWidget * tw   = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+  glw = GetGlWidget();
+  btw = GetControlWidget();
+  GtkWidget * tw   = GetTopWidget(d->FileName.c_str() );
   GtkWidget * tw2  = gtk_window_new(GTK_WINDOW_TOPLEVEL);
   GtkWidget * box  = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
   GtkWidget * box1 = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
   GtkWidget * box2 = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
-  InitTopWidget(tw, d->FileName.c_str() );
-
-  glw = gtk_gl_area_new();
-  InitGlWidget(glw);
+  
+  
+  gtk_box_pack_start(GTK_BOX(box1), glw, true, true, 0);
+  gtk_box_pack_start(GTK_BOX(box2), btw, true, true, 0);
 
   if( WidgetSize == 0) {
-    GdkRectangle * screenSz = ScreenDimensions(tw);
+    GdkRectangle * screenSz = ScreenDimensions();
     d->PlotSize = WindowDimensions(screenSz);
-    d->FontSize = d->PlotSize.y * 13.0/1000.0;
   }
   else {
     d->PlotSize.x = WidgetSize;
     d->PlotSize.y = WidgetSize *3/4;
   }
 
-  btw = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
-  InitControlWidget(btw);
-
-  gtk_box_pack_start(GTK_BOX(box1), glw, true, true, 0);
-  gtk_box_pack_start(GTK_BOX(box2), btw, true, true, 0);
-
-
+  d->FontSize = d->PlotSize.y * 13.0/1000.0;
+    
   if(JoinWindows) {
     gtk_widget_set_size_request(box1, d->PlotSize.x, d->PlotSize.y);
     gtk_widget_set_size_request(box2, 300, d->PlotSize.y);
     gtk_box_pack_start(GTK_BOX(box), box2, true, true, 0);
     gtk_box_pack_start(GTK_BOX(box), box1, true, true, 0);
     gtk_container_add(GTK_CONTAINER(tw), box);
+    gtk_widget_show_all(tw);
   }
   else {  
     gtk_window_set_default_size(GTK_WINDOW(tw), d->PlotSize.x, d->PlotSize.y);
@@ -140,10 +138,10 @@ int main(int argc, char **argv) {
     gtk_container_add(GTK_CONTAINER(tw2), box2);
     gtk_window_move(GTK_WINDOW(tw2), 10, 10);
     gtk_widget_show_all(tw2);
+    //gtk_window_move(GTK_WINDOW(tw), screenSz->width-d->PlotSize.x-3, 3);
+    gtk_widget_show_all(tw);
   }
 
-  //gtk_window_move(GTK_WINDOW(tw), screenSz->width-d->PlotSize.x-3, 3);
-  gtk_widget_show_all(tw);
 
 
 
